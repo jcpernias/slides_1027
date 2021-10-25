@@ -1,0 +1,9 @@
+.Auto
+.DS_Store
+*~
+build
+pdf
+.deps
+paths.org
+figures
+local.mk

@@ -1,0 +1,17 @@
+#+STARTUP: indent hidestars content
+
+#+TITLE: Unit 1 Figures
+
+#+PROPERTY: header-args:latex :noweb yes :eval no
+
+* El modelo de regresión múltiple
+
+
+** Prueba
+
+#+BEGIN_SRC latex :tangle fig-01_1027-test.tex :noweb no
+  \begin{tikzpicture}[xscale = 0.3, yscale = 0.3]
+    \draw[axis]
+      (0, 10) node[left] {$Y$} |- (10, 0) node[below] {$X$} ;
+  \end{tikzpicture}
+#+END_SRC

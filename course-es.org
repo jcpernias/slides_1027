@@ -1,0 +1,13 @@
+#+STARTUP: indent hidestars content
+
+#+AUTHOR: Econometría I \\
+#+AUTHOR: EC1027
+#+DATE: Curso 2021--2022
+
+#+OPTIONS: toc:nil ':t ^:{} num:1 H:2 title:nil
+
+#+LATEX_CLASS: pres
+#+LATEX_CLASS_OPTIONS: [es]
+
+#+LANGUAGE: es
+#+LATEX_HEADER: \newcommand*{\LANG}{es}

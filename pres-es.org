@@ -1,0 +1,4 @@
+#+SETUPFILE: ./course-es.org
+
+#+LATEX_CLASS: pres
+#+OPTIONS: toc:nil ':t ^:{} num:1 H:2 title:nil
