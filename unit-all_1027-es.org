@@ -5,9 +5,9 @@
 #+LATEX_CLASS: hdout
 #+OPTIONS: toc:nil ':t *:t ^:{} num:3 H:4 title:nil
 
-* Introducción
+* Regresión con datos de corte transversal
 
 
-** El modelo de regresión lineal
+** {{{unit01}}}
 
 #+include: "unit-01_1027-es.org" :lines "6-"
