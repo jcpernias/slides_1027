@@ -239,6 +239,13 @@ compact]{titlesec}
   \maketitle%
 }
 
+\mode
+<article>
+{
+  \renewcommand{\subtitle}[2][]{%
+    \def\insertsubtitle{#2}\g@addto@macro\@title{\\<article>{\huge#2}}}
+}
+
 %% CC notice
 %% --------------------------------------------------------------------------------
 %% Two minipages side by side that fill the width of the line.

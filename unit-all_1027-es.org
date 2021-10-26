@@ -1,5 +1,8 @@
 # -*- ispell-dictionary: "castellano" -*-
 
+#+TITLE: Econometría I
+#+SUBTITLE: EC0127
+
 #+SETUPFILE: ./course-es.org
 
 #+LATEX_CLASS: hdout
