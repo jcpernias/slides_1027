@@ -162,6 +162,7 @@
 
 \newcommand*{\firstframes}{%
   \begin{frame}[plain]\titlepage\end{frame}%
+  \logo{}%
   \begin{frame}%<presentation>%
     \frametitle{\OutlineLabel}%
     \tableofcontents[hideallsubsections]%
@@ -185,3 +186,6 @@
 
 \setbeamercolor{enumerate item}{fg=Section}
 \setbeamertemplate{enumerate items}[default]
+
+
+\logo{\includegraphics[scale=1]{small-by-sa}}
