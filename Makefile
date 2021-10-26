@@ -60,12 +60,14 @@ hdout_tex_deps := \
 	$(texdir)/hdout.cls \
 	$(texdir)/docs-base.sty \
 	$(texdir)/docs-full.sty \
+	$(rootdir)/course-colors.cfg \
 	$(rootdir)/hyperref.cfg
 
 pres_tex_deps := \
 	$(texdir)/pres.cls \
 	$(texdir)/docs-base.sty \
 	$(texdir)/docs-full.sty \
+	$(rootdir)/course-colors.cfg \
 	$(rootdir)/hyperref.cfg
 
 fig_tex_deps := \
