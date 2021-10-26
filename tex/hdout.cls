@@ -28,12 +28,16 @@
 \ExecuteOptions{es}
 \ProcessOptions*\relax
 
+\InputIfFileExists{hdout.cfg}{}{}
+
 %% Class loading
 %% --------------------------------------------------------------------------------
 \PassOptionsToPackage{english,spanish}{translator}
 \PassOptionsToPackage{svgnames}{xcolor}
 \PassOptionsToPackage{fleqn, tbtags, leqno}{amsmath}
-\LoadClass[a4paper, 11pt, twoside]{article}
+\LoadClass[%
+a4paper,
+twoside]{article}
 
 %% Beamer
 %% --------------------------------------------------------------------------------
