@@ -188,4 +188,4 @@
 \setbeamertemplate{enumerate items}[default]
 
 
-\logo{\includegraphics[scale=1]{small-by-sa}}
+\logo{\includegraphics[scale=0.35]{by-sa}}
