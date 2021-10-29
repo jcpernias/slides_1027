@@ -8,9 +8,45 @@
 #+LATEX_CLASS: hdout
 #+OPTIONS: toc:nil ':t *:t ^:{} num:3 H:4 title:nil
 
-* Regresión con datos de corte transversal
+* {{{part01}}}
 
 
 ** {{{unit01}}}
 
 #+include: "unit-01_1027-es.org" :lines "6-"
+
+** {{{unit02}}}
+
+#+include: "unit-02_1027-es.org" :lines "6-"
+
+** {{{unit03}}}
+
+#+include: "unit-03_1027-es.org" :lines "6-"
+
+** {{{unit04}}}
+
+#+include: "unit-04_1027-es.org" :lines "6-"
+
+** {{{unit05}}}
+
+#+include: "unit-05_1027-es.org" :lines "6-"
+
+
+* {{{part02}}}
+
+
+** {{{unit06}}}
+
+#+include: "unit-06_1027-es.org" :lines "6-"
+
+** {{{unit07}}}
+
+#+include: "unit-07_1027-es.org" :lines "6-"
+
+** {{{unit08}}}
+
+#+include: "unit-08_1027-es.org" :lines "6-"
+
+** {{{unit09}}}
+
+#+include: "unit-09_1027-es.org" :lines "6-"

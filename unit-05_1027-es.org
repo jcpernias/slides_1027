@@ -1,0 +1,21 @@
+# -*- ispell-dictionary: "spanish" -*-
+#+SETUPFILE: ./pres-es.org
+
+#+TITLE: {{{unit05}}}
+
+#+MATS: bib
+#+begin_bibbox
+- Mankiw: ::  /Principios de Economía/. Capítulos 1 y 2.
+- Pindyck y Rubinfeld: :: /Microeconomía/. Capítulo 1.
+#+end_bibbox
+
+* Introducción
+
+
+** El modelo
+
+#+begin_export latex
+\[
+  y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + u_i
+\]
+#+end_export
