@@ -1,7 +1,7 @@
 # -*- ispell-dictionary: "castellano" -*-
 
-#+TITLE: Econometría I
-#+SUBTITLE: EC0127
+#+TITLE: \coursename
+#+SUBTITLE: \coursecode
 
 #+SETUPFILE: ./course-es.org
 

@@ -3,6 +3,8 @@
 #+AUTHOR: José Pernías
 #+DATE: Curso 2021--2022
 
+#+LATEX_HEADER: \newcommand*{\coursename}{Econometría I}
+#+LATEX_HEADER: \newcommand*{\coursecode}{EC1027}
 
 #+LATEX_CLASS_OPTIONS: [es]
 #+LANGUAGE: es
