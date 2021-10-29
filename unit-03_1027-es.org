@@ -11,11 +11,27 @@
 
 * Introducción
 
+** Homoscedasticidad
 
-** El modelo
+** Heteroscedasticidad
 
-#+begin_export latex
-\[
-  y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + u_i
-\]
-#+end_export
+
+* Consecuencias de la heteroscedasticidad
+
+** Varianza de los estimadores de MCO
+
+** Invalidez de los contrastes de hipótesis
+
+** Ineficiencia
+
+* Inferencia robusta a la heteroscedasticidad
+
+* Contrastes de heteroscedasticidad
+
+** Contraste de Breusch-Pagan
+
+** Contraste de White
+
+* Estimación eficiente
+
+** Mínimos cuadrados ponderados
