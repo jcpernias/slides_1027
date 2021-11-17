@@ -12,10 +12,54 @@
 * Introducción
 
 
-** El modelo
+** Propiedades de grandes muestras
 
-#+begin_export latex
-\[
-  y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + u_i
-\]
-#+end_export
+- Leyes de grandes números.
+
+- Teoremas del límite central.
+
+** Propiedades asintóticas
+
+- Consistencia.
+
+- Distribución asintótica.
+
+- Eficiencia asintótica.
+
+* Consistencia
+
+** Definición
+
+- El límite en probabilidad del estimador MCO coincide con el parámetro.
+
+** Supuestos
+
+- *RLM.1* a *RLM.4*.
+
+- El supuesto *RLM.4* puede relajarse y bastaría con:
+  #+begin_export latex
+  \[
+    \Exp(u) = 0 \stext{y} \cov(x_{j}, u) \text{\ para $j = 1, 2, \dots, k.$}
+  \]
+  #+end_export
+
+
+** Inconsistencia
+
+- Inconsistencia de $\bhat_i$:
+  #+begin_export latex
+  \[
+    \plim \bhat_{i} - \beta_{i} = \frac{\cov(x_{i}, u)}{\var(x_{i})}
+  \]
+  #+end_export
+
+* Normalidad asintótica
+
+** Distribución asintótica del estimador MCO
+
+- Para todo $j$:
+  #+begin_export latex
+  \[
+    \frac{\bhat_{j} - \beta_{j}}{\se(\bhat_{j})} \adistr \Normal(0, 1)
+  \]
+  #+end_export
