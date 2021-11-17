@@ -26,6 +26,8 @@ Rscriptbin := /usr/local/bin/Rscript
 
 -include local.mk
 
+include course.mk
+
 ## Variables
 ## ================================================================================
 
@@ -56,30 +58,34 @@ RSCRIPT := $(Rscriptbin) -e
 
 tex_check_dirs := $(builddir) $(figdir) $(depsdir)
 
+
+common_tex_deps := \
+	$(rootdir)/$(subject_code)-macros.tex \
+	$(texdir)/docs-base.sty \
+	$(rootdir)/course.cfg \
+	$(rootdir)/hyperref.cfg
+
+
 hdout_tex_deps := \
 	$(texdir)/hdout.cls \
-	$(texdir)/docs-base.sty \
 	$(texdir)/docs-full.sty \
 	$(rootdir)/course-colors.cfg \
 	$(rootdir)/hdout.cfg \
-	$(rootdir)/course.cfg \
-	$(rootdir)/hyperref.cfg
+	$(common_tex_deps)
 
 pres_tex_deps := \
 	$(texdir)/pres.cls \
-	$(texdir)/docs-base.sty \
 	$(texdir)/docs-full.sty \
 	$(rootdir)/course-colors.cfg \
 	$(rootdir)/pres.cfg \
-	$(rootdir)/course.cfg \
-	$(rootdir)/hyperref.cfg
+	$(common_tex_deps)
+
 
 fig_tex_deps := \
 	$(texdir)/figure.cls \
-	$(texdir)/docs-base.sty \
 	$(rootdir)/standalone.cfg \
-	$(rootdir)/course.cfg \
-	$(rootdir)/hyperref.cfg
+	$(common_tex_deps)
+
 
 FIGURES :=
 
@@ -117,7 +123,6 @@ define knit
 "source(\"./R/common.R\"); library(knitr); options(knitr.package.root.dir=\"${rootdir}\"); knit(\"$1\", \"$2\")"
 endef
 
-include course.mk
 
 ## Rules
 ## ================================================================================
