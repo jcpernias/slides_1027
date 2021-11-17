@@ -9,13 +9,177 @@
 - Pindyck y Rubinfeld: :: /Microeconomía/. Capítulo 1.
 #+end_bibbox
 
-* Introducción
+#+PROPERTY: header-args:R :session *R* :exports results :results output :eval yes
+#+PROPERTY: header-args:R :var orgbackend=(prin1-to-string org-export-current-backend)
+#+MACRO: Rtable (eval (concat "#+header: :results output " (prin1-to-string org-export-current-backend)))
+
+* El modelo clásico de regresión
 
 
-** El modelo
+** Introducción
 
-#+begin_export latex
-\[
-  y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + u_i
-\]
-#+end_export
+Finalidad modelos econométricos:
+
+- Estimación de relaciones causales.
+
+- Resumen de información en un conjunto de datos.
+
+- Predicción.
+
+
+** Elementos del modelo de regresión
+
+- Variables: continuas, binarias, categóricas, rango limitado.
+
+- Parámetros.
+
+- Término de error.
+
+
+** Supuestos
+
+- *RLM.1*: Linealidad en los parámetros.
+
+- *RLM.2*: Muestreo aleatorio.
+
+- *RLM.3*: Ausencia de multicolinealidad perfecta.
+
+- *RLM.4*: Media condicional nula.
+
+- *RLM.5*: Homoscedasticidad.
+
+- *RLM.6*: Normalidad.
+
+
+* Estimación
+
+
+** Estimación por MCO
+
+- Ecuaciones normales:
+  #+begin_export latex
+  \begin{gather*}
+    \sum \uhat_{i} = 0 \\
+    \sum \uhat_{i} x_{1\,i} = 0 \\
+    \vdotswithin{\sum} \\
+    \sum \uhat_{i} x_{k\,i} = 0 \\
+  \end{gather*}
+  #+end_export
+
+
+** Bondad del ajuste
+
+- Error típico de la regresión, $\SER$.
+
+- Coeficiente de determinación, $\Rsq$.
+
+- $\Rsq$ ajustado, $\Rbarsq$.
+
+
+* Propiedades del estimador de MCO
+
+
+** Propiedades de muestras pequeñas
+
+- Insesgadez.
+
+- Distribución muestral.
+
+- Eficiencia.
+
+
+* Inferencia
+
+
+** Conceptos básicos
+
+- Hipótesis nula e hipótesis alternativa.
+
+- Error tipo I.
+
+- Error tipo II.
+
+- Regla de rechazo.
+
+
+** Más conceptos básicos
+
+- Nivel de significación.
+
+- Potencia.
+
+- Valor crítico.
+
+- $\pvalue$.
+
+
+** Contraste de hipótesis
+
+- Hipótesis combinaciones lineales de los parámetros del modelo.
+
+- Hipótesis simples e hipótesis compuestas.
+
+- Modelo general y modelo restringido.
+
+
+** El contraste /t/
+
+- Aplicabilidad.
+
+- Construcción.
+
+- Distribución bajo la hipótesis nula.
+
+- Sólo necesita la estimación del modelo general.
+
+- Generalización a hipótesis compuestas: contraste de Wald.
+
+
+** El contraste /F/
+
+- Aplicabilidad.
+
+- Construcción.
+
+- Distribución bajo la hipótesis nula.
+
+- Se necesita la estimación del modelo general y del modelo restringido.
+
+
+** Algunos casos especiales
+
+- El estadístico $t$:
+  #+begin_export latex
+  \[
+    t_{\bhat_{j}} = \frac{\bhat_{j}}{\se(\bhat_{j})}
+  \]
+  #+end_export
+
+- El estadístico $F$ de significación conjunta de la regresión:
+  #+begin_export latex
+  \[
+    F = \frac{\Rsq / k}{(1 - \Rsq) / (n - k - 1)}
+  \]
+  #+end_export
+
+
+** Intervalos de confianza
+
+- Construcción.
+
+
+* Predicción
+
+
+** Predicción puntual
+
+- Predicción del valor medio.
+
+- Predicción del valor.
+
+
+** Intervalos de predicción
+
+- Valor medio.
+
+- Valor de la variable dependiente.
