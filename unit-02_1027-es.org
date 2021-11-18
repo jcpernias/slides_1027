@@ -18,6 +18,7 @@
 
 - Teoremas del límite central.
 
+
 ** Propiedades asintóticas
 
 - Consistencia.
@@ -26,11 +27,22 @@
 
 - Eficiencia asintótica.
 
+** Consideraciones prácticas
+
+- Las propiedades asintóticas no requieren el supuesto de normalidad.
+
+- Requisitos técnicos: momentos finitos hasta orden 4.
+
+- Calidad de la aproximación mejora con el tamaño muestral. ¿Cuántas
+  observaciones son necesarias?
+
 * Consistencia
+
 
 ** Definición
 
 - El límite en probabilidad del estimador MCO coincide con el parámetro.
+
 
 ** Supuestos
 
@@ -53,7 +65,28 @@
   \]
   #+end_export
 
+
 * Normalidad asintótica
+
+
+** Supuestos
+
+- Necesitamos los supuestos para garantizar la consistencia: *RLM.1$ a
+  *RLM.4*.
+
+- Si además se cumple el supuesto *RLM.5*, $\hat{\sigma}^2$ es un estimador consistente de $\var(u)$.
+
+** Varianza de los estimadores MCO
+
+- Los supuestos de Gauss-Markov justifican el uso de las fórmulas para
+  estimar las varianzas de los estimadores:
+  #+begin_export latex
+  \[
+    \widehat{\var}(\bhat_{j}) = \frac{\hat{\sigma}^2}{\SST_{j}(1-\Rsq_{j})}
+  \]
+  #+end_export
+
+- Factores de los que depende la precisión de los estimadores.
 
 ** Distribución asintótica del estimador MCO
 
@@ -63,3 +96,40 @@
     \frac{\bhat_{j} - \beta_{j}}{\se(\bhat_{j})} \adistr \Normal(0, 1)
   \]
   #+end_export
+
+
+* Inferencia asintótica
+
+** Contraste /t/ asintótico
+
+- Desde un punto de vista práctico podemos usar la distribución $t$
+  para determinar valores críticos y $\pvalues$.
+  #+begin_export latex
+  \[
+    \frac{\bhat_{j} - \beta_{j}}{\se(\bhat_{j})} \adistr t_{n - k - 1}
+  \]
+  #+end_export
+
+- Contraste de Wald.
+
+** Contraste /F/ asintótico
+
+- Nada cambia.
+
+** Contrastes de multiplicadores de Lagrange
+
+- Sólo es necesaria la estimación del modelo restringido.
+
+- Frecuentemente se calcula a partir de una *regresión auxiliar*.
+
+** Contraste LM de variables omitidas
+
+- Estimación del modelo restringido por MCO.
+
+- Regresión auxiliar usando los residuos como variable dependiente.
+
+- Estadístico de contraste.
+
+** Intervalos de confianza asintóticos
+
+- Fórmulas habituales.
