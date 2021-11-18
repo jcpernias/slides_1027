@@ -27,6 +27,7 @@
 
 - Eficiencia asintótica.
 
+
 ** Consideraciones prácticas
 
 - Las propiedades asintóticas no requieren el supuesto de normalidad.
@@ -35,6 +36,7 @@
 
 - Calidad de la aproximación mejora con el tamaño muestral. ¿Cuántas
   observaciones son necesarias?
+
 
 * Consistencia
 
@@ -76,6 +78,7 @@
 
 - Si además se cumple el supuesto *RLM.5*, $\hat{\sigma}^2$ es un estimador consistente de $\var(u)$.
 
+
 ** Varianza de los estimadores MCO
 
 - Los supuestos de Gauss-Markov justifican el uso de las fórmulas para
@@ -87,6 +90,7 @@
   #+end_export
 
 - Factores de los que depende la precisión de los estimadores.
+
 
 ** Distribución asintótica del estimador MCO
 
@@ -100,6 +104,7 @@
 
 * Inferencia asintótica
 
+
 ** Contraste /t/ asintótico
 
 - Desde un punto de vista práctico podemos usar la distribución $t$
@@ -112,15 +117,18 @@
 
 - Contraste de Wald.
 
+
 ** Contraste /F/ asintótico
 
 - Nada cambia.
+
 
 ** Contrastes de multiplicadores de Lagrange
 
 - Sólo es necesaria la estimación del modelo restringido.
 
 - Frecuentemente se calcula a partir de una *regresión auxiliar*.
+
 
 ** Contraste LM de variables omitidas
 
@@ -129,6 +137,7 @@
 - Regresión auxiliar usando los residuos como variable dependiente.
 
 - Estadístico de contraste.
+
 
 ** Intervalos de confianza asintóticos
 

@@ -11,27 +11,69 @@
 
 * Introducción
 
+
 ** Homoscedasticidad
+
+- MCO bajo homoscedasticidad. Cada observación recibe el mismo peso.
 
 ** Heteroscedasticidad
 
+- Cuando hay heteroscedasticidad diferentes observaciones aportan
+  información con diferente incertidumbre.
 
 * Consecuencias de la heteroscedasticidad
 
+
+** Insesgadez y consistencia
+
+- Estas propiedades no se ven afectadas por la presencia de
+  heteroscedasticidad.
+
 ** Varianza de los estimadores de MCO
+
+- La fórmula usual deja de ser válida.
 
 ** Invalidez de los contrastes de hipótesis
 
+- Las fórmulas habituales dejan de ser válidas.
+
 ** Ineficiencia
+
+- Es posible construir estimadores más eficientes si conocemos el
+  patrón de la heteroscedasticidad. Dar más peso a las observaciones
+  más precisas.
 
 * Inferencia robusta a la heteroscedasticidad
 
+
+** Varianza del estimador MCO
+
+- La varianza del estimador MCO cuando
+  #+begin_export latex
+  \[
+    \var(u_{i} | x_{1i}) = \sigma^{2}_{i}
+  \]
+  #+end_export
+  es
+  #+begin_export latex
+  \[
+    \var(\bhat_{1}) = \frac{\sum(x_{i} - \bar{x})^{2}\sigma^2_{i}}{\Big[\sum(x_{i} - \bar{x})^{2}\Big]^{2}}
+  \]
+  #+end_export
+
+
 * Contrastes de heteroscedasticidad
+
 
 ** Contraste de Breusch-Pagan
 
+
 ** Contraste de White
+
 
 * Estimación eficiente
 
+
 ** Mínimos cuadrados ponderados
+
+- Transformar el modelo y aplicar MCO.
