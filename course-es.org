@@ -6,7 +6,6 @@
 #+LATEX_HEADER: \newcommand*{\coursename}{Econometría I}
 #+LATEX_HEADER: \newcommand*{\coursecode}{EC1027}
 
-#+LATEX_CLASS_OPTIONS: [es]
 #+LANGUAGE: es
 #+LATEX_HEADER: \newcommand*{\LANG}{es}
 

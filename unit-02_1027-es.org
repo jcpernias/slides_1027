@@ -1,5 +1,5 @@
 # -*- ispell-dictionary: "spanish" -*-
-#+SETUPFILE: ./pres-es.org
+#+SETUPFILE: ./course-es.org
 
 #+TITLE: {{{unit02}}}
 
