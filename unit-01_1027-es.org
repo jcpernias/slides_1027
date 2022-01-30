@@ -12,28 +12,7 @@
 #+PROPERTY: header-args:R :var orgbackend=(prin1-to-string org-export-current-backend)
 #+MACRO: Rtable (eval (concat "#+header: :results output " (prin1-to-string org-export-current-backend)))
 
-* El modelo clásico de regresión
-
-
-** Introducción
-
-Finalidad modelos econométricos:
-
-- Estimación de relaciones causales.
-
-- Resumen de información en un conjunto de datos.
-
-- Predicción.
-
-
-** Elementos del modelo de regresión
-
-- Variables: continuas, binarias, categóricas, rango limitado.
-
-- Parámetros.
-
-- Término de error.
-
+* El modelo clásico de regresión lineal
 
 ** Supuestos
 
@@ -49,6 +28,69 @@ Finalidad modelos econométricos:
 
 - *RLM.6*: Normalidad.
 
+** RLM.1: Linealidad en los parámetros
+
+El modelo *poblacional* puede expresarse como:
+#+begin_export latex
+\[
+  y = \beta_{0} + \beta_{1} x_{1} + \dots + \beta_{k} x_{k} + u
+\]
+#+end_export
+donde $\beta_0, \beta_0, \dots, \beta_k$ son los *parámetros*
+desconocidos, $y$ es la *variable dependiente*, $x_1, x_2, \dots, x_k$
+son las *variables explicativas* y $u$ es un *término de error* no
+observable.
+
+** RLM.2: Muestreo aleatorio
+
+Disponemos de una muestra aleatoria de n observaciones:
+#+begin_export latex
+\[
+  \{(x_{1i}, x_{2i}, \dots, x_{ki}, y_{i}); i = 1, 2, \dots, n \}
+\]
+#+end_export
+
+** RLM.3: No hay colinealidad perfecta
+
+En la muestra se cumplen *todas* las condiciones:
+
+- El número de observaciones, $n$, es mayor que el número de
+  parámetros, $k + 1$.
+
+- Ninguna de las variables explicativas es constante.
+
+- No existen *relaciones lineales exactas* entre las variables
+  explicativas.
+
+** RLM.4: Media condicional nula
+
+El valor esperado del término de error para cualquier combinación de
+valores que tomen las variables explicativas es 0:
+#+begin_export latex
+\[
+  \Exp(u | x_{1}, x_{2}, \dots, x_{k}) = 0
+\]
+#+end_export
+
+** RLM.5: Homoscedasticidad
+
+La varianza del término de error no depende de los valores
+que tomen las explicativas:
+#+begin_export latex
+\[
+  \var(u | x_{1}, x_{2}, \dots, x_{k}) = \sigma^{2}
+\]
+#+end_export
+
+** RLM.6: Normalidad
+
+El término de error es independiente de las variables explicativas y
+su distribución es normal con media 0 y varianza $\sigma^2$:
+#+begin_export latex
+\[
+  u \sim \Normal(0, \sigma^{2})
+\]
+#+end_export
 
 * Estimación
 
