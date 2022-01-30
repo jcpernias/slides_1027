@@ -5,8 +5,7 @@
 
 #+MATS: bib
 #+begin_bibbox
-- Mankiw: ::  /Principios de Economía/. Capítulos 1 y 2.
-- Pindyck y Rubinfeld: :: /Microeconomía/. Capítulo 1.
+- Wooldridge: ::  /Inroducción a la Econometría/. Capítulos 3, 4, 6 y 7.
 #+end_bibbox
 
 #+PROPERTY: header-args:R :session *R* :exports results :results output :eval yes
