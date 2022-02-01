@@ -5,7 +5,7 @@
 
 #+MATS: bib
 #+begin_bibbox
-- Wooldridge: ::  /Inroducción a la Econometría/. Capítulos 3, 4, 6 y 7.
+- Wooldridge: ::  /Introducción a la Econometría/. Capítulos 3, 4, 6 y 7.
 #+end_bibbox
 
 #+PROPERTY: header-args:R :session *R* :exports results :results output :eval yes
@@ -13,6 +13,7 @@
 #+MACRO: Rtable (eval (concat "#+header: :results output " (prin1-to-string org-export-current-backend)))
 
 * El modelo clásico de regresión lineal
+
 
 ** Supuestos
 
@@ -28,39 +29,47 @@
 
 - *RLM.6*: Normalidad.
 
+
 ** RLM.1: Linealidad en los parámetros
 
-El modelo *poblacional* puede expresarse como:
+El *modelo poblacional* puede expresarse como:
 #+begin_export latex
 \[
   y = \beta_{0} + \beta_{1} x_{1} + \dots + \beta_{k} x_{k} + u
 \]
 #+end_export
-donde $\beta_0, \beta_0, \dots, \beta_k$ son los *parámetros*
-desconocidos, $y$ es la *variable dependiente*, $x_1, x_2, \dots, x_k$
-son las *variables explicativas* y $u$ es un *término de error* no
-observable.
+donde:
+- $y$ es la *variable dependiente*,
+
+- $\beta_0, \beta_1, \dots, \beta_k$ son los *parámetros*
+  desconocidos,
+
+- $x_1, x_2, \dots, x_k$ son las *variables explicativas* y
+
+- $u$ es un *término de error* no observable.
+
 
 ** RLM.2: Muestreo aleatorio
 
-Disponemos de una muestra aleatoria de n observaciones:
+Disponemos de una *muestra aleatoria* de $n$ observaciones:
 #+begin_export latex
 \[
   \{(x_{1i}, x_{2i}, \dots, x_{ki}, y_{i}); i = 1, 2, \dots, n \}
 \]
 #+end_export
 
+
 ** RLM.3: No hay colinealidad perfecta
 
 En la muestra se cumplen *todas* las condiciones:
 
-- El número de observaciones, $n$, es mayor que el número de
-  parámetros, $k + 1$.
+- El número de observaciones, $n$, es mayor que el de parámetros, $k +
+  1$.
 
 - Ninguna de las variables explicativas es constante.
 
-- No existen *relaciones lineales exactas* entre las variables
-  explicativas.
+- No existen *relaciones lineales exactas* entre las explicativas.
+
 
 ** RLM.4: Media condicional nula
 
@@ -72,6 +81,7 @@ valores que tomen las variables explicativas es 0:
 \]
 #+end_export
 
+
 ** RLM.5: Homoscedasticidad
 
 La varianza del término de error no depende de los valores
@@ -82,39 +92,127 @@ que tomen las explicativas:
 \]
 #+end_export
 
+
 ** RLM.6: Normalidad
 
-El término de error es independiente de las variables explicativas y
-su distribución es normal con media 0 y varianza $\sigma^2$:
+El término de error es *independiente* de las variables explicativas y
+su distribución es *normal* con media 0 y varianza $\sigma^2$:
 #+begin_export latex
 \[
   u \sim \Normal(0, \sigma^{2})
 \]
 #+end_export
 
+
 * Estimación
+
+
+** Función de regresión muestral
+
+*Función de regresión muestral*:
+#+begin_export latex
+\[
+  \yhat = \bhat_{0} + \bhat_{1} x_{1} + \dots + \bhat_{k} x_{k}
+\]
+#+end_export
+donde:
+- $\yhat$ son los *predicciones*,
+
+- $\bhat_0, \bhat_1, \dots, \bhat_k$ son las *estimaciones* de los parámetros.
+
+
+** Residuos
+
+*Residuos*:
+#+begin_export latex
+\[
+   \uhat = y - \yhat
+\]
+#+end_export
+
+La función de regresión muestral también puede expresarse como:
+#+begin_export latex
+\[
+  y = \bhat_{0} + \bhat_{1} x_{1} + \dots + \bhat_{k} x_{k} + \uhat
+\]
+#+end_export
 
 
 ** Estimación por MCO
 
-- Ecuaciones normales:
-  #+begin_export latex
-  \begin{gather*}
-    \sum \uhat_{i} = 0 \\
-    \sum \uhat_{i} x_{1\,i} = 0 \\
-    \vdotswithin{\sum} \\
-    \sum \uhat_{i} x_{k\,i} = 0 \\
-  \end{gather*}
-  #+end_export
+El estimador de *mínimos cuadrados ordinarios*, MCO, minimiza la suma
+del cuadrado de los residuos:
+#+begin_export latex
+\[
+  \min_{\{\bhat_{0}, \dots, \bhat_{k}\}} \sum_{i = 1}^n \uhat_i^{2}
+\]
+#+end_export
+
+
+** Ecuaciones normales
+
+El estimador MCO se obtiene resolviendo las *ecuaciones normales*:
+#+begin_export latex
+\begin{gather*}
+  \sum_{i = 1}^n \uhat_{i} = 0 \\
+  \sum_{i = 1}^n \uhat_{i} x_{ji} = 0 \quad (j = 1, 2, \dots, k)
+\end{gather*}
+#+end_export
+
+
+** Sumas de cuadrados
+
+Suma de cuadrados total:
+#+begin_export latex
+\[
+   \SCT = \sum_{1=1}^n (y_i - \ymean)^{2}
+\]
+#+end_export
+
+Suma de cuadrados explicada:
+#+begin_export latex
+\[
+   \SCE = \sum_{1=1}^n (\yhat_i - \ymean)^{2}
+\]
+#+end_export
+
+Suma de cuadrados de los residuos:
+#+begin_export latex
+\[
+  \SCR = \sum_{1=1}^n \uhat_i^{2}
+\]
+#+end_export
+
+La estimación por MCO garantiza que:
+#+begin_export latex
+\[
+  \SCT = \SCE + \SCR
+\]
+#+end_export
 
 
 ** Bondad del ajuste
 
-- Error típico de la regresión, $\SER$.
+- Error típico de la regresión:
+  #+begin_export latex
+  \[
+    \SER = \sqrt{\frac{\SCR}{n - k - 1}}
+  \]
+  #+end_export
 
-- Coeficiente de determinación, $\Rsq$.
+- Coeficiente de determinación:
+  #+begin_export latex
+  \[
+    \Rsq = 1 - \frac{\SCR}{\SCT}
+  \]
+  #+end_export
 
-- $\Rsq$ ajustado, $\Rbarsq$.
+- $\Rsq$ ajustado:
+  #+begin_export latex
+  \[
+    \Rbarsq = 1 - \frac{\SCR/(n - k - 1)}{\SCT/(n - 1)}
+  \]
+  #+end_export
 
 
 * Propiedades del estimador de MCO
@@ -122,105 +220,116 @@ su distribución es normal con media 0 y varianza $\sigma^2$:
 
 ** Propiedades de muestras pequeñas
 
-- Insesgadez.
+- Se refieren al método de estimación, MCO, no a las estimaciones
+  obtenidas con una muestra particular.
 
-- Distribución muestral.
+- Dependen del cumplimiento de los supuestos del modelo de regresión
+  lineal clásico.
 
-- Eficiencia.
-
-
-* Inferencia
-
-
-** Conceptos básicos
-
-- Hipótesis nula e hipótesis alternativa.
-
-- Error tipo I.
-
-- Error tipo II.
-
-- Regla de rechazo.
+- No dependen del tamaño muestral: son válidas para cualquier $n$.
 
 
-** Más conceptos básicos
 
-- Nivel de significación.
+** Insesgadez
 
-- Potencia.
+*Insesgadez*: El valor esperado de las estimaciones coincide con los
+parámetros poblacionales:
+#+begin_export latex
+\[
+  \Exp(\bhat_{j})  = \beta_{j} \quad (j = 0, 1, \dots, k).
+\]
+#+end_export
 
-- Valor crítico.
-
-- $\pvalue$.
-
-
-** Contraste de hipótesis
-
-- Hipótesis combinaciones lineales de los parámetros del modelo.
-
-- Hipótesis simples e hipótesis compuestas.
-
-- Modelo general y modelo restringido.
+El estimador de MCO es insesgado si se cumplen los supuestos *RLM.1* a
+*RLM.4*.
 
 
-** El contraste /t/
+** Omisión de variables relevantes
 
-- Aplicabilidad.
-
-- Construcción.
-
-- Distribución bajo la hipótesis nula.
-
-- Sólo necesita la estimación del modelo general.
-
-- Generalización a hipótesis compuestas: contraste de Wald.
-
-
-** El contraste /F/
-
-- Aplicabilidad.
-
-- Construcción.
-
-- Distribución bajo la hipótesis nula.
-
-- Se necesita la estimación del modelo general y del modelo restringido.
-
-
-** Algunos casos especiales
-
-- El estadístico $t$:
+- Ejemplo: modelo que cumple los supuestos *RLM.1* a *RLM.4*:
   #+begin_export latex
   \[
-    t_{\bhat_{j}} = \frac{\bhat_{j}}{\se(\bhat_{j})}
+    y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + u
   \]
   #+end_export
 
-- El estadístico $F$ de significación conjunta de la regresión:
+- Realizamos la regresión de $y$ sobre $x_1$ omitiendo la variable
+  $x_2$.
+
+- ¿Qué ocurre si especificamos un modelo donde falta una de las
+  explicativas?
+
+
+** Sesgo
+
+- Cuando se omite $x_2$:
   #+begin_export latex
   \[
-    F = \frac{\Rsq / k}{(1 - \Rsq) / (n - k - 1)}
+    \Exp(\bhat_{1}) = \beta_{1} + \beta_2 \delta_{12}
+  \]
+  #+end_export
+  donde $\delta_{12}$ es la pendiente de la regresión de $x_1$ sobre
+  $x_2$.
+
+- *Sesgo* por omisión de $x_2$:
+  #+begin_export latex
+  \[
+    \operatorname{Sesgo}(\bhat_{1}) = \Exp(\bhat_{1}) - \beta_{1} = \beta_2 \delta_{12}
   \]
   #+end_export
 
 
-** Intervalos de confianza
+** Sesgo de variable omitida
 
-- Construcción.
+El estimador de MCO presenta sesgo cuando se cumplen *las dos*
+condiciones:
 
+- $\beta_2 \neq 0$: las variables omitidas son *relevantes*.
 
-* Predicción
-
-
-** Predicción puntual
-
-- Predicción del valor medio.
-
-- Predicción del valor.
+- $\delta_{12} \neq 0$: las variables omitidas están correlacionadas
+  con alguna de las variables incluidas en la regresión.
 
 
-** Intervalos de predicción
+** Varianza del estimador MCO
 
-- Valor medio.
+Si se cumplen los *supuestos de Gauss-Markov* (*RLM.1* a *RLM.5*):
+#+begin_export latex
+\[
+  \var(\bhat_{j} | \bm{x}) = \frac{\sigma^{2}}{\SCT_{j}(1 - \Rsq_{j})}
+  \quad (j = 1, 2, \dots, k)
+\]
+#+end_export
+donde:
+- $\SCT_j = \sum_{i=1}^n(x_{ij} - \bar{x}_j)^2$
 
-- Valor de la variable dependiente.
+- $\Rsq_j$ es el coeficiente de determinación de una regresión de
+  $x_j$ sobre el resto de explicativas.
+
+
+** Eficiencia
+
+*Teorema de Gauss-Markov*: Si se cumplen los supuestos de
+Gauss-Markov, el estimador MCO es el *estimador lineal insesgado
+óptimo*.
+
+- Un *estimador lineal* es una función lineal de los valores de la
+  variable dependiente:
+  #+begin_export latex
+  \[
+     \bhat_j = \sum_{i=1}^n w_{ij} y_i
+  \]
+  #+end_export
+
+- Dentro de un grupo de estimadores, el *estimador óptimo* es el que
+  tiene menor varianza muestral.
+
+
+** Distribución muestral
+
+Bajo los supuestos del modelo clásico de regresión lineal (*RLM.1* a *RLM.6*):
+#+begin_export latex
+\[
+  \bhat_{j} | \bm{x} \sim \Normal\big(\beta_j, \var(\bhat_j | \bm{x})\big)
+  \quad (j = 0, 1, \dots, k)
+\]
+#+end_export

@@ -33,12 +33,13 @@
 #+include: "unit-05_1027-es.org" :lines "6-"
 
 
-* {{{part02}}}
-
-
 ** {{{unit06}}}
 
 #+include: "unit-06_1027-es.org" :lines "6-"
+
+
+* {{{part02}}}
+
 
 ** {{{unit07}}}
 
@@ -49,5 +50,9 @@
 #+include: "unit-08_1027-es.org" :lines "6-"
 
 ** {{{unit09}}}
+
+#+include: "unit-09_1027-es.org" :lines "6-"
+
+** {{{unit10}}}
 
 #+include: "unit-09_1027-es.org" :lines "6-"

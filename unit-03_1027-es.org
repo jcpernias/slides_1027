@@ -12,78 +12,133 @@
 * Introducción
 
 
-** Homoscedasticidad
+** Propiedades de grandes muestras
 
-- MCO bajo homoscedasticidad. Cada observación recibe el mismo peso.
+- Leyes de grandes números.
 
-** Heteroscedasticidad
-
-- Cuando hay heteroscedasticidad diferentes observaciones aportan
-  información con diferente incertidumbre.
-
-* Consecuencias de la heteroscedasticidad
+- Teoremas del límite central.
 
 
-** Insesgadez y consistencia
+** Propiedades asintóticas
 
-- Estas propiedades no se ven afectadas por la presencia de
-  heteroscedasticidad.
+- Consistencia.
 
-** Varianza de los estimadores de MCO
+- Distribución asintótica.
 
-- La fórmula usual deja de ser válida.
+- Eficiencia asintótica.
 
-** Invalidez de los contrastes de hipótesis
 
-- Las fórmulas habituales dejan de ser válidas.
+** Consideraciones prácticas
 
-** Ineficiencia
+- Las propiedades asintóticas no requieren el supuesto de normalidad.
 
-- Es posible construir estimadores más eficientes si conocemos el
-  patrón de la heteroscedasticidad. Dar más peso a las observaciones
-  más precisas.
+- Requisitos técnicos: momentos finitos hasta orden 4.
 
-* Inferencia robusta a la heteroscedasticidad
+- Calidad de la aproximación mejora con el tamaño muestral. ¿Cuántas
+  observaciones son necesarias?
 
-** Varianza del estimador MCO
 
-- La varianza del estimador MCO cuando
+* Consistencia
+
+
+** Definición
+
+- El límite en probabilidad del estimador MCO coincide con el parámetro.
+
+
+** Supuestos
+
+- *RLM.1* a *RLM.4*.
+
+- El supuesto *RLM.4* puede relajarse y bastaría con:
   #+begin_export latex
   \[
-    \var(u_{i} | x_{1i}) = \sigma^{2}_{i}
-  \]
-  #+end_export
-  es
-  #+begin_export latex
-  \[
-    \var(\bhat_{1}) = \frac{\sum(x_{i} - \bar{x})^{2}\sigma^2_{i}}{\Big[\sum(x_{i} - \bar{x})^{2}\Big]^{2}}
-  \]
-  #+end_export
-
-** Contrastes /t/
-
-- Contrastes de la hipótesis nula $\beta_j = b$ se construyen
-  utilizando la estimación de MCO, $\bhat_j$, y el error típoco
-  robustos a heteroscedasticidad, $\se_R(\bhat_j)$:
-  #+begin_export latex
-  \[
-    t_{j} = \frac{\bhat_{j} - b}{\se_{R}(\bhat_{j})}
+    \Exp(u) = 0 \stext{y} \cov(x_{j}, u) \text{\ para $j = 1, 2, \dots, k.$}
   \]
   #+end_export
 
 
-* Contrastes de heteroscedasticidad
+** Inconsistencia
+
+- Inconsistencia de $\bhat_i$:
+  #+begin_export latex
+  \[
+    \plim \bhat_{i} - \beta_{i} = \frac{\cov(x_{i}, u)}{\var(x_{i})}
+  \]
+  #+end_export
 
 
-** Contraste de Breusch-Pagan
+* Normalidad asintótica
 
 
-** Contraste de White
+** Supuestos
+
+- Necesitamos los supuestos para garantizar la consistencia: *RLM.1$ a
+  *RLM.4*.
+
+- Si además se cumple el supuesto *RLM.5*, $\hat{\sigma}^2$ es un estimador consistente de $\var(u)$.
 
 
-* Estimación eficiente
+** Varianza de los estimadores MCO
+
+- Los supuestos de Gauss-Markov justifican el uso de las fórmulas para
+  estimar las varianzas de los estimadores:
+  #+begin_export latex
+  \[
+    \widehat{\var}(\bhat_{j}) = \frac{\hat{\sigma}^2}{\SCT_{j}(1-\Rsq_{j})}
+  \]
+  #+end_export
+
+- Factores de los que depende la precisión de los estimadores.
 
 
-** Mínimos cuadrados ponderados
+** Distribución asintótica del estimador MCO
 
-- Transformar el modelo y aplicar MCO.
+- Para todo $j$:
+  #+begin_export latex
+  \[
+    \frac{\bhat_{j} - \beta_{j}}{\se(\bhat_{j})} \adistr \Normal(0, 1)
+  \]
+  #+end_export
+
+
+* Inferencia asintótica
+
+
+** Contraste /t/ asintótico
+
+- Desde un punto de vista práctico podemos usar la distribución $t$
+  para determinar valores críticos y $\pvalues$.
+  #+begin_export latex
+  \[
+    \frac{\bhat_{j} - \beta_{j}}{\se(\bhat_{j})} \adistr t_{n - k - 1}
+  \]
+  #+end_export
+
+- Contraste de Wald.
+
+
+** Contraste /F/ asintótico
+
+- Nada cambia.
+
+
+** Contrastes de multiplicadores de Lagrange
+
+- Sólo es necesaria la estimación del modelo restringido.
+
+- Frecuentemente se calcula a partir de una *regresión auxiliar*.
+
+
+** Contraste LM de variables omitidas
+
+- Estimación del modelo restringido por MCO.
+
+- Regresión auxiliar usando los residuos como variable dependiente.
+
+- Estadístico de contraste.
+
+
+** Intervalos de confianza asintóticos
+
+- Fórmulas habituales.

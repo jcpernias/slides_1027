@@ -5,140 +5,105 @@
 
 #+MATS: bib
 #+begin_bibbox
-- Mankiw: ::  /Principios de Economía/. Capítulos 1 y 2.
-- Pindyck y Rubinfeld: :: /Microeconomía/. Capítulo 1.
+- Wooldridge: ::  /Introducción a la Econometría/. Capítulos 3, 4, 6 y 7.
 #+end_bibbox
 
-* Introducción
+#+PROPERTY: header-args:R :session *R* :exports results :results output :eval yes
+#+PROPERTY: header-args:R :var orgbackend=(prin1-to-string org-export-current-backend)
+#+MACRO: Rtable (eval (concat "#+header: :results output " (prin1-to-string org-export-current-backend)))
+
+* Inferencia
 
 
-** Propiedades de grandes muestras
+** Conceptos básicos
 
-- Leyes de grandes números.
+- Hipótesis nula e hipótesis alternativa.
 
-- Teoremas del límite central.
+- Error tipo I.
 
+- Error tipo II.
 
-** Propiedades asintóticas
-
-- Consistencia.
-
-- Distribución asintótica.
-
-- Eficiencia asintótica.
+- Regla de rechazo.
 
 
-** Consideraciones prácticas
+** Más conceptos básicos
 
-- Las propiedades asintóticas no requieren el supuesto de normalidad.
+- Nivel de significación.
 
-- Requisitos técnicos: momentos finitos hasta orden 4.
+- Potencia.
 
-- Calidad de la aproximación mejora con el tamaño muestral. ¿Cuántas
-  observaciones son necesarias?
+- Valor crítico.
 
-
-* Consistencia
+- $\pvalue$.
 
 
-** Definición
+** Contraste de hipótesis
 
-- El límite en probabilidad del estimador MCO coincide con el parámetro.
+- Hipótesis combinaciones lineales de los parámetros del modelo.
+
+- Hipótesis simples e hipótesis compuestas.
+
+- Modelo general y modelo restringido.
 
 
-** Supuestos
+** El contraste /t/
 
-- *RLM.1* a *RLM.4*.
+- Aplicabilidad.
 
-- El supuesto *RLM.4* puede relajarse y bastaría con:
+- Construcción.
+
+- Distribución bajo la hipótesis nula.
+
+- Sólo necesita la estimación del modelo general.
+
+- Generalización a hipótesis compuestas: contraste de Wald.
+
+
+** El contraste /F/
+
+- Aplicabilidad.
+
+- Construcción.
+
+- Distribución bajo la hipótesis nula.
+
+- Se necesita la estimación del modelo general y del modelo restringido.
+
+
+** Algunos casos especiales
+
+- El estadístico $t$:
   #+begin_export latex
   \[
-    \Exp(u) = 0 \stext{y} \cov(x_{j}, u) \text{\ para $j = 1, 2, \dots, k.$}
+    t_{\bhat_{j}} = \frac{\bhat_{j}}{\se(\bhat_{j})}
+  \]
+  #+end_export
+
+- El estadístico $F$ de significación conjunta de la regresión:
+  #+begin_export latex
+  \[
+    F = \frac{\Rsq / k}{(1 - \Rsq) / (n - k - 1)}
   \]
   #+end_export
 
 
-** Inconsistencia
+** Intervalos de confianza
 
-- Inconsistencia de $\bhat_i$:
-  #+begin_export latex
-  \[
-    \plim \bhat_{i} - \beta_{i} = \frac{\cov(x_{i}, u)}{\var(x_{i})}
-  \]
-  #+end_export
+- Construcción.
 
 
-* Normalidad asintótica
+* Predicción
 
 
-** Supuestos
+** Predicción puntual
 
-- Necesitamos los supuestos para garantizar la consistencia: *RLM.1$ a
-  *RLM.4*.
+- Predicción del valor medio.
 
-- Si además se cumple el supuesto *RLM.5*, $\hat{\sigma}^2$ es un estimador consistente de $\var(u)$.
-
-
-** Varianza de los estimadores MCO
-
-- Los supuestos de Gauss-Markov justifican el uso de las fórmulas para
-  estimar las varianzas de los estimadores:
-  #+begin_export latex
-  \[
-    \widehat{\var}(\bhat_{j}) = \frac{\hat{\sigma}^2}{\SST_{j}(1-\Rsq_{j})}
-  \]
-  #+end_export
-
-- Factores de los que depende la precisión de los estimadores.
+- Predicción del valor.
 
 
-** Distribución asintótica del estimador MCO
+** Intervalos de predicción
 
-- Para todo $j$:
-  #+begin_export latex
-  \[
-    \frac{\bhat_{j} - \beta_{j}}{\se(\bhat_{j})} \adistr \Normal(0, 1)
-  \]
-  #+end_export
+- Valor medio.
 
-
-* Inferencia asintótica
-
-
-** Contraste /t/ asintótico
-
-- Desde un punto de vista práctico podemos usar la distribución $t$
-  para determinar valores críticos y $\pvalues$.
-  #+begin_export latex
-  \[
-    \frac{\bhat_{j} - \beta_{j}}{\se(\bhat_{j})} \adistr t_{n - k - 1}
-  \]
-  #+end_export
-
-- Contraste de Wald.
-
-
-** Contraste /F/ asintótico
-
-- Nada cambia.
-
-
-** Contrastes de multiplicadores de Lagrange
-
-- Sólo es necesaria la estimación del modelo restringido.
-
-- Frecuentemente se calcula a partir de una *regresión auxiliar*.
-
-
-** Contraste LM de variables omitidas
-
-- Estimación del modelo restringido por MCO.
-
-- Regresión auxiliar usando los residuos como variable dependiente.
-
-- Estadístico de contraste.
-
-
-** Intervalos de confianza asintóticos
-
-- Fórmulas habituales.
+- Valor de la variable dependiente.
