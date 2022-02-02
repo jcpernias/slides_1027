@@ -14,9 +14,7 @@ subject_code := 1027
 	10
 
 unit_figs := \
-	01
-#	02 \
-#	03
+	02
 
 LANGUAGES := es
 

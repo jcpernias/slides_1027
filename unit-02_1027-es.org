@@ -11,24 +11,57 @@
 
 * Contraste de hipótesis
 
+
 ** Hipótesis nula e hipótesis alternativa
 
 - *Hipótesis nula*, $H_0$: la hipótesis para la que queremos
   determinar si hay o no suficiente evidencia en contra.
 
-- *Hipótesis alternativa*, $H_1$: la hipótesis que acpetaremos si
+- *Hipótesis alternativa*, $H_1$: la hipótesis que aceptaremos si
   rechazamos la hipótesis nula.
 
-** Conceptos básicos
 
-- Error tipo I.
+** Contrastes acerca de un parámetro
 
-- Error tipo II.
+- Modelo poblacional:
+  #+begin_export latex
+  \[
+    y = \beta_{0} + \beta_{1} x_{1} + \dots + \beta_{j} x_{j} + \dots +
+    \beta_{k} x_{k} + u
+  \]
+  #+end_export
 
-- Regla de rechazo.
+- Hipótesis nula: el valor del parámetro $\beta_j$ es una constante
+  conocida $b_j$:
+  #+begin_export latex
+  \[
+    H_{0}\!: \beta_{j} = b_{j}
+  \]
+  #+end_export
 
+** Estadístico de contraste
+
+El estadístico $t$ para la $H_0\!: \beta_j = b_j$ es:
+#+begin_export latex
+\[
+  t = \frac{\bhat_{j} - b_{j}}{\se(\bhat_{j})}
+\]
+#+end_export
+
+** Distribución bajo la hipótesis nula
+
+Si se cumplen los supuestos del modelo clásico de regresión lineal,
+cuando la hipótesis nula es cierta el estadístico $t$ se distribuye
+como una variable aleatoria $t$ con $n - k - 1$ grados de libertad:
+#+begin_export latex
+\[
+  t \sim t_{n-k-1}
+\]
+#+end_export
 
 ** Más conceptos básicos
+
+#+MATS: figcol fig-02_1027-ndens-*.pdf 0.5
 
 - Nivel de significación.
 
