@@ -8,16 +8,18 @@
 - Wooldridge: ::  /Introducción a la Econometría/. Capítulos 3, 4, 6 y 7.
 #+end_bibbox
 
-#+PROPERTY: header-args:R :session *R* :exports results :results output :eval yes
-#+PROPERTY: header-args:R :var orgbackend=(prin1-to-string org-export-current-backend)
-#+MACRO: Rtable (eval (concat "#+header: :results output " (prin1-to-string org-export-current-backend)))
 
-* Inferencia
+* Contraste de hipótesis
 
+** Hipótesis nula e hipótesis alternativa
+
+- *Hipótesis nula*, $H_0$: la hipótesis para la que queremos
+  determinar si hay o no suficiente evidencia en contra.
+
+- *Hipótesis alternativa*, $H_1$: la hipótesis que acpetaremos si
+  rechazamos la hipótesis nula.
 
 ** Conceptos básicos
-
-- Hipótesis nula e hipótesis alternativa.
 
 - Error tipo I.
 
@@ -87,7 +89,7 @@
   #+end_export
 
 
-** Intervalos de confianza
+* Intervalos de confianza
 
 - Construcción.
 
