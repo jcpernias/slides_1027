@@ -1,17 +1,9 @@
-SHELL := /bin/sh
+# -*- mode: makefile; -*-
 
 subject_code := 1027
- units := \
+units := \
 	01 \
-	02 \
-	03 \
-	04 \
-	05 \
-	06 \
-	07 \
-	08 \
-	09 \
-	10
+	02
 
 unit_figs := \
 	02
