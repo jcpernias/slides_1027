@@ -64,7 +64,6 @@
         ("\\subsection{%s}" . "\\subsection*{%s}")))
 
 
-
 (defun install-custom-class (description)
   "Make a LaTeX class available to use with Org"
   (let ((class (car description)))

@@ -39,6 +39,7 @@
   \]
   #+end_export
 
+
 ** Estadístico de contraste
 
 El estadístico $t$ para la $H_0\!: \beta_j = b_j$ es:
@@ -47,6 +48,7 @@ El estadístico $t$ para la $H_0\!: \beta_j = b_j$ es:
   t = \frac{\bhat_{j} - b_{j}}{\se(\bhat_{j})}
 \]
 #+end_export
+
 
 ** Distribución bajo la hipótesis nula
 
