@@ -26,7 +26,6 @@ Rscriptbin := /usr/local/bin/Rscript
 
 -include local.mk
 
-
 ## Variables
 ## ================================================================================
 
@@ -56,35 +55,6 @@ MAKEFIGDEPS := $(pythonbin) $(pythondir)/makefigdeps.py
 RSCRIPT := $(Rscriptbin) -e
 
 tex_check_dirs := $(builddir) $(figdir) $(depsdir)
-
-
-common_tex_deps := \
-	$(rootdir)/$(subject_code)-macros.tex \
-	$(texdir)/docs-base.sty \
-	$(rootdir)/course.cfg \
-	$(rootdir)/hyperref.cfg
-
-
-hdout_tex_deps := \
-	$(texdir)/hdout.cls \
-	$(texdir)/docs-full.sty \
-	$(rootdir)/course-colors.cfg \
-	$(rootdir)/hdout.cfg \
-	$(common_tex_deps)
-
-pres_tex_deps := \
-	$(texdir)/pres.cls \
-	$(texdir)/docs-full.sty \
-	$(rootdir)/course-colors.cfg \
-	$(rootdir)/pres.cfg \
-	$(common_tex_deps)
-
-
-fig_tex_deps := \
-	$(texdir)/figure.cls \
-	$(rootdir)/standalone.cfg \
-	$(common_tex_deps)
-
 
 FIGURES :=
 
@@ -129,6 +99,31 @@ define knit
 endef
 
 include course.mk
+
+common_tex_deps := \
+	$(rootdir)/$(subject_code)-macros.tex \
+	$(texdir)/docs-base.sty \
+	$(rootdir)/course.cfg \
+	$(rootdir)/hyperref.cfg
+
+hdout_tex_deps := \
+	$(texdir)/hdout.cls \
+	$(texdir)/docs-full.sty \
+	$(rootdir)/course-colors.cfg \
+	$(rootdir)/hdout.cfg \
+	$(common_tex_deps)
+
+pres_tex_deps := \
+	$(texdir)/pres.cls \
+	$(texdir)/docs-full.sty \
+	$(rootdir)/course-colors.cfg \
+	$(rootdir)/pres.cfg \
+	$(common_tex_deps)
+
+fig_tex_deps := \
+	$(texdir)/figure.cls \
+	$(rootdir)/standalone.cfg \
+	$(common_tex_deps)
 
 ## Rules
 ## ================================================================================
