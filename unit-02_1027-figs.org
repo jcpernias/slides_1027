@@ -23,6 +23,8 @@
     ((1+(\x*\x)/\n)^(-(\n+1)/2.));
   }, declare function={
     ndens(\x) = 1/(sqrt(2*pi))*exp(-(\x^2)/2);
+  }, declare function={
+    gauss(\x,\m,\s) = 1/(\s*sqrt(2*pi))*exp(-(((\x-\m)/\s)^2)/2);
   }
 #+end_src
 
@@ -39,9 +41,9 @@
       grid = major,
       <<density-functions>>
       ]
-      \addplot [fill=cyan!20, draw=none, domain=0:5.96] {gauss(6.5,1)} \closedcycle;
-      \addplot [very thick,cyan!50!black] {gauss(4,1)};
-      \addplot [very thick,cyan!50!black] {gauss(6.5,1)};
+      \addplot [fill=cyan!20, draw=none, domain=0:5.96] {gauss(x,6.5,1)} \closedcycle;
+      \addplot [very thick,cyan!50!black] {gauss(x,4,1)};
+      \addplot [very thick,cyan!50!black] {gauss(x,6.5,1)};
 
 
       \draw [yshift=-0.6cm, latex-latex](axis cs:4,0) -- node [fill=white] {$1.96\sigma$} (axis cs:5.96,0);
