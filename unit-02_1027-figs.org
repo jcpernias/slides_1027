@@ -1,4 +1,4 @@
-#+STARTUP: indent hidestars content
+#+SETUPFILE: ./course-es.org
 
 #+TITLE: Unit 1 Figures
 
