@@ -63,7 +63,7 @@ como una variable aleatoria $t$ con $n - k - 1$ grados de libertad:
 
 ** Más conceptos básicos
 
-#+MATS: figcol fig-02_1027-ndens-*.pdf 0.5
+#+MATS: figcol fig-02_1027-tdens-*.pdf 0.5
 
 - Nivel de significación.
 
