@@ -9,7 +9,7 @@
 #+end_bibbox
 
 
-* Contraste de hipótesis
+* Contraste de hipótesis sobre un parámetro
 
 
 ** Hipótesis nula e hipótesis alternativa
@@ -31,8 +31,7 @@
   \]
   #+end_export
 
-- Hipótesis nula: el valor del parámetro $\beta_j$ es una constante
-  conocida $b_j$:
+- Hipótesis nula: el valor del parámetro $\beta_j$ es igual a $b_j$:
   #+begin_export latex
   \[
     H_{0}\!: \beta_{j} = b_{j}
@@ -42,18 +41,21 @@
 
 ** Estadístico de contraste
 
-El estadístico $t$ para la $H_0\!: \beta_j = b_j$ es:
+El *estadístico $\bm{t}$* para la $H_0\!: \beta_j = b_j$ es:
 #+begin_export latex
 \[
   t = \frac{\bhat_{j} - b_{j}}{\se(\bhat_{j})}
 \]
 #+end_export
-
+donde $\se(\bhat_{j})$ es el error típico del estimador del parámetro
+$\beta_j$.
 
 ** Distribución bajo la hipótesis nula
 
+#+MATS: figcol fig-02_1027-tdens-*.pdf 0.5
+
 Si se cumplen los supuestos del modelo clásico de regresión lineal,
-cuando la hipótesis nula es cierta el estadístico $t$ se distribuye
+*cuando la hipótesis nula es cierta* el estadístico $t$ se distribuye
 como una variable aleatoria $t$ con $n - k - 1$ grados de libertad:
 #+begin_export latex
 \[
@@ -61,9 +63,203 @@ como una variable aleatoria $t$ con $n - k - 1$ grados de libertad:
 \]
 #+end_export
 
+** La hipótesis alternativa
+
+La hipótesis alternativa es, usualmente, la negación de la hipótesis
+nula:
+#+begin_export latex
+\[
+  H_{1}\!: \beta_{j} \neq b_{j}
+\]
+#+end_export
+
+** La región de rechazo
+
+#+MATS: figcol fig-02_1027-ttest-rejection-area-*.pdf 0.5
+
+La hipótesis alternativa determina la *región de rechazo*: valores
+grandes en valor absoluto del estadístico $t$ son evidencia en contra
+de la hipótesis nula.
+
+** Nivel de significación
+
+- El *nivel de significación* determina el tamaño de la región de
+  rechazo.
+
+- Es la probabilidad de rechazar la hipótesis nula cuando ésta es
+  cierta:
+  #+begin_export latex
+  \[
+    \alpha = \Pr(\text{rechazar $H_{0}$}\,|\,\text{$H_{0}$ es cierta})
+  \]
+  #+end_export
+
+** Valores críticos
+
+- Los *valores críticos* delimitan la región de rechazo.
+
+- Se determinan a partir de la distribución bajo la hipótesis nula y
+  del nivel de significación.
+
+** Valores críticos de un contraste de dos colas
+
+
+#+MATS: figcol fig-02_1027-ttest-two-tails-*.pdf 0.5
+
+En un contraste de $H_0\!: \beta_j = b_j$ frente a $H_1\!: \beta_j
+\neq b_j$, el valor crítico $c_{\alpha}$ cumple:
+#+begin_export latex
+\[
+  \Pr(|t_{n - k - 1}| > c_{\alpha/2}) = \alpha
+\]
+#+end_export
+
+** Regla de rechazo
+
+#+MATS: figcol fig-02_1027-ttest-h0-rejected-*.pdf 0.5
+
+*Regla de rechazo*: se rechaza $H_0$ (en favor de $H_1$) a un nivel de
+significación $\alpha$ cuando el estadístico $t$ cae en la región de
+rechazo:
+#+begin_export latex
+\[
+  |t| > c_{\alpha/2}
+\]
+#+end_export
+
+** No rechazo
+
+#+MATS: figcol fig-02_1027-ttest-h0-not-rejected-*.pdf 0.5
+
+Decimos que *no se rechaza* la $H_0$ cuando el estadístico $t$ se
+sitúa fuera de la región de rechazo. Evitamos expresiones como
+"/aceptar la hipótesis nula/".
+
+** Valor-$p$
+
+El *valor-$\bm{p}$* es la probabilidad cuando $H_0$ es cierta de
+observar un valor del estadístico de contraste al menos tan grande
+como el que se ha obtenido.
+
+** Valor-$p$ de un contraste de dos colas
+
+#+MATS: figcol fig-02_1027-ttest-p-value-*.pdf 0.5
+
+El valor-$p$ se corresponde con el área de las dos colas delimitadas
+por el estadístico de contraste:
+#+begin_export latex
+\[
+  \text{valor-}p = \Pr(|t_{n-k-1}| > |t|)
+\]
+#+end_export
+
+** Regla de rechazo con el valor-$p$
+
+*Regla de rechazo*: se rechaza $H_0$ (en favor de $H_1$) a un nivel de
+significación $\alpha$ cuando el valor-$p$ es menor que el nivel de significación $\alpha$:
+#+begin_export latex
+\[
+  \text{valor-}p < \alpha
+\]
+#+end_export
+
+** Interpretación del valor-$p$
+
+- El valor-$p$ *no* es la probabilidad de que $H_0$ sea cierta.
+
+- Mide la intensidad de la evidencia en contra de $H_0$:
+  cuanto más pequeño es el valor-$p$, menos soportan los datos la
+  $H_0$.
+
+** Resumen
+
+- Contraste de $H_0\!: \beta_j = b_j$ frente a $H_{1}\!: \beta_{j}
+  \neq b_{j}$.
+
+- Estadístico de contraste:
+  #+begin_export latex
+  \[
+    t = \frac{\bhat_{j} - b_{j}}{\se(\bhat_{j})}
+  \]
+  #+end_export
+
+- Se rechaza $H_0$ a un nivel de significación $\alpha$ si:
+
+  + $|t| > c_{\alpha/2}$, donde $c_{\alpha/2}$ se obtiene de la
+    distribución $t_{n - k - 1}$; o
+
+  + $\text{valor-}p < \alpha$, donde el valor-$p$ se obtiene de la
+    distribución $t_{n - k - 1}$.
+
+** Contrastes de significación individual
+
+- Es un caso especial del contraste $t$ de dos colas: $H_0\!: \beta_j = 0$ frente a $H_{1}\!: \beta_{j} \neq 0$.
+
+- El estadístico de contraste es el *cociente $\bm{t}$*:
+  #+begin_export latex
+  \[
+    t = \frac{\bhat_{j}}{\se(\bhat_{j})}
+  \]
+  #+end_export
+
+- Cuando se rechaza la $H_0$ se suele usar expresiones como "$x_j$ es
+  *estadísticamente significativa* al nivel $\alpha$".
+
+** Contrastes de una cola (I)
+
+#+MATS: figcol fig-02_1027-ttest-one-tail-pos-*.pdf 0.5
+
+- Contraste de $H_0\!: \beta_j = b_j$ frente a $H_{1}\!: \beta_{j}
+  > b_{j}$.
+
+- Estadístico de contraste:
+  #+begin_export latex
+  \[
+    t = (\bhat_{j} - b_{j})/\se(\bhat_{j})
+  \]
+  #+end_export
+
+- Se rechaza $H_0$ si $t > c_{\alpha}$, donde:
+  #+begin_export latex
+  \[
+    \Pr(t_{n-k-1} > c_{\alpha}) = \alpha
+  \]
+  #+end_export
+
+** Contrastes de una cola (y II)
+
+#+MATS: figcol fig-02_1027-ttest-one-tail-neg-*.pdf 0.5
+
+- Contraste de $H_0\!: \beta_j = b_j$ frente a $H_{1}\!: \beta_{j}
+  < b_{j}$.
+
+- Estadístico de contraste:
+  #+begin_export latex
+  \[
+    t = (\bhat_{j} - b_{j})/\se(\bhat_{j})
+  \]
+  #+end_export
+
+- Se rechaza $H_0$ si $t < -c_{\alpha}$, donde:
+  #+begin_export latex
+  \[
+    \Pr(t_{n-k-1} < -c_{\alpha}) = \alpha
+  \]
+  #+end_export
+
+
+* Intervalos de confianza
+
+** Intervalos de confianza
+
+- Construcción.
+
+
+
+* Contrastes de hipótesis lineales sobre los parámetros
+
 ** Más conceptos básicos
 
-#+MATS: figcol fig-02_1027-tdens-*.pdf 0.5
 
 - Nivel de significación.
 
@@ -123,10 +319,6 @@ como una variable aleatoria $t$ con $n - k - 1$ grados de libertad:
   \]
   #+end_export
 
-
-* Intervalos de confianza
-
-- Construcción.
 
 
 * Predicción
