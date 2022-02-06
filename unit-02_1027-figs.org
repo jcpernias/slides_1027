@@ -229,7 +229,7 @@
 #+end_src
 
 #+begin_src latex :noweb-ref conf-int-fill
-  \draw[fill, cyan!20]
+  \draw[fill, SeaGreen!30]
     ($(L)+(0, 0.1)$) rectangle ($(U)+(0, -0.1)$) ;
 #+end_src
 
