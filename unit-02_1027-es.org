@@ -50,6 +50,7 @@ El *estadístico $\bm{t}$* para la $H_0\!: \beta_j = b_j$ es:
 donde $\se(\bhat_{j})$ es el error típico del estimador del parámetro
 $\beta_j$.
 
+
 ** Distribución bajo la hipótesis nula
 
 #+MATS: figcol fig-02_1027-tdens-*.pdf 0.5
@@ -63,6 +64,7 @@ como una variable aleatoria $t$ con $n - k - 1$ grados de libertad:
 \]
 #+end_export
 
+
 ** La hipótesis alternativa
 
 La hipótesis alternativa es, usualmente, la negación de la hipótesis
@@ -73,6 +75,7 @@ nula:
 \]
 #+end_export
 
+
 ** La región de rechazo
 
 #+MATS: figcol fig-02_1027-ttest-rejection-area-*.pdf 0.5
@@ -80,6 +83,7 @@ nula:
 La hipótesis alternativa determina la *región de rechazo*: valores
 grandes en valor absoluto del estadístico $t$ son evidencia en contra
 de la hipótesis nula.
+
 
 ** Nivel de significación
 
@@ -94,12 +98,14 @@ de la hipótesis nula.
   \]
   #+end_export
 
+
 ** Valores críticos
 
 - Los *valores críticos* delimitan la región de rechazo.
 
 - Se determinan a partir de la distribución bajo la hipótesis nula y
   del nivel de significación.
+
 
 ** Valores críticos de un contraste de dos colas
 
@@ -114,6 +120,7 @@ En un contraste de $H_0\!: \beta_j = b_j$ frente a $H_1\!: \beta_j
 \]
 #+end_export
 
+
 ** Regla de rechazo
 
 #+MATS: figcol fig-02_1027-ttest-h0-rejected-*.pdf 0.5
@@ -127,6 +134,7 @@ rechazo:
 \]
 #+end_export
 
+
 ** No rechazo
 
 #+MATS: figcol fig-02_1027-ttest-h0-not-rejected-*.pdf 0.5
@@ -135,11 +143,13 @@ Decimos que *no se rechaza* la $H_0$ cuando el estadístico $t$ se
 sitúa fuera de la región de rechazo. Evitamos expresiones como
 "/aceptar la hipótesis nula/".
 
+
 ** Valor-$p$
 
 El *valor-$\bm{p}$* es la probabilidad cuando $H_0$ es cierta de
 observar un valor del estadístico de contraste al menos tan grande
 como el que se ha obtenido.
+
 
 ** Valor-$p$ de un contraste de dos colas
 
@@ -153,6 +163,7 @@ por el estadístico de contraste:
 \]
 #+end_export
 
+
 ** Regla de rechazo con el valor-$p$
 
 *Regla de rechazo*: se rechaza $H_0$ (en favor de $H_1$) a un nivel de
@@ -163,6 +174,7 @@ significación $\alpha$ cuando el valor-$p$ es menor que el nivel de significaci
 \]
 #+end_export
 
+
 ** Interpretación del valor-$p$
 
 - El valor-$p$ *no* es la probabilidad de que $H_0$ sea cierta.
@@ -170,6 +182,7 @@ significación $\alpha$ cuando el valor-$p$ es menor que el nivel de significaci
 - Mide la intensidad de la evidencia en contra de $H_0$:
   cuanto más pequeño es el valor-$p$, menos soportan los datos la
   $H_0$.
+
 
 ** Resumen
 
@@ -191,6 +204,7 @@ significación $\alpha$ cuando el valor-$p$ es menor que el nivel de significaci
   + $\text{valor-}p < \alpha$, donde el valor-$p$ se obtiene de la
     distribución $t_{n - k - 1}$.
 
+
 ** Contrastes de significación individual
 
 - Es un caso especial del contraste $t$ de dos colas: $H_0\!: \beta_j = 0$ frente a $H_{1}\!: \beta_{j} \neq 0$.
@@ -204,6 +218,7 @@ significación $\alpha$ cuando el valor-$p$ es menor que el nivel de significaci
 
 - Cuando se rechaza la $H_0$ se suele usar expresiones como "$x_j$ es
   *estadísticamente significativa* al nivel $\alpha$".
+
 
 ** Contrastes de una cola (I)
 
@@ -225,6 +240,7 @@ significación $\alpha$ cuando el valor-$p$ es menor que el nivel de significaci
     \Pr(t_{n-k-1} > c_{\alpha}) = \alpha
   \]
   #+end_export
+
 
 ** Contrastes de una cola (y II)
 
@@ -250,9 +266,59 @@ significación $\alpha$ cuando el valor-$p$ es menor que el nivel de significaci
 
 * Intervalos de confianza
 
+
 ** Intervalos de confianza
 
-- Construcción.
+Un *intervalo de confianza* para el parámetro $\beta_j$ a un *nivel de
+confianza* de $(1-\alpha)$ es un intervalo $(\bar{\beta}_j,
+\ubar{\beta}_j)$ que contendrá el valor del parámetro $\beta_j$ con
+una probabilidad $1-\alpha$:
+#+begin_export latex
+\[
+  \Pr(\ubar{\beta}_j < \beta_j < \bar{\beta}_j) = 1 - \alpha
+\]
+#+end_export
+
+** Estimación por intervalos
+
+*Estimación por intervalos*: en vez de obtener un único valor
+(*estimación puntual*), calculamos un intervalo de valores para el
+parámetro $\beta_j$.
+
+#+MATS: fig fig-02_1027-conf-interval-*.pdf
+
+
+** Contraste de hipótesis
+
+*Contraste de hipótesis*: Rechazamos $H_0\!: \beta_j = b_j$ frente a
+$H_1\!: \beta_j \neq b_j$ a un nivel de significación $\alpha$ si
+$b_j$ no está incluido en el intervalo de confianza $(\bar{\beta}_j,
+\ubar{\beta}_j)$ construido a un nivel de confianza $(1 - \alpha)$.
+
+#+MATS: fig fig-02_1027-conf-interval-test-*.pdf
+
+
+** Cálculo
+
+Si se cumplen los supuestos del modelo clásico de regresión lineal,
+*RLM.1* a *RLM.6*, los límites de un intervalo a un nivel de confianza
+$(1 - \alpha)$ para el parámetro $\beta_j$ son:
+#+begin_export latex
+\[
+  \bhat_j \pm c_{\alpha/2} \cdot \se(\bhat_j)
+\]
+#+end_export
+donde $c_{\alpha/2}$ es el valor crítico de dos colas de una
+distribución $t_{n-k-1}$ a un nivel de significación $\alpha$.
+
+** Simetría
+
+El intervalo de confianza es simétrico y su centro es la estimación $\bhat_j$.
+
+#+MATS: fig fig-02_1027-conf-interval-estimation-*.pdf
+
+
+
 
 
 

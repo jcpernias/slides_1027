@@ -1,10 +1,11 @@
 #+SETUPFILE: ./course-es.org
 
-#+TITLE: Unit 1 Figures
+#+TITLE: {{{unit02}}} figures
 
 #+PROPERTY: header-args:latex :noweb yes :eval no
 
-* Contraste de hipótesis
+
+* Común
 
 ** Funciones de densidad
 
@@ -28,7 +29,10 @@
   }
 #+end_src
 
-** Distribución t
+
+* Contraste de hipótesis sobre  un parámetro
+
+** Chunks
 
 #+begin_src latex :noweb-ref t60-axis-options
   no markers, samples=128,
@@ -90,6 +94,8 @@
     (axis cs:-1.67,0) node [fill=white, below] {$-c_{\alpha/2}$}
     (axis cs:1.67,0) node [fill=white, below] {$c_{\alpha/2}$} ;
 #+end_src
+
+** Distribución t
 
 #+begin_src latex :tangle fig-02_1027-tdens.tex
   \begin{tikzpicture}
@@ -205,5 +211,77 @@
         to [out=345, in=105] (-1.6, 0.03) ;
       <<t60-zero>>
     \end{axis}
+  \end{tikzpicture}
+#+end_src
+
+* Intervalos de confianza
+
+** Chunks
+
+#+begin_src latex :noweb-ref conf-int-axis
+  \draw[axis, ->] (0,0) -- (10,0) node[right] {$\mathbb{R}$} ;
+#+end_src
+
+#+begin_src latex :noweb-ref conf-int-coord
+  \coordinate (L) at (1.5, 0) ;
+  \coordinate (U) at (6.5, 0) ;
+  \coordinate (C) at (4, 0) ;
+#+end_src
+
+#+begin_src latex :noweb-ref conf-int-fill
+  \draw[fill, cyan!20]
+    ($(L)+(0, 0.1)$) rectangle ($(U)+(0, -0.1)$) ;
+#+end_src
+
+#+begin_src latex :noweb-ref conf-int-marks
+  \draw[curve]
+    (L) +(0, 0.2) -- +(0, -0.2)
+    (U) +(0, 0.2) -- +(0, -0.2) ;
+  \draw[curve]
+    (L) node[above=0.3cm] {$\ubar{\beta}_{j}$}
+    (U) node[above=0.3cm] {$\bar{\beta}_{j}$} ;
+#+end_src
+
+
+#+begin_src latex :noweb-ref conf-int-estimation
+  \draw[curve]
+    (C) +(0, 0.12) -- +(0, -0.12) ;
+  \draw[curve]
+    (L) node[below=0.3cm] {$\bhat_{j} - c_{\alpha/2} \cdot \se(\bhat_{j})$}
+    (C) node[below=0.3cm] {$\bhat_{j}$}
+    (U) node[below=0.3cm] {$\bhat_{j} + c_{\alpha/2} \cdot \se(\bhat_{j})$} ;
+#+end_src
+
+** Figures
+
+
+#+begin_src latex :tangle fig-02_1027-conf-interval.tex
+  \begin{tikzpicture}
+    <<conf-int-coord>>
+    <<conf-int-fill>>
+    <<conf-int-marks>>
+    <<conf-int-axis>>
+  \end{tikzpicture}
+#+end_src
+
+#+begin_src latex :tangle fig-02_1027-conf-interval-test.tex
+  \begin{tikzpicture}
+    <<conf-int-coord>>
+    <<conf-int-fill>>
+    <<conf-int-marks>>
+    \draw [yshift=-0.1cm, -stealth, thick]
+      (8, -0.5)  node [fill=white, below] {$b_{j}$} -- (8, 0);
+    <<conf-int-axis>>
+  \end{tikzpicture}
+#+end_src
+
+
+#+begin_src latex :tangle fig-02_1027-conf-interval-estimation.tex
+  \begin{tikzpicture}
+    <<conf-int-coord>>
+    <<conf-int-fill>>
+    <<conf-int-marks>>
+    <<conf-int-estimation>>
+    <<conf-int-axis>>
   \end{tikzpicture}
 #+end_src
