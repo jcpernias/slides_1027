@@ -285,3 +285,57 @@
     <<conf-int-axis>>
   \end{tikzpicture}
 #+end_src
+
+
+* Contrastes de hipótesis lineales sobre los parámetros
+
+** Chunks
+
+#+begin_src latex :noweb-ref f330-axis-options
+  no markers, samples=128,
+  xmin = 0, xmax = 4.2, ymin = 0, ymax = 0.8,
+  axis lines* = left,
+  xlabel=$F$,
+  every axis x label/.style={at=(current axis.right of origin),
+    anchor=north west},
+  axis line style={thin},
+  height=5.2cm, width=6.5cm,
+  xtick=\empty, ytick=\empty,
+  clip=false, axis on top,
+  grid = major,
+  <<density-functions>>
+#+end_src
+
+#+begin_src latex :noweb-ref f330-zero
+  \draw (0, 0) node[below] { $0$ } ;
+#+end_src
+
+#+begin_src latex :noweb-ref f330-pdf
+  \addplot [thick,cyan!50!black, domain=0:4] {fdens(x,3,30)}
+    node[pos=0.20, right, font=\small, black] {$F_{q, n - k - 1}$};
+#+end_src
+
+#+begin_src latex :noweb-ref f330-pos-tail
+  \addplot [fill=cyan!20, draw=none, domain=2.3:4]
+    {fdens(x,3,30)} \closedcycle;
+  \draw[cyan!70!black] (2.30, 0) -- (2.30, {fdens(2.30,3,30)}) ;
+#+end_src
+
+
+** Figures
+
+#+begin_src latex :tangle fig-02_1027-ftest-rejection-area.tex
+  \begin{tikzpicture}
+    \begin{axis}[
+      <<f330-axis-options>>
+      ]
+      <<f330-pos-tail>>
+      <<f330-pdf>>
+      <<f330-zero>>
+      \draw [yshift=-0.1cm]
+        (2.30, 0) node [below] {$c_{\alpha}$} ;
+      \draw[font=\small,-stealth] (3.2, 0.15) node[right] {$\alpha$}
+        to [out=195, in=75] (2.8, 0.025) ;
+    \end{axis}
+  \end{tikzpicture}
+#+end_src
