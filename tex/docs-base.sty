@@ -104,7 +104,7 @@
 %% Math
 %% --------------------------------------------------------------------------------
 \RequirePackage{latexsym}
-%\RequirePackage{amssymb}
+\RequirePackage{accents}
 \RequirePackage{mathtools}
 \mathtoolsset{mathic}
 
@@ -133,6 +133,7 @@
 \DeclarePairedDelimiter\Math@eval{.}{\rvert}
 \newcommand*{\eval}[2]{\Math@eval*{#1}_{#2}}
 
+\newcommand*{\ubar}[1]{\underaccent{\bar}{#1}}
 
 %% Common colours
 %% --------------------------------------------------------------------------------
