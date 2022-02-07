@@ -263,6 +263,17 @@ significación $\alpha$ cuando el valor-$p$ es menor que el nivel de significaci
   \]
   #+end_export
 
+** Contrastes de una cola y valores-$p$
+
+- Los valores-$p$ que presentan por defecto los programas estadísticos
+  son válidos para contrastes de dos colas.
+
+- Si el estadístico $t$ está en la misma cola de la región de rechazo,
+  el valor-$p$ será la mitad del que imprime el programa informático.
+
+- Si el estadístico $t$ está en la cola opuesta a la de la región de
+  rechazo, el valor-$p$ será mayor que $0.5$ y no se rechazará la
+  $H_0$ a ninguno de los niveles de significación habituales.
 
 * Intervalos de confianza
 
@@ -489,6 +500,10 @@ restringido, $\Rsqr$, y del modelo no restringido, $\Rsqnr$:
 - Las fórmulas basadas en los coeficientes de determinación *sólo*
   pueden usarse si los modelos restringido y no restringido tienen la
   *misma variable dependiente*.
+
+- Cualquier conjunto de restricciones lineales siempre puede
+  transformarse en restricciones de exclusión mediante una
+  reparametrización del modelo.
 
 * COMMENT Predicción
 
