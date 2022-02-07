@@ -144,9 +144,9 @@ sitúa fuera de la región de rechazo. Evitamos expresiones como
 "/aceptar la hipótesis nula/".
 
 
-** Valor-$\bm{p}$
+** Valor-p
 
-El *valor-$\bm{p}$* es la probabilidad cuando $H_0$ es cierta de
+El *valor-$\bm{p}$* es la probabilidad, cuando $H_0$ es cierta, de
 observar un valor del estadístico de contraste al menos tan grande
 como el que se ha obtenido.
 
@@ -166,8 +166,9 @@ por el estadístico de contraste:
 
 ** Regla de decisión con el valor-$p$
 
-*Regla de decisión*: se rechaza $H_0$ (en favor de $H_1$) a un nivel de
-significación $\alpha$ cuando el valor-$p$ es menor que el nivel de significación $\alpha$:
+*Regla de decisión*: se rechaza $H_0$ a un nivel de significación
+$\alpha$ cuando el valor-$p$ es menor que el nivel de significación
+$\alpha$:
 #+begin_export latex
 \[
   \text{valor-}p < \alpha.
