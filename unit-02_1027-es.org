@@ -27,14 +27,14 @@
   #+begin_export latex
   \[
     y = \beta_{0} + \beta_{1} x_{1} + \dots + \beta_{j} x_{j} + \dots +
-    \beta_{k} x_{k} + u
+    \beta_{k} x_{k} + u.
   \]
   #+end_export
 
-- Hipótesis nula: el valor del parámetro $\beta_j$ es igual a $b_j$:
+- Hipótesis nula: el valor del parámetro $\beta_j$ es igual a $b_j$,
   #+begin_export latex
   \[
-    H_{0}\!: \beta_{j} = b_{j}
+    H_{0}\!: \beta_{j} = b_{j}.
   \]
   #+end_export
 
@@ -44,7 +44,7 @@
 El *estadístico $\bm{t}$* para la $H_0\!: \beta_j = b_j$ es:
 #+begin_export latex
 \[
-  t = \frac{\bhat_{j} - b_{j}}{\se(\bhat_{j})}
+  t = \frac{\bhat_{j} - b_{j}}{\se(\bhat_{j})},
 \]
 #+end_export
 donde $\se(\bhat_{j})$ es el error típico del estimador del parámetro
@@ -60,7 +60,7 @@ Si se cumplen los supuestos del modelo clásico de regresión lineal,
 como una variable aleatoria $t$ con $n - k - 1$ grados de libertad:
 #+begin_export latex
 \[
-  t \sim t_{n-k-1}
+  t \sim t_{n-k-1}.
 \]
 #+end_export
 
@@ -71,7 +71,7 @@ La hipótesis alternativa es, usualmente, la negación de la hipótesis
 nula:
 #+begin_export latex
 \[
-  H_{1}\!: \beta_{j} \neq b_{j}
+  H_{1}\!: \beta_{j} \neq b_{j}.
 \]
 #+end_export
 
@@ -94,7 +94,7 @@ de la hipótesis nula.
   cierta:
   #+begin_export latex
   \[
-    \alpha = \Pr(\text{rechazar $H_{0}$}\,|\,\text{$H_{0}$ es cierta})
+    \alpha = \Pr(\text{rechazar $H_{0}$}\,|\,\text{$H_{0}$ es cierta}).
   \]
   #+end_export
 
@@ -116,7 +116,7 @@ En un contraste de $H_0\!: \beta_j = b_j$ frente a $H_1\!: \beta_j
 \neq b_j$, el valor crítico $c_{\alpha}$ cumple:
 #+begin_export latex
 \[
-  \Pr(|t_{n - k - 1}| > c_{\alpha/2}) = \alpha
+  \Pr(|t_{n - k - 1}| > c_{\alpha/2}) = \alpha.
 \]
 #+end_export
 
@@ -130,7 +130,7 @@ de significación $\alpha$ cuando el estadístico $t$ cae en la región
 de rechazo:
 #+begin_export latex
 \[
-  |t| > c_{\alpha/2}
+  |t| > c_{\alpha/2}.
 \]
 #+end_export
 
@@ -144,7 +144,7 @@ sitúa fuera de la región de rechazo. Evitamos expresiones como
 "/aceptar la hipótesis nula/".
 
 
-** Valor-$p$
+** Valor-$\bm{p}$
 
 El *valor-$\bm{p}$* es la probabilidad cuando $H_0$ es cierta de
 observar un valor del estadístico de contraste al menos tan grande
@@ -159,7 +159,7 @@ El valor-$p$ se corresponde con el área de las dos colas delimitadas
 por el estadístico de contraste:
 #+begin_export latex
 \[
-  \text{valor-}p = \Pr(|t_{n-k-1}| > |t|)
+  \text{valor-}p = \Pr(|t_{n-k-1}| > |t|).
 \]
 #+end_export
 
@@ -170,7 +170,7 @@ por el estadístico de contraste:
 significación $\alpha$ cuando el valor-$p$ es menor que el nivel de significación $\alpha$:
 #+begin_export latex
 \[
-  \text{valor-}p < \alpha
+  \text{valor-}p < \alpha.
 \]
 #+end_export
 
@@ -192,7 +192,7 @@ significación $\alpha$ cuando el valor-$p$ es menor que el nivel de significaci
 - Estadístico de contraste:
   #+begin_export latex
   \[
-    t = \frac{\bhat_{j} - b_{j}}{\se(\bhat_{j})}
+    t = \frac{\bhat_{j} - b_{j}}{\se(\bhat_{j})}.
   \]
   #+end_export
 
@@ -212,7 +212,7 @@ significación $\alpha$ cuando el valor-$p$ es menor que el nivel de significaci
 - El estadístico de contraste es el *cociente $\bm{t}$*:
   #+begin_export latex
   \[
-    t = \frac{\bhat_{j}}{\se(\bhat_{j})}
+    t = \frac{\bhat_{j}}{\se(\bhat_{j})}.
   \]
   #+end_export
 
@@ -224,20 +224,20 @@ significación $\alpha$ cuando el valor-$p$ es menor que el nivel de significaci
 
 #+MATS: figcol fig-02_1027-ttest-one-tail-pos-*.pdf 0.5
 
-- Contraste de $H_0\!: \beta_j = b_j$ frente a $H_{1}\!: \beta_{j}
+- $H_0\!: \beta_j = b_j$ frente a $H_{1}\!: \beta_{j}
   > b_{j}$.
 
 - Estadístico de contraste:
   #+begin_export latex
   \[
-    t = (\bhat_{j} - b_{j})/\se(\bhat_{j})
+    t = (\bhat_{j} - b_{j})/\se(\bhat_{j}).
   \]
   #+end_export
 
 - Se rechaza $H_0$ si $t > c_{\alpha}$, donde:
   #+begin_export latex
   \[
-    \Pr(t_{n-k-1} > c_{\alpha}) = \alpha
+    \Pr(t_{n-k-1} > c_{\alpha}) = \alpha.
   \]
   #+end_export
 
@@ -246,20 +246,20 @@ significación $\alpha$ cuando el valor-$p$ es menor que el nivel de significaci
 
 #+MATS: figcol fig-02_1027-ttest-one-tail-neg-*.pdf 0.5
 
-- Contraste de $H_0\!: \beta_j = b_j$ frente a $H_{1}\!: \beta_{j}
+- $H_0\!: \beta_j = b_j$ frente a $H_{1}\!: \beta_{j}
   < b_{j}$.
 
 - Estadístico de contraste:
   #+begin_export latex
   \[
-    t = (\bhat_{j} - b_{j})/\se(\bhat_{j})
+    t = (\bhat_{j} - b_{j})/\se(\bhat_{j}).
   \]
   #+end_export
 
 - Se rechaza $H_0$ si $t < -c_{\alpha}$, donde:
   #+begin_export latex
   \[
-    \Pr(t_{n-k-1} < -c_{\alpha}) = \alpha
+    \Pr(t_{n-k-1} < -c_{\alpha}) = \alpha.
   \]
   #+end_export
 
@@ -270,12 +270,12 @@ significación $\alpha$ cuando el valor-$p$ es menor que el nivel de significaci
 ** Intervalos de confianza
 
 Un *intervalo de confianza* para el parámetro $\beta_j$ a un *nivel de
-confianza* de $(1-\alpha)$ es un intervalo $(\bar{\beta}_j,
+confianza* de $1-\alpha$ es un intervalo $(\bar{\beta}_j,
 \ubar{\beta}_j)$ que contendrá el valor del parámetro $\beta_j$ con
 una probabilidad $1-\alpha$:
 #+begin_export latex
 \[
-  \Pr(\ubar{\beta}_j < \beta_j < \bar{\beta}_j) = 1 - \alpha
+  \Pr(\ubar{\beta}_j < \beta_j < \bar{\beta}_j) = 1 - \alpha.
 \]
 #+end_export
 
@@ -296,7 +296,7 @@ parámetro $\beta_j$.
 *Contraste de hipótesis*: Rechazamos $H_0\!: \beta_j = b_j$ frente a
 $H_1\!: \beta_j \neq b_j$ a un nivel de significación $\alpha$ si
 $b_j$ no está incluido en el intervalo de confianza $(\bar{\beta}_j,
-\ubar{\beta}_j)$ construido a un nivel de confianza $(1 - \alpha)$.
+\ubar{\beta}_j)$ construido a un nivel de confianza $1 - \alpha$.
 
 #+MATS: fig fig-02_1027-conf-interval-test-*.pdf
 
@@ -306,10 +306,10 @@ $b_j$ no está incluido en el intervalo de confianza $(\bar{\beta}_j,
 
 Si se cumplen los supuestos del modelo clásico de regresión lineal,
 *RLM.1* a *RLM.6*, los límites de un intervalo a un nivel de confianza
-$(1 - \alpha)$ para el parámetro $\beta_j$ son:
+$1 - \alpha$ para el parámetro $\beta_j$ son:
 #+begin_export latex
 \[
-  \bhat_j \pm c_{\alpha/2} \cdot \se(\bhat_j)
+  \bhat_j \pm c_{\alpha/2} \cdot \se(\bhat_j),
 \]
 #+end_export
 donde $c_{\alpha/2}$ es el valor crítico de dos colas de una
@@ -319,7 +319,8 @@ distribución $t_{n-k-1}$ a un nivel de significación $\alpha$.
 ** Simetría
 
 
-El intervalo de confianza es simétrico y su centro es la estimación $\bhat_j$.
+El intervalo de confianza del parámetro $\beta_j$ es simétrico y su
+centro es la estimación $\bhat_j$.
 
 #+MATS: fig fig-02_1027-conf-interval-estimation-*.pdf
 
@@ -328,8 +329,8 @@ El intervalo de confianza es simétrico y su centro es la estimación $\bhat_j$.
 
 ** Hipótesis lineales sobre los parámetros
 
-- La hipótesis nula se compone de una o más combinaciones lineales
-  cuyo valor es conocido. Por ejemplo:
+- La hipótesis nula se compone de una o más *combinaciones lineales*
+  de los parámetros. Por ejemplo:
 
   + $H_0\!: \beta_3 = 0, \beta_4 = 1$.
 
@@ -341,38 +342,39 @@ El intervalo de confianza es simétrico y su centro es la estimación $\bhat_j$.
 
 ** Restricciones de exclusión
 
-- *Restricciones de exclusión múltiple*: En la hipótesis nula las
-  pendientes de $q$ regresores son nulas:
+- *Restricciones de exclusión múltiple*: las pendientes de $q$
+  regresores son nulas:
   #+begin_export latex
   \[
-    H_{0}\!: \beta_{1} = \beta_{2} = \dots = \beta_{q} = 0
+    H_{0}\!: \beta_{1} = \beta_{2} = \dots = \beta_{q} = 0.
   \]
   #+end_export
 - En la hipótesis alternativa al menos una de las pendientes $\beta_{1}, \beta_{2}, \dots, \beta_{q}$ es distinta de $0$:
   #+begin_export latex
   \[
-    H_{1}\!: \text{no $H_0$}
+    H_{1}\!: \text{no $H_0$}.
   \]
   #+end_export
 
 ** Modelo no restringido
 
 *Modelo no restringido*: los parámetros pueden tomar cualquier valor y
- es válido tanto bajo la $H_0$ como bajo la $H_1$:
+es válido tanto bajo la $H_0$ como bajo la $H_1$:
 #+begin_export latex
 \[
   y = \beta_{0} + \beta_{1} x_{1} + \dots + \beta_{q} x_{q} +
-  \beta_{q+1} x_{q+1} + \dots +  \beta_{k} x_{k} + u
+  \beta_{q+1} x_{q+1} + \dots +  \beta_{k} x_{k} + u.
 \]
 #+end_export
 
 
 ** Modelo restringido
 
-*Modelo no restringido*: los parámetros $\beta_1, \dots, \beta_q$ son iguales a $0$ y sólo es válido bajo la $H_0$:
+*Modelo restringido*: los parámetros $\beta_1, \dots, \beta_q$ son
+iguales a $0$ y sólo es válido bajo la $H_0$:
 #+begin_export latex
 \[
-  y = \beta_{0} + \beta_{q+1} x_{q+1} + \dots +  \beta_{k} x_{k} + u
+  y = \beta_{0} + \beta_{q+1} x_{q+1} + \dots +  \beta_{k} x_{k} + u.
 \]
 #+end_export
 
@@ -393,7 +395,7 @@ El intervalo de confianza es simétrico y su centro es la estimación $\bhat_j$.
 El estadístico de contraste es el *estadístico $\bm{F}$*:
 #+begin_export latex
 \[
-  F = \frac{(\SCRr - \SCRnr) / q}{\SCRnr / (n - k - 1)}
+  F = \frac{(\SCRr - \SCRnr) / q}{\SCRnr / (n - k - 1)}.
 \]
 #+end_export
 
@@ -404,7 +406,7 @@ Si se cumplen los supuestos del modelo clásico de regresión lineal,
 como una variable aleatoria $F$ con $q$ y $n - k - 1$ grados de libertad:
 #+begin_export latex
 \[
-  F \sim F_{q, n-k-1}
+  F \sim F_{q, n-k-1}.
 \]
 #+end_export
 
@@ -416,7 +418,7 @@ como una variable aleatoria $F$ con $q$ y $n - k - 1$ grados de libertad:
 - Valor crítico a un nivel de significación $\alpha$:
   #+begin_export latex
   \[
-    \Pr(F_{q, n-k-1} > c_{\alpha}) = \alpha
+    \Pr(F_{q, n-k-1} > c_{\alpha}) = \alpha.
   \]
   #+end_export
 
@@ -427,21 +429,21 @@ como una variable aleatoria $F$ con $q$ y $n - k - 1$ grados de libertad:
 
 ** La regla de decisión
 
-*Regla de decisión*: se rechaza $H_0$ (en favor de $H_1$) a un nivel
-de significación $\alpha$ cuando:
+*Regla de decisión*: se rechaza $H_0$ a un nivel de significación
+$\alpha$ cuando:
 
 - El estadístico $F$ cae en la región de rechazo:
   #+begin_export latex
   \[
-    F > c_{\alpha}
+    F > c_{\alpha}.
   \]
   #+end_export
 
 - El valor-$p$ es menor que el nivel de significación $\alpha$. El
-  valor-$p$ se define como:
+  valor-$p$ es:
   #+begin_export latex
   \[
-    \text{valor-}p = \Pr(F_{q, n-k-1} > F)
+    \text{valor-}p = \Pr(F_{q, n-k-1} > F).
   \]
   #+end_export
 
@@ -449,12 +451,12 @@ de significación $\alpha$ cuando:
 
 ** El contraste $F$ y el $R^2$
 
-Para contrastar restricciones de exclusión, el estadístico $F$ puede
+/Para contrastar restricciones de exclusión/ el estadístico $F$ puede
 calcularse a partir de los coeficientes de determinación del modelo
 restringido, $\Rsqr$, y del modelo no restringido, $\Rsqnr$:
 #+begin_export latex
 \[
-  F = \frac{(\Rsqnr - \Rsqr) / q}{\Rsqnr / (n - k - 1)}
+  F = \frac{(\Rsqnr - \Rsqr) / q}{(1 - \Rsqnr) / (n - k - 1)}.
 \]
 #+end_export
 
@@ -465,14 +467,14 @@ restringido, $\Rsqr$, y del modelo no restringido, $\Rsqnr$:
   nula de que todas las pendientes son nulas:
   #+begin_export latex
   \[
-    H_0\!: \beta_1 = \beta_2 = \dots = \beta_k = 0
+    H_0\!: \beta_1 = \beta_2 = \dots = \beta_k = 0.
   \]
   #+end_export
 
 - El estadístico $F$ en términos del coeficiente de determinación es:
   #+begin_export latex
   \[
-    F = \frac{\Rsq / k}{(1 - \Rsq) / (n - k - 1)}
+    F = \frac{\Rsq / k}{(1 - \Rsq) / (n - k - 1)}.
   \]
   #+end_export
 
@@ -484,11 +486,11 @@ restringido, $\Rsqr$, y del modelo no restringido, $\Rsqnr$:
   cuadrados de los residuos para contrastar restricciones lineales
   generales.
 
-- Las fórmulas basadas en los coeficientes de determinación sólo
+- Las fórmulas basadas en los coeficientes de determinación *sólo*
   pueden usarse si los modelos restringido y no restringido tienen la
-  misma variable dependiente.
+  *misma variable dependiente*.
 
-* Predicción
+* COMMENT Predicción
 
 
 ** Predicción puntual

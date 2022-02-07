@@ -144,9 +144,10 @@
       ]
       <<t60-rejection-area>>
       <<t60-pdf>>
+      <<t60-critical-values>>
       <<t60-zero>>
       \draw [yshift=-0.1cm, -stealth, thick, font=\small]
-        (1, -0.04)  node [fill=white, below] {$t$} -- (1,0);
+        (0.6, -0.04)  node [fill=white, below] {$t$} -- (0.6, 0);
     \end{axis}
   \end{tikzpicture}
 #+end_src
@@ -158,9 +159,10 @@
       ]
       <<t60-rejection-area>>
       <<t60-pdf>>
+      <<t60-critical-values>>
       <<t60-zero>>
       \draw [yshift=-0.1cm, -stealth, thick, font=\small]
-        (-2, -0.04)  node [fill=white, below] {$t$} -- (-2, 0);
+        (-2.6, -0.04)  node [fill=white, below] {$t$} -- (-2.6, 0);
     \end{axis}
   \end{tikzpicture}
 #+end_src
