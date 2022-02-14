@@ -3,7 +3,9 @@
 subject_code := 1027
 units := \
 	01 \
-	02
+	02 \
+	03 \
+	04
 
 unit_figs := \
 	02
