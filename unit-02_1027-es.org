@@ -144,7 +144,7 @@ sitúa fuera de la región de rechazo. Evitamos expresiones como
 "/aceptar la hipótesis nula/".
 
 
-** Valor-p
+** Valor-$p$
 
 El *valor-$\bm{p}$* es la probabilidad, cuando $H_0$ es cierta, de
 observar un valor del estadístico de contraste al menos tan grande
@@ -264,6 +264,7 @@ $\alpha$:
   \]
   #+end_export
 
+
 ** Contrastes de una cola y valores-$p$
 
 - Los valores-$p$ que presentan por defecto los programas estadísticos
@@ -275,6 +276,7 @@ $\alpha$:
 - Si el estadístico $t$ está en la cola opuesta a la de la región de
   rechazo, el valor-$p$ será mayor que $0.5$ y no se rechazará la
   $H_0$ a ninguno de los niveles de significación habituales.
+
 
 * Intervalos de confianza
 
@@ -339,6 +341,7 @@ centro es la estimación $\bhat_j$.
 
 * Contrastes de hipótesis lineales sobre los parámetros
 
+
 ** Hipótesis lineales sobre los parámetros
 
 - La hipótesis nula se compone de una o más *combinaciones lineales*
@@ -367,6 +370,7 @@ centro es la estimación $\bhat_j$.
     H_{1}\!: \text{no $H_0$}.
   \]
   #+end_export
+
 
 ** Modelo no restringido
 
@@ -402,6 +406,7 @@ iguales a $0$ y sólo es válido bajo la $H_0$:
   de los residuos del modelo restringido, $\SCRr$, y del modelo no
   restringido, $\SCRnr$.
 
+
 ** Estadístico de contraste
 
 El estadístico de contraste es el *estadístico $\bm{F}$*:
@@ -410,6 +415,7 @@ El estadístico de contraste es el *estadístico $\bm{F}$*:
   F = \frac{(\SCRr - \SCRnr) / q}{\SCRnr / (n - k - 1)}.
 \]
 #+end_export
+
 
 ** Distribución bajo la hipótesis nula
 
@@ -505,6 +511,7 @@ restringido, $\Rsqr$, y del modelo no restringido, $\Rsqnr$:
 - Cualquier conjunto de restricciones lineales siempre puede
   transformarse en restricciones de exclusión mediante una
   reparametrización del modelo.
+
 
 * COMMENT Predicción
 
