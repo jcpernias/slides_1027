@@ -12,20 +12,102 @@
 * Introducción
 
 
-** Propiedades de grandes muestras
+** El supuesto de normalidad
 
-- Leyes de grandes números.
+El supuesto *RLM.6* del modelo clásico de regresión requiere la
+normalidad del término de error:
+#+begin_export latex
+\[
+  u \sim \Normal(0, \sigma^{2})
+\]
+#+end_export
 
-- Teoremas del límite central.
+
+** Inferencia en el modelo clásico
+
+El supuesto de normalidad permite conocer la distribución de los
+contrates de hipótesis bajo la hipótesis nula.
+
+
+** Falta de normalidad
+
+En muchos casos el supuesto de normalidad no es muy razonable:
+
+- Variable dependiente sólo toma valores positivos.
+
+- Variable dependiente sólo toma algunos valores discretos.
+
+
+** Teoría asintótica
+
+La *teoría asintótica* estudia el comportamiento de estimadores y
+contrastes de hipótesis cuando el tamaño muestral crece
+indefinidamente.
+
+
+** Teoremas sobre límites
+
+Bajo ciertas condiciones, secuencias de variables aleatorias obtenidas
+por muestreo aleatorio cumplen conforme $n \to \infty$:
+
+- *Leyes de grandes números*: establecen la convergencia de medias
+  muestrales a la media poblacional.
+
+- *Teoremas del límite central*: establecen la *distribución
+  asintótica* de las medias muestrales.
 
 
 ** Propiedades asintóticas
 
-- Consistencia.
+- *Consistencia*.
 
-- Distribución asintótica.
+- *Distribución asintótica*.
 
-- Eficiencia asintótica.
+- *Eficiencia asintótica*.
+
+
+** Consistencia
+
+Un estimador es consistente si conforme aumenta el tamaño muestral converge en probabilidad al parámetro poblacional:
+#+begin_export latex
+\[
+   \plim \bhat_j = \beta_j
+\]
+#+end_export
+
+Intuitivamente, cuanto mayor es el tamaño muestral más cerca está un estimador consistente del parámetro poblacional
+
+
+** Consistencia e insesgadez
+
+- Las propiedades de consistencia e insesgadez son independientes: una
+  no implica la otra.
+
+- Un estimador es consistente si es insesgado y su varianza decrece y
+  converge a 0 conforme aumenta el tamaño muestral.
+
+
+** Distribución asintótica
+
+- La *distribución asintótica* de un estimador es su distribución en
+  el límite.
+
+- Proporciona una aproximación a la distribución del estimador para un
+  tamaño muestral finito.
+
+
+** Normalidad asintótica
+
+- Un estimador es *asintóticamente normal* si su distribución
+  asintótica es normal:
+  #+begin_export latex
+  \[
+    \bhat_{j} \adistr \Normal(\beta_j, \var(\bhat_{j}))
+  \]
+  #+end_export
+
+- No es necesaria la normalidad del término de error, bastan las
+  condiciones de un teorema del límite central.
 
 
 ** Consideraciones prácticas
@@ -34,23 +116,20 @@
 
 - Requisitos técnicos: momentos finitos hasta orden 4.
 
-- Calidad de la aproximación mejora con el tamaño muestral. ¿Cuántas
-  observaciones son necesarias?
+- La calidad de las aproximaciones asintóticas suele mejorar con el
+  tamaño muestral. Pero, ¿cuántas observaciones son necesarias en la
+  práctica?
 
 
-* Consistencia
+* Propiedades asintóticas de MCO
 
-
-** Definición
-
-- El límite en probabilidad del estimador MCO coincide con el parámetro.
 
 
 ** Supuestos
 
-- *RLM.1* a *RLM.4*.
+- MCO es consistente si se cumplen los supuestos *RLM.1* a *RLM.4*.
 
-- El supuesto *RLM.4* puede relajarse y bastaría con:
+- El supuesto *RLM.4*, $E(u|\bm{x}) = 0$, puede relajarse y basta con:
   #+begin_export latex
   \[
     \Exp(u) = 0 \stext{y} \cov(x_{j}, u) \text{\ para $j = 1, 2, \dots, k.$}
@@ -60,12 +139,40 @@
 
 ** Inconsistencia
 
-- Inconsistencia de $\bhat_i$:
+- La *inconsistencia* de $\bhat_i$ es la diferencia entre el límite
+  del estimador y el parámetro poblacional. En el caso de MCO:
   #+begin_export latex
   \[
     \plim \bhat_{i} - \beta_{i} = \frac{\cov(x_{i}, u)}{\var(x_{i})}
   \]
   #+end_export
+
+- MCO es *inconsistente* si el término de error y, al menos, una de
+  las explicativas están correlacionados.
+
+
+** Variable relevante omitida
+
+- Se cumplen los supuestos *RLM.1* a *RLM.4* en el modelo poblacional:
+  #+begin_export latex
+  \[
+    y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + u
+  \]
+  #+end_export
+
+- Si se omite la variable $x_2$, el sesgo del estimador MCO de
+  $\beta_1$ es:
+  #+begin_export latex
+  \[
+    \plim \bhat_{1} - \beta_{1} = \beta_2 \delta_{21}
+  \]
+  #+end_export
+  donde $\delta_{21} = \cov(x_1, x_2) / \var(x_1)$, mide la intensidad
+  de la asociación de $x_2$ y $x_1$.
+
+- Omitir una variable relevante, $\beta_2 \neq 0$, causa
+  inconsistencia si la variable omitida está correlacionada con alguna
+  de las explicativas, $\delta_{21} \neq 0$.
 
 
 * Normalidad asintótica
@@ -73,10 +180,11 @@
 
 ** Supuestos
 
-- Necesitamos los supuestos para garantizar la consistencia: *RLM.1$ a
+- Necesitamos los supuestos para garantizar la consistencia: *RLM.1* a
   *RLM.4*.
 
-- Si además se cumple el supuesto *RLM.5*, $\hat{\sigma}^2$ es un estimador consistente de $\var(u)$.
+- Si además se cumple el supuesto *RLM.5*, $\hat{\sigma}^2$ es un
+  estimador consistente de $\var(u)$.
 
 
 ** Varianza de los estimadores MCO
@@ -105,7 +213,7 @@
 * Inferencia asintótica
 
 
-** Contraste /t/ asintótico
+** Contraste $t$ asintótico
 
 - Desde un punto de vista práctico podemos usar la distribución $t$
   para determinar valores críticos y $\pvalues$.
@@ -118,7 +226,7 @@
 - Contraste de Wald.
 
 
-** Contraste /F/ asintótico
+** Contraste $F$ asintótico
 
 - Nada cambia.
 
