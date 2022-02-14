@@ -41,6 +41,14 @@
 ]{beamer}
 
 
+%% Disable hyphenation
+%% --------------------------------------------------------------------------------
+\RequirePackage{hyphsubst}
+\HyphSubstLet{spanish}{nohyphenation}
+\HyphSubstLet{english}{nohyphenation}
+
+
+
 %% Beamer setup
 %% --------------------------------------------------------------------------------
 
