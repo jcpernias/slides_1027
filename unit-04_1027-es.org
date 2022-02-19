@@ -32,7 +32,7 @@ estimar la FRP.
 es constante:
 #+begin_export latex
 \[
-  E(u_i^2|x_{1i}, x_{2i}, \dots, x_{ki}) = \sigma^2_i
+  \Exp(u_i^2|x_{1i}, x_{2i}, \dots, x_{ki}) = \sigma^2_i
 \]
 #+end_export
 y, en general, $\sigma^2_i \neq \sigma^2_j$, cuando $i \neq j$.
@@ -160,68 +160,189 @@ Un procedimiento común con datos de corte transversal:
 
 ** ¿Por qué?
 
-- ¿Es necesario usar errores típicos robustos?
 
-- ¿Es necesario usar estimadores más eficientes que MCO?
+- Si no hay grandes problemas de heteroscedasticidad no sería necesario
+  usar errores típicos robustos.
+
+- MCO es el estimador óptimo (en cierto sentido) cuando el término de
+  error es homoscedástico. Si hay heteroscedasticidad quizá queramos
+  emplear estimadores más eficientes que MCO.
+
+** Contrastes de especificación
+
+- Tratamos de verificar si se cumple alguno de los supuestos sobre el
+  modelo poblacional.
+
+- La hipótesis nula suele ser que la especificación es correcta.
+
+- A menudo se utiliza un contraste de multiplicadores de Lagrange.
+
+** Contrastes de heteroscedasticidad
+
+- La hipótesis nula es el supuesto *RLM.5*:
+  #+begin_export latex
+  \[
+    H_0\!: \var(u_i | x_{1i}, \dots, x_{ki}) = \sigma^2.
+  \]
+  #+end_export
+
+- Bajo la hipótesis alternativa hay heteroscedasticidad:
+  #+begin_export latex
+  \[
+    H_1\!: \var(u_i | x_{1i}, \dots, x_{ki}) = \sigma^2_i.
+  \]
+  #+end_export
+
+** Enfoque general
+
+- Podemos reescribir la hipótesis nula como:
+  #+begin_export latex
+  \[
+    H_0\!: \Exp(u^2_i | x_{1i}, \dots, x_{ki}) = \sigma^2.
+  \]
+  #+end_export
+
+- Si no se cumple $H_0$ la esperanza condicional de $u^2$ depende de
+  los regresores. Si la relación fuera lineal:
+  #+begin_export latex
+  \[
+     u^2  = \delta_0   + \delta_1 x_{1} +  \dots + \delta_k x_{k} + \text{error}.
+  \]
+  #+end_export
+
+- Si observáramos $u_i$ podríamos contrastar homoscedasticidad
+  mediante un contraste de:
+  #+begin_export latex
+  \[
+    H_0\!: \delta_1 = \delta_2 = \dots = \delta_k = 0
+  \]
+  #+end_export
 
 
-** Contraste de White (I)
+** Regresión auxiliar
 
-Halbert White muestra que hay problemas con MCO cuando la varianza
-condicional depende de:
+- Los contrastes modernos de heteroscedasticidad utilizan una
+  regresión auxiliar cuya variable dependiente es $\uhat^2$.
 
-- Las variables explicativas: $x_1, x_2, \dots, x_k$.
+- Cada contraste se diferencia por los $k_{aux}$ regresores que se
+  incluyen.
 
-- Los cuadrados de las variables explicativas: $x^2_1, x^2_2, \dots,
-  x^2_k$.
+- El estadístico $\LM = n \Rsq_{aux}$ se distribuye bajo la $H_0$ como
+  una $\chi^2_{k_{aux}}$.
 
-- Los productos cruzados: $x_1 \cdot x_2, x_1 \cdot x_3, \dots$
-
-
-** Contraste de White (II)
-
-Propone un contraste basado en una regresión auxiliar de los residuos
-MCO al cuadrado sobre las explicativas, sus cuadrados y sus productos
-cruzados:
-
-Para contrastar la hipótesis nula se puede usar:
-
-- El estadístico LM: $N R^2$.
-- El estadístico $F$ para contrastar la significación conjunta de la
-  regresión auxiliar.
-
-
-** Contraste de White (III)
-
-En la regresión auxiliar del contraste de White hay un gran número de
-parámetros. Esto puede provocar que el contraste de White tenga poca
-**potencia** (capacidad de detectar heteroscedasticidad cuando
-realmente está presente).
-
-
-** Contraste de White (IV)
-
-Para mitigar ese problema, en ocasiones se omiten los productos
-cruzados en la regresión auxiliar.
-
-
-** Otros contrastes
-
-La heteroscedasticidad puede contrastarse mediante una regresión
-auxiliar de los residuos MCO al cuadrado sobre un conjunto de
-variables que estén relacionadas con la varianza del término de
-error. Puede usarse:
-
-- El estadítico LM.
-
-- El contraste $F$ de significación conjunta.
-
+- También puede usarse el contraste de significación de la regresión:
+  #+begin_export latex
+  \[
+    F = \frac{\Rsq_{aux} / k_{aux}}{(1 - \Rsq_{aux}) / (n - k_{aux} - 1)}.
+  \]
+  #+end_export
 
 
 ** Contraste de Breusch-Pagan
 
+- En la actualidad, se usa comúnmente la variante, debida a [[https://en.wikipedia.org/wiki/Roger_Koenker][Koenker]],
+  del contraste que propusieron [[https://en.wikipedia.org/wiki/Trevor_S._Breusch][Breusch]] y [[https://en.wikipedia.org/wiki/Adrian_Pagan][Pagan]].
 
-** Contraste de White alternativo
+- En la regresión auxiliar se usan como regresores las $k$ variables
+  explicativas del modelo de regresión original.
+
+
+** Contraste de Breusch-Pagan: ejemplo
+
+- Modelo de regresión con 3 explicativas:
+  #+begin_export latex
+  \[
+    y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + \beta_3 x_{3i} + u_i.
+  \]
+  #+end_export
+
+- Después de estimar por MCO se obtienen los residuos $\uhat$.
+
+- Regresión auxiliar:
+  #+begin_export latex
+  \[
+    \uhat^2_i = \delta_0 + \delta_1 x_{1i} + \delta_2 x_{2i} + \delta_3 x_{3i} + \text{error}.
+  \]
+  #+end_export
+
+- Se estima por MCO la regresión auxiliar y se calcula el estadístico
+  $\LM$ o el estadístico $F$ de la regresión auxiliar.
+
+
+** Contraste de White: motivación
+
+[[https://en.wikipedia.org/wiki/Halbert_White][White]] concluye que la heteroscedasticidad sólo es problemática si la varianza condicional de $u$ depende de:
+
+- las variables explicativas: $x_1, x_2, \dots, x_k$;
+
+- sus cuadrados: $x^2_1, x^2_2, \dots, x^2_k$; o
+
+- sus productos cruzados: $x_1 \cdot x_2, x_1 \cdot x_3, \dots$
+
+** Contraste de White
+
+- La regresión auxiliar incluye  las explicativas, sus cuadrados y sus productos cruzados.
+
+- Pueden aparecer problemas de multicolinealidad perfecta en la
+  regresión auxiliar, especialmente si hay variables ficticias. En ese caso, habría que eliminar de la regresión auxiliar los regresores redundantes.
+
+
+** Contraste de White: ejemplo
+
+- Modelo de regresión con 3 explicativas:
+  #+begin_export latex
+  \[
+    y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + \beta_3 x_{3i} + u_i.
+  \]
+  #+end_export
+
+- Después de estimar por MCO se obtienen los residuos $\uhat$.
+
+- Regresión auxiliar:
+  #+begin_export latex
+  \begin{align*}
+    \uhat^2_i
+    = \delta_0 &+ \delta_1 x_{1i} + \delta_2 x_{2i} + \delta_3 x_{3i}
+    + \delta_4 x^{2}_{1i} + \delta_{5} x^{2}_{2i} + \delta_6 x^{2}_{3i} \\
+    &+ \delta_7 x_{1i} x_{2i} + \delta_8 x_{1i} x_{3i} + \delta_9 x_{2i}x_{3i}
+     +  \text{error}.
+  \end{align*}
+  #+end_export
+
+- Se estima por MCO la regresión auxiliar y se calcula el estadístico
+  $\LM$ o el estadístico $F$ de la regresión auxiliar.
+
+
+** Contraste de White: alternativas (I)
+
+- En la regresión auxiliar del contraste de White hay un gran número
+  de parámetros, lo que puede traducirse en baja **potencia**
+  (capacidad de detectar heteroscedasticidad cuando realmente está
+  presente).
+
+- Para mitigar ese problema, en ocasiones se omiten los productos
+  cruzados en la regresión auxiliar:
+  #+begin_export latex
+  \begin{equation*}
+    \uhat^2_i
+    = \delta_0 + \delta_1 x_{1i} + \delta_2 x_{2i} + \delta_3 x_{3i}
+    + \delta_4 x^{2}_{1i} + \delta_{5} x^{2}_{2i} + \delta_6 x^{2}_{3i}
+      +  \text{error}.
+  \end{equation*}
+  #+end_export
+
+** Contraste de White: alternativas (y II)
+
+Wooldridge propone una variante del contraste de White donde sólo se
+incluyen en la regresión auxiliar las predicciones de MCO,
+$\yhat$, y sus cuadrados, $\yhat^2$:
+#+begin_export latex
+\begin{equation*}
+  \uhat^2_i = \delta_0 + \delta_1 \yhat_{i} + \delta_2 \yhat^2_{i} +  \text{error}.
+\end{equation*}
+#+end_export
+
+
 
 
 * Estimación eficiente
@@ -249,7 +370,7 @@ La idea detrás de MCG es:
 - Consideremos el caso en que:
   #+begin_export latex
   \[
-    V(u | x_{1}, x_{2}) = E(u^2 | x_{1}, x_{2}) = \sigma^2 x^2_{2}
+    V(u | x_{1}, x_{2}) = \Exp(u^2 | x_{1}, x_{2}) = \sigma^2 x^2_{2}
   \]
   #+end_export
 
@@ -278,8 +399,8 @@ La idea detrás de MCG es:
   #+begin_export latex
   \begin{align*}
     \var(u^*| x_{1}, x_{2})
-    &= E((u/x_{2})^2|x_{1}, x_{2}) \\
-    &= (1/x_{2})^2E(u^2| x_{1}, x_{2}) \\
+    &= \Exp((u/x_{2})^2|x_{1}, x_{2}) \\
+    &= (1/x_{2})^2\Exp(u^2| x_{1}, x_{2}) \\
     &= (1/x^2_{2}) \sigma^2 x_{2}^2 \\
     &= \sigma^2
   \end{align*}
@@ -325,7 +446,7 @@ Resumen:
 - Consideremos ahora el caso en que:
   #+begin_export latex
   \[
-    E(u_i^2 | x_{1i}, x_{2i}) = \sigma^2 \exp(\delta_0 + \delta_1 x_{2i} + \delta_2 x^2_{2i})
+    \Exp(u_i^2 | x_{1i}, x_{2i}) = \sigma^2 \exp(\delta_0 + \delta_1 x_{2i} + \delta_2 x^2_{2i})
   \]
   #+end_export
   La función de dispersión depende de parámetros desconocidos:
@@ -352,7 +473,7 @@ Resumen:
 - Varianza condicional:
   #+begin_export latex
   \[
-    E(u_i^2 | x_{1i}, x_{2i}) = \sigma^2 \exp(\delta_0 + \delta_1 x_{2i} + \delta_2 x^2_{2i})
+    \Exp(u_i^2 | x_{1i}, x_{2i}) = \sigma^2 \exp(\delta_0 + \delta_1 x_{2i} + \delta_2 x^2_{2i})
   \]
   #+end_export
 
