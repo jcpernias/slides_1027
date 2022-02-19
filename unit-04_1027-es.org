@@ -13,28 +13,51 @@
 
 ** Homoscedasticidad
 
-- MCO bajo homoscedasticidad. Cada observación recibe el mismo peso.
+*Homoscedasticidad*: la dispersión alrededor de la función de
+regresión poblacional, FRP, es constante. Todas las observaciones son
+igual de informativas a la hora de determinar por donde pasa la FRP.
+
 
 ** Heteroscedasticidad
 
-- Cuando hay heteroscedasticidad diferentes observaciones aportan
-  información con diferente incertidumbre.
+*Heteroscedasticidad*: la dispersión alrededor de la función de
+regresión poblacional, FRP, cambia con los valores de la
+explicativa. Algunas observaciones contienen menos información para
+estimar la FRP.
+
+** Varianza condicional
+
+*Heteroscedasticidad*: La varianza condicional del término de error no
+es constante:
+#+begin_export latex
+\[
+  E(u_i^2|x_{1i}, x_{2i}, \dots, x_{ki}) = \sigma^2_i
+\]
+#+end_export
+y, en general, $\sigma^2_i \neq \sigma^2_j$, cuando $i \neq j$.
+
 
 * Consecuencias de la heteroscedasticidad
 
 
 ** Insesgadez y consistencia
 
-- Estas propiedades no se ven afectadas por la presencia de
-  heteroscedasticidad.
+- La heteroscedasticidad no afecta al supuesto **RLM.4**.
+
+- Si se cumplen los supuestos **RLM.1** a **RLM.4**, el estimador MCO
+  es insesgado y consistente aunque exista heteroscedasticidad.
+
+
 
 ** Varianza de los estimadores de MCO
 
-- La fórmula usual deja de ser válida.
+- La fórmula usual deja de ser válida incluso asintóticamente.
+
 
 ** Invalidez de los contrastes de hipótesis
 
-- Las fórmulas habituales dejan de ser válidas.
+- Las fórmulas habituales dejan de ser válidas incluso asintóticamente.
+
 
 ** Ineficiencia
 
@@ -42,7 +65,17 @@
   patrón de la heteroscedasticidad. Dar más peso a las observaciones
   más precisas.
 
+
 * Inferencia robusta a la heteroscedasticidad
+
+** Errores típicos robustos
+
+Una alternativa común es:
+
+- Estimar los parámetros por MCO.
+
+- Modificar el cálculo de los errores típicos de los estimadores.
+
 
 ** Varianza del estimador MCO
 
@@ -59,6 +92,7 @@
   \]
   #+end_export
 
+
 ** Contrastes /t/
 
 - Contrastes de la hipótesis nula $\beta_j = b$ se construyen
@@ -70,19 +104,249 @@
   \]
   #+end_export
 
+** Contrastes de hipótesis múltiples
+
+- El estadístico $F$ que compara las $\SCR$ o los $\Rsq$ no es válido
+  en presencia de heteroscedasticidad y no existe una versión robusta.
+
+- Podemos utilizar contrastes de Wald utilizando estimaciones de
+  $\var(\hat{\bm\beta})$ robustas a heteroscedasticidad.
 
 * Contrastes de heteroscedasticidad
+
+
+** ¿Por qué?
+
+- ¿Es necesario usar errores típicos robustos?
+
+- ¿Es necesario usar estimadores más eficientes que MCO?
+
+** Contraste de White (I)
+
+Halbert White muestra que hay problemas con MCO cuando la varianza
+condicional depende de:
+
+- Las variables explicativas: $x_1, x_2, \dots, x_k$.
+
+- Los cuadrados de las variables explicativas: $x^2_1, x^2_2, \dots,
+  x^2_k$.
+
+- Los productos cruzados: $x_1 \cdot x_2, x_1 \cdot x_3, \dots$
+
+** Contraste de White (II)
+
+Propone un contraste basado en una regresión auxiliar de los residuos
+MCO al cuadrado sobre las explicativas, sus cuadrados y sus productos
+cruzados:
+
+Para contrastar la hipótesis nula se puede usar:
+
+- El estadístico LM: $N R^2$.
+- El estadístico $F$ para contrastar la significación conjunta de la
+  regresión auxiliar.
+
+** Contraste de White (III)
+
+En la regresión auxiliar del contraste de White hay un gran número de
+parámetros. Esto puede provocar que el contraste de White tenga poca
+**potencia** (capacidad de detectar heteroscedasticidad cuando
+realmente está presente).
+
+** Contraste de White (IV)
+
+Para mitigar ese problema, en ocasiones se omiten los productos
+cruzados en la regresión auxiliar.
+
+
+** Otros contrastes
+
+La heteroscedasticidad puede contrastarse mediante una regresión
+auxiliar de los residuos MCO al cuadrado sobre un conjunto de
+variables que estén relacionadas con la varianza del término de
+error. Puede usarse:
+
+- El estadítico LM.
+
+- El contraste $F$ de significación conjunta.
+
 
 
 ** Contraste de Breusch-Pagan
 
 
-** Contraste de White
+** Contraste de White alternativo
 
 
 * Estimación eficiente
 
 
-** Mínimos cuadrados ponderados
+** Mínimos cuadrados generalizados (MCG)
 
-- Transformar el modelo y aplicar MCO.
+La idea detrás de MCG es:
+
+1. Transformar el modelo de forma que se cumplan los supuestos de
+   Gauss-Markov.
+
+2. Aplicar MCO al modelo transformado.
+
+
+** Mínimos cuadrados ponderados (I)
+
+- Función de regresión poblacional:
+  #+begin_export latex
+  \[
+    y = \beta_0 + \beta_1 x_{1} + \beta_2 x_{2} + u
+  \]
+  #+end_export
+
+- Consideremos el caso en que:
+  #+begin_export latex
+  \[
+    V(u | x_{1}, x_{2}) = E(u^2 | x_{1}, x_{2}) = \sigma^2 x^2_{2}
+  \]
+  #+end_export
+
+
+** Mínimos cuadrados ponderados (II)
+
+- Transformación del modelo: dividimos por $x_{2}$:
+  #+begin_export latex
+  \[
+    \frac{y}{x_{2}} = \beta_0 \frac{1}{x_{2}}+ \beta_1 \frac{x_{1}}{x_{2}} + \beta_2 \frac{x_{2}}{x_{2}} + \frac{u}{x_{2}}
+  \]
+  #+end_export
+
+- Reescribimos el modelo como:
+  #+begin_export latex
+  \[
+    y^* = \beta_2 + \beta_0 x^*_{0} + \beta_1 x^*_{1} + u^*
+  \]
+  #+end_export
+  donde $y^* = y / x_{2}$, $x^*_{0} = 1 / x_{2}$, $x^*_{1} = x_{1} / x_{2}$, $u^* = u / x_{2}$.
+
+** Mínimos cuadrados ponderados (III)
+
+- El término de error del modelo transformado es homoscedástico:
+  #+begin_export latex
+  \begin{align*}
+    \var(u^*| x_{1}, x_{2})
+    &= E((u/x_{2})^2|x_{1}, x_{2}) \\
+    &= (1/x_{2})^2E(u^2| x_{1}, x_{2}) \\
+    &= (1/x^2_{2}) \sigma^2 x_{2}^2 \\
+    &= \sigma^2
+  \end{align*}
+  #+end_export
+
+- El estimador ELIO consiste en aplicar MCO al modelo transformado.
+
+** Mínimos cuadrados ponderados (IV)
+
+Resumen:
+
+- La varianza del término de error es proporcional a $h_i$ que es una
+  función conocida de variables observables:
+  #+begin_export latex
+  \[
+    \var(u | x_{1}, x_{2}, \dots, x_{k}) = \sigma^2 h
+  \]
+  #+end_export
+
+- Transformamos el modelo dividiendo todas las variables (y el término
+  constante) por $\sqrt{h}$.
+
+- Estimamos el modelo transformado por MCO.
+
+
+** MCP factibles (I)
+
+- Hasta ahora hemos supuesto que conocemos $h$.
+
+- ¿Qué podemos hacer si no observamos $h$?
+
+** MCP factibles (II)
+
+- Función de regresión poblacional:
+  #+begin_export latex
+  \[
+    y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + u_i
+  \]
+  #+end_export
+
+- Consideremos ahora el caso en que:
+  #+begin_export latex
+  \[
+    E(u_i^2 | x_{1i}, x_{2i}) = \sigma^2 \exp(\delta_0 + \delta_1 x_{2i} + \delta_2 x^2_{2i})
+  \]
+  #+end_export
+  La función de dispersión depende de parámetros desconocidos:
+  #+begin_export latex
+  \[
+    h_i =\exp(\delta_0 + \delta_1 x_{2i} + \delta_2 x^2_{2i})
+  \]
+  #+end_export
+
+** MCP factibles (III)
+
+- Para aplicar el principio de MCG primero debemos estimar los
+  parámetros de los que depende $h_i$ y obtener una estimación de la
+  función de dispersión, $\hat{h}_i$.
+
+- Transformamos el modelo dividiendo por $\sqrt{\hat{h}_i}$.
+
+- Aplicamos MCO al modelo transformado.
+
+** Estimación de $h_i$ (I)
+
+- Varianza condicional:
+  #+begin_export latex
+  \[
+    E(u_i^2 | x_{1i}, x_{2i}) = \sigma^2 \exp(\delta_0 + \delta_1 x_{2i} + \delta_2 x^2_{2i})
+  \]
+  #+end_export
+
+- A partir de la ecuación anterior, podemos escribir:
+  #+begin_export latex
+  \[
+    u_i^2 = \sigma^2 \exp(\delta_0 + \delta_1 x_{2i} + \delta_2 x^2_{2i}) v_i
+  \]
+  #+end_export
+
+- Tomando logaritmos:
+  #+begin_export latex
+  \[
+    \log(u_i^2) = \theta_0 + \delta_1 x_{2i} + \delta_2 x^2_{2i} + e_i
+  \]
+  #+end_export
+
+** Estimación de $h_i$ (II)
+
+- Estimamos los parámetros de:
+  #+begin_export latex
+  \[
+    \log(u_i^2) = \theta_0 + \delta_1 x_{2i} + \delta_2 x^2_{2i} + e_i
+  \]
+  #+end_export
+  reemplazando $u_i$ por los residuos de mínimos cuadrados,
+  $\hat{u}_i$
+
+- Finalmente obtenemos $\hat{h}_i$ tomando la exponencial de los
+  valores predichos en la regresión anterior.
+
+** Comparación con MCO
+
+- MCP y MCO son insesgados bajo heteroscedasticidad. No debería haber
+  una gran diferencia entre ambas estimaciones.
+
+- No son comparables los coeficientes de determinación y el error
+  típico de la regresión de MCO y MCP.
+
+- Igual que con MCO, es posible usar matrices de covarianzas robustas
+  después de estimar por MCP.
+
+** Alternativas a MCP
+
+- La heteroscedasticidad suele estar asociada con el "tamaño" de las
+  observaciones.
+
+- Con frecuencia, los problemas de heteroscedasticidad pueden
+  mitigarse usando logaritmos.
