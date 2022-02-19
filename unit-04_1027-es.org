@@ -333,7 +333,7 @@ Un procedimiento común con datos de corte transversal:
 
 ** Contraste de White: alternativas (y II)
 
-Wooldridge propone una variante del contraste de White donde sólo se
+[[https://en.wikipedia.org/wiki/Jeffrey_Wooldridge][Wooldridge]] propone una variante del contraste de White donde sólo se
 incluyen en la regresión auxiliar las predicciones de MCO,
 $\yhat$, y sus cuadrados, $\yhat^2$:
 #+begin_export latex
