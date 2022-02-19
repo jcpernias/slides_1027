@@ -113,6 +113,7 @@ Un procedimiento común con datos de corte transversal:
   \]
   #+end_export
 
+
 ** Estimación robusta de $\var(\bhat)$
 
 - [[https://en.wikipedia.org/wiki/Halbert_White][Halbert White]] mostró que se puede obtener una estimación consistente
@@ -120,7 +121,7 @@ Un procedimiento común con datos de corte transversal:
   #+begin_export latex
   \[
     \widehat{\var}_R(\bhat_{1}) = \frac{\sum(x_{i} - \bar{x})^{2} \uhat^2_i}{%
-      \Big[\sum(x_{i} - \bar{x})^{2}\Big]^{2}}
+      \Big[\sum(x_{i} - \bar{x})^{2}\Big]^{2}}.
   \]
   #+end_export
 
@@ -128,15 +129,16 @@ Un procedimiento común con datos de corte transversal:
   equivalentes a la propuesta original de White pero, en ciertas
   situaciones, son superiores en muestras pequeñas.
 
+
 ** Contrastes $t$ robustos
 
-- Un estadístico válido asintóticamente para contrastar la hipótesis
-  nula $\beta_j = b$ se obtiene utilizando la estimación de MCO,
+- Se obtiene un estadístico válido asintóticamente para contrastar la
+  hipótesis nula $\beta_j = b$ utilizando la estimación de MCO,
   $\bhat_j$, y el error típico robusto a heteroscedasticidad,
   $\se_R(\bhat_j)$:
   #+begin_export latex
   \[
-    t_{j} = \frac{\bhat_{j} - b}{\se_{R}(\bhat_{j})}
+    t_{j} = \frac{\bhat_{j} - b}{\se_{R}(\bhat_{j})}.
   \]
   #+end_export
 
