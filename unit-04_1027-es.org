@@ -25,6 +25,7 @@ regresión poblacional, FRP, cambia con los valores de la
 explicativa. Algunas observaciones contienen menos información para
 estimar la FRP.
 
+
 ** Varianza condicional
 
 *Heteroscedasticidad*: La varianza condicional del término de error no
@@ -72,51 +73,85 @@ en muestras grandes.
   construir estimadores más eficientes que MCO.
 
 
-* Inferencia robusta a la heteroscedasticidad
+* Inferencia robusta a heteroscedasticidad
+
 
 ** Errores típicos robustos
 
-Una alternativa común es:
+Un procedimiento común con datos de corte transversal:
 
 - Estimar los parámetros por MCO.
 
-- Modificar el cálculo de los errores típicos de los estimadores.
+- Modificar el cálculo de los errores típicos de los estimadores para
+  que sean válidos (asintóticamente) haya o no haya
+  heteroscedasticidad.
 
 
 ** Varianza del estimador MCO
 
-- La varianza del estimador MCO cuando
+- Modelo de regresión simple:
   #+begin_export latex
   \[
-    \var(u_{i} | x_{1i}) = \sigma^{2}_{i}
-  \]
-  #+end_export
-  es
-  #+begin_export latex
-  \[
-    \var(\bhat_{1}) = \frac{\sum(x_{i} - \bar{x})^{2}\sigma^2_{i}}{\Big[\sum(x_{i} - \bar{x})^{2}\Big]^{2}}
+    y_i = \beta_0 + \beta_1 x_i + u_i.
   \]
   #+end_export
 
+- Se cumplen los supuestos *RLM.1* a *RLM.4*.
 
-** Contrastes /t/
+- Heteroscedasticidad:
+  #+begin_export latex
+  \[
+    \var(u_{i} | x_{1i}) = \sigma^{2}_{i}.
+  \]
+  #+end_export
 
-- Contrastes de la hipótesis nula $\beta_j = b$ se construyen
-  utilizando la estimación de MCO, $\bhat_j$, y el error típoco
-  robustos a heteroscedasticidad, $\se_R(\bhat_j)$:
+- La varianza del estimador MCO es:
+  #+begin_export latex
+  \[
+    \var(\bhat_{1}) = \frac{\sum(x_{i} - \bar{x})^{2}\sigma^2_{i}}{%
+      \Big[\sum(x_{i} - \bar{x})^{2}\Big]^{2}}.
+  \]
+  #+end_export
+
+** Estimación robusta de $\var(\bhat)$
+
+- [[https://en.wikipedia.org/wiki/Halbert_White][Halbert White]] mostró que se puede obtener una estimación consistente
+  de $\var(\bhat)$ exista o no heteroscedasticidad:
+  #+begin_export latex
+  \[
+    \widehat{\var}_R(\bhat_{1}) = \frac{\sum(x_{i} - \bar{x})^{2} \uhat^2_i}{%
+      \Big[\sum(x_{i} - \bar{x})^{2}\Big]^{2}}
+  \]
+  #+end_export
+
+- Posteriormente, se han descrito alternativas que son asintóticamente
+  equivalentes a la propuesta original de White pero, en ciertas
+  situaciones, son superiores en muestras pequeñas.
+
+** Contrastes $t$ robustos
+
+- Un estadístico válido asintóticamente para contrastar la hipótesis
+  nula $\beta_j = b$ se obtiene utilizando la estimación de MCO,
+  $\bhat_j$, y el error típico robusto a heteroscedasticidad,
+  $\se_R(\bhat_j)$:
   #+begin_export latex
   \[
     t_{j} = \frac{\bhat_{j} - b}{\se_{R}(\bhat_{j})}
   \]
   #+end_export
 
-** Contrastes de hipótesis múltiples
 
-- El estadístico $F$ que compara las $\SCR$ o los $\Rsq$ no es válido
-  en presencia de heteroscedasticidad y no existe una versión robusta.
+** Contrastes de hipótesis lineales
 
-- Podemos utilizar contrastes de Wald utilizando estimaciones de
-  $\var(\hat{\bm\beta})$ robustas a heteroscedasticidad.
+- En presencia de heteroscedasticidad no es válido el estadístico $F$
+  que compara las $\SCR$ o los $\Rsq$ de los modelos restringido y no
+  restringido. Tampoco existe una versión robusta de este contraste.
+
+- Para contrastar restricciones lineales generales sobre los
+  parámetros del modelo, utilizamos contrastes de Wald construidos con
+  estimaciones de $\var(\hat{\bm\beta})$ robustas a
+  heteroscedasticidad.
+
 
 * Contrastes de heteroscedasticidad
 
@@ -126,6 +161,7 @@ Una alternativa común es:
 - ¿Es necesario usar errores típicos robustos?
 
 - ¿Es necesario usar estimadores más eficientes que MCO?
+
 
 ** Contraste de White (I)
 
@@ -139,6 +175,7 @@ condicional depende de:
 
 - Los productos cruzados: $x_1 \cdot x_2, x_1 \cdot x_3, \dots$
 
+
 ** Contraste de White (II)
 
 Propone un contraste basado en una regresión auxiliar de los residuos
@@ -151,12 +188,14 @@ Para contrastar la hipótesis nula se puede usar:
 - El estadístico $F$ para contrastar la significación conjunta de la
   regresión auxiliar.
 
+
 ** Contraste de White (III)
 
 En la regresión auxiliar del contraste de White hay un gran número de
 parámetros. Esto puede provocar que el contraste de White tenga poca
 **potencia** (capacidad de detectar heteroscedasticidad cuando
 realmente está presente).
+
 
 ** Contraste de White (IV)
 
@@ -230,6 +269,7 @@ La idea detrás de MCG es:
   #+end_export
   donde $y^* = y / x_{2}$, $x^*_{0} = 1 / x_{2}$, $x^*_{1} = x_{1} / x_{2}$, $u^* = u / x_{2}$.
 
+
 ** Mínimos cuadrados ponderados (III)
 
 - El término de error del modelo transformado es homoscedástico:
@@ -244,6 +284,7 @@ La idea detrás de MCG es:
   #+end_export
 
 - El estimador ELIO consiste en aplicar MCO al modelo transformado.
+
 
 ** Mínimos cuadrados ponderados (IV)
 
@@ -269,6 +310,7 @@ Resumen:
 
 - ¿Qué podemos hacer si no observamos $h$?
 
+
 ** MCP factibles (II)
 
 - Función de regresión poblacional:
@@ -291,6 +333,7 @@ Resumen:
   \]
   #+end_export
 
+
 ** MCP factibles (III)
 
 - Para aplicar el principio de MCG primero debemos estimar los
@@ -300,6 +343,7 @@ Resumen:
 - Transformamos el modelo dividiendo por $\sqrt{\hat{h}_i}$.
 
 - Aplicamos MCO al modelo transformado.
+
 
 ** Estimación de $h_i$ (I)
 
@@ -324,6 +368,7 @@ Resumen:
   \]
   #+end_export
 
+
 ** Estimación de $h_i$ (II)
 
 - Estimamos los parámetros de:
@@ -338,6 +383,7 @@ Resumen:
 - Finalmente obtenemos $\hat{h}_i$ tomando la exponencial de los
   valores predichos en la regresión anterior.
 
+
 ** Comparación con MCO
 
 - MCP y MCO son insesgados bajo heteroscedasticidad. No debería haber
@@ -348,6 +394,7 @@ Resumen:
 
 - Igual que con MCO, es posible usar matrices de covarianzas robustas
   después de estimar por MCP.
+
 
 ** Alternativas a MCP
 
