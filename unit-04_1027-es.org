@@ -51,19 +51,25 @@ y, en general, $\sigma^2_i \neq \sigma^2_j$, cuando $i \neq j$.
 
 ** Varianza de los estimadores de MCO
 
-- La fórmula usual deja de ser válida incluso asintóticamente.
+Cuando hay heteroscedasticidad, las fórmulas usuales de las varianzas
+de los estimadores de MCO, $\var(\bhat)$, no son válidas incluso en
+muestras grandes.
 
 
-** Invalidez de los contrastes de hipótesis
+** Contraste de hipótesis
 
-- Las fórmulas habituales dejan de ser válidas incluso asintóticamente.
+Cuando el término de error es heteroscedástico, los procedimientos
+habituales de contraste de hipótesis dejan de ser válidos incluso
+en muestras grandes.
 
 
-** Ineficiencia
+** Eficiencia
 
-- Es posible construir estimadores más eficientes si conocemos el
-  patrón de la heteroscedasticidad. Dar más peso a las observaciones
-  más precisas.
+- Con heteroscedasticidad, MCO no es el estimador lineal insesgado
+  óptimo.
+
+- Si se conoce el patrón de la heteroscedasticidad es posible
+  construir estimadores más eficientes que MCO.
 
 
 * Inferencia robusta a la heteroscedasticidad
