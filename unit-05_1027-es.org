@@ -1,20 +1,192 @@
 # -*- ispell-dictionary: "spanish" -*-
 #+SETUPFILE: ./course-es.org
 
-#+TITLE: {{{unit05}}}
+#+TITLE: {{{unit04}}} (y II)
 
 #+MATS: bib
 #+begin_bibbox
-- Wooldridge: ::  /Introducción a la Econometría/. Capítulo 0.
+- Wooldridge: ::  /Introducción a la Econometría/. Capítulo 8.
 #+end_bibbox
 
-* Introducción
+
+* Estimación eficiente
 
 
-** El modelo
+** Mínimos cuadrados generalizados (MCG)
 
-#+begin_export latex
-\[
-  y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + u_i
-\]
-#+end_export
+La idea detrás de MCG es:
+
+1. Transformar el modelo de forma que se cumplan los supuestos de
+   Gauss-Markov.
+
+2. Aplicar MCO al modelo transformado.
+
+
+** Mínimos cuadrados ponderados (I)
+
+- Función de regresión poblacional:
+  #+begin_export latex
+  \[
+    y = \beta_0 + \beta_1 x_{1} + \beta_2 x_{2} + u
+  \]
+  #+end_export
+
+- Consideremos el caso en que:
+  #+begin_export latex
+  \[
+    V(u | x_{1}, x_{2}) = \Exp(u^2 | x_{1}, x_{2}) = \sigma^2 x^2_{2}
+  \]
+  #+end_export
+
+
+** Mínimos cuadrados ponderados (II)
+
+- Transformación del modelo: dividimos por $x_{2}$:
+  #+begin_export latex
+  \[
+    \frac{y}{x_{2}} = \beta_0 \frac{1}{x_{2}}+ \beta_1 \frac{x_{1}}{x_{2}} + \beta_2 \frac{x_{2}}{x_{2}} + \frac{u}{x_{2}}
+  \]
+  #+end_export
+
+- Reescribimos el modelo como:
+  #+begin_export latex
+  \[
+    y^* = \beta_2 + \beta_0 x^*_{0} + \beta_1 x^*_{1} + u^*
+  \]
+  #+end_export
+  donde $y^* = y / x_{2}$, $x^*_{0} = 1 / x_{2}$, $x^*_{1} = x_{1} / x_{2}$, $u^* = u / x_{2}$.
+
+
+** Mínimos cuadrados ponderados (III)
+
+- El término de error del modelo transformado es homoscedástico:
+  #+begin_export latex
+  \begin{align*}
+    \var(u^*| x_{1}, x_{2})
+    &= \Exp((u/x_{2})^2|x_{1}, x_{2}) \\
+    &= (1/x_{2})^2\Exp(u^2| x_{1}, x_{2}) \\
+    &= (1/x^2_{2}) \sigma^2 x_{2}^2 \\
+    &= \sigma^2
+  \end{align*}
+  #+end_export
+
+- El estimador ELIO consiste en aplicar MCO al modelo transformado.
+
+
+** Mínimos cuadrados ponderados (IV)
+
+Resumen:
+
+- La varianza del término de error es proporcional a $h_i$ que es una
+  función conocida de variables observables:
+  #+begin_export latex
+  \[
+    \var(u | x_{1}, x_{2}, \dots, x_{k}) = \sigma^2 h
+  \]
+  #+end_export
+
+- Transformamos el modelo dividiendo todas las variables (y el término
+  constante) por $\sqrt{h}$.
+
+- Estimamos el modelo transformado por MCO.
+
+
+** MCP factibles (I)
+
+- Hasta ahora hemos supuesto que conocemos $h$.
+
+- ¿Qué podemos hacer si no observamos $h$?
+
+
+** MCP factibles (II)
+
+- Función de regresión poblacional:
+  #+begin_export latex
+  \[
+    y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + u_i
+  \]
+  #+end_export
+
+- Consideremos ahora el caso en que:
+  #+begin_export latex
+  \[
+    \Exp(u_i^2 | x_{1i}, x_{2i}) = \sigma^2 \exp(\delta_0 + \delta_1 x_{2i} + \delta_2 x^2_{2i})
+  \]
+  #+end_export
+  La función de dispersión depende de parámetros desconocidos:
+  #+begin_export latex
+  \[
+    h_i =\exp(\delta_0 + \delta_1 x_{2i} + \delta_2 x^2_{2i})
+  \]
+  #+end_export
+
+
+** MCP factibles (III)
+
+- Para aplicar el principio de MCG primero debemos estimar los
+  parámetros de los que depende $h_i$ y obtener una estimación de la
+  función de dispersión, $\hat{h}_i$.
+
+- Transformamos el modelo dividiendo por $\sqrt{\hat{h}_i}$.
+
+- Aplicamos MCO al modelo transformado.
+
+
+** Estimación de $h_i$ (I)
+
+- Varianza condicional:
+  #+begin_export latex
+  \[
+    \Exp(u_i^2 | x_{1i}, x_{2i}) = \sigma^2 \exp(\delta_0 + \delta_1 x_{2i} + \delta_2 x^2_{2i})
+  \]
+  #+end_export
+
+- A partir de la ecuación anterior, podemos escribir:
+  #+begin_export latex
+  \[
+    u_i^2 = \sigma^2 \exp(\delta_0 + \delta_1 x_{2i} + \delta_2 x^2_{2i}) v_i
+  \]
+  #+end_export
+
+- Tomando logaritmos:
+  #+begin_export latex
+  \[
+    \log(u_i^2) = \theta_0 + \delta_1 x_{2i} + \delta_2 x^2_{2i} + e_i
+  \]
+  #+end_export
+
+
+** Estimación de $h_i$ (II)
+
+- Estimamos los parámetros de:
+  #+begin_export latex
+  \[
+    \log(u_i^2) = \theta_0 + \delta_1 x_{2i} + \delta_2 x^2_{2i} + e_i
+  \]
+  #+end_export
+  reemplazando $u_i$ por los residuos de mínimos cuadrados,
+  $\hat{u}_i$
+
+- Finalmente obtenemos $\hat{h}_i$ tomando la exponencial de los
+  valores predichos en la regresión anterior.
+
+
+** Comparación con MCO
+
+- MCP y MCO son insesgados bajo heteroscedasticidad. No debería haber
+  una gran diferencia entre ambas estimaciones.
+
+- No son comparables los coeficientes de determinación y el error
+  típico de la regresión de MCO y MCP.
+
+- Igual que con MCO, es posible usar matrices de covarianzas robustas
+  después de estimar por MCP.
+
+
+** Alternativas a MCP
+
+- La heteroscedasticidad suele estar asociada con el "tamaño" de las
+  observaciones.
+
+- Con frecuencia, los problemas de heteroscedasticidad pueden
+  mitigarse usando logaritmos.
