@@ -105,14 +105,13 @@ Un procedimiento común con datos de corte transversal:
 
 ** Varianza del estimador MCO
 
-- Modelo de regresión simple:
+- Se cumplen los supuestos *RLM.1* a *RLM.4* en el modelo de regresión
+  simple:
   #+begin_export latex
   \[
     y_i = \beta_0 + \beta_1 x_i + u_i.
   \]
   #+end_export
-
-- Se cumplen los supuestos *RLM.1* a *RLM.4*.
 
 - Heteroscedasticidad:
   #+begin_export latex
@@ -141,22 +140,21 @@ Un procedimiento común con datos de corte transversal:
   \]
   #+end_export
 
-- Posteriormente, se han descrito alternativas que son asintóticamente
-  equivalentes a la propuesta original de White pero, en ciertas
-  situaciones, son superiores en muestras pequeñas.
+- Se han descrito alternativas a la propuesta original de White que
+  son equivalentes asintóticamente pero que, bajo ciertas condiciones,
+  son superiores en muestras pequeñas.
 
 
 ** Contrastes $t$ robustos
 
-- Se obtiene un estadístico válido asintóticamente para contrastar la
-  hipótesis nula $\beta_j = b$ utilizando la estimación de MCO,
-  $\bhat_j$, y el error típico robusto a heteroscedasticidad,
-  $\se_R(\bhat_j)$:
-  #+begin_export latex
-  \[
-    t_{j} = \frac{\bhat_{j} - b}{\se_{R}(\bhat_{j})}.
-  \]
-  #+end_export
+Un estadístico asintóticamente válido para contrastar la hipótesis
+nula $\beta_j = b$ se construye con la estimación de MCO, $\bhat_j$, y
+el error típico robusto a heteroscedasticidad, $\se_R(\bhat_j)$:
+#+begin_export latex
+\[
+  t_{j} = \frac{\bhat_{j} - b}{\se_{R}(\bhat_{j})}.
+\]
+#+end_export
 
 
 ** Contrastes de hipótesis lineales
@@ -190,7 +188,8 @@ Un procedimiento común con datos de corte transversal:
 - Tratamos de verificar si se cumple alguno de los supuestos sobre el
   modelo poblacional.
 
-- La hipótesis nula suele ser que la especificación es correcta.
+- Frecuentemente la hipótesis nula afirma que no hay problemas de
+  especificación y el estimador MCO tiene buenas propiedades.
 
 - A menudo se utiliza un contraste de multiplicadores de Lagrange.
 
@@ -229,8 +228,8 @@ Un procedimiento común con datos de corte transversal:
   \]
   #+end_export
 
-- Si observáramos $u_i$ podríamos contrastar homoscedasticidad
-  mediante un contraste de:
+- Si observáramos $u_i$ podríamos contrastar homoscedasticidad por
+  medio de la hipótesis nula:
   #+begin_export latex
   \[
     H_0\!: \delta_1 = \delta_2 = \dots = \delta_k = 0
@@ -302,10 +301,13 @@ varianza condicional de $u$ depende de:
 
 ** Contraste de White
 
-- La regresión auxiliar incluye  las explicativas, sus cuadrados y sus productos cruzados.
+- La regresión auxiliar incluye las explicativas, sus cuadrados y sus
+  productos cruzados.
 
 - Pueden aparecer problemas de multicolinealidad perfecta en la
-  regresión auxiliar, especialmente si hay variables ficticias. En ese caso, habría que eliminar de la regresión auxiliar los regresores redundantes.
+  regresión auxiliar, especialmente si hay variables ficticias. En ese
+  caso, habría que eliminar de la regresión auxiliar los regresores
+  redundantes.
 
 
 ** Contraste de White: ejemplo
