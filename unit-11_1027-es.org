@@ -1,0 +1,20 @@
+# -*- ispell-dictionary: "spanish" -*-
+#+SETUPFILE: ./course-es.org
+
+#+TITLE: {{{unit11}}}
+
+#+MATS: bib
+#+begin_bibbox
+- Wooldridge: ::  /Introducción a la Econometría/. Capítulo 0.
+#+end_bibbox
+
+* Introducción
+
+
+** El modelo
+
+#+begin_export latex
+\[
+  y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + u_i
+\]
+#+end_export

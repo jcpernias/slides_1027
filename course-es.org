@@ -15,14 +15,15 @@
 #+MACRO: part01 Regresión con datos de corte transversal
 #+MACRO: part02 Regresión con series temporales
 
-#+MACRO: unit01 El modelo clásico de regresión lineal (I)
-#+MACRO: unit02 El modelo clásico de regresión lineal (y II)
+#+MACRO: unit01 El modelo clásico de regresión lineal
+
 #+MACRO: unit03 Propiedades asintóticas del estimador MCO
 #+MACRO: unit04 Heteroscedasticidad
-#+MACRO: unit05 El modelo de probabilidad lineal
-#+MACRO: unit06 Otras cuestiones
 
-#+MACRO: unit07 Introducción a las series temporales
-#+MACRO: unit08 Regresión con series temporales
-#+MACRO: unit09 Autocorrelación
-#+MACRO: unit10 Modelos causales con series temporales
+#+MACRO: unit06 El modelo de probabilidad lineal
+#+MACRO: unit07 Otras cuestiones
+
+#+MACRO: unit08 Introducción a las series temporales
+#+MACRO: unit09 Regresión con series temporales
+#+MACRO: unit10 Autocorrelación
+#+MACRO: unit11 Modelos causales con series temporales
