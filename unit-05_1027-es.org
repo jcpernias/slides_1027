@@ -9,87 +9,180 @@
 #+end_bibbox
 
 
-* Estimación eficiente
+* Ineficiencia de MCO
+
+** Heteroscedasticidad
+
+#+MATS: figcol img/het3.pdf 0.5
+
+Con *heteroscedasticidad* la dispersión alrededor de la FRP
+cambia con los valores de la explicativa.
 
 
-** Mínimos cuadrados generalizados (MCG)
+** Ineficiencia de MCO
 
-La idea detrás de MCG es:
+#+MATS: figcol img/het4.pdf 0.5
 
-1. Transformar el modelo de forma que se cumplan los supuestos de
+La *ineficiencia de MCO* se origina porque se tratan por
+igual todas las observaciones, aunque algunas contienen
+información imprecisa para estimar la FRP.
+
+
+** Estimación eficiente
+
+*Estimación eficiente* con heteroscedasticidad:
+
+- Se asigna un peso diferente a cada observación.
+
+- Las observaciones más imprecisas reciben ponderaciones menores.
+
+
+** Mínimos Cuadrados Generalizados
+
+El estimador eficiente cuando existe heteroscedasticidad pertenece a
+la familia de *Mínimos Cuadrados Generalizados* (MCG). Los estimadores
+MCG consisten en:
+
+1. *Transformar el modelo* de forma que se cumplan los supuestos de
    Gauss-Markov.
 
-2. Aplicar MCO al modelo transformado.
+2. Estimar el *modelo transformado por MCO*.
 
 
-** Mínimos cuadrados ponderados (I)
+* Mínimos cuadrados ponderados
 
-- Función de regresión poblacional:
+** Modelo de regresión
+
+El modelo de regresión cumple los supuestos *RLM.1* a *RLM.4*:
+#+begin_export latex
+\[
+  y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i}
+  + \dots + \beta_k x_{ki} + u_i.
+\]
+#+end_export
+
+** Heteroscedasticidad
+
+- La varianza del término de error puede expresarse como:
   #+begin_export latex
   \[
-    y = \beta_0 + \beta_1 x_{1} + \beta_2 x_{2} + u
+    \var(u_i | x_{1i}, x_{2i}, \dots, x_{ki}) =
+    \sigma^2 h(x_{1i}, x_{2i}, \dots, x_{ki}) =
+    \sigma^2 h(\bm{x}_i).
   \]
   #+end_export
 
-- Consideremos el caso en que:
-  #+begin_export latex
-  \[
-    V(u | x_{1}, x_{2}) = \Exp(u^2 | x_{1}, x_{2}) = \sigma^2 x^2_{2}
-  \]
-  #+end_export
+- La función $h(\bm{x}_i)$ toma siempre valores positivos y expresa la
+  relación entre las explicativas y la varianza del término de error.
+
+- La constante desconocida $\sigma^2$ es positiva.
+
+** Heteroscedasticidad conocida
+
+- Supondremos que la función $h(\bm{x}_i)$ *es conocida* y no depende
+  de parámetros desconocidos.
 
 
-** Mínimos cuadrados ponderados (II)
+** Transformación del modelo
 
-- Transformación del modelo: dividimos por $x_{2}$:
-  #+begin_export latex
-  \[
-    \frac{y}{x_{2}} = \beta_0 \frac{1}{x_{2}}+ \beta_1 \frac{x_{1}}{x_{2}} + \beta_2 \frac{x_{2}}{x_{2}} + \frac{u}{x_{2}}
-  \]
-  #+end_export
+- Si conocemos $h_i = h(\bm{x}_i)$ podemos dividir el modelo original
+  por $\sqrt{h_i}$.
 
-- Reescribimos el modelo como:
-  #+begin_export latex
-  \[
-    y^* = \beta_2 + \beta_0 x^*_{0} + \beta_1 x^*_{1} + u^*
-  \]
-  #+end_export
-  donde $y^* = y / x_{2}$, $x^*_{0} = 1 / x_{2}$, $x^*_{1} = x_{1} / x_{2}$, $u^* = u / x_{2}$.
-
-
-** Mínimos cuadrados ponderados (III)
-
-- El término de error del modelo transformado es homoscedástico:
+- El término de error del modelo transformado, $u^*_i = u_i /
+  \sqrt{h_i}$, es homoscedástico:
   #+begin_export latex
   \begin{align*}
-    \var(u^*| x_{1}, x_{2})
-    &= \Exp((u/x_{2})^2|x_{1}, x_{2}) \\
-    &= (1/x_{2})^2\Exp(u^2| x_{1}, x_{2}) \\
-    &= (1/x^2_{2}) \sigma^2 x_{2}^2 \\
-    &= \sigma^2
+    \var(u_i^*| \bm{x}_i)
+    &= \Exp\big((u_i/\sqrt{h_i})^2| \bm{x}_i\big) \\
+    &= (1/h_{i})\Exp(u^2| \bm{x}_i) \\
+    &= (1/h_i) \sigma^2 h_i \\
+    &= \sigma^2.
   \end{align*}
   #+end_export
 
-- El estimador ELIO consiste en aplicar MCO al modelo transformado.
+** Ejemplo
 
+- Modelo original. Si $x_{2i}$ siempre toma valores positivos y
+  $h(x_{1i}, x_{2i}) = x_{2i}$:
+  #+begin_export latex
+  \begin{gather*}
+    y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + u_i, \\
+    \var(u_i | x_{1i}, x_{2i}) = \sigma^2 x_{2i}.
+  \end{gather*}
+  #+end_export
 
-** Mínimos cuadrados ponderados (IV)
+- Modelo transformado:
+  #+begin_export latex
+  \begin{gather*}
+    y^*_i = \beta_0 x^*_{0i} + \beta_1 x^*_{1i} + \beta_2 x^*_{2i} + u^*_i, \\
+    \var(u^*_i | x_{1i}, x_{2i}) = \sigma^2.
+  \end{gather*}
+  #+end_export
+  donde
+  #+begin_export latex
+  \begin{equation*}
+    y^*_i = y_i / \sqrt{x_{2i}},\quad
+    x^*_{0i} = 1 / \sqrt{x_{2i}},\quad
+    x^*_{1i} = x_{1i} / \sqrt{x_{2i}},\quad
+    x^*_{2i} = x_{2i} / \sqrt{x_{2i}}.
+  \end{equation*}
+  #+end_export
 
-Resumen:
+** Mínimos cuadrados ponderados
+
+Estimador de *Mínimos Cuadrados Ponderados*, (MCP):
 
 - La varianza del término de error es proporcional a $h_i$ que es una
   función conocida de variables observables:
   #+begin_export latex
   \[
-    \var(u | x_{1}, x_{2}, \dots, x_{k}) = \sigma^2 h
+    \var(u_i | x_{1i}, x_{2i}, \dots, x_{ki}) = \sigma^2 h_i.
   \]
   #+end_export
 
-- Transformamos el modelo dividiendo todas las variables (y el término
-  constante) por $\sqrt{h}$.
+- Se transforma el modelo dividiendo por $\sqrt{h_i}$.
 
-- Estimamos el modelo transformado por MCO.
+- Se estima el modelo transformado por MCO.
 
+** Suma ponderada de los cuadrados de los residuos
+
+- Residuos del estimador MCP:
+  #+begin_export latex
+  \[
+      \utilde^{2}_{i} =
+      y_{i} - \btilde_{0}  - \btilde_{1} x_{1i} - \dots - \btilde_{k} x_{ki},
+  \]
+  #+end_export
+  donde $\btilde_0, \btilde_1, \dots, \btilde_k$ son las estimaciones
+  MCP.
+
+- El estimador MCP minimiza la suma *ponderada de residuos al cuadrado*:
+  #+begin_export latex
+  \[
+    \sum_{i} \utilde^{2}_{i}/h_{i} =
+    \sum_{i} \big(
+    y_{i} - \btilde_{0} - \btilde_{1} x_{1i} - \dots - \btilde_{k} x_{ki}
+    \big)^{2}/h_{i}
+  \]
+  #+end_export
+
+- El *peso*, $w_i$, que se asigna a cada observación es la inversa de
+  $h_i$, $w_i = 1 / h_i$.
+
+
+** Bondad del ajuste
+
+En general, no es posible comparar el $R^2$ obtenido con MCP y el
+obtenido con MCO:
+
+- Diferentes programas informáticos calculan de forma diferente el
+  $R^2$ de MCP y los distintos métodos no son equivalentes.
+
+- Los $R^2$ que se calculan para MCP no se pueden interpretar como
+  medidas de bondad del ajuste.
+
+
+* Mínimos cuadrados ponderados factibles
 
 ** MCP factibles (I)
 
@@ -171,6 +264,9 @@ Resumen:
   valores predichos en la regresión anterior.
 
 
+
+* Otras cuestiones
+
 ** Comparación con MCO
 
 - MCP y MCO son insesgados bajo heteroscedasticidad. No debería haber
@@ -178,6 +274,10 @@ Resumen:
 
 - No son comparables los coeficientes de determinación y el error
   típico de la regresión de MCO y MCP.
+
+
+
+** Inferencia robusta
 
 - Igual que con MCO, es posible usar matrices de covarianzas robustas
   después de estimar por MCP.
