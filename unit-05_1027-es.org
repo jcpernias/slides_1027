@@ -11,6 +11,7 @@
 
 * Ineficiencia de MCO
 
+
 ** Heteroscedasticidad
 
 #+MATS: figcol img/het3.pdf 0.5
@@ -51,6 +52,7 @@ MCG consisten en:
 
 * Mínimos cuadrados ponderados
 
+
 ** Modelo de regresión
 
 El modelo de regresión cumple los supuestos *RLM.1* a *RLM.4*:
@@ -60,6 +62,7 @@ El modelo de regresión cumple los supuestos *RLM.1* a *RLM.4*:
   + \dots + \beta_k x_{ki} + u_i.
 \]
 #+end_export
+
 
 ** Heteroscedasticidad
 
@@ -76,6 +79,7 @@ El modelo de regresión cumple los supuestos *RLM.1* a *RLM.4*:
   relación entre las explicativas y la varianza del término de error.
 
 - La constante desconocida $\sigma^2$ es positiva.
+
 
 ** Heteroscedasticidad conocida
 
@@ -99,6 +103,7 @@ El modelo de regresión cumple los supuestos *RLM.1* a *RLM.4*:
     &= \sigma^2.
   \end{align*}
   #+end_export
+
 
 ** Ejemplo
 
@@ -128,7 +133,8 @@ El modelo de regresión cumple los supuestos *RLM.1* a *RLM.4*:
   \end{equation*}
   #+end_export
 
-** Mínimos cuadrados ponderados
+
+** Mínimos Cuadrados Ponderados
 
 Estimador de *Mínimos Cuadrados Ponderados*, (MCP):
 
@@ -143,6 +149,16 @@ Estimador de *Mínimos Cuadrados Ponderados*, (MCP):
 - Se transforma el modelo dividiendo por $\sqrt{h_i}$.
 
 - Se estima el modelo transformado por MCO.
+
+
+** Propiedades de MCP
+
+- Si se cumplen los supuestos *RLM.1* a *RLM.4* el estimador MCP es
+  insesgado y consistente.
+
+- El modelo transformado cumple con los supuestos de Gauss-Markov, por
+  lo que MCP es el estimador lineal insesgado óptimo.
+
 
 ** Suma ponderada de los cuadrados de los residuos
 
@@ -184,109 +200,138 @@ obtenido con MCO:
 
 * Mínimos cuadrados ponderados factibles
 
-** MCP factibles (I)
 
-- Hasta ahora hemos supuesto que conocemos $h$.
+** Heteroscedasticidad desconocida
 
-- ¿Qué podemos hacer si no observamos $h$?
+- Hasta ahora hemos supuesto que conocemos $h_i$. ¿Qué podemos hacer
+  en caso contrario?
 
+- Aunque no conozcamos la forma exacta de la heteroscedasticidad, con
+  frecuencia sabemos que está relacionada con algunas de las variables
+  del modelo.
 
-** MCP factibles (II)
-
-- Función de regresión poblacional:
-  #+begin_export latex
-  \[
-    y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + u_i
-  \]
-  #+end_export
-
-- Consideremos ahora el caso en que:
-  #+begin_export latex
-  \[
-    \Exp(u_i^2 | x_{1i}, x_{2i}) = \sigma^2 \exp(\delta_0 + \delta_1 x_{2i} + \delta_2 x^2_{2i})
-  \]
-  #+end_export
-  La función de dispersión depende de parámetros desconocidos:
-  #+begin_export latex
-  \[
-    h_i =\exp(\delta_0 + \delta_1 x_{2i} + \delta_2 x^2_{2i})
-  \]
-  #+end_export
+- El estimador de *Mínimos Cuadrados Ponderados Factibles* (MCPF) se
+  obtiene de forma análoga al estimador de MCP salvo que utiliza una
+  estimación de $h_i$ para obtener el modelo transformado.
 
 
-** MCP factibles (III)
+** Modelización de la heteroscedasticidad
 
-- Para aplicar el principio de MCG primero debemos estimar los
-  parámetros de los que depende $h_i$ y obtener una estimación de la
-  función de dispersión, $\hat{h}_i$.
-
-- Transformamos el modelo dividiendo por $\sqrt{\hat{h}_i}$.
-
-- Aplicamos MCO al modelo transformado.
+Especificaremos un modelo para la varianza del término de error que
+dependa de variables observables y de parámetros desconocidos. Por
+ejemplo, podemos escribir:
+#+begin_export latex
+\begin{gather*}
+  \var(u_i | \bm{x}_{i}) = \sigma^2 h(\bm{x}_{i}) \\
+  \intertext{con}
+  h(\bm{x}_{i}) = \exp(\delta_{0} + \delta_{1} x_{1i} + \dots + \delta_{k} x_{ki}),
+\end{gather*}
+#+end_export
+donde $\delta_0, \delta_1, \dots, \delta_k$ son parámetros
+desconocidos y la función exponencial garantiza que $h(\bm{x}_{i}) >
+0$.
 
 
 ** Estimación de $h_i$ (I)
 
-- Varianza condicional:
+Varianza condicional del término de error:
+#+begin_export latex
+\[
+  \Exp(u_i^2 | \bm{x}_{i}) = \sigma^2
+  \exp(\delta_{0} + \delta_{1} x_{1i} + \dots + \delta_{k} x_{ki}).
+\]
+#+end_export
+Si observásemos el término de error, $u_i$, podríamos estimar:
+#+begin_export latex
+\[
+  \log(u_i^2) =
+  \alpha_0 + \delta_{1} x_{1i} + \dots +
+  \delta_{k} x_{ki} + \text{error}.
+\]
+#+end_export
+Para poder estimar los parámetros de la regresión anterior,
+reemplazamos $u_i$ por los residuos de MCO, $\hat{u}_i$.
+
+
+** Estimación de $h_i$ (y II)
+
+1. Estimamos por MCO los parámetros de la función de regresión:
   #+begin_export latex
   \[
-    \Exp(u_i^2 | x_{1i}, x_{2i}) = \sigma^2 \exp(\delta_0 + \delta_1 x_{2i} + \delta_2 x^2_{2i})
+    \log(\uhat_i^2) = \alpha_0 + \delta_{1} x_{1i} +
+    \dots + \delta_{k} x_{ki} + \text{error}.
   \]
   #+end_export
 
-- A partir de la ecuación anterior, podemos escribir:
-  #+begin_export latex
-  \[
-    u_i^2 = \sigma^2 \exp(\delta_0 + \delta_1 x_{2i} + \delta_2 x^2_{2i}) v_i
-  \]
-  #+end_export
-
-- Tomando logaritmos:
-  #+begin_export latex
-  \[
-    \log(u_i^2) = \theta_0 + \delta_1 x_{2i} + \delta_2 x^2_{2i} + e_i
-  \]
-  #+end_export
+2. Obtenemos $\hhat_i$ a partir de las predicciones de la regresión
+   anterior:
+   #+begin_export latex
+   \[
+     \hhat_i = \exp(\ahat_0 + \dhat_{1} x_{1i} + \dots + \dhat_{k} x_{ki}).
+   \]
+   #+end_export
 
 
-** Estimación de $h_i$ (II)
+** Mínimos Cuadrados Ponderados Factibles
 
-- Estimamos los parámetros de:
-  #+begin_export latex
-  \[
-    \log(u_i^2) = \theta_0 + \delta_1 x_{2i} + \delta_2 x^2_{2i} + e_i
-  \]
-  #+end_export
-  reemplazando $u_i$ por los residuos de mínimos cuadrados,
-  $\hat{u}_i$
+Procedimiento para la estimación por *Mínimos Cuadrados Ponderados
+Factibles* (MCPF):
 
-- Finalmente obtenemos $\hat{h}_i$ tomando la exponencial de los
-  valores predichos en la regresión anterior.
+#+ATTR_LATEX: :options [label=\textbf{Paso \arabic*}:, wide=0pt, leftmargin=1em]
+1. Se estima el modelo por MCO y se guardan los residuos $\uhat_i$.
 
+2. Se estima por MCO una regresión de $\log(\uhat^2_i)$ sobre las
+   explicativas.
+
+3. Se obtiene $\hhat_i$ tomando la exponencial de las predicciones de
+   la regresión del paso anterior.
+
+4. Se estima el modelo por MCP usando $1/\hhat_i$ como ponderaciones.
+
+
+** Propiedades de MCPF
+
+- Al usar una estimación de $h_i$, MCPF no es insesgado ni lineal.
+
+- Si se cumplen los supuestos *RLM.1* a *RLM.4* el estimador de MCPF es consistente.
+
+- Si la especificación de la heteroscedasticidad es correcta, MCPF es
+  asintóticamente más eficiente que MCO.
+
+
+** Especificaciones alternativas
+
+Se han usado especificaciones alternativas de la
+heteroscedasticidad. En consecuencia se modificaría el *Paso 2* del
+procedimiento para obtener el estimador MCPF descrito antes:
+
+- Regresar $\log(\uhat^2_i)$ sobre un subconjunto de las explicativas.
+
+- Regresar $\log(\uhat^2_i)$ sobre las explicativas, sus cuadrados y
+  productos cruzados.
+
+- Regresar $\log(\uhat^2_i)$ sobre las predicciones, $\yhat$, y sus cuadrados, $\yhat^2_i$.
+
+Los restantes pasos del procedimiento de estimación no se alterarían.
 
 
 * Otras cuestiones
 
+
 ** Comparación con MCO
 
-- MCP y MCO son insesgados bajo heteroscedasticidad. No debería haber
-  una gran diferencia entre ambas estimaciones.
+- MCO y MCP(F) son estimadores consistentes cuando se cumplen los
+  supuestos *RLM.1* a *RLM.4*.
 
-- No son comparables los coeficientes de determinación y el error
-  típico de la regresión de MCO y MCP.
-
+- Grandes diferencias en las estimaciones apuntarían al incumplimiento
+  de otras de las hipótesis de Gauss-Markov.
 
 
 ** Inferencia robusta
 
-- Igual que con MCO, es posible usar matrices de covarianzas robustas
-  después de estimar por MCP.
+- Si el supuesto sobre la naturaleza de la heteroscedasticidad es
+  correcto, los contrastes $t$ y $F$ calculados a partir de las
+  estimaciones MCP(F) tienen validez asintótica.
 
-
-** Alternativas a MCP
-
-- La heteroscedasticidad suele estar asociada con el "tamaño" de las
-  observaciones.
-
-- Con frecuencia, los problemas de heteroscedasticidad pueden
-  mitigarse usando logaritmos.
+- Si sigue existiendo heteroscedasticidad después de la estimación
+  MCP(F), puede usarse una matriz de covarianzas robusta.
