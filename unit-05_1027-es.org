@@ -24,9 +24,9 @@ cambia con los valores de la explicativa.
 
 #+MATS: figcol img/het4.pdf 0.5
 
-La *ineficiencia de MCO* se origina porque se tratan por
-igual todas las observaciones, aunque algunas contienen
-información imprecisa para estimar la FRP.
+La *ineficiencia de MCO* se debe a que se tratan por igual todas las
+observaciones, aunque no todas contienen información igual de precisa
+para estimar la FRP.
 
 
 ** Estimación eficiente
@@ -160,17 +160,29 @@ Estimador de *Mínimos Cuadrados Ponderados*, (MCP):
   lo que MCP es el estimador lineal insesgado óptimo.
 
 
-** Suma ponderada de los cuadrados de los residuos
+** Predicciones y residuos
 
-- Residuos del estimador MCP:
+- El modelo transformado sólo sirve para obtener las estimaciones de
+  MCP de los parámetros: $\btilde_0, \btilde_1, \dots, \btilde_k$.
+
+- Para calcular las predicciones usamos las variables originales sin
+  transformar:
   #+begin_export latex
   \[
-      \utilde^{2}_{i} =
-      y_{i} - \btilde_{0}  - \btilde_{1} x_{1i} - \dots - \btilde_{k} x_{ki},
+    \ytilde_i = \btilde_{0}  + \btilde_{1} x_{1i} + \dots + \btilde_{k} x_{ki}.
   \]
   #+end_export
-  donde $\btilde_0, \btilde_1, \dots, \btilde_k$ son las estimaciones
-  MCP.
+
+- También usamos las variables originales para calcular los residuos:
+  #+begin_export latex
+  \[
+    \utilde_i = y_i - \ytilde_i = y_i - \btilde_{0}  - \btilde_{1} x_{1i} - \dots - \btilde_{k} x_{ki}.
+  \]
+  #+end_export
+
+
+
+** Suma ponderada de los cuadrados de los residuos
 
 - El estimador MCP minimiza la suma *ponderada de residuos al cuadrado*:
   #+begin_export latex
@@ -178,12 +190,12 @@ Estimador de *Mínimos Cuadrados Ponderados*, (MCP):
     \sum_{i} \utilde^{2}_{i}/h_{i} =
     \sum_{i} \big(
     y_{i} - \btilde_{0} - \btilde_{1} x_{1i} - \dots - \btilde_{k} x_{ki}
-    \big)^{2}/h_{i}
+    \big)^{2}/h_{i}.
   \]
   #+end_export
 
-- El *peso*, $w_i$, que se asigna a cada observación es la inversa de
-  $h_i$, $w_i = 1 / h_i$.
+- El *peso* o *ponderación*, $w_i$, que se asigna a cada observación
+  es la inversa de $h_i$, $w_i = 1 / h_i$.
 
 
 ** Bondad del ajuste
@@ -323,8 +335,9 @@ Los restantes pasos del procedimiento de estimación no se alterarían.
 - MCO y MCP(F) son estimadores consistentes cuando se cumplen los
   supuestos *RLM.1* a *RLM.4*.
 
-- Grandes diferencias en las estimaciones apuntarían al incumplimiento
-  de otras de las hipótesis de Gauss-Markov.
+- Grandes diferencias en las estimaciones de MCO y de MCP(F)
+  indicarían el posible incumplimiento de otras de las hipótesis de
+  Gauss-Markov.
 
 
 ** Inferencia robusta
@@ -333,5 +346,9 @@ Los restantes pasos del procedimiento de estimación no se alterarían.
   correcto, los contrastes $t$ y $F$ calculados a partir de las
   estimaciones MCP(F) tienen validez asintótica.
 
-- Si sigue existiendo heteroscedasticidad después de la estimación
-  MCP(F), puede usarse una matriz de covarianzas robusta.
+- Si el supuesto no captura toda la heteroscedasticidad, sería
+  necesario usar un estimador robusto de $\var(\btilde)$ después de la
+  estimación MCP(F).
+
+- En general, es recomendable el uso de métodos de inferencia robustos
+  a heteroscedasticidad con los estimadores de MCO y de MCP(F).
