@@ -322,7 +322,7 @@ procedimiento para obtener el estimador MCPF descrito antes:
 - Regresar $\log(\uhat^2_i)$ sobre las explicativas, sus cuadrados y
   productos cruzados.
 
-- Regresar $\log(\uhat^2_i)$ sobre las predicciones, $\yhat$, y sus cuadrados, $\yhat^2_i$.
+- Regresar $\log(\uhat^2_i)$ sobre las predicciones, $\yhat_i$, y sus cuadrados, $\yhat^2_i$.
 
 Los restantes pasos del procedimiento de estimación no se alterarían.
 
