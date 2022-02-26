@@ -5,7 +5,7 @@
 
 #+MATS: bib
 #+begin_bibbox
-- Wooldridge: ::  /Introducción a la Econometría/. Capítulo 0.
+- Wooldridge: ::  /Introducción a la Econometría/. Capítulos 7.5 y 8.5.
 #+end_bibbox
 
 * Introducción
@@ -18,3 +18,7 @@
   y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + u_i
 \]
 #+end_export
+
+* El modelo lineal de probabilidad
+
+* Estimación
