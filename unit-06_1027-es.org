@@ -10,15 +10,167 @@
 
 * Introducción
 
+** Modelos de eventos cuantitativos
 
-** El modelo
+¿Podemos usar el modelo de regresión para explicar *eventos
+cuantitativos*?
 
-#+begin_export latex
-\[
-  y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + u_i
-\]
-#+end_export
 
-* El modelo lineal de probabilidad
+** Variable dependiente binaria
 
-* Estimación
+La variable dependiente sólo toma dos valores:
+
+- $y_i = 1$, en aquellas observaciones donde ocurre el evento que
+  estamos estudiando; y
+
+- $y_i = 0$, en las observaciones en que no ocurre el evento.
+
+** Modelo de regresión múltiple
+
+- Modelo de regresión:
+  #+begin_export latex
+  \[
+    y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_k x_k + u
+  \]
+  #+end_export
+
+- Los supuestos *RLM.1* a *RLM.4* no son impiden que la variable
+  dependiente $y$ sea binaria.
+
+
+** Interpretación de los parámetros
+
+- Cuando $y$ es una variable continua, los parámetros $\beta_1, \dots,
+  \beta_k$ indican en cuantas unidades cambia $y$ cuando $x_j$ cambia
+  en 1 unidad, /ceteris paribus/.
+
+- Esta interpretación no es válida cuando $y$ es dicotómica: o cambia
+  desde $y = 0$ hasta $y = 1$, o cambia desde $y = 1$ hasta $y = 0$, o
+  no cambia en absoluto.
+
+** Probabilidad
+
+- Si $y$ es una variable dicotómica:
+  #+begin_export latex
+  \[
+    \Exp(y | \bm{x}) = \Pr(y = 1 | \bm{x})
+  \]
+  #+end_export
+
+- Por tanto:
+  #+begin_export latex
+  \[
+    \Pr(y = 1 | \bm{x}) = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_k x_k
+  \]
+  #+end_export
+  El parámetro $\beta_j$ mide en cuánto cambia la probabilidad de que $y$
+  tome el valor 1 cuando $\incr x_j = 1$, /ceteris paribus/.
+
+** El modelo lineal de probabilidad
+
+- Un *modelo de probabilidad lineal* es un modelo de regresión con
+  variable dependiente binaria:
+  #+begin_export latex
+  \[
+    y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_k x_k + u
+  \]
+  #+end_export
+
+- La probabilidad de que ocurra $y = 1$ es lineal en los parámetros
+  $\beta_j$.
+
+- Las pendientes son el cambio en la probabilidad $y = 1$ cuando
+  cambia una explicativa, manteniendo el resto de factores constantes:
+  #+begin_export latex
+  \[
+    \Delta \Pr(y = 1 | \bm{x}) = \beta_j \Delta x_j
+  \]
+  #+end_export
+
+
+* Estimación por MCO
+
+** Estimación
+
+- Las estimaciones de los parámetros, $\bhat_j$, se obtienen con las
+  ecuaciones normales de MCO:
+  #+begin_export latex
+  \begin{gather*}
+    \sum_{i}\uhat_{i} = 0, \\
+    \sum_{i}x_{1i}\uhat_{i} = 0, \\
+    \vdotswithin{\sum} \\
+    \sum_{i}x_{ki}\uhat_{i} = 0,
+  \end{gather*}
+  #+end_export
+  donde
+  #+begin_export latex
+  \[
+    \uhat = y - \bhat_0 - \bhat_1 x_1 - \dots - \bhat_k x_k.
+  \]
+  #+end_export
+** Predicción
+
+- Las predicciones de MCO se pueden interpretar como estimaciones de
+  la probabilidad de $y = 1$:
+  #+begin_export latex
+  \[
+    \phat = \bhat_0 + \bhat_1 x_1 + \dots + \bhat_k x_k
+  \]
+  #+end_export
+
+- Para predecir la variable dependiente se suele usar la regla:
+  #+begin_export latex
+  \begin{gather*}
+    \yhat = 1 \text{\ si $\phat \geq 0.5$}, \\
+    \yhat = 0 \text{\ si $\phat < 0.5$}.
+  \end{gather*}
+  #+end_export
+
+** Bondad del ajuste
+
+- En los modelos con variable dependiente binaria se suele usar como
+  medida de bondad del ajuste el *porcentaje de observaciones
+  correctamente predichas*
+
+- Para calcular esta medida tabulamos las predicciones $\yhat$ y los
+  valores de $y$:
+
+  #+begin_export latex
+  \begin{center}
+    \begin{tabular}{*{3}{>{$}c<{$}}}
+      \toprule
+      & \yhat = 0 & \yhat = 1 \\
+      \midrule
+      y = 0 & n_{00} & n_{01} \\
+      y = 1 & n_{10} & n_{11} \\
+      \bottomrule
+    \end{tabular}
+    \vspace*{1ex}
+  \end{center}
+  #+end_export
+
+  Sumando $n_{00} + n_{11}$ se obtiene el número de observaciones
+  correctamente predichas.
+
+** Insesgadez y consistencia
+
+- Si se cumplen los supuestos *RLM.1* a *RLM.4* el estimador MCO es
+  insesgado y consistente.
+
+
+** Heteroscedasticidad
+
+- En el modelo lineal de probabilidad se incumple el supuesto *RLM.5*.
+
+- La varianza condicional del término de error puede escribirse como:
+  #+begin_export latex
+  \[
+    \var(u|\bm{x}) = p(\bm{x})\big(1 - p(\bm{x})\big)
+  \]
+  #+end_export
+  donde $p(\bm{x})$ es la probabilidad condicional de $y = 1$:
+  #+begin_export latex
+  \[
+    p(\bm{x}) = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_k x_k
+  \]
+  #+end_export
