@@ -21,10 +21,9 @@ determinantes de *eventos cuantitativos*?
 
 La variable dependiente sólo toma dos valores:
 
-- $y_i = 1$, en aquellas observaciones donde ocurre el evento que
-  estamos estudiando; y
+- $y_i = 1$, cuando se produce el evento que estamos estudiando;
 
-- $y_i = 0$, en las observaciones en que no ocurre el evento.
+- $y_i = 0$, cuando no se produce.
 
 
 ** Modelo de regresión múltiple
@@ -39,18 +38,20 @@ La variable dependiente sólo toma dos valores:
 - ¿Cuál es la interpretación de los parámetros cuando $y$ es una
   variable binaria?
 
+
 ** Probabilidad condicional
 
-- Si $y$ es una variable dicotómica la esperanza condicional de $y$
-  coincide con la probabilidad condicional de que $y = 1$:
+- Si $y$ es una variable binaria, su esperanza condicional coincide
+  con la probabilidad condicional de que $y = 1$:
   #+begin_export latex
   \[
     \Exp(y | \bm{x}) = \Pr(y = 1 | \bm{x}).
   \]
   #+end_export
 
-- *Modelo de probabilidad lineal* (MLP): la probabilidad de que $y = 1$
-  es lineal en los parámetros $\beta_0, \beta_1, \dots, \beta_k$:
+- *Modelo de probabilidad lineal* (MLP): la probabilidad de que $y$
+  tome el valor $1$ es una función lineal en los parámetros $\beta_0,
+  \beta_1, \dots, \beta_k$:
   #+begin_export latex
   \[
     \Pr(y = 1 | \bm{x}) = \beta_0 + \beta_1 x_1 + \dots + \beta_k x_k.
@@ -89,7 +90,7 @@ La variable dependiente sólo toma dos valores:
   + proporciona resultados similares cuando las variables explicativas
     toman valores cercanos a sus medias.
 
-- El MLP puede generar probabilidades fuera del intervalo $[0, 1]$,
+- El MLP puede generar probabilidades fuera del intervalo $(0, 1)$,
   por lo que no es adecuado para algunas aplicaciones.
 
 
@@ -99,7 +100,7 @@ La variable dependiente sólo toma dos valores:
 
 ** Estimación
 
-- Las estimaciones de los parámetros del MLP se pueden obtener por MCO.
+- Los parámetros del MLP se pueden estimar por MCO.
 
 - Los residuos se obtienen de la forma usual:
   #+begin_export latex
@@ -107,6 +108,7 @@ La variable dependiente sólo toma dos valores:
     \uhat_i = y_i - \bhat_0 - \bhat_1 x_{1i} - \dots - \bhat_k x_{ki}.
   \]
   #+end_export
+
 
 ** Predicción
 
@@ -132,35 +134,34 @@ La variable dependiente sólo toma dos valores:
 
 ** Bondad del ajuste
 
-- En los modelos con variable dependiente binaria se suele usar como
-  medida de bondad del ajuste el *porcentaje de observaciones
-  correctamente predichas*
+Tabulación cruzada de $y$ e $\ytilde$:
+#+begin_export latex
+\begin{center}
+  \begin{tabular}{*{3}{>{$}c<{$}}}
+    \toprule
+    & \ytilde_i = 0 & \ytilde_i = 1 \\
+    \midrule
+    y_i = 0 & n_{00} & n_{01} \\
+    y_i = 1 & n_{10} & n_{11} \\
+    \bottomrule
+  \end{tabular}
+  \vspace*{1ex}
+\end{center}
+#+end_export
 
-- Para calcular esta medida tabulamos las predicciones $\yhat$ y los
-  valores de $y$:
+- Número de predicciones correctas: $n_{00} + n_{11}$.
 
-  #+begin_export latex
-  \begin{center}
-    \begin{tabular}{*{3}{>{$}c<{$}}}
-      \toprule
-      & \ytilde_i = 0 & \ytilde_i = 1 \\
-      \midrule
-      y_i = 0 & n_{00} & n_{01} \\
-      y_i = 1 & n_{10} & n_{11} \\
-      \bottomrule
-    \end{tabular}
-    \vspace*{1ex}
-  \end{center}
-  #+end_export
+- Número total de observaciones: $n = n_{00} + n_{01} + n_{10} +
+  n_{11}$.
 
-  Sumando $n_{00} + n_{11}$ se obtiene el número de observaciones
-  correctamente predichas.
-
+- *Porcentaje de predicciones correctas*: $100 (n_{00} + n_{11}) /
+  n$. Se usa para medir la bondad del ajuste de modelos con
+  variable dependiente binaria.
 
 ** Insesgadez y consistencia
 
-- Los supuestos *RLM.1* a *RLM.4* no impiden que la variable
-  dependiente $y$ sea binaria.
+- Los supuestos *RLM.1* a *RLM.4* no son incompatibles con que la
+  variable dependiente sea binaria.
 
 - Si se cumplen los supuestos *RLM.1* a *RLM.4* el estimador MCO es
   insesgado y consistente.
@@ -177,15 +178,19 @@ La variable dependiente sólo toma dos valores:
   \]
   #+end_export
 
+
 ** Uso de MCO
 
-- El modelo lineal de probabilidad puede estimarse por MCO.
+- Los parámetros del modelo lineal de probabilidad pueden estimarse
+  por MCO.
 
-- Para contrastar hipótesis sobre los parámetros es necesario usar
-  estimaciones robustas a heteroscedasticidad de $\var(\bhat)$.
+- Para contrastar hipótesis o construir intervalos de confianza es
+  necesario usar estimaciones robustas a heteroscedasticidad de
+  $\var(\bhat)$.
 
 
 * Estimación eficiente
+
 
 ** Varianza del término de error
 
@@ -202,6 +207,7 @@ La variable dependiente sólo toma dos valores:
 
 - Se podría aplicar MCPF si se reemplaza $p_i$ por una estimación,
   $\phat_i$.
+
 
 ** Mínimos Cuadrados Ponderados Factibles
 
@@ -223,10 +229,11 @@ La variable dependiente sólo toma dos valores:
   \]
   #+end_export
 
+
 ** Limitaciones
 
 - El estimador MCPF no puede obtenerse si para algunas observaciones
-  se obtiene $\phat_i < 0$ o $\phat_i > 0$.
+  se obtiene $\phat_i \leq 0$ o $\phat_i \geq 1$.
 
 - Aunque se han propuesto alternativas, en esos casos es mejor usar
   MCO y contrastes de hipótesis robustos a heteroscedasticidad.
