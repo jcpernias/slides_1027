@@ -21,7 +21,7 @@
 #+MACRO: unit04 Heteroscedasticidad
 
 #+MACRO: unit06 El modelo de probabilidad lineal
-#+MACRO: unit07 Otras cuestiones
+#+MACRO: unit07 Especificación del modelo y problemas con los datos
 
 #+MACRO: unit08 Introducción a las series temporales
 #+MACRO: unit09 Regresión con series temporales

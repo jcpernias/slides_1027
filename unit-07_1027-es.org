@@ -5,16 +5,51 @@
 
 #+MATS: bib
 #+begin_bibbox
-- Wooldridge: ::  /Introducción a la Econometría/. Capítulo 0.
+- Wooldridge: ::  /Introducción a la Econometría/. Capítulo 9, secciones 9.1 y 9.5.
 #+end_bibbox
 
-* Introducción
+* Especificación del modelo
+
+** Introducción
+
+- *Forma funcional*: ¿Cómo aparecen las variables explicativas en el modelo de regresión? ¿Es necesario añadir términos al cuadrado? ¿Interacciones?
+
+- Contraste de *hipótesis no anidadas*: ¿Cómo podemos elegir entre dos modelos alternativos cuando ninguno es un caso especial del otro?
 
 
-** El modelo
+** Forma funcional
 
-#+begin_export latex
-\[
-  y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + u_i
-\]
-#+end_export
+- Ejemplo: la siguiente ecuación de salarios satisface los supuestos
+  *RLM.1* a *RLM.4*:
+  #+begin_export latex
+  \[
+    \log(\Var{wage}) = \beta_{0}
+    + \beta_{1} \Var{educ}
+    + \beta_{2} \Var{exper}
+    + \beta_{3} \Var{exper}^{2}
+    + \beta_{4} \Var{female}
+    + \beta_{5} \Var{female} \cdot \Var{educ}
+    + u
+  \]
+  #+end_export
+
+** Contrastes $F$
+
+** Contraste RESET
+
+** Hipótesis no anidadas
+
+** Contrastes de abarcamiento
+
+** Contraste de Davidson-MacKinnon
+
+
+* Problemas con los datos
+
+** Introducción
+
+** Observaciones incompletas
+
+** Muestreo no aleatorio
+
+** Observaciones atípicas y observaciones influyentes
