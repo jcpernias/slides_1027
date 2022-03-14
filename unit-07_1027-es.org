@@ -184,7 +184,7 @@ capacidad explicativa.
     \]
     #+end_export
 
-- En el caso del Modelo B, se contrasta $H_0\!: \theta_B = 0$ en la
+- En el caso del Modelo B, se contrasta $H_0\!: \theta_A = 0$ en la
   regresión:
     #+begin_export latex
     \[
@@ -219,8 +219,119 @@ capacidad explicativa.
 
 ** Introducción
 
+- En ocasiones, se producen violaciones del supuesto de muestreo
+  aleatorio aún trabajando con datos de corte transversal.
+
+- ¿Cuáles son las consecuencias del incumplimiento de *RLM.2*?
+
 ** Observaciones incompletas
+
+- Un problema relativamente frecuente es la presencia de
+  *observaciones incompletas* para las que faltan los valores de
+  algunas variables.
+
+- Usualmente se ignoran las observaciones incompletas en la
+  estimación.
+
+** Observaciones incompletas: consecuencias
+
+- Si se eliminan las observaciones incompletas para la estimación, se
+  reduce el número de observaciones y la precisión de los estimadores
+  empeora.
+
+- Las estimaciones pueden estar sesgadas si la falta de información
+  responde a razones sistemáticas (por ejemplo: las familias más ricas
+  no revelan su renta con mayor frecuencia que familias más pobres).
+
+- No se introducen sesgo si las observaciones incompletas se producen
+  por puro azar.
 
 ** Muestreo no aleatorio
 
+El *muestreo no aleatorio* se puede deber a diversas razones:
+
++ Observaciones incompletas.
+
++ Esquemas de obtención de los datos.
+
+** Selección muestral
+
+*Selección muestral*: El mecanismo que determina qué observaciones
+forman parte de la muestra no es aleatorio. Distinguimos entre:
+
++ *Selección muestral exógena*: la selección de la muestra se basa
+  en los valores que toman las variables explicativas.
+
++ *Selección muestral endógena*: la muestra no contiene
+  observaciones para algunos valores de la variable dependiente.
+
+** Selección muestral: consecuencias
+
+- *Selección muestral exógena*: Los estimadores siguen siendo
+  insesgados y consistentes mientras se cumpla el supuesto de media
+  condicional nula del término de error.
+
+- *Selección muestral endógena*: La selección en base a la variable
+  dependiente implica que el supuesto *RLM.4* no se cumple, por lo que
+  MCO sería en este caso sesgado e inconsistente.
+
+** Muestreo estratificado
+
+- *Estratos*: subgrupos de una población que no se solapan y cuya
+  unión es la población total.
+
+- *Muestreo estratificado*: la frecuencia con que se muestrean los
+  diferentes estratos no es proporcional a su tamaño.
+
+- Se trata de garantizar que en la muestra final estén suficientemente
+  representados grupos minoritarios.
+
+** Muestreo estratificado: consecuencias
+
+- Si la estratificación se basa en una o más variables explicativas,
+  el estimador de MCO será insesgado y consistente.
+
+- Por el contrario si la estratificación se realiza en base a los
+  valores que toma la variable dependiente, MCO será sesgado e
+  inconsistente.
+
 ** Observaciones atípicas y observaciones influyentes
+
+- *Observaciones atípicas* (/outliers/): observaciones para las que
+  una variable toma un valor inusualmente grande.
+
+- *Observaciones influyentes*: son aquellas que si se eliminan de la
+  muestra provocan grandes cambios en las estimaciones de MCO.
+
+
+** Observaciones atípicas
+
+- Pueden deberse a errores en la introducción de los datos. Si la
+  corrección del error no es obvia, se deberían eliminar esas
+  observaciones.
+
+- Otra posible razón es la inclusión en la muestra de observaciones
+  con características muy diferentes al resto de la población. Con
+  frecuencia, la mejor estrategia en estos casos es presentar los
+  resultados con y sin las observaciones atípicas.
+
+
+** Análisis de los residuos
+
+- El tamaño de los residuos de MCO no es un buen indicador para
+  detectar observaciones atípicas. En general, los residuos de estas
+  observaciones no son especialmente grandes.
+
+** Residuos estudentizados
+
+- En la detección de observaciones atípicas se suelen emplear los
+  *residuos estudentizados*, $\hat{\epsilon}$.
+
+- El residuo estudentizado para la observación $i$,
+  $\hat{\epsilon}_i$, puede obtenerse añadiendo al modelo una ficticia
+  que sólo toma el valor 1 en esa observación: $\hat{\epsilon}_i$ es
+  el estadístico $t$ de esa ficticia.
+
+- Se considerarían atípicas aquellas observaciones cuyos residuos
+  estudentizados sean muy grandes de acuerdo con la distribución
+  $t_{n-k-2}$.
