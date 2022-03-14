@@ -38,7 +38,7 @@
 %% --------------------------------------------------------------------------------
 \PassOptionsToPackage{english,spanish}{translator}
 \PassOptionsToPackage{svgnames}{xcolor}
-\PassOptionsToPackage{fleqn, tbtags, leqno}{amsmath}
+\PassOptionsToPackage{fleqn, tbtags}{amsmath}
 \LoadClass[%
 a4paper,
 twoside]{article}

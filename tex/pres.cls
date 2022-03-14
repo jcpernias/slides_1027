@@ -34,7 +34,7 @@
 %% --------------------------------------------------------------------------------
 \PassOptionsToPackage{english,spanish}{translator}
 \PassOptionsToPackage{svgnames}{xcolor}
-\PassOptionsToPackage{fleqn, tbtags, leqno}{amsmath}
+\PassOptionsToPackage{fleqn, tbtags}{amsmath}
 \LoadClass[%
   presentation, %
   compress %% Navigation bars as small as possible
