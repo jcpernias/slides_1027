@@ -10,38 +10,209 @@
 
 * Especificación del modelo
 
-** Introducción
-
-- *Forma funcional*: ¿Cómo aparecen las variables explicativas en el modelo de regresión? ¿Es necesario añadir términos al cuadrado? ¿Interacciones?
-
-- Contraste de *hipótesis no anidadas*: ¿Cómo podemos elegir entre dos modelos alternativos cuando ninguno es un caso especial del otro?
-
 
 ** Forma funcional
 
-- Ejemplo: la siguiente ecuación de salarios satisface los supuestos
-  *RLM.1* a *RLM.4*:
-  #+begin_export latex
-  \[
-    \log(\Var{wage}) = \beta_{0}
-    + \beta_{1} \Var{educ}
-    + \beta_{2} \Var{exper}
-    + \beta_{3} \Var{exper}^{2}
-    + \beta_{4} \Var{female}
-    + \beta_{5} \Var{female} \cdot \Var{educ}
-    + u
-  \]
-  #+end_export
+Por ejemplo, supongamos que la siguiente ecuación de salarios
+satisface los supuestos *RLM.1* a *RLM.4*:
+#+begin_export latex
+\[
+  \begin{aligned}
+  \log(\Var{wage}) = &\beta_{0}
+  + \beta_{1} \Var{educ}
+  + \beta_{2} \Var{exper}
+  + \beta_{3} \Var{exper}^{2} \\
+  &+ \beta_{4} \Var{female}
+  + \beta_{5} \Var{female} \cdot \Var{educ}
+  + u
+  \end{aligned}
+\]
+#+end_export
+¿Qué consecuencias tendría estimar el modelo sin $\Var{exper}^2$ o sin
+el término de interacción $\Var{female} \cdot \Var{educ}$? ¿Cómo
+podemos detectar errores de especificación de la *forma funcional*?
+
+** Consecuencias
+
+- Al omitir términos relevantes, es probable que obtengamos
+  *estimaciones sesgadas* de los restantes parámetros.
+
+- No está claro como interpretar los *efectos marginales* de las
+  explicativas.
+
+** Detección
+
+- Se han propuesto muchas alternativas para detectar errores de
+  especificación de la forma funcional:
+
+  + Contrastes $F$.
+
+  + *Contraste RESET*.
+
+  + Contrastes de *hipótesis no anidadas*.
+
+- Todos estos contrastes suponen que la especificación de la variable
+  dependiente es correcta. No sirven, por ejemplo, para elegir entre
+  $y$ y $\log(y)$.
+
 
 ** Contrastes $F$
 
+- Podemos probar diferentes especificaciones alternativas incluyendo
+  potencias, términos de interacción y otras transformaciones de las
+  explicativas.
+
+- Los contrastes $F$ se pueden utilizar para determinar la
+  significación de los términos que se añaden al modelo original.
+
+
 ** Contraste RESET
 
+- El contraste RESET se diseñó para detectar problemas de mala
+  especificación de la forma funcional.
+
+- Bajo la hipótesis nula, la forma funcional es correcta. No es
+  necesario especificar la forma funcional bajo la hipótesis
+  alternativa.
+
+** Cálculo del contraste RESET
+
+- Se estima por MCO el modelo original:
+  #+begin_export latex
+  \[
+    y = \beta_{0} + \beta_{1} x_{1} + \dots + \beta_{k} x_{k} + u
+  \]
+  #+end_export
+
+- Se obtienen las predicciones de la variable dependiente, $\yhat$, y
+  se añaden  al modelo potencias de $\yhat$:
+  #+begin_export latex
+  \[
+    y = \beta_{0} + \beta_{1} x_{1} + \dots + \beta_{k} x_{k}
+    + \delta_1 \yhat^2 + \delta_2 \yhat^3 +  u
+  \]
+  #+end_export
+
+- Bajo la hipótesis nula, el modelo original estaba bien especificado
+  y los términos adicionales no son significativos: $H_0\!: \delta_1 =
+  \delta_2 = 0$. Para verificar esta condición se usa un contraste $F$.
+
+
+** Variaciones del contraste RESET
+
+- Algunos autores recomiendan añadir solamente los cuadrados de las
+  predicciones:
+  #+begin_export latex
+  \[
+    y = \beta_{0} + \beta_{1} x_{1} + \dots + \beta_{k} x_{k}
+    + \delta_1 \yhat^2  +  u
+  \]
+  #+end_export
+  En este caso podemos usar un contraste $t$ para la $H_0\!: \delta_1
+  = 0$.
+
+- Si la varianza condicional de término de error no fuera constante,
+  se utilizarían contrates $F$ y $t$ robustos a heteroscedasticidad.
+
 ** Hipótesis no anidadas
+- ¿Cómo podemos elegir entre los siguientes modelos?
+  #+begin_export latex
+  \begin{gather}
+    y = \alpha_{0}
+    + \alpha_{1} x_{1}
+    + \alpha_{2} x_{2}
+    + u \tag{Modelo A} \\
+    y = \beta_{0}
+    + \beta_{1} \log(x_{1})
+    + \beta_{2} \log(x_{2})
+    + v \tag{Modelo B}
+  \end{gather}
+  #+end_export
+
+- No podemos usar los contrastes $F$: no podemos obtener uno de los
+  modelos imponiendo restricciones en los parámetros del otro modelo.
+
+- Los contrastes de *hipótesis no anidadas* sirven para comparar dos
+  modelos alternativos cuando ninguno es un caso especial del otro.
 
 ** Contrastes de abarcamiento
 
-** Contraste de Davidson-MacKinnon
+- Los *contrastes de abarcamiento* (/encompassing tests/) se basan en
+  la construcción de un tercer modelo que contenga como casos
+  especiales los modelos que se quieren comparar.
+
+** Contrastes de abarcamiento: ejemplo
+
+- El siguiente modelo tiene como casos especiales el Modelo A y el
+  Modelo B de nuestro ejemplo:
+  #+begin_export latex
+  \[
+    y = \gamma_{0}
+    + \gamma_{1} x_{1}
+    + \gamma_{2} x_{2}
+    + \gamma_{3} \log(x_{1})
+    + \gamma_{4} \log(x_{2})
+    + \text{error}
+  \]
+  #+end_export
+
+- Para contrastar la validez de un modelo frente a otro podemos usar los
+  contrastes $F$ correspondientes a las siguientes hipótesis:
+  #+ATTR_LATEX: :align l@{}p{0.75cm}@{}l
+  | *Modelo A* frente a Modelo B: | | $H_0\!: \gamma_3 = \gamma_4 = 0$ |
+  | *Modelo B* frente a Modelo A: | | $H_0\!: \gamma_1 = \gamma_2 = 0$ |
+
+
+** Contrastes de Davidson-MacKinnon
+
+Davidson y MacKinnon proponen añadir a un modelo las predicciones
+obtenidas con otro modelo y contrastar si ese término adicional tiene
+capacidad explicativa.
+
+** Contrastes de Davidson-MacKinnon: ejemplo
+
+- Para contrastar la validez del Modelo A:
+  + Se estima el Modelo B y se obtienen las predicciones: $\yhat_B$.
+  + Se contrasta $H_0\!: \theta_B = 0$ en la regresión:
+    #+begin_export latex
+    \[
+      y = \alpha_{0}
+      + \alpha_{1} x_{1}
+      + \alpha_{2} x_{2}
+      + \theta_{B} \yhat_{B}
+      + \text{error}
+    \]
+    #+end_export
+
+- En el caso del Modelo B, se contrasta $H_0\!: \theta_B = 0$ en la
+  regresión:
+    #+begin_export latex
+    \[
+      y = \beta_{0}
+      + \beta_{1} \log(x_{1})
+      + \beta_{2} \log(x_{2})
+      + \theta_{A} \yhat_{A}
+      + \text{error}
+    \]
+    #+end_export
+    donde $\yhat_A$ son las predicciones obtenidas con el Modelo A.
+
+** Contrastes de hipótesis no anidadas y heteroscedasticidad
+
+- Las hipótesis no anidadas se contrastan con estadísticos $t$ o $F$
+  en modelos de regresión que se construyen con el único objetivo del
+  contraste de esas hipótesis.
+
+- En caso de heteroscedasticidad se utilizarían las versiones robustas
+  de los contrastes $t$ y $F$.
+
+** Contrastes de hipótesis no anidadas: limitaciones
+
+- Estos contrastes no producen siempre una respuesta clara: es posible
+  que se acepten los dos modelos o que se rechacen ambos.
+
+- Rechazar un modelo no quiere decir que el modelo rival sea el
+  correcto.
 
 
 * Problemas con los datos
