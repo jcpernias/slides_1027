@@ -24,6 +24,6 @@
 #+MACRO: unit07 Especificación del modelo y problemas con los datos
 
 #+MACRO: unit08 Introducción a las series temporales
-#+MACRO: unit09 Regresión con series temporales
-#+MACRO: unit10 Autocorrelación
-#+MACRO: unit11 Modelos causales con series temporales
+#+MACRO: unit09 El estimador MCO con series temporales
+#+MACRO: unit10 Autocorrelación y heteroscedasticidad
+#+MACRO: unit11 Temas avanzados
