@@ -11,10 +11,146 @@
 * Introducción
 
 
-** El modelo
+** Datos de series temporales
 
-#+begin_export latex
-\[
-  y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + u_i
-\]
-#+end_export
+- Una muestra de datos de *series temporales* está formada por
+  observaciones de variables en periodos de tiempo consecutivos.
+
+
+** Comparación con datos de corte transversal
+
+- En series temporales no pensamos en una población posiblemente
+  infinita de la cual extraemos elementos aleatoriamente.
+
+- En series temporales, el paso del tiempo proporciona un orden natural de las observaciones están ordenadas.
+
+
+** Frecuencia
+
+- Series temporales regulares: el intervalo de tiempo que transcurre
+  entre una observación y la siguiente es siempre el mismo: un año, un
+  semestre, un cuatrimestre, un mes, etc.
+
+- Frecuencia de una serie temporal.
+
+- Series temporales irregulares.
+
+
+** Ejemplo: inflación interanual en España
+
+|------+------+------+------+------+------+------+------+------+------+------+------+------|
+|      | Ene  | Feb  | Mar  | Abr  | May  | Jun  | Jul  | Ago  | Sep  | Oct  | Nov  | Dic  |
+|------+------+------+------+------+------+------+------+------+------+------+------+------|
+| 2016 | -0,3 | -0,8 | -0,8 | -1,1 | -1,0 | -0,8 | -0,6 | -0,1 | 0,2  | 0,7  | 0,7  | 1,6  |
+| 2017 | 3,0  | 3,0  | 2,3  | 2,6  | 1,9  | 1,5  | 1,5  | 1,6  | 1,8  | 1,6  | 1,7  | 1,1  |
+| 2018 | 0,6  | 1,1  | 1,2  | 1,1  | 2,1  | 2,3  | 2,2  | 2,2  | 2,3  | 2,3  | 1,7  | 1,2  |
+| 2019 | 1,0  | 1,1  | 1,3  | 1,5  | 0,8  | 0,4  | 0,5  | 0,3  | 0,1  | 0,1  | 0,4  | 0,8  |
+| 2020 | 1,1  | 0,7  | 0,0  | -0,7 | -0,9 | -0,3 | -0,6 | -0,5 | -0,4 | -0,8 | -0,8 | -0,5 |
+| 2021 | 0,5  | 0,0  | 1,3  | 2,2  | 2,7  | 2,7  | 2,9  | 3,3  | 4,0  | 5,4  | 5,5  | 6,5  |
+| 2022 | 6,1  | 7,6  | 9,8  |      |      |      |      |      |      |      |      |      |
+|------+------+------+------+------+------+------+------+------+------+------+------+------|
+
+
+** Gráfico de series temporales
+
+
+** Problemas
+
+- Dos problemas principales:
+
+  + Las características de las variables aleatorias (media, varianza,
+    correlación) pueden cambiar conforme transcurre el tiempo.
+
+  + Dependencia de lo que ocurre en periodos consecutivos.
+
+
+* Conceptos básicos
+
+
+** Procesos estocásticos
+
+- $y_t$: observación de la serie temporal $y$ en el periodo $t$. El
+  índice $t$ va desde $1$ para el primer periodo en la muestra hasta
+  $T$ para el último, $t = 1, 2, \dots, T$.
+
+
+- Proceso estocástico: notación $\{y_t: t = 1, 2, \dots, T\}$.
+
+
+** Correlación serial
+
+
+** Autocovarianzas
+
+
+** Coeficientes de autocorrelación
+
+
+** Autocorrelograma
+
+
+** Estacionariedad: concepto
+
+
+** Estacionariedad: definición
+
+
+** Dependencia débil
+
+
+
+* Características de las series temporales
+
+
+* Ejemplos
+
+- PIB y agregados macro.
+
+- Índices de precios.
+
+- Otros números índices.
+
+- Tipos de interés.
+
+- Cotizaciones de bolsa.
+
+- Indicadores de turismo.
+
+
+* Características de las series temporales
+
+- Dependencia temporal: en general, lo que ocurra mañana será muy
+  parecido a lo que ocurre hoy. Base para muchos métodos de
+  predicción: extrapolación sofisticada de lo que ocurrió en el
+  pasado. Autocorrelación.
+
+- Tendencias.
+
+- Uso de logaritmos.
+
+- Diferencias y retardos.
+
+- Estacionalidad.
+
+
+* Modelo autorregresivos
+
+- Modelo AR(1). Estacionariedad. Diferencias.
+
+- Predicción y errores de predicción. Predicción con diferencias.
+
+- Modelo AR(p).
+
+- Predicción.
+
+- Selección del número de retardos
+
+
+* Tendencias, estacionalidad y análisis de intervención
+
+- Tendencias deterministas. Tendencia lineal. Tendencias con datos en
+  logaritmos.
+
+- Estacionalidad.
+
+- Análisis de intervención. Variables ficticias: impulso, escalón, etc.
