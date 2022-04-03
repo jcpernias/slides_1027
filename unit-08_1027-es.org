@@ -5,7 +5,10 @@
 
 #+MATS: bib
 #+begin_bibbox
-- Wooldridge: ::  /Introducción a la Econometría/. Capítulo 0.
+- Wooldridge: ::  /Introducción a la Econometría/. Capítulo 10,
+  secciones 10.1, 10.2, 10.4 y 10.5.
+- Stock y Watson: ::  /Introducción a la Econometría/. Capítulo 14,
+  secciones 14.1 a 14.5.
 #+end_bibbox
 
 * Introducción
