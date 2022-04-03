@@ -17,26 +17,28 @@
 ** Datos de series temporales
 
 - Una muestra de datos de *series temporales* está formada por
-  observaciones de variables en periodos de tiempo consecutivos.
+  observaciones de una o más variables *en periodos de tiempo
+  consecutivos*.
 
 
 ** Comparación con datos de corte transversal
 
-- En series temporales no pensamos en una población posiblemente
-  infinita de la cual extraemos elementos aleatoriamente.
+- En series temporales no pensamos en una población, posiblemente
+  infinita, de la cual extraemos elementos aleatoriamente.
 
-- En series temporales, el paso del tiempo proporciona un orden natural de las observaciones están ordenadas.
+- El paso del tiempo proporciona un *orden* natural de las
+  observaciones.
 
 
-** Frecuencia
+** Series temporales regulares
 
-- Series temporales regulares: el intervalo de tiempo que transcurre
+- *Series temporales regulares*: el intervalo de tiempo que transcurre
   entre una observación y la siguiente es siempre el mismo: un año, un
   semestre, un cuatrimestre, un mes, etc.
 
-- Frecuencia de una serie temporal.
-
-- Series temporales irregulares.
+- De acuerdo con la *frecuencia* con que se observan los valores de
+  una variable, hablamos de series temporales anuales, trimestrales,
+  mensuales, etc.
 
 
 ** Ejemplo: inflación interanual en España
