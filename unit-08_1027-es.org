@@ -3,6 +3,31 @@
 
 #+TITLE: {{{unit08}}}
 
+#+PROPERTY: header-args:R :session *R-ts-intro*
+#+PROPERTY: header-args:R+ :tangle yes
+#+PROPERTY: header-args:R+ :exports both
+#+PROPERTY: header-args:R+ :results output
+
+#+BEGIN_SRC R :exports none :tangle no :results silent
+  ## load R libraries
+  library(tidyverse)
+  library(readxl)
+  library(zoo)
+
+  theme_set(theme_bw())
+
+  theme_update(panel.border = element_blank(),
+               axis.line.x = element_line(size = 0.2),
+               axis.line.y = element_line(size=0.2),
+               text = element_text(size = 9))
+
+
+  ipc_db <- read_xlsx("data/50902.xlsx", range = "a9:c251",
+                      col_names = c("tidx", "ipc", "infl"))
+  infl <- zooreg(ipc_db$infl, start = 2002, frequency = 12)
+#+END_SRC
+
+
 #+MATS: bib
 #+begin_bibbox
 - Wooldridge: ::  /Introducción a la Econometría/. Capítulo 10,
@@ -43,20 +68,37 @@
 
 ** Ejemplo: inflación interanual en España
 
+Tasas de variación interanual del IPC general de España. Fuente: INE.
+
+#+ATTR_LATEX: :font \scriptsize :align @{}l*{12}{@{\hspace{3mm}}>{$}r<{$}}@{} :booktabs t
 |------+------+------+------+------+------+------+------+------+------+------+------+------|
-|      | Ene  | Feb  | Mar  | Abr  | May  | Jun  | Jul  | Ago  | Sep  | Oct  | Nov  | Dic  |
+|      | \text{Ene} | \text{Feb} | \text{Mar} | \text{Abr} | \text{May} | \text{Jun} | \text{Jul} | \text{Ago} | \text{Sep} | \text{Oct} | \text{Nov} | \text{Dic} |
 |------+------+------+------+------+------+------+------+------+------+------+------+------|
-| 2016 | -0,3 | -0,8 | -0,8 | -1,1 | -1,0 | -0,8 | -0,6 | -0,1 | 0,2  | 0,7  | 0,7  | 1,6  |
-| 2017 | 3,0  | 3,0  | 2,3  | 2,6  | 1,9  | 1,5  | 1,5  | 1,6  | 1,8  | 1,6  | 1,7  | 1,1  |
-| 2018 | 0,6  | 1,1  | 1,2  | 1,1  | 2,1  | 2,3  | 2,2  | 2,2  | 2,3  | 2,3  | 1,7  | 1,2  |
-| 2019 | 1,0  | 1,1  | 1,3  | 1,5  | 0,8  | 0,4  | 0,5  | 0,3  | 0,1  | 0,1  | 0,4  | 0,8  |
-| 2020 | 1,1  | 0,7  | 0,0  | -0,7 | -0,9 | -0,3 | -0,6 | -0,5 | -0,4 | -0,8 | -0,8 | -0,5 |
-| 2021 | 0,5  | 0,0  | 1,3  | 2,2  | 2,7  | 2,7  | 2,9  | 3,3  | 4,0  | 5,4  | 5,5  | 6,5  |
-| 2022 | 6,1  | 7,6  | 9,8  |      |      |      |      |      |      |      |      |      |
+| 2016 | -0.3 | -0.8 | -0.8 | -1.1 | -1.0 | -0.8 | -0.6 | -0.1 | 0.2  | 0.7  | 0.7  | 1.6  |
+| 2017 | 3.0  | 3.0  | 2.3  | 2.6  | 1.9  | 1.5  | 1.5  | 1.6  | 1.8  | 1.6  | 1.7  | 1.1  |
+| 2018 | 0.6  | 1.1  | 1.2  | 1.1  | 2.1  | 2.3  | 2.2  | 2.2  | 2.3  | 2.3  | 1.7  | 1.2  |
+| 2019 | 1.0  | 1.1  | 1.3  | 1.5  | 0.8  | 0.4  | 0.5  | 0.3  | 0.1  | 0.1  | 0.4  | 0.8  |
+| 2020 | 1.1  | 0.7  | 0.0  | -0.7 | -0.9 | -0.3 | -0.6 | -0.5 | -0.4 | -0.8 | -0.8 | -0.5 |
+| 2021 | 0.5  | 0.0  | 1.3  | 2.2  | 2.7  | 2.7  | 2.9  | 3.3  | 4.0  | 5.4  | 5.5  | 6.5  |
+| 2022 | 6.1  | 7.6  | 9.8  |      |      |      |      |      |      |      |      |      |
 |------+------+------+------+------+------+------+------+------+------+------+------+------|
 
 
 ** Gráfico de series temporales
+
+Tasa interanual de inflación calculada a partir del IPC general de España. Fuente: INE.
+
+#+NAME: fig1
+#+header: :width 4.00 :height 2.47 :family "Times" :R-dev-args encoding = "ISOLatin9.enc"
+#+begin_src R :results output graphics file :exports results :file figures/infl.pdf
+  autoplot(window(infl, start = "2016-1")) +
+    scale_y_continuous(breaks = seq(0, 10, 2)) +
+    scale_x_yearmon(breaks = seq(2016, 2022, 1), format = "%Y",
+                    minor_breaks = NULL) +
+    labs(x = NULL, y = NULL)
+#+end_src
+#+ATTR_LATEX: :centering t
+#+RESULTS: fig1
 
 
 ** Problemas
