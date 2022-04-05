@@ -51,8 +51,8 @@
 - En series temporales no pensamos en una población, posiblemente
   infinita, de la cual extraemos elementos aleatoriamente.
 
-- El paso del tiempo proporciona un *orden* natural de las
-  observaciones.
+- El paso del tiempo proporciona un *orden* natural a las
+  observaciones de series temporales.
 
 
 ** Series temporales regulares
@@ -103,12 +103,12 @@ Tasa interanual de inflación calculada a partir del IPC general de España. Fue
 
 ** Problemas
 
-- Dos problemas principales:
+Dos problemas principales:
 
-  + Las características de las variables aleatorias (media, varianza,
-    correlación) pueden cambiar conforme transcurre el tiempo.
++ Las características de las variables aleatorias (media, varianza,
+  correlación) pueden cambiar conforme transcurre el tiempo.
 
-  + Dependencia de lo que ocurre en periodos consecutivos.
++ Dependencia de lo que ocurre en periodos consecutivos.
 
 
 * Conceptos básicos
@@ -117,11 +117,16 @@ Tasa interanual de inflación calculada a partir del IPC general de España. Fue
 ** Procesos estocásticos
 
 - $y_t$: observación de la serie temporal $y$ en el periodo $t$. El
-  índice $t$ va desde $1$ para el primer periodo en la muestra hasta
-  $T$ para el último, $t = 1, 2, \dots, T$.
+  índice $t$ va desde $1$, para el primer periodo en la muestra, hasta
+  $T$, para el último.
 
-
-- Proceso estocástico: notación $\{y_t: t = 1, 2, \dots, T\}$.
+- Un *proceso estocástico* es una secuencia de una (o más) variables
+  aleatorias en periodos consecutivos de tiempo. Notación:
+  #+begin_export latex
+  \[
+    \{y_t\!: t =  1, 2, \dots, T\}.
+  \]
+  #+end_export
 
 
 ** Correlación serial
