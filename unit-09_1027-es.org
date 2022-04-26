@@ -5,16 +5,286 @@
 
 #+MATS: bib
 #+begin_bibbox
-- Wooldridge: ::  /Introducción a la Econometría/. Capítulo 0.
+- Wooldridge: ::  /Introducción a la Econometría/. Capítulo 10.
+- Stock y Watson: ::  /Introducción a la Econometría/. Capítulo 14,
+  secciones 14.6 a 14.8, y capítulo 15, secciones 15.1 a 15.3.
 #+end_bibbox
 
 * Introducción
 
+** El modelo de regresión con series temporales
 
-** El modelo
-
+Nos centraremos en la aplicación de MCO para estimar los parámetros
+del modelo:
 #+begin_export latex
 \[
-  y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + u_i
+  y_t = \beta_0 + \beta_1 x_{1t} + \beta_1 x_{2t} + \dots + \beta_1 x_{kt} + u_t
 \]
 #+end_export
+donde $t = 1, 2, \dots, T$.
+
+** Notación
+
+- Nuestra especificación admite modelos dinámicos.
+
+- $\bm{x_t}$: los valores que toman las explicativas en el periodo $t$.
+
+- $\bm{X}$: los valores de todas las explicativas en todos los periodos
+  de tiempo.
+
+** Propiedades de MCO con series temporales
+
+-  ¿Qué tiene que cumplirse para que MCO tenga buenas propiedades
+  exactas?
+
+- ¿Qué supuestos son necesarios para que se cumplan las propiedades
+  asintóticas?
+
+
+
+* El modelo clásico de regresión con series temporales
+
+** Supuestos
+
+- *TS.1*: Linealidad en los parámetros.
+- *TS.2*: Ausencia de colinealidad perfecta.
+- *TS.3*: Exogeneidad estricta.
+- *TS.4*: Homoscedasticidad.
+- *TS.5*: Ausencia de correlación serial.
+- *TS.6*: Normalidad.
+
+** Linealidad en los parámetros
+
+El proceso estocástico $\{(y_t, x_{1t}, x_{2t}, \dots, x_{kt})\!: t = 1,
+2, \dots, T\}$ sigue el modelo:
+#+begin_export latex
+\[
+  y_t = \beta_0 + \beta_1 x_{1t} + \beta_1 x_{2t} + \dots + \beta_1 x_{kt} + u_t
+\]
+#+end_export
+donde $\{u_t\!: t = 1, 2, \dots, T\}$ es una secuencia de perturbaciones
+aleatorias.
+
+** Ausencia de colinealidad perfecta
+
+En la muestra ninguna de las variables explicativas es constante ni
+una combinación lineal perfecta de las otras explicativas.
+
+** Media condicional nula
+
+Condicional a los valores que toman las explicativas en *todos* los
+periodos de tiempo, la media del término de error es $0$:
+#+begin_export latex
+\[
+  \Exp(u_t | \bm{X}) = 0,\quad t = 1, 2, \dots, T.
+\]
+#+end_export
+
+** Exogeneidad estricta
+
+- *TS.2* implica que las variables explicativas son *estrictamente
+  exógenas*: $u_t$ debe estar interrelacionado con todas las
+  explicativas en *todos* los periodos de tiempo.
+
+** Homoscedasticidad
+
+Condicional a $\bm{X}$, la varianza de $u_t$ es la misma en todos los
+periodos:
+#+begin_export latex
+\[
+  \var(u_t | \bm{X}) = \sigma^2,\quad t = 1, 2, \dots, T.
+\]
+#+end_export
+
+** Ausencia de correlación serial
+
+Condicional a $\bm{X}$, las perturbaciones aleatorias de dos periodos
+diferentes están incorrelacionadas:
+#+begin_export latex
+\[
+  \corr(u_t, u_s | \bm{X}) = 0,\quad \text{para todo $t \neq s$.}
+\]
+#+end_export
+
+
+** Normalidad
+
+El término de error $u_t$ es independiente de $\bm{X}$ y se distribuye
+independiente e idénticamente como $\Normal(0, \sigma^2)$.
+
+** Propiedades de muestras finitas
+
+Los supuestos del modelo clásico de regresión con series temporales
+garantizan las siguientes propiedades del estimador de MCO:
+
+- *Insesgadez*: si se cumplen *TS.1* a *TS.3*.
+
+- *Eficiencia*: si, además, se cumplen *TS.4* y *TS.5*.
+
+- *Normalidad*: si, además, se cumple *TS.6*.
+
+** Limitaciones de la exogeneidad estricta
+
+La exogeneidad estricta es incompatible con algunos casos importantes:
+
+  + Efectos de retroalimentación.
+
+  + Modelos autorregresivos.
+
+
+** Regresión espuria
+
+- *Regresión espuria*: Encontrar una relación aparente entre dos o más
+  variables que presentan tendencias pero que no tienen relación entre
+  sí.
+
+- Factores no observables provocan tendencias en la dependiente y las
+  explicativas.
+
+- Una solución simple es incluir una tendencia lineal como un regresor
+  adicional.
+
+** Tendencias lineales
+
+Incluir una tendencia lineal es equivalente a:
+
+- Eliminar la tendencia lineal de la variable dependiente, calculando
+  $\ddot{y}_t$, los residuos de la regresión:
+  #+begin_export latex
+  \[
+    y_{t} = \ahat_{0} + \ahat_{1} t + \ddot{y}_{t}
+  \]
+  #+end_export
+
+- De forma similar, eliminar la tendencia lineal de cada una de las
+  variables explicativas obteniendo $\ddot{x}_{1t}, \ddot{x}_{2t}, \dots, \ddot{x}_{kt}$.
+
+- Estimar por MCO los parámetros de una regresión de $\ddot{y}_t$
+  sobre $\ddot{x}_{1t}, \ddot{x}_{2t}, \dots, \ddot{x}_{kt}$.
+
+
+** Estacionalidad
+
+- Con datos trimestrales y mensuales es usual observar variables con
+  fuertes oscilaciones estacionales.
+
+- Una forma simple de controlar este tipo de fluctuaciones es incluir
+  *variables ficticias estacionales* en el modelo de regresión.
+
+
+** Desestacionalización
+
+- Incluir variables ficticias en la regresión es equivalente a estimar
+  el modelo con las variables previamente *desestacionalizadas*.
+
+- Es frecuente encontrar variables que presentan oscilaciones
+  estacionales y comportamiento tendencial. Ambos tipos de efectos
+  pueden controlarse incluyendo simultáneamente una tendencia lineal y
+  variables ficticias estacionales.
+
+* Propiedades asintóticas de MCO con series temporales
+
+** Supuestos
+
+- *TS.1'*: Linealidad y dependencia débil.
+- *TS.2'*: Ausencia de colinealidad perfecta.
+- *TS.3'*: Exogeneidad (contemporánea).
+- *TS.4'*: Homoscedasticidad.
+- *TS.5'*: Ausencia de correlación serial.
+
+** Linealidad y dependencia débil
+
+El proceso estocástico $\{(y_t, x_{1t}, x_{2t}, \dots, x_{kt})\!: t =
+1, 2, \dots, T\}$ es *estacionario* y *débilmente dependiente* sigue
+el modelo:
+#+begin_export latex
+\[
+  y_t = \beta_0 + \beta_1 x_{1t} + \beta_1 x_{2t} + \dots + \beta_1 x_{kt} + u_t
+\]
+#+end_export
+donde $\{u_t\!: t = 1, 2, \dots, T\}$ es la secuencia de perturbaciones
+aleatorias.
+
+** Estacionariedad
+
+Un proceso estocástico es *(débilmente) estacionario* si:
+
+- La media es independiente de $t$: $\Exp(x_t) = \mu$.
+- La varianza es constante a lo largo del tiempo: $\var(x_t) = \sigma^2$.
+- La covarianza entre $x_t$ y $x_{t + h}$ sólo depende de $h$:
+  $\cov(x_{t}, x_{t+h}) = \gamma_h$.
+
+
+** Dependencia débil
+
+- Una serie $\{x_t\}$ estacionaria es *débilmente dependiente* si la
+  correlación entre $x_t$ y $x_{t + h}$ decrece *rápidamente* conforme
+  aumenta $h$.
+
+
+** Ruido blanco
+
+El proceso estocástico $\{e_t\}$ es un *ruido blanco* si:
+
+- $\Exp(e_t) = 0$.
+
+- $\var(e_t) = \sigma^2_e$.
+
+- $\cov(e_t, e_s) = 0$, para $t \neq s$.
+
+
+** Proceso autorregresivo de orden 1
+
+- La serie $\{y_t\}$ sigue un proceso autorregresivo de orden 1,
+  $\AR{1}$ si:
+  #+begin_export latex
+  \[
+    y_{t} = \rho_{1} y_{t-1} + e_{t}
+  \]
+  #+end_export
+  donde $e_t$ es un ruido blanco.
+
+** Estabilidad de los procesos AR(1)
+
+Un proceso $\AR{1}$ es *estable* si $\abs{\rho_1} < 1$. En ese caso es
+estacionario y débilmente dependiente:
+
+- $\Exp(y_t) = 0$.
+- $\var(y_t) = \sigma^2_e$.
+- $\corr(y_t, y_{t + h}) = \rho_1^h$.
+
+** Procesos estacionarios con tendencia
+
+Frecuentemente se usa la denominación de *proceso estacionario con
+tendencia* para series que siguen:
+#+begin_export latex
+\[
+  y_t = \alpha_0 + \alpha_1 t + u_t
+\]
+#+end_export
+donde $u_t$ es un proceso estacionario y débilmente dependiente.
+
+** Exogeneidad contemporánea
+
+- Las variables explicativas $\bm{x}_t$ son *contemporáneamente exógenas*:
+  #+begin_export latex
+  \[
+    \Exp(u_{t}|\bm{x}_{t}) = 0.
+  \]
+  #+end_export
+
+- Este supuesto no excluye fenómenos de retroalimentación ni
+  autorregresiones.
+
+** Homoscedasticidad y ausencia de autocorrelación
+
+- Homoscedasticidad: $\var(u_t|\bm{x}_t) = \sigma^2$.
+
+- No correlación serial: $\corr(u_t, u_s | \bm{x}_t, \bm{x}_s) = 0$.
+
+
+** Propiedades asintóticas
+
+- *Consistencia*: si se cumplen *TS.1'* a *TS.3'*.
+
+- *Normalidad asintótica*: si además se cumplen *TS.4'* y *TS.5'*.
