@@ -149,7 +149,8 @@ Intuitivamente, cuanto mayor es el tamaño muestral más cerca está un estimado
 
 ** Variable relevante omitida
 
-- Se cumplen los supuestos *RLM.1* a *RLM.4* en el modelo poblacional:
+- Se cumplen los supuestos *RLM.1* a *RLM.4* en el mod
+  elo poblacional:
   #+begin_export latex
   \[
     y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + u.
