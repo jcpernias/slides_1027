@@ -10,15 +10,16 @@
 
 #+BEGIN_SRC R :exports none :tangle no :results silent
   ## load R libraries
+  options(tidyverse.quiet = TRUE)
   library(tidyverse)
   library(readxl)
-  library(zoo)
+  library(zoo, warn.conflicts = FALSE)
 
   theme_set(theme_bw())
 
   theme_update(panel.border = element_blank(),
-               axis.line.x = element_line(size = 0.2),
-               axis.line.y = element_line(size=0.2),
+               axis.line.x = element_line(linewidth = 0.2),
+               axis.line.y = element_line(linewidth = 0.2),
                text = element_text(size = 9))
 
 

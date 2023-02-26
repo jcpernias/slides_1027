@@ -1,5 +1,6 @@
+options(tidyverse.quiet = TRUE)
 library(tidyverse)
-library(rlang)
+library(rlang, warn.conflicts = FALSE)
 
 mkdb <- function(pars) {
   if (!is.null(pars$seed))
@@ -28,7 +29,7 @@ base_plot <- function(data, mapping) {
                          angle = 0, hjust = 1,
                          margin = margin(r = 0.08, unit = "inches")),
           axis.line =
-            element_line(colour = 'black', size = 0.5,
+            element_line(colour = 'black', linewidth = 0.5,
                          lineend = "round",
                          arrow = grid::arrow(ends = "last", type = "closed",
                                              angle = 22.5,
@@ -44,7 +45,7 @@ mkplot <- function(data, pars, shades = NULL) {
 
   base_plot <- base_plot(data, aes(x, y)) +
     geom_segment(aes(x = x0, xend = x1, y = y0, yend = y1),
-                 size = 0.4, colour = "DarkBlue") +
+                 linewidth = 0.4, colour = "DarkBlue") +
     scale_y_continuous(expand = c(0, 0),
                        limits = pars$ylimits,
                        breaks = NULL) +
