@@ -8,7 +8,7 @@
 - Wooldridge: ::  /Introducción a la Econometría/. Capítulo 9, secciones 9.1 y 9.5.
 #+end_bibbox
 
-* Especificación del modelo
+* Forma funcional
 
 
 ** Forma funcional
@@ -32,6 +32,7 @@ satisface los supuestos *RLM.1* a *RLM.4*:
 el término de interacción $\Var{female} \cdot \Var{educ}$? ¿Cómo
 podemos detectar errores de especificación de la *forma funcional*?
 
+
 ** Consecuencias
 
 - Al omitir términos relevantes, es probable que obtengamos
@@ -40,20 +41,30 @@ podemos detectar errores de especificación de la *forma funcional*?
 - No está claro como interpretar los *efectos marginales* de las
   explicativas.
 
+
 ** Detección
 
 - Se han propuesto muchas alternativas para detectar errores de
-  especificación de la forma funcional:
+  especificación de la forma funcional. En este curso consideraremos:
+
+  + Medidas de bondad del ajuste.
 
   + Contrastes $F$.
-
-  + *Contraste RESET*.
 
   + Contrastes de *hipótesis no anidadas*.
 
 - Todos estos contrastes suponen que la especificación de la variable
   dependiente es correcta. No sirven, por ejemplo, para elegir entre
-  $y$ y $\log(y)$.
+  tomar logaritmos de la variable dependiente o no.
+
+
+** Bondad del ajuste
+
+- Una forma simple de comparar modelos alternativos es usar medidas de
+  bondad del ajuste.
+
+- Debe usarse el $R^2$ ajustado cuando los modelos tienen un número
+  diferente de variables explicativas.
 
 
 ** Contrastes $F$
@@ -66,7 +77,7 @@ podemos detectar errores de especificación de la *forma funcional*?
   significación de los términos que se añaden al modelo original.
 
 
-** Contraste RESET
+** COMMENT Contraste RESET
 
 - El contraste RESET se diseñó para detectar problemas de mala
   especificación de la forma funcional.
@@ -75,7 +86,8 @@ podemos detectar errores de especificación de la *forma funcional*?
   necesario especificar la forma funcional bajo la hipótesis
   alternativa.
 
-** Cálculo del contraste RESET
+
+** COMMENT Cálculo del contraste RESET
 
 - Se estima por MCO el modelo original:
   #+begin_export latex
@@ -98,7 +110,7 @@ podemos detectar errores de especificación de la *forma funcional*?
   \delta_2 = 0$. Para verificar esta condición se usa un contraste $F$.
 
 
-** Variaciones del contraste RESET
+** COMMENT Variaciones del contraste RESET
 
 - Algunos autores recomiendan añadir solamente los cuadrados de las
   predicciones:
@@ -114,7 +126,8 @@ podemos detectar errores de especificación de la *forma funcional*?
 - Si la varianza condicional de término de error no fuera constante,
   se utilizarían contrates $F$ y $t$ robustos a heteroscedasticidad.
 
-** Hipótesis no anidadas
+
+** Modelos no anidados
 - ¿Cómo podemos elegir entre los siguientes modelos?
   #+begin_export latex
   \begin{gather}
@@ -129,17 +142,18 @@ podemos detectar errores de especificación de la *forma funcional*?
   \end{gather}
   #+end_export
 
-- No podemos usar los contrastes $F$: no podemos obtener uno de los
-  modelos imponiendo restricciones en los parámetros del otro modelo.
+- El ejemplo anterior es un caso de *modelos no anidados*: ninguno de
+  los dos modelos es un caso especial del otro.
 
-- Los contrastes de *hipótesis no anidadas* sirven para comparar dos
-  modelos alternativos cuando ninguno es un caso especial del otro.
+- No podemos usar contrastes $F$ para comparar modelos no anidados.
+
 
 ** Contrastes de abarcamiento
 
 - Los *contrastes de abarcamiento* (/encompassing tests/) se basan en
   la construcción de un tercer modelo que contenga como casos
   especiales los modelos que se quieren comparar.
+
 
 ** Contrastes de abarcamiento: ejemplo
 
@@ -169,6 +183,7 @@ Davidson y MacKinnon proponen añadir a un modelo las predicciones
 obtenidas con otro modelo y contrastar si ese término adicional tiene
 capacidad explicativa.
 
+
 ** Contrastes de Davidson-MacKinnon: ejemplo
 
 - Para contrastar la validez del Modelo A:
@@ -197,6 +212,7 @@ capacidad explicativa.
     #+end_export
     donde $\yhat_A$ son las predicciones obtenidas con el Modelo A.
 
+
 ** Contrastes de hipótesis no anidadas y heteroscedasticidad
 
 - Las hipótesis no anidadas se contrastan con estadísticos $t$ o $F$
@@ -205,6 +221,7 @@ capacidad explicativa.
 
 - En caso de heteroscedasticidad se utilizarían las versiones robustas
   de los contrastes $t$ y $F$.
+
 
 ** Contrastes de hipótesis no anidadas: limitaciones
 
@@ -215,14 +232,8 @@ capacidad explicativa.
   correcto.
 
 
-* Problemas con los datos
 
-** Introducción
-
-- En ocasiones, se producen violaciones del supuesto de muestreo
-  aleatorio aún trabajando con datos de corte transversal.
-
-- ¿Cuáles son las consecuencias del incumplimiento de *RLM.2*?
+* Observaciones incompletas
 
 ** Observaciones incompletas
 
@@ -232,6 +243,7 @@ capacidad explicativa.
 
 - Usualmente se ignoran las observaciones incompletas en la
   estimación.
+
 
 ** Observaciones incompletas: consecuencias
 
@@ -246,6 +258,9 @@ capacidad explicativa.
 - No se introducen sesgo si las observaciones incompletas se producen
   por puro azar.
 
+
+* Muestreo no aleatorio
+
 ** Muestreo no aleatorio
 
 El *muestreo no aleatorio* se puede deber a diversas razones:
@@ -253,6 +268,7 @@ El *muestreo no aleatorio* se puede deber a diversas razones:
 + Observaciones incompletas.
 
 + Esquemas de obtención de los datos.
+
 
 ** Selección muestral
 
@@ -265,6 +281,7 @@ forman parte de la muestra no es aleatorio. Distinguimos entre:
 + *Selección muestral endógena*: la muestra no contiene
   observaciones para algunos valores de la variable dependiente.
 
+
 ** Selección muestral: consecuencias
 
 - *Selección muestral exógena*: Los estimadores siguen siendo
@@ -274,6 +291,7 @@ forman parte de la muestra no es aleatorio. Distinguimos entre:
 - *Selección muestral endógena*: La selección en base a la variable
   dependiente implica que el supuesto *RLM.4* no se cumple, por lo que
   MCO sería en este caso sesgado e inconsistente.
+
 
 ** Muestreo estratificado
 
@@ -286,6 +304,7 @@ forman parte de la muestra no es aleatorio. Distinguimos entre:
 - Se trata de garantizar que en la muestra final estén suficientemente
   representados grupos minoritarios.
 
+
 ** Muestreo estratificado: consecuencias
 
 - Si la estratificación se basa en una o más variables explicativas,
@@ -294,6 +313,9 @@ forman parte de la muestra no es aleatorio. Distinguimos entre:
 - Por el contrario si la estratificación se realiza en base a los
   valores que toma la variable dependiente, MCO será sesgado e
   inconsistente.
+
+* Observaciones atípicas y observaciones influyentes
+
 
 ** Observaciones atípicas y observaciones influyentes
 
@@ -321,6 +343,7 @@ forman parte de la muestra no es aleatorio. Distinguimos entre:
 - El tamaño de los residuos de MCO no es un buen indicador para
   detectar observaciones atípicas. En general, los residuos de estas
   observaciones no son especialmente grandes.
+
 
 ** Residuos estudentizados
 
