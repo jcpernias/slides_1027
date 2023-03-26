@@ -140,42 +140,94 @@ general de España. Fuente: INE.
 
 ** Ejemplo: retardos
 
-- La serie anual $Y_t$ contiene los valores del PIB español a precios
-  de mercado desde el año 2000 hasta el 2008. Se mide en millones de
-  euros.
+La serie anual $Y_t$ contiene los valores del PIB español a precios de
+mercado desde el año 2000 hasta el 2008. Se mide en millones de euros.
 
-  #+ATTR_LATEX: :font \footnotesize :align @{}rr*{4}{@{\hspace{8mm}}>{$}r<{$}}@{} :booktabs t
-  | \text{Año} | t | Y_{t}         | Y_{t-1}       | Y_{t-2}       | Y_{t-3}      |
-  |------------+---+---------------+---------------+---------------+--------------|
-  |       2000 | 1 | \num{ 647851} | \text{---}    | \text{---}    | \text{---}   |
-  |       2001 | 2 | \num{ 700993} | \num{ 647851} | \text{---}    | \text{---}   |
-  |       2002 | 3 | \num{ 749552} | \num{ 700993} | \num{ 647851} | \text{---}   |
-  |       2003 | 4 | \num{ 802266} | \num{ 749552} | \num{ 700993} | \num{647851} |
-  |       2004 | 5 | \num{ 859437} | \num{ 802266} | \num{ 749552} | \num{700993} |
-  |       2005 | 6 | \num{ 927357} | \num{ 859437} | \num{ 802266} | \num{749552} |
-  |       2006 | 7 | \num{1003823} | \num{ 927357} | \num{ 859437} | \num{802266} |
-  |       2007 | 8 | \num{1075539} | \num{1003823} | \num{ 927357} | \num{859437} |
-  |       2008 | 9 | \num{1109541} | \num{1075539} | \num{1003823} | \num{927357} |
+#+ATTR_LATEX: :font \footnotesize :align @{}rr*{4}{@{\hspace{8mm}}r}@{} :booktabs t
+|  Año | $t$ | $Y_{t}$       | $Y_{t-1}$     | $Y_{t-2}$     | $Y_{t-3}$    |
+|------+-----+---------------+---------------+---------------+--------------|
+| 2000 |   1 | \num{ 647851} | \text{---}    | \text{---}    | \text{---}   |
+| 2001 |   2 | \num{ 700993} | \num{ 647851} | \text{---}    | \text{---}   |
+| 2002 |   3 | \num{ 749552} | \num{ 700993} | \num{ 647851} | \text{---}   |
+| 2003 |   4 | \num{ 802266} | \num{ 749552} | \num{ 700993} | \num{647851} |
+| 2004 |   5 | \num{ 859437} | \num{ 802266} | \num{ 749552} | \num{700993} |
+| 2005 |   6 | \num{ 927357} | \num{ 859437} | \num{ 802266} | \num{749552} |
+| 2006 |   7 | \num{1003823} | \num{ 927357} | \num{ 859437} | \num{802266} |
+| 2007 |   8 | \num{1075539} | \num{1003823} | \num{ 927357} | \num{859437} |
+| 2008 |   9 | \num{1109541} | \num{1075539} | \num{1003823} | \num{927357} |
+
+** Diferencias
+
+- La *diferencia* de la serie $y_t$ es $\incr y_t = y_{t} - y_{t-1}$,
+  el incremento de la variable de un periodo a otro.
+
+- Podemos calcular $\mathit{gy}_t$, la tasa porcentual de crecimiento
+  de $y_t$, a partir de la diferencia y del primer retardo:
+  #+begin_export latex
+  \[
+    \mathit{gy}_t = 100 \frac{\incr y_t}{y_{t-1}}
+  \]
+  #+end_export
+
+** Ejemplo: diferencias
+
+Diferencia y tasa de crecimiento de  $Y_t$.
+
+#+ATTR_LATEX: :font \footnotesize :align @{}rr*{4}{@{\hspace{8mm}}r}@{} :booktabs t
+|  Año | $t$ | $Y_{t}$       | $Y_{t-1}$     | $\incr Y_{t}$ | $gY_{t}$   |
+|------+-----+---------------+---------------+---------------+------------|
+| 2000 |   1 | \num{ 647851} | \text{---}    | \text{---}    | \text{---} |
+| 2001 |   2 | \num{ 700993} | \num{ 647851} | \num{53142}   | \num{8.2}  |
+| 2002 |   3 | \num{ 749552} | \num{ 700993} | \num{48559}   | \num{6.9}  |
+| 2003 |   4 | \num{ 802266} | \num{ 749552} | \num{52714}   | \num{7.0}  |
+| 2004 |   5 | \num{ 859437} | \num{ 802266} | \num{57171}   | \num{7.1}  |
+| 2005 |   6 | \num{ 927357} | \num{ 859437} | \num{67920}   | \num{7.9}  |
+| 2006 |   7 | \num{1003823} | \num{ 927357} | \num{76466}   | \num{8.2}  |
+| 2007 |   8 | \num{1075539} | \num{1003823} | \num{71716}   | \num{7.1}  |
+| 2008 |   9 | \num{1109541} | \num{1075539} | \num{34002}   | \num{3.2}  |
+
+** Logaritmos y tasas de crecimiento
+
+- En el análisis de series temporales es muy común usar las variables
+  en logaritmos.
+
+- Es muy frecuente calcular la tasa de crecimiento de $y_t$ usando la
+  diferencia del logaritmo de $y_t$:
+  #+begin_export latex
+  \[
+    \mathit{gy}_t \approx 100 \incr \log(y_t)
+  \]
+  #+end_export
+
+** Ejemplo: logaritmos y tasas de crecimiento
+
+No hay grandes diferencias entre las diferentes formas de calcular las
+tasas de crecimiento.
+
+#+ATTR_LATEX: :font \footnotesize :align @{}rr*{2}{@{\hspace{15mm}}r@{\hspace{2mm}}r}@{} :booktabs t
+|  Año | $t$ | $Y_{t}$       | $100 \incr Y_{t} / Y_{t-1}$ | $\log(Y_{t})$ | $100 \incr \log(Y_{t})$ |
+|------+-----+---------------+-----------------------------+---------------+-------------------------|
+| 2000 |   1 | \num{ 647851} | \text{---}                  | \num{13.38}   | \text{---}              |
+| 2001 |   2 | \num{ 700993} | \num{8.2}                   | \num{13.46}   | \num{7.9}               |
+| 2002 |   3 | \num{ 749552} | \num{6.9}                   | \num{13.53}   | \num{6.7}               |
+| 2003 |   4 | \num{ 802266} | \num{7.0}                   | \num{13.60}   | \num{6.8}               |
+| 2004 |   5 | \num{ 859437} | \num{7.1}                   | \num{13.66}   | \num{6.9}               |
+| 2005 |   6 | \num{ 927357} | \num{7.9}                   | \num{13.74}   | \num{7.6}               |
+| 2006 |   7 | \num{1003823} | \num{8.2}                   | \num{13.82}   | \num{7.9}               |
+| 2007 |   8 | \num{1075539} | \num{7.1}                   | \num{13.89}   | \num{6.9}               |
+| 2008 |   9 | \num{1109541} | \num{3.2}                   | \num{13.92}   | \num{3.1}               |
+
 
 ** Procesos estocásticos
 
 - Los modelos estadísticos para estudiar series temporales se basa en
   el concepto de *proceso estocástico*.
 
-- Un *proceso estocástico* es una secuencia de una (o más) variables
-  aleatorias en periodos consecutivos de tiempo:
-  #+begin_export latex
-  \[
-     \{y_1, y_2, \dots, y_T\}
-  \]
-  #+end_export
+- Un *proceso estocástico* es una secuencia de variables aleatorias
+  observadas en periodos consecutivos de tiempo: $\{y_1, y_2, \dots,
+  y_T\}$.
 
-- Notación abreviada:
-  #+begin_export latex
-  \[
-    \{y_t\!: t =  1, 2, \dots, T\}.
-  \]
-  #+end_export
+- Notación abreviada: $\{y_t\!: t =  1, 2, \dots, T\}$.
 
 
 ** Esperanza
@@ -204,10 +256,10 @@ general de España. Fuente: INE.
 
 
 
-* Características de las series temporales
+* COMMENT Características de las series temporales
 
 
-* Ejemplos
+* COMMENT Ejemplos
 
 - PIB y agregados macro.
 
@@ -222,7 +274,7 @@ general de España. Fuente: INE.
 - Indicadores de turismo.
 
 
-* Características de las series temporales
+* COMMENT Características de las series temporales
 
 - Dependencia temporal: en general, lo que ocurra mañana será muy
   parecido a lo que ocurre hoy. Base para muchos métodos de
@@ -238,7 +290,7 @@ general de España. Fuente: INE.
 - Estacionalidad.
 
 
-* Modelo autorregresivos
+* COMMENT Modelo autorregresivos
 
 - Modelo AR(1). Estacionariedad. Diferencias.
 
@@ -251,7 +303,7 @@ general de España. Fuente: INE.
 - Selección del número de retardos
 
 
-* Tendencias, estacionalidad y análisis de intervención
+* COMMENT Tendencias, estacionalidad y análisis de intervención
 
 - Tendencias deterministas. Tendencia lineal. Tendencias con datos en
   logaritmos.
