@@ -8,13 +8,14 @@
 #+PROPERTY: header-args:R+ :exports both
 #+PROPERTY: header-args:R+ :results output
 
-#+BEGIN_SRC R :exports none :tangle no :results silent
+#+begin_src R :exports none :tangle no :results silent
   ## load R libraries
   options(tidyverse.quiet = TRUE)
   library(tidyverse)
   library(readxl)
   library(zoo, warn.conflicts = FALSE)
 
+  ## Set ggplot2 theme
   theme_set(theme_bw())
 
   theme_update(panel.border = element_blank(),
@@ -23,10 +24,15 @@
                text = element_text(size = 9))
 
 
-  ipc_db <- read_xlsx("data/50902.xlsx", range = "a9:c251",
-                      col_names = c("tidx", "ipc", "infl"))
-  infl <- zooreg(ipc_db$infl, start = 2002, frequency = 12)
-#+END_SRC
+  ## Read data
+  ipc_db <- read_xlsx("data/IPCa.xlsx", range = "b9:b322",
+                      col_names = "ipc")
+  ipc <- zooreg(ipc_db$ipc, start = c(1997, 1), frequency = 12)
+
+  ## Compute inflation rates
+  lp <- log(ipc)
+  infl <- 100 * diff(lp, lag = 12)
+#+end_src
 
 
 #+MATS: bib
@@ -49,8 +55,7 @@
 
 ** Comparación con datos de corte transversal
 
-- En series temporales no pensamos en una población, posiblemente
-  infinita, de la cual extraemos elementos aleatoriamente.
+- Los datos no provienen de un *muestreo aleatorio*.
 
 - El paso del tiempo proporciona un *orden* natural a las
   observaciones de series temporales.
@@ -66,68 +71,115 @@
   una variable, hablamos de series temporales anuales, trimestrales,
   mensuales, etc.
 
-
 ** Ejemplo: inflación interanual en España
 
-Tasas de variación interanual del IPC general de España. Fuente: INE.
+Tasa interanual de inflación calculada a partir del IPC armonizado
+general de España. Fuente: INE.
 
 #+ATTR_LATEX: :font \scriptsize :align @{}l*{12}{@{\hspace{3mm}}>{$}r<{$}}@{} :booktabs t
-|------+------+------+------+------+------+------+------+------+------+------+------+------|
+|------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------|
 |      | \text{Ene} | \text{Feb} | \text{Mar} | \text{Abr} | \text{May} | \text{Jun} | \text{Jul} | \text{Ago} | \text{Sep} | \text{Oct} | \text{Nov} | \text{Dic} |
-|------+------+------+------+------+------+------+------+------+------+------+------+------|
-| 2016 | -0.3 | -0.8 | -0.8 | -1.1 | -1.0 | -0.8 | -0.6 | -0.1 | 0.2  | 0.7  | 0.7  | 1.6  |
-| 2017 | 3.0  | 3.0  | 2.3  | 2.6  | 1.9  | 1.5  | 1.5  | 1.6  | 1.8  | 1.6  | 1.7  | 1.1  |
-| 2018 | 0.6  | 1.1  | 1.2  | 1.1  | 2.1  | 2.3  | 2.2  | 2.2  | 2.3  | 2.3  | 1.7  | 1.2  |
-| 2019 | 1.0  | 1.1  | 1.3  | 1.5  | 0.8  | 0.4  | 0.5  | 0.3  | 0.1  | 0.1  | 0.4  | 0.8  |
-| 2020 | 1.1  | 0.7  | 0.0  | -0.7 | -0.9 | -0.3 | -0.6 | -0.5 | -0.4 | -0.8 | -0.8 | -0.5 |
-| 2021 | 0.5  | 0.0  | 1.3  | 2.2  | 2.7  | 2.7  | 2.9  | 3.3  | 4.0  | 5.4  | 5.5  | 6.5  |
-| 2022 | 6.1  | 7.6  | 9.8  |      |      |      |      |      |      |      |      |      |
-|------+------+------+------+------+------+------+------+------+------+------+------+------|
+|------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------|
+| 2016 |       -0.4 |       -1.0 |       -1.0 |       -1.2 |       -1.1 |       -0.9 |       -0.7 |       -0.3 |        0.0 |        0.5 |        0.5 |        1.4 |
+| 2017 |        2.9 |        3.0 |        2.1 |        2.6 |        2.0 |        1.6 |        1.7 |        2.0 |        1.8 |        1.7 |        1.8 |        1.2 |
+| 2018 |        0.7 |        1.2 |        1.3 |        1.1 |        2.1 |        2.3 |        2.3 |        2.2 |        2.3 |        2.3 |        1.7 |        1.2 |
+| 2019 |        1.0 |        1.1 |        1.3 |        1.6 |        0.9 |        0.6 |        0.6 |        0.4 |        0.2 |        0.2 |        0.5 |        0.8 |
+| 2020 |        1.1 |        0.9 |        0.1 |       -0.7 |       -0.9 |       -0.3 |       -0.7 |       -0.6 |       -0.6 |       -0.9 |       -0.8 |       -0.6 |
+| 2021 |        0.4 |       -0.1 |        1.2 |        2.0 |        2.4 |        2.5 |        2.9 |        3.3 |        4.0 |        5.4 |        5.5 |        6.6 |
+| 2022 |        6.2 |        7.6 |        9.8 |        8.3 |        8.5 |       10.0 |       10.7 |       10.5 |        9.0 |        7.3 |        6.7 |        5.5 |
+| 2023 |        5.9 |        6.0 |            |            |            |            |            |            |            |            |            |            |
+|------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------|
 
 
 ** Gráfico de series temporales
 
-Tasa interanual de inflación calculada a partir del IPC general de España. Fuente: INE.
+Tasa interanual de inflación calculada a partir del IPC armonizado
+general de España. Fuente: INE.
 
 #+NAME: fig1
-#+header: :width 4.00 :height 2.47 :family "Times" :R-dev-args encoding = "ISOLatin9.enc"
+#+header: :width 4.0 :height 2.47 :family "Times" :R-dev-args encoding = "ISOLatin9.enc"
 #+begin_src R :results output graphics file :exports results :file figures/infl.pdf
-  autoplot(window(infl, start = "2016-1")) +
+  autoplot(window(infl, start = "1999-1")) +
     scale_y_continuous(breaks = seq(0, 10, 2)) +
-    scale_x_yearmon(breaks = seq(2016, 2022, 1), format = "%Y",
-                    minor_breaks = NULL) +
+    scale_x_yearmon(breaks = seq(2000, 2023, 5), format = "%Y",
+                    minor_breaks = seq(1999, 2023, 1)) +
     labs(x = NULL, y = NULL)
 #+end_src
 #+ATTR_LATEX: :centering t
 #+RESULTS: fig1
 
+** Principales dificultades
 
-** Problemas
++ Muestras relativamente pequeñas.
 
-Dos problemas principales:
++ Los procesos que determinan los valores que toma una serie temporal
+  pueden cambiar con el paso del tiempo.
 
-+ Las características de las variables aleatorias (media, varianza,
-  correlación) pueden cambiar conforme transcurre el tiempo.
-
-+ Dependencia de lo que ocurre en periodos consecutivos.
++ Un hecho que ocurra en un momento del tiempo puede tener influencia
+  en sucesivos periodos, creando dependencia entre observaciones
+  consecutivas de una serie temporal.
 
 
 * Conceptos básicos
 
+** Notación
+
+- $y_t$: observación de la serie temporal $y$ en el periodo $t$.
+
+- El índice $t$ va desde $1$, para el primer periodo en la muestra,
+  hasta $T$, para el último.
+
+** Retardos
+
+- El *primer retardo* (/first lag/) de la serie $y$ es $y_{t-1}$, el
+  valor que tomaba la variable el período anterior.
+
+- De forma análoga, podemos definir el segundo y sucesivos retardos de
+  la serie $y$: $y_{t-2}, y_{t-3}, \dots$
+
+
+** Ejemplo: retardos
+
+- La serie anual $Y_t$ contiene los valores del PIB español a precios
+  de mercado desde el año 2000 hasta el 2008. Se mide en millones de
+  euros.
+
+  #+ATTR_LATEX: :font \footnotesize :align @{}rr*{4}{@{\hspace{8mm}}>{$}r<{$}}@{} :booktabs t
+  | \text{Año} | t | Y_{t}         | Y_{t-1}       | Y_{t-2}       | Y_{t-3}      |
+  |------------+---+---------------+---------------+---------------+--------------|
+  |       2000 | 1 | \num{ 647851} | \text{---}    | \text{---}    | \text{---}   |
+  |       2001 | 2 | \num{ 700993} | \num{ 647851} | \text{---}    | \text{---}   |
+  |       2002 | 3 | \num{ 749552} | \num{ 700993} | \num{ 647851} | \text{---}   |
+  |       2003 | 4 | \num{ 802266} | \num{ 749552} | \num{ 700993} | \num{647851} |
+  |       2004 | 5 | \num{ 859437} | \num{ 802266} | \num{ 749552} | \num{700993} |
+  |       2005 | 6 | \num{ 927357} | \num{ 859437} | \num{ 802266} | \num{749552} |
+  |       2006 | 7 | \num{1003823} | \num{ 927357} | \num{ 859437} | \num{802266} |
+  |       2007 | 8 | \num{1075539} | \num{1003823} | \num{ 927357} | \num{859437} |
+  |       2008 | 9 | \num{1109541} | \num{1075539} | \num{1003823} | \num{927357} |
 
 ** Procesos estocásticos
 
-- $y_t$: observación de la serie temporal $y$ en el periodo $t$. El
-  índice $t$ va desde $1$, para el primer periodo en la muestra, hasta
-  $T$, para el último.
+- Los modelos estadísticos para estudiar series temporales se basa en
+  el concepto de *proceso estocástico*.
 
 - Un *proceso estocástico* es una secuencia de una (o más) variables
-  aleatorias en periodos consecutivos de tiempo. Notación:
+  aleatorias en periodos consecutivos de tiempo:
+  #+begin_export latex
+  \[
+     \{y_1, y_2, \dots, y_T\}
+  \]
+  #+end_export
+
+- Notación abreviada:
   #+begin_export latex
   \[
     \{y_t\!: t =  1, 2, \dots, T\}.
   \]
   #+end_export
+
+
+** Esperanza
+
 
 
 ** Correlación serial
