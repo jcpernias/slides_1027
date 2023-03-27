@@ -1,7 +1,7 @@
 # -*- ispell-dictionary: "spanish" -*-
 #+SETUPFILE: ./course-es.org
 
-#+TITLE: {{{unit08}}}
+#+TITLE: {{{unit08}}} (I)
 
 #+PROPERTY: header-args:R :session *R-ts-intro*
 #+PROPERTY: header-args:R+ :tangle yes
@@ -71,7 +71,9 @@
   una variable, hablamos de series temporales anuales, trimestrales,
   mensuales, etc.
 
+
 ** Ejemplo: inflación interanual en España
+
 
 Tasa interanual de inflación calculada a partir del IPC armonizado
 general de España. Fuente: INE.
@@ -108,6 +110,7 @@ general de España. Fuente: INE.
 #+ATTR_LATEX: :centering t
 #+RESULTS: fig1
 
+
 ** Principales dificultades
 
 + Muestras relativamente pequeñas.
@@ -122,12 +125,14 @@ general de España. Fuente: INE.
 
 * Conceptos básicos
 
+
 ** Notación
 
 - $y_t$: observación de la serie temporal $y$ en el periodo $t$.
 
 - El índice $t$ va desde $1$, para el primer periodo en la muestra,
   hasta $T$, para el último.
+
 
 ** Retardos
 
@@ -156,6 +161,7 @@ mercado desde el año 2000 hasta el 2008. Se mide en millones de euros.
 | 2007 |   8 | \num{1075539} | \num{1003823} | \num{ 927357} | \num{859437} |
 | 2008 |   9 | \num{1109541} | \num{1075539} | \num{1003823} | \num{927357} |
 
+
 ** Diferencias
 
 - La *diferencia* de la serie $y_t$ es $\incr y_t = y_{t} - y_{t-1}$,
@@ -168,6 +174,7 @@ mercado desde el año 2000 hasta el 2008. Se mide en millones de euros.
     \mathit{gy}_t = 100 \frac{\incr y_t}{y_{t-1}}
   \]
   #+end_export
+
 
 ** Ejemplo: diferencias
 
@@ -186,6 +193,7 @@ Diferencia y tasa de crecimiento de  $Y_t$.
 | 2007 |   8 | \num{1075539} | \num{1003823} | \num{71716}   | \num{7.1}  |
 | 2008 |   9 | \num{1109541} | \num{1075539} | \num{34002}   | \num{3.2}  |
 
+
 ** Logaritmos y tasas de crecimiento
 
 - En el análisis de series temporales es muy común usar las variables
@@ -198,6 +206,7 @@ Diferencia y tasa de crecimiento de  $Y_t$.
     \mathit{gy}_t \approx 100 \incr \log(y_t)
   \]
   #+end_export
+
 
 ** Ejemplo: logaritmos y tasas de crecimiento
 
@@ -220,7 +229,7 @@ tasas de crecimiento.
 
 ** Procesos estocásticos
 
-- Los modelos estadísticos para estudiar series temporales se basa en
+- Los modelos estadísticos para estudiar series temporales se basan en
   el concepto de *proceso estocástico*.
 
 - Un *proceso estocástico* es una secuencia de variables aleatorias
@@ -232,28 +241,179 @@ tasas de crecimiento.
 
 ** Esperanza
 
+- En general, la esperanza del proceso estocástico es la secuencia de
+  esperanzas en cada momento del tiempo: $\{E(y_t)\!: t = 1, \dots,
+  T\}$.
+
+- La esperanza de un proceso *estacionario en media* es constante:
+  #+begin_export latex
+  \[
+    E(y_t) = \mu, \quad t = 1, \dots, T.
+  \]
+  #+end_export
 
 
-** Correlación serial
+** Tendencias
+
+- En series económicas, es frecuente encontrar *tendencias*: la
+  esperanza del proceso tiende a crecer (o disminuir) con el paso del
+  tiempo.
+
+- PIB a precios de mercado de España. Millones de euros. Fuente: INE.
+  #+NAME: fig2
+  #+header: :width 4.0 :height 2.47 :family "Times" :R-dev-args encoding = "ISOLatin9.enc"
+  #+begin_src R :results output graphics file :exports results :file figures/pib.pdf
+    pib_db <- read_xlsx("data/pib.xlsx", range = "b2:b28",
+                        col_names = "pib")
+
+    pib <- zooreg(pib_db$pib, start = 1995, frequency = 1)
+
+    autoplot(pib) +
+      scale_x_continuous(breaks = seq(1995, 2023, 5),
+                        minor_breaks = seq(1995, 2023, 1)) +
+      labs(x = NULL, y = NULL)
+  #+end_src
+  #+ATTR_LATEX: :centering t
+  #+RESULTS: fig2
+
+
+** Estacionalidad
+
+- Algunas series con frecuencia superior a la anual presentan
+  *variaciones estacionales*: variaciones cíclicas que se repiten año
+  a año.
+- Índice de cifra de negocios del comercio al por menor. Precios corrientes. Base 2015. Fuente: INE.
+
+  #+NAME: fig3
+  #+header: :width 4.0 :height 2.30 :family "Times" :R-dev-args encoding = "ISOLatin9.enc"
+  #+begin_src R :results output graphics file :exports results :file figures/icom.pdf
+    com_db <- read_xlsx("data/IComMinor.xlsx", range = "b9:b285",
+                        col_names = "icom")
+
+    icom <- zooreg(com_db$icom, start = c(2000, 1), frequency = 12)
+
+    autoplot(window(icom, end = "2022-12")) +
+      #scale_y_continuous(breaks = seq(0, 10, 2)) +
+      scale_x_yearmon(breaks = seq(2000, 2023, 5), format = "%Y",
+                      minor_breaks = seq(2000, 2023, 1)) +
+      labs(x = NULL, y = NULL)
+  #+end_src
+  #+ATTR_LATEX: :centering t
+  #+RESULTS: fig3
+
+
+
+** Varianza
+
+- Usamos la varianza para describir la dispersión de $y_t$ en cada
+  momento del tiempo: $\var(y_t) = \sigma^2_t$.
+
+- A menudo las variables económicas que presentan tendencias
+  crecientes también tienen varianzas crecientes. En esos casos, la
+  transformación logarítmica puede estabilizar las varianzas.
 
 
 ** Autocovarianzas
 
+- Usamos las *autocovarianzas* para medir la dependencia de las
+  variables que forman un proceso estocástico.
+
+- La autocovarianza de orden $h$ se define como
+  #+begin_export latex
+  \[
+    \cov(y_t, y_{t-h}) =
+    E\big[\big(y_{t} - E(y_{t})\big) \big(y_{t-h} - E(y_{t-h})\big)\big]
+  \]
+  #+end_export
+
+
+** Estacionariedad
+
+- El concepto de *estacionariedad* se refiere a la estabilidad de la
+  distribución de un proceso estocástico.
+
+- En su versión estricta requiere que la distribución conjunta de
+  $\{y_t\}$ no cambie conforme transcurre el tiempo.
+
+
+** Estacionariedad débil
+
+- *Estacionariedad débil* (o *estacionariedad en covarianza*) de $y_t$:
+
+  + Esperanza constante: $E(y_t) = \mu$.
+
+  + Varianza constante: $\var(y_t) = \sigma^2 < \infty$.
+
+  + La autocovarianza entre $y_t$ e $y_{t-h}$ sólo depende de $h$ y no
+    cambia con $t$: $\cov(y_t, y_{t-h}) = \gamma_h$, para $h \geq 1$ y
+    cualquier $t$.
+
+- La estacionariedad estricta implica la estacionariedad débil, pero
+  no al revés.
+
+
+** No estacionariedad
+
+En economía es frecuente encontrar series *no estacionarias*:
+
+- Tendencias.
+
+- Variaciones estacionales.
+
+- Alternancia de periodos con alta y baja dispersión.
+
+- *Cambio estructural* (/structural breaks/).
+
+
 
 ** Coeficientes de autocorrelación
 
+- Las autocovarianzas dependen de las unidades de $y_t$, lo que
+  dificulta su interpretación.
 
-** Autocorrelograma
+- Es más frecuente usar los *coeficientes de autocorrelación* cuyo
+  rango de variación está acotado entre $-1$ y $1$.
+
+- El coeficiente de autocorrelación de orden $j$ se define como
+  #+begin_export latex
+  \[
+    \rho_j = \corr(y_t, y_{t-j}) =
+    \frac{\cov(y_t, y_{t-j})}{\sqrt{\var(y_t) \var(y_{t-j})}}
+  \]
+  #+end_export
 
 
-** Estacionariedad: concepto
+** Correlación serial
+
+- Una serie está *autocorrelacionada* cuando sus coeficientes de
+  autocorrelación son distintos de 0.
+
+- En economía las variables suelen presentar *autocorrelación
+  positiva*: el valor que toman en un periodo es similar al que tomó
+  en periodos inmediatamente anteriores.
+
+- En una variable con *autocorrelación negativa* se suelen alternar en
+  periodos consecutivos valores altos con valores bajos.
 
 
-** Estacionariedad: definición
+** COMMENT Correlograma
+
+
+- Un *correlograma* es la representación gráfica de los coeficientes
+  de autocorrelación de una serie temporal.
+
 
 
 ** Dependencia débil
 
+- La *dependencia débil* implica que la dependencia entre $y_t$ e
+  $y_{t+h}$ decrece conforme aumenta $h$ y que decrece a un ritmo
+  rápido.
+
+- Un proceso débilmente dependiente está *asintóticamente
+  incorrela\-cionado* si $\rho_h \to 0$ conforme $h \to \infty$. La
+  dependencia débil exige, además, que la convergencia sea lo
+  suficientemente rápida.
 
 
 * COMMENT Características de las series temporales
