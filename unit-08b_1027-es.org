@@ -1,0 +1,165 @@
+# -*- ispell-dictionary: "spanish" -*-
+#+SETUPFILE: ./course-es.org
+
+#+TITLE: {{{unit08}}} (y II)
+
+#+PROPERTY: header-args:R :session *R-ts-intro*
+#+PROPERTY: header-args:R+ :tangle yes
+#+PROPERTY: header-args:R+ :exports both
+#+PROPERTY: header-args:R+ :results output
+
+
+#+MATS: bib
+#+begin_bibbox
+- Wooldridge: ::  /Introducción a la Econometría/. Capítulo 10,
+  secciones 10.1, 10.2, 10.4 y 10.5.
+- Stock y Watson: ::  /Introducción a la Econometría/. Capítulo 14,
+  secciones 14.1 a 14.5.
+#+end_bibbox
+
+* Introducción
+
+** Algunos procesos estocásticos
+
+Examinaremos las principales características de algunos procesos
+estocásticos importantes:
+
+- Ruido blanco.
+
+- Procesos autorregresivos.
+
+- Paseo aleatorio.
+
+- Procesos integrados.
+
+* Ruido blanco
+
+** Definición
+
+El proceso estocástico $\{e_t\}$ es un *ruido blanco* si:
+
+- $E(e_t) = 0$.
+
+- $\var(e_t) = \sigma^2_e < \infty$.
+
+- $\cov(e_{t+h}, e_t) = 0$, para todo $h > 0$.
+
+** Características
+
+- Un ruido blanco es un proceso estacionario y débilmente
+  estacionario.
+
+- Conocer los valores pasados de un ruido blanco no ayuda a predecir
+  mejor $e_t$:
+  #+begin_export latex
+  \[
+    E(e_t | e_{t-1}, e_{t-2}, \dots) = E(e_t) = 0.
+  \]
+  #+end_export
+
+- Un ruido blanco no tiene *memoria*: el valor que toma en un periodo no
+  tienen ninguna influencia sobre los valores futuros.
+
+** Relación con otros conceptos
+
+- Un ruido blanco es un proceso *i.i.d.* (independiente e
+  idénticamente distribuido).
+
+- En algunos campos coincide con el concepto de *innovaciones*.
+
+- Un *ruido blanco gaussiano*, además de las anteriores, cumple la
+  condición:
+  #+begin_export latex
+  \[
+    e_t \sim \Normal(0, \sigma^2_e)
+  \]
+  #+end_export
+
+* Procesos autorregresivos
+
+** Procesos autorregresivos
+
+- El valor presente de un *proceso autorregresivo* depende de los
+  valores que tomó el proceso en periodos anteriores.
+
+- Un proceso autorregresivo de orden $p$, AR($p$), cumple la siguiente
+  ecuación:
+  #+begin_export latex
+  \[
+    y_{t} = \rho_{1} y_{t-1} + \rho_{2} y_{t-2} + \dots \rho_{p} y_{t-p} + e_{t},
+  \]
+  #+end_export
+  donde $\rho_1, \rho_2, \dots, \rho_p$ son parámetros y $\{e_t\}$ es
+  un ruido blanco. El valor inicial de la secuencia es 0: $y_0 = 0$.
+
+** Proceso AR(1)
+
+- Nos centraremos en el proceso autorregresivo de orden 1, AR(1):
+  #+begin_export latex
+  \[
+    y_{t} = \rho y_{t-1} +  e_{t},
+  \]
+  #+end_export
+
+- La condición de estabilidad de un proceso AR(1) es:
+  #+begin_export latex
+  \[
+    \abs{\rho} < 1
+  \]
+  #+end_export
+
+- Un proceso AR estable es estacionario y débilmente dependiente.
+
+** Esperanza de un proceso AR(1)
+
+- $y_t$ sigue un proceso AR(1): $y_{t} = \rho y_{t-1} +  e_{t}$.
+
+- Tomando esperanzas:
+  #+begin_export latex
+  \[
+    E(y_{t}) = \rho E(y_{t-1}) +  E(e_{t}).
+  \]
+  #+end_export
+
+- Si $y_t$ es estacionario: $E(y_t) = E(y_{t-1})œ$. Por otro
+  lado, $E(e_t) = 0$. Por tanto,
+  #+begin_export latex
+  \[
+     E(y_{t}) = \rho E(y_{t}).
+  \]
+  #+end_export
+
+- De la expresión anterior se deduce que $E(y_t) = 0$.
+
+** Varianza de un proceso AR(1)
+
+- $y_t$ sigue un proceso AR(1): $y_{t} = \rho y_{t-1} +  e_{t}$.
+
+- La varianza de $y_t$ es:
+  #+begin_export latex
+  \[
+     \var(y_{t}) = \rho^2 \var(y_{t-1}) + \var(e_t).
+  \]
+  #+end_export
+
+- Si $y_t$ es estacionario, $\var(y_{t}) = \var(y_{t-1}) =
+  \sigma^2_y$. Podemos escribir la expresión anterior como:
+  #+begin_export latex
+  \[
+     \sigma^2_y = \rho^2 \sigma^2_y + \sigma^2_e.
+  \]
+  #+end_export
+
+- Finalmente, la varianza de $y_t$ es:
+  #+begin_export latex
+  \[
+     \sigma^2_y = \frac{\sigma^2_e}{1 - \rho^2}.
+  \]
+  #+end_export
+
+
+
+* Paseo aleatorio
+
+
+* Procesos integrados
