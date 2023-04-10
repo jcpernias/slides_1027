@@ -9,3 +9,7 @@ figures
 local.mk
 ~$*
 .Rhistory
+*.aux
+*.log
+*.pdf
+*.synctex.gz
