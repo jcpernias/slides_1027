@@ -7,6 +7,7 @@
 
 * Común
 
+
 ** Funciones de densidad
 
 #+begin_src latex :noweb-ref density-functions
@@ -31,6 +32,7 @@
 
 
 * Contraste de hipótesis sobre  un parámetro
+
 
 ** Chunks
 
@@ -94,6 +96,7 @@
     (axis cs:-1.67,0) node [fill=white, below] {$-c_{\alpha/2}$}
     (axis cs:1.67,0) node [fill=white, below] {$c_{\alpha/2}$} ;
 #+end_src
+
 
 ** Distribución t
 
@@ -216,7 +219,9 @@
   \end{tikzpicture}
 #+end_src
 
+
 * Intervalos de confianza
+
 
 ** Chunks
 
@@ -254,6 +259,7 @@
     (U) node[below=0.3cm] {$\bhat_{j} + c_{\alpha/2} \cdot \se(\bhat_{j})$} ;
 #+end_src
 
+
 ** Figures
 
 
@@ -290,6 +296,7 @@
 
 
 * Contrastes de hipótesis lineales sobre los parámetros
+
 
 ** Chunks
 

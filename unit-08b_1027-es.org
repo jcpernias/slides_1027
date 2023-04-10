@@ -3,11 +3,6 @@
 
 #+TITLE: {{{unit08}}} (y II)
 
-#+PROPERTY: header-args:R :session *R-ts-intro*
-#+PROPERTY: header-args:R+ :tangle yes
-#+PROPERTY: header-args:R+ :exports both
-#+PROPERTY: header-args:R+ :results output
-
 
 #+MATS: bib
 #+begin_bibbox
@@ -17,7 +12,9 @@
   secciones 14.1 a 14.5.
 #+end_bibbox
 
+
 * Introducción
+
 
 ** Algunos procesos estocásticos
 
@@ -32,7 +29,9 @@ estocásticos importantes:
 
 - Procesos integrados.
 
+
 * Ruido blanco
+
 
 ** Definición
 
@@ -43,6 +42,14 @@ El proceso estocástico $\{e_t\}$ es un *ruido blanco* si:
 - $\var(e_t) = \sigma^2_e < \infty$.
 
 - $\cov(e_{t+h}, e_t) = 0$, para todo $h > 0$.
+
+
+** Ejemplo
+
+Ruido blanco, $\sigma^2_e = 4$, $T = 60$.
+
+#+MATS: fig fig-08b_1027-wn-ts-*.pdf
+
 
 ** Características
 
@@ -60,6 +67,14 @@ El proceso estocástico $\{e_t\}$ es un *ruido blanco* si:
 - Un ruido blanco no tiene *memoria*: el valor que toma en un periodo no
   tienen ninguna influencia sobre los valores futuros.
 
+
+** Ejemplo
+
+#+MATS: figcol fig-08b_1027-wn-lag-*.pdf 0.5
+
+Esto es un auténtico atropello y las cosas no van a quedar así.
+
+
 ** Relación con otros conceptos
 
 - Un ruido blanco es un proceso *i.i.d.* (independiente e
@@ -75,7 +90,9 @@ El proceso estocástico $\{e_t\}$ es un *ruido blanco* si:
   \]
   #+end_export
 
+
 * Procesos autorregresivos
+
 
 ** Procesos autorregresivos
 
@@ -92,6 +109,7 @@ El proceso estocástico $\{e_t\}$ es un *ruido blanco* si:
   donde $\rho_1, \rho_2, \dots, \rho_p$ son parámetros y $\{e_t\}$ es
   un ruido blanco. El valor inicial de la secuencia es 0: $y_0 = 0$.
 
+
 ** Proceso AR(1)
 
 - Nos centraremos en el proceso autorregresivo de orden 1, AR(1):
@@ -101,14 +119,15 @@ El proceso estocástico $\{e_t\}$ es un *ruido blanco* si:
   \]
   #+end_export
 
-- La condición de estabilidad de un proceso AR(1) es:
+- La *condición de estabilidad* de un proceso AR(1) es:
   #+begin_export latex
   \[
     \abs{\rho} < 1
   \]
   #+end_export
 
-- Un proceso AR estable es estacionario y débilmente dependiente.
+- Un *proceso AR estable* es estacionario y débilmente dependiente.
+
 
 ** Esperanza de un proceso AR(1)
 
@@ -131,6 +150,7 @@ El proceso estocástico $\{e_t\}$ es un *ruido blanco* si:
 
 - Para que la ecuación anterior sea cierta para cualquier $\rho$, se
   tiene que cumplir que $E(y_t) = 0$.
+
 
 ** Varianza de un proceso AR(1)
 
@@ -157,6 +177,7 @@ El proceso estocástico $\{e_t\}$ es un *ruido blanco* si:
      \sigma^2_y = \frac{\sigma^2_e}{1 - \rho^2}.
   \]
   #+end_export
+
 
 ** Autocovarianzas de un proceso AR(1) (I)
 
@@ -191,6 +212,7 @@ El proceso estocástico $\{e_t\}$ es un *ruido blanco* si:
   \]
   #+end_export
 
+
 ** Autocovarianzas de un proceso AR(1) (II)
 
 - Ahora escribimos el proceso autorregresivo para $t+2$:
@@ -221,6 +243,7 @@ El proceso estocástico $\{e_t\}$ es un *ruido blanco* si:
     \cov(y_{t+2}, y_t) = \rho^2 \sigma^2_y.
   \]
   #+end_export
+
 
 ** Autocovarianzas de un proceso AR(1) (III)
 
@@ -256,6 +279,7 @@ El proceso estocástico $\{e_t\}$ es un *ruido blanco* si:
   \]
   #+end_export
 
+
 ** Autocorrelaciones de un proceso AR(1)
 
 - Autocorrelación entre $y_{t+h}$ e $y_ {t}$:
@@ -278,6 +302,13 @@ El proceso estocástico $\{e_t\}$ es un *ruido blanco* si:
   \end{gather*}
   #+end_export
 
+** Autocorrelograma
+
+#+MATS: figcol fig-08b_1027-ar1-p8-corr-*.pdf 0.5
+
+Un autocorrelograma se balanceaba sobre la tela de una araña.
+
+
 
 ** Estacionariedad y dependencia débil
 
@@ -295,6 +326,7 @@ El proceso estocástico $\{e_t\}$ es un *ruido blanco* si:
 
 
 * Paseo aleatorio
+
 
 ** Definición
 
@@ -321,6 +353,7 @@ El proceso estocástico $\{e_t\}$ es un *ruido blanco* si:
   \]
   #+end_export
 
+
 ** Esperanza y varianza
 
 - La esperanza de un paseo aleatorio es 0:
@@ -337,6 +370,7 @@ El proceso estocástico $\{e_t\}$ es un *ruido blanco* si:
     \var(y_t) =  \var(e_t) +  \var(e_{t-1}) + \dots +  \var(e_1) = t \sigma^2_e.
   \]
   #+end_export
+
 
 ** Autocovarianzas y autocorrelaciones
 
@@ -380,6 +414,9 @@ débil:
 - $\corr(y_{t+h}, y_t)$ converge a 0 conforme $h \to \infty$, pero la
   convergencia es muy lenta.
 
+
+* Tendencias
+
 ** Paseo aleatorio con deriva
 
 - Un *paseo aleatorio con deriva* se puede expresar como:
@@ -408,6 +445,7 @@ débil:
 
 * Procesos integrados
 
+
 ** La diferencia de un paseo aleatorio
 
 - Un paseo aleatorio puede escribirse como:
@@ -430,6 +468,7 @@ débil:
      \incr y_t = e_t
   \]
   #+end_export
+
 
 ** Procesos integrados
 

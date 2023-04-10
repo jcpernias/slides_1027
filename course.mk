@@ -16,7 +16,8 @@ units := \
 	11
 
 unit_figs := \
-	02
+	02 \
+	08b
 
 LANGUAGES := es
 
