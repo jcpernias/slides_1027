@@ -242,13 +242,13 @@ tasas de crecimiento.
 ** Esperanza
 
 - En general, la esperanza del proceso estocástico es la secuencia de
-  esperanzas en cada momento del tiempo: $\{E(y_t)\!: t = 1, \dots,
+  esperanzas en cada momento del tiempo: $\{\Exp(y_t)\!: t = 1, \dots,
   T\}$.
 
 - La esperanza de un proceso *estacionario en media* es constante:
   #+begin_export latex
   \[
-    E(y_t) = \mu, \quad t = 1, \dots, T.
+    \Exp(y_t) = \mu, \quad t = 1, \dots, T.
   \]
   #+end_export
 
@@ -322,7 +322,7 @@ tasas de crecimiento.
   #+begin_export latex
   \[
     \cov(y_t, y_{t-h}) =
-    E\big[\big(y_{t} - E(y_{t})\big) \big(y_{t-h} - E(y_{t-h})\big)\big]
+    \Exp\!\big[\big(y_{t} - \Exp(y_{t})\big) \big(y_{t-h} - \Exp(y_{t-h})\big)\big]
   \]
   #+end_export
 
@@ -340,7 +340,7 @@ tasas de crecimiento.
 
 - *Estacionariedad débil* (o *estacionariedad en covarianza*) de $y_t$:
 
-  + Esperanza constante: $E(y_t) = \mu$.
+  + Esperanza constante: $\Exp(y_t) = \mu$.
 
   + Varianza constante: $\var(y_t) = \sigma^2 < \infty$.
 

@@ -37,7 +37,7 @@ estocásticos importantes:
 
 El proceso estocástico $\{e_t\}$ es un *ruido blanco* si:
 
-- $E(e_t) = 0$.
+- $\Exp(e_t) = 0$.
 
 - $\var(e_t) = \sigma^2_e < \infty$.
 
@@ -60,7 +60,7 @@ Ruido blanco, $\sigma^2_e = 4$, $T = 60$.
   mejor $e_t$:
   #+begin_export latex
   \[
-    E(e_t | e_{t-1}, e_{t-2}, \dots) = E(e_t) = 0.
+    \Exp(e_t | e_{t-1}, e_{t-2}, \dots) = \Exp(e_t) = 0.
   \]
   #+end_export
 
@@ -136,20 +136,20 @@ Esto es un auténtico atropello y las cosas no van a quedar así.
 - Tomando esperanzas:
   #+begin_export latex
   \[
-    E(y_{t}) = \rho E(y_{t-1}) +  E(e_{t}).
+    \Exp(y_{t}) = \rho \Exp(y_{t-1}) +  \Exp(e_{t}).
   \]
   #+end_export
 
-- Si $y_t$ es estacionario: $E(y_t) = E(y_{t-1})œ$. Por otro
-  lado, $E(e_t) = 0$. Por tanto, la expresión anterior se reduce a:
+- Si $y_t$ es estacionario: $\Exp(y_t) = \Exp(y_{t-1})œ$. Por otro
+  lado, $\Exp(e_t) = 0$. Por tanto, la expresión anterior se reduce a:
   #+begin_export latex
   \[
-     E(y_{t}) = \rho E(y_{t}).
+     \Exp(y_{t}) = \rho \Exp(y_{t}).
   \]
   #+end_export
 
 - Para que la ecuación anterior sea cierta para cualquier $\rho$, se
-  tiene que cumplir que $E(y_t) = 0$.
+  tiene que cumplir que $\Exp(y_t) = 0$.
 
 
 ** Varianza de un proceso AR(1)
@@ -181,17 +181,17 @@ Esto es un auténtico atropello y las cosas no van a quedar así.
 
 ** Autocovarianzas de un proceso AR(1) (I)
 
-- Ya que $E(y_t) = 0$, la autocovarianza de $y_{t+h}$ e $y_ {t}$ es:
+- Ya que $\Exp(y_t) = 0$, la autocovarianza de $y_{t+h}$ e $y_ {t}$ es:
   #+begin_export latex
   \[
-    \cov(y_{t+h}, y_t) = E(y_{t+h}  y_t)
+    \cov(y_{t+h}, y_t) = \Exp(y_{t+h}  y_t)
   \]
   #+end_export
 
 - Cuando $h = 1$:
   #+begin_export latex
   \[
-    \cov(y_{t+1}, y_t) = E(y_{t+1}  y_t)
+    \cov(y_{t+1}, y_t) = \Exp(y_{t+1}  y_t)
   \]
   #+end_export
 
@@ -199,12 +199,12 @@ Esto es un auténtico atropello y las cosas no van a quedar así.
   #+begin_export latex
   \[
     \cov(y_{t+1}, y_t) =
-    E\big[(\rho y_t + e_{t+1}) y_t\big] =
-    E\big[\rho y^{2}_t + y_t e_{t+1} \big]
+    \Exp\!\big[(\rho y_t + e_{t+1}) y_t\big] =
+    \Exp\!\big[\rho y^{2}_t + y_t e_{t+1} \big]
   \]
   #+end_export
 
-- Teniendo en cuenta que $E(y^2_t) = \sigma^2_y$ y que $E(y_t e_s) =
+- Teniendo en cuenta que $\Exp(y^2_t) = \sigma^2_y$ y que $\Exp(y_t e_s) =
   0$ para $t \neq s$:
   #+begin_export latex
   \[
@@ -232,8 +232,8 @@ Esto es un auténtico atropello y las cosas no van a quedar así.
 - La autocovarianza de $y_{t+2}$ e $y_ {t}$ es:
   #+begin_export latex
   \[
-    \cov(y_{t+2}, y_t) = E(y_{t+2}  y_t) =
-    E\big[(\rho^2 y_{t} + \rho e_{t+1}+  e_{t + 2}) y_t\big].
+    \cov(y_{t+2}, y_t) = \Exp(y_{t+2}  y_t) =
+    \Exp\!\big[(\rho^2 y_{t} + \rho e_{t+1}+  e_{t + 2}) y_t\big].
   \]
   #+end_export
 
@@ -263,7 +263,7 @@ Esto es un auténtico atropello y las cosas no van a quedar así.
   #+begin_export latex
   \[
     \cov(y_{t+h}, y_t) =
-    E\big[(\rho^h y_{t} +
+    \Exp\!\big[(\rho^h y_{t} +
     \rho^{h-1} e_{t+1}  +
     \dots +
     e_{t + h})
@@ -271,7 +271,7 @@ Esto es un auténtico atropello y las cosas no van a quedar así.
   \]
   #+end_export
 
-- Dado que $E(y^2_t) = \sigma^2_y$ y que $E(y_t e_s) = 0$ para $t \neq
+- Dado que $\Exp(y^2_t) = \sigma^2_y$ y que $\Exp(y_t e_s) = 0$ para $t \neq
   s$:
   #+begin_export latex
   \[
@@ -302,6 +302,7 @@ Esto es un auténtico atropello y las cosas no van a quedar así.
   \end{gather*}
   #+end_export
 
+
 ** Autocorrelograma
 
 #+MATS: figcol fig-08b_1027-ar1-p8-corr-*.pdf 0.5
@@ -314,7 +315,7 @@ Un autocorrelograma se balanceaba sobre la tela de una araña.
 
 - Si $\abs{\rho} < 1$ el proceso AR(1) es estacionario:
 
-  + $E(y_t) = 0$.
+  + $\Exp(y_t) = 0$.
 
   + $\var(y_t) = \sigma^2_e / (1 - \rho^2)$.
 
@@ -359,7 +360,7 @@ Un autocorrelograma se balanceaba sobre la tela de una araña.
 - La esperanza de un paseo aleatorio es 0:
   #+begin_export latex
   \[
-    E(y_t) =  E(e_t) +  E(e_{t-1}) + \dots +  E(e_1) = 0.
+    \Exp(y_t) =  \Exp(e_t) +  \Exp(e_{t-1}) + \dots +  \Exp(e_1) = 0.
   \]
   #+end_export
 
@@ -377,8 +378,8 @@ Un autocorrelograma se balanceaba sobre la tela de una araña.
 - La autocovarianza entre $y_{t+h}$ e $y_t$ es:
   #+begin_export latex
   \[
-    \cov(y_{t+h}, y_t) = E(y_{t+h} y_t) =
-    E\big[( y_{t} + e_{t+1}  + \dots + e_{t + h}) y_t\big]  = t \sigma^2_e.
+    \cov(y_{t+h}, y_t) = \Exp(y_{t+h} y_t) =
+    \Exp\!\big[( y_{t} + e_{t+1}  + \dots + e_{t + h}) y_t\big]  = t \sigma^2_e.
   \]
   #+end_export
 
@@ -395,7 +396,7 @@ Un autocorrelograma se balanceaba sobre la tela de una araña.
 Un paseo aleatorio no cumple las condiciones de la estacionariedad
 débil:
 
-- $E(y_t) = 0$.
+- $\Exp(y_t) = 0$.
 
 - $\var(y_t) = t \sigma^2_e$.
 
@@ -416,6 +417,7 @@ débil:
 
 
 * Tendencias
+
 
 ** Paseo aleatorio con deriva
 
@@ -438,7 +440,7 @@ débil:
 - El valor esperado de $y$ es función de $t$:
   #+begin_export latex
   \[
-     E(y_t) = \alpha_0 t
+     \Exp(y_t) = \alpha_0 t
   \]
   #+end_export
 
