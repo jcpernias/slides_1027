@@ -10,18 +10,120 @@
   secciones 14.6 a 14.8, y capítulo 15, secciones 15.1 a 15.3.
 #+end_bibbox
 
-* Introducción
+* Modelos de regresión con series temporales
 
-** El modelo de regresión con series temporales
+** Introducción
 
-Nos centraremos en la aplicación de MCO para estimar los parámetros
-del modelo:
-#+begin_export latex
-\[
-  y_t = \beta_0 + \beta_1 x_{1t} + \beta_1 x_{2t} + \dots + \beta_1 x_{kt} + u_t
-\]
-#+end_export
-donde $t = 1, 2, \dots, T$.
+- Con series temporales es posible investigar las relaciones dinámicas
+  entre variables.
+
+- En primer lugar, examinaremos algunos modelos comúnmente utilizados.
+
+
+** Modelos estáticos
+
+- En un *modelo estático*, un cambio en una variable explicativa sólo
+  tiene efectos en el periodo en que se produce y no tiene influencia
+  en los periodos posteriores.
+
+- Todas las variables del modelo se refieren al mismo periodo
+  temporal:
+  #+begin_export latex
+  \[
+    y_t = \alpha + \beta z_{t} + u_t,
+  \]
+  #+end_export
+  donde $y_t$ es la variable dependiente, $z_t$ la variable
+  explicativa, $\alpha$ y $\beta$ son parámetros desconocidos, $t = 1,
+  2, \dots, T$ y $u_t$ es un término de error no observable tal que
+  $\Exp(u_t | z_t) = 0$.
+
+** Modelos de retardos distribuidos
+
+- En un *modelo de retardos distribuidos* los cambios en las
+  variables explicativas tienen efectos en más de un periodo.
+
+- Estos modelos se caracterizan por incluir retardos de las variables
+  explicativas:
+  #+begin_export latex
+  \[
+    y_t = \alpha + \beta_0 z_{t} + \beta_1 z_{t-1} + \beta_2 z_{t-2} + \dots + \beta_L z_{t-L} + u_t,
+  \]
+  #+end_export
+  donde $L$ es el número de retardos que aparecen en el modelo, y
+  $\Exp(u_t | z_t, z_{t-1}, z_{t-2}, \dots) = 0$.
+
+** Multiplicadores dinámicos
+
+- El parámetro $\beta_0$ es el *multiplicador de impacto* o
+  *multiplicador de corto plazo*. Es el efecto inmediato o
+  contemporáneo de un cambio unitario de $z_t$ sobre $y_t$.
+
+- Los parámetros $\beta_h$, $h = 0, 1, \dots$, son los
+  *multiplicadores dinámicos* y miden el efecto de $z$ sobre $y$
+  después de $h$ periodos:
+  #+begin_export latex
+  \[
+    \iratio{y_t}{z_{t-h}} = \iratio{y_{t+h}}{z_{t}} = \beta_h.
+  \]
+  #+end_export
+
+** Multiplicadores acumulativos
+
+- Los *multiplicadores acumulativos*, $\delta_h$, suman los efectos
+  que produce un cambio unitario de $z$ sobre la variable dependiente
+  conforme pasa el tiempo:
+
+  #+ATTR_LATEX: :align @{}cl@{} :booktabs t
+  | Periodos transcurridos | Multiplicador acumulativo                |
+  |------------------------+------------------------------------------|
+  | $0$                    | $\delta_0 = \beta_0$                     |
+  | $1$                    | $\delta_1 = \beta_0 + \beta_1$           |
+  | $2$                    | $\delta_2 = \beta_0 + \beta_1 + \beta_2$ |
+  | $\vdots$               | $\vdots$                                 |
+  | $L$                    | $\delta_L = \sum_{i=0}^L \beta_i$        |
+
+- En la última fila de la tabla aparece el *multiplicador de largo
+  plazo*, $\delta_L$, que es la suma de todos los multiplicadores
+  dinámicos.
+
+
+** Modelos autorregresivos
+
+- En un *modelo autorregresivo* las variables explicativas son
+  retardos de la variable dependiente.
+
+- Modelo autorregresivo de orden p, AR(p):
+  #+begin_export latex
+  \[
+     y_t = \alpha + \rho_1 y_{t-1} + \rho_2 y_{t-2} + \dots +  \rho_p y_{t-p} + u_{t},
+  \]
+  #+end_export
+  donde $\Exp(u_t | y_{t-1}, y_{t-2}, \dots) = 0$.
+
+
+** Modelos ARDL
+
+- Un *modelo autorregresivo con retardos distribuidos*,
+  $\text{ARDL}(p, q)$, incluye como variables explicativas $p$
+  retardos de $y$ y $q$ retardos de $z$:
+  #+begin_export latex
+  \[
+    y_t =
+    \alpha + \rho_1 y_{t-1} +
+    \dots +
+    \rho_p y_{t-p} +
+    \beta_0 z_{t} +
+    \beta_1 z_{t-1} +
+    \dots +
+    \beta_q z_{t-q} +
+    u_{t},
+  \]
+  #+end_export
+  donde $\Exp(u_t | z_t, y_{t-1}, z_{t-1}, y_{t-2}, z_{t-2}, \dots) = 0$.
+
+
+* El modelo clásico de regresión con series temporales
 
 ** Notación
 
@@ -31,6 +133,7 @@ donde $t = 1, 2, \dots, T$.
 
 - $\bm{X}$: los valores de todas las explicativas en todos los periodos
   de tiempo.
+
 
 ** Propiedades de MCO con series temporales
 
@@ -42,8 +145,6 @@ donde $t = 1, 2, \dots, T$.
 
 
 
-* El modelo clásico de regresión con series temporales
-
 ** Supuestos
 
 - *TS.1*: Linealidad en los parámetros.
@@ -52,6 +153,7 @@ donde $t = 1, 2, \dots, T$.
 - *TS.4*: Homoscedasticidad.
 - *TS.5*: Ausencia de correlación serial.
 - *TS.6*: Normalidad.
+
 
 ** Linealidad en los parámetros
 
@@ -65,10 +167,12 @@ El proceso estocástico $\{(y_t, x_{1t}, x_{2t}, \dots, x_{kt})\!: t = 1,
 donde $\{u_t\!: t = 1, 2, \dots, T\}$ es una secuencia de perturbaciones
 aleatorias.
 
+
 ** Ausencia de colinealidad perfecta
 
 En la muestra ninguna de las variables explicativas es constante ni
 una combinación lineal perfecta de las otras explicativas.
+
 
 ** Media condicional nula
 
@@ -80,11 +184,13 @@ periodos de tiempo, la media del término de error es $0$:
 \]
 #+end_export
 
+
 ** Exogeneidad estricta
 
 - *TS.2* implica que las variables explicativas son *estrictamente
   exógenas*: $u_t$ debe estar interrelacionado con todas las
   explicativas en *todos* los periodos de tiempo.
+
 
 ** Homoscedasticidad
 
@@ -95,6 +201,7 @@ periodos:
   \var(u_t | \bm{X}) = \sigma^2,\quad t = 1, 2, \dots, T.
 \]
 #+end_export
+
 
 ** Ausencia de correlación serial
 
@@ -112,6 +219,7 @@ diferentes están incorrelacionadas:
 El término de error $u_t$ es independiente de $\bm{X}$ y se distribuye
 independiente e idénticamente como $\Normal(0, \sigma^2)$.
 
+
 ** Propiedades de muestras finitas
 
 Los supuestos del modelo clásico de regresión con series temporales
@@ -122,6 +230,7 @@ garantizan las siguientes propiedades del estimador de MCO:
 - *Eficiencia*: si, además, se cumplen *TS.4* y *TS.5*.
 
 - *Normalidad*: si, además, se cumple *TS.6*.
+
 
 ** Limitaciones de la exogeneidad estricta
 
@@ -143,6 +252,7 @@ La exogeneidad estricta es incompatible con algunos casos importantes:
 
 - Una solución simple es incluir una tendencia lineal como un regresor
   adicional.
+
 
 ** Tendencias lineales
 
@@ -182,7 +292,9 @@ Incluir una tendencia lineal es equivalente a:
   pueden controlarse incluyendo simultáneamente una tendencia lineal y
   variables ficticias estacionales.
 
+
 * Propiedades asintóticas de MCO con series temporales
+
 
 ** Supuestos
 
@@ -191,6 +303,7 @@ Incluir una tendencia lineal es equivalente a:
 - *TS.3'*: Exogeneidad (contemporánea).
 - *TS.4'*: Homoscedasticidad.
 - *TS.5'*: Ausencia de correlación serial.
+
 
 ** Linealidad y dependencia débil
 
@@ -204,6 +317,7 @@ el modelo:
 #+end_export
 donde $\{u_t\!: t = 1, 2, \dots, T\}$ es la secuencia de perturbaciones
 aleatorias.
+
 
 ** Estacionariedad
 
@@ -244,6 +358,7 @@ El proceso estocástico $\{e_t\}$ es un *ruido blanco* si:
   #+end_export
   donde $e_t$ es un ruido blanco.
 
+
 ** Estabilidad de los procesos AR(1)
 
 Un proceso $\AR{1}$ es *estable* si $\abs{\rho_1} < 1$. En ese caso es
@@ -252,6 +367,7 @@ estacionario y débilmente dependiente:
 - $\Exp(y_t) = 0$.
 - $\var(y_t) = \sigma^2_e$.
 - $\corr(y_t, y_{t + h}) = \rho_1^h$.
+
 
 ** Procesos estacionarios con tendencia
 
@@ -264,6 +380,7 @@ tendencia* para series que siguen:
 #+end_export
 donde $u_t$ es un proceso estacionario y débilmente dependiente.
 
+
 ** Exogeneidad contemporánea
 
 - Las variables explicativas $\bm{x}_t$ son *contemporáneamente exógenas*:
@@ -275,6 +392,7 @@ donde $u_t$ es un proceso estacionario y débilmente dependiente.
 
 - Este supuesto no excluye fenómenos de retroalimentación ni
   autorregresiones.
+
 
 ** Homoscedasticidad y ausencia de autocorrelación
 
