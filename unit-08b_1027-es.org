@@ -245,7 +245,7 @@ Esto es un auténtico atropello y las cosas no van a quedar así.
   #+end_export
 
 
-** Autocovarianzas de un proceso AR(1) (III)
+** Autocovarianzas de un proceso AR(1) (y III)
 
 - Mediante sustitución recursiva obtenemos:
   #+begin_export latex
