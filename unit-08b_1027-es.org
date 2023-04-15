@@ -68,11 +68,14 @@ Ruido blanco, $\sigma^2_e = 4$, $T = 60$.
   tienen ninguna influencia sobre los valores futuros.
 
 
-** Ejemplo
+** Autocorrelación
 
 #+MATS: figcol fig-08b_1027-wn-lag-*.pdf 0.5
 
-Esto es un auténtico atropello y las cosas no van a quedar así.
+- $e_t$ no está correlacinado con sus retardos.
+
+- Los coeficientes de autocorrelación de un ruido blanco son todos
+  iguales a 0: $\rho_h = 0$, para todo $h > 0$.
 
 
 ** Relación con otros conceptos
