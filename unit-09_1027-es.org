@@ -306,25 +306,24 @@ garantizan las siguientes propiedades del estimador de MCO:
 * Propiedades asintóticas de MCO con series temporales
 
 
-** Propiedades de MCO con series temporales
+** Introducción
 
--  ¿Qué tiene que cumplirse para que MCO tenga buenas propiedades
-  exactas?
-
-- ¿Qué supuestos son necesarios para que se cumplan las propiedades
-  asintóticas?
+¿Qué supuestos son necesarios para que el estimador MCO tenga buenas
+propiedades asintóticas en modelos de regresión con series temporales?
 
 
 ** Supuestos
 
-- *TS.1'*: Linealidad y dependencia débil.
-- *TS.2'*: Ausencia de colinealidad perfecta.
-- *TS.3'*: Exogeneidad (contemporánea).
-- *TS.4'*: Homoscedasticidad.
-- *TS.5'*: Ausencia de correlación serial.
+- *ST.1'*: Linealidad y dependencia débil.
+- *ST.2'*: Ausencia de colinealidad perfecta.
+- *ST.3'*: Exogeneidad (contemporánea).
+- *ST.4'*: Homoscedasticidad.
+- *ST.5'*: Ausencia de correlación serial.
 
 
 ** Linealidad y dependencia débil
+
+*ST.1'*: *Linealidad y dependencia débil*.
 
 El proceso estocástico $\{(y_t, x_{1t}, x_{2t}, \dots, x_{kt})\!: t =
 1, 2, \dots, T\}$ es *estacionario* y *débilmente dependiente* sigue
@@ -337,70 +336,18 @@ el modelo:
 donde $\{u_t\!: t = 1, 2, \dots, T\}$ es la secuencia de perturbaciones
 aleatorias.
 
+** Ausencia de colinealidad perfecta
 
-** Estacionariedad
+*ST.2'*: *Ausencia de colinealidad perfecta*.
 
-Un proceso estocástico es *(débilmente) estacionario* si:
+En la muestra ninguna de las variables explicativas es constante ni
+una combinación lineal perfecta de las otras explicativas.
 
-- La media es independiente de $t$: $\Exp(x_t) = \mu$.
-- La varianza es constante a lo largo del tiempo: $\var(x_t) = \sigma^2$.
-- La covarianza entre $x_t$ y $x_{t + h}$ sólo depende de $h$:
-  $\cov(x_{t}, x_{t+h}) = \gamma_h$.
-
-
-** Dependencia débil
-
-- Una serie $\{x_t\}$ estacionaria es *débilmente dependiente* si la
-  correlación entre $x_t$ y $x_{t + h}$ decrece *rápidamente* conforme
-  aumenta $h$.
-
-
-** Ruido blanco
-
-El proceso estocástico $\{e_t\}$ es un *ruido blanco* si:
-
-- $\Exp(e_t) = 0$.
-
-- $\var(e_t) = \sigma^2_e$.
-
-- $\cov(e_t, e_s) = 0$, para $t \neq s$.
-
-
-** Proceso autorregresivo de orden 1
-
-- La serie $\{y_t\}$ sigue un proceso autorregresivo de orden 1,
-  $\AR{1}$ si:
-  #+begin_export latex
-  \[
-    y_{t} = \rho_{1} y_{t-1} + e_{t}
-  \]
-  #+end_export
-  donde $e_t$ es un ruido blanco.
-
-
-** Estabilidad de los procesos AR(1)
-
-Un proceso $\AR{1}$ es *estable* si $\abs{\rho_1} < 1$. En ese caso es
-estacionario y débilmente dependiente:
-
-- $\Exp(y_t) = 0$.
-- $\var(y_t) = \sigma^2_e$.
-- $\corr(y_t, y_{t + h}) = \rho_1^h$.
-
-
-** Procesos estacionarios con tendencia
-
-Frecuentemente se usa la denominación de *proceso estacionario con
-tendencia* para series que siguen:
-#+begin_export latex
-\[
-  y_t = \alpha_0 + \alpha_1 t + u_t
-\]
-#+end_export
-donde $u_t$ es un proceso estacionario y débilmente dependiente.
 
 
 ** Exogeneidad contemporánea
+
+*ST.3'*: *Exogeneidad (contemporánea)*.
 
 - Las variables explicativas $\bm{x}_t$ son *contemporáneamente exógenas*:
   #+begin_export latex
@@ -409,15 +356,27 @@ donde $u_t$ es un proceso estacionario y débilmente dependiente.
   \]
   #+end_export
 
-- Este supuesto no excluye fenómenos de retroalimentación ni
-  autorregresiones.
+- Este supuesto no se viola si se dan fenómenos de retroalimentación o
+  si se incluyen retardos de la variable dependiente entre las
+  explicativas.
 
 
 ** Homoscedasticidad y ausencia de autocorrelación
 
-- Homoscedasticidad: $\var(u_t|\bm{x}_t) = \sigma^2$.
+*ST.4'*: *Homoscedasticidad*.
+#+begin_export latex
+\[
+  \var(u_t|\bm{x}_t) = \sigma^2.
+\]
+#+end_export
+#+latex: \vspace*{2ex}
 
-- No correlación serial: $\corr(u_t, u_s | \bm{x}_t, \bm{x}_s) = 0$.
+*ST.5'*: *Ausencia de correlación serial*.
+#+begin_export latex
+\[
+  \corr(u_t, u_s | \bm{x}_t, \bm{x}_s) = 0,\quad \text{para todo $t \neq s$.}
+\]
+#+end_export
 
 
 ** Propiedades asintóticas
@@ -427,56 +386,61 @@ donde $u_t$ es un proceso estacionario y débilmente dependiente.
 - *Normalidad asintótica*: si además se cumplen *TS.4'* y *TS.5'*.
 
 
-* Otras cuestiones
+* Inferencia asintótica
+
+** Introducción
+
+- Para estimar los errores típicos de $\hat{\beta}_j$ con las fórmulas
+  tradicionales de MCO es necesario que se cumplan los supuestos
+  *ST.4'* y *ST.5'*.
+
+- Sin embargo, es frecuente encontrar correlación serial en el término
+  de error.
+
+- También es frecuente, especialmente en modelos financieros,
+  la presencia de heteroscedasticidad.
+
+** Inferencia robusta
+
+- Las aportaciones de Newey y West, y de autores posteriores, muestran
+  como pueden obtenerse estimaciones de $\var(\hat{\beta})$ que
+  sean válidas aun en presencia de correlación serial y
+  heteroscedasticidad.
+
+- Se suele usar el acrónimo *HAC* (/heteroskedasticity and
+  autocorrelation consistent/) para referirse a esos errores típicos
+  robustos.
+
+** Contrastes $t$ robustos
+
+La hipótesis nula $\beta_j = b$ puede contrastarse usando un cociente
+$t$ robusto que utiliza la estimación MCO, $\hat{\beta}_j$, y un error
+típico robusto a heteroscedasticidad y autocorrelación,
+$\se_{\text{HAC}}(\bhat_j)$:
+#+begin_export latex
+\[
+  t_{j} = \frac{\bhat_{j} - b}{\se_{\text{HAC}}(\bhat_{j})}.
+\]
+#+end_export
 
 
-** Regresión espuria
+** Contrastes de hipótesis lineales
 
-- *Regresión espuria*: Encontrar una relación aparente entre dos o más
-  variables que presentan tendencias pero que no tienen relación entre
-  sí.
+- En presencia de autocorrelación y heteroscedasticidad no es válido
+  el estadístico $F$ que compara las $\SCR$ o los $\Rsq$ de los
+  modelos restringido y no restringido. Tampoco existe una versión
+  robusta de este contraste.
 
-- Factores no observables provocan tendencias en la dependiente y las
-  explicativas.
+- Para contrastar restricciones lineales generales sobre los
+  parámetros del modelo, utilizamos contrastes de Wald construidos con
+  estimaciones de $\var(\hat{\bm\beta})$ robustas a
+  heteroscedasticidad y autocorrelación.
 
-- Una solución simple es incluir una tendencia lineal como un regresor
-  adicional.
+** Estimación e inferencia robusta con MCO
 
+- Se estiman por MCO los parámetros del modelo de regresión. MCO es
+  consistente si se cumplen los supuestos *ST.1'*, *ST.2'* y *ST.3'*.
 
-** Tendencias lineales
-
-Incluir una tendencia lineal es equivalente a:
-
-- Eliminar la tendencia lineal de la variable dependiente, calculando
-  $\ddot{y}_t$, los residuos de la regresión:
-  #+begin_export latex
-  \[
-    y_{t} = \ahat_{0} + \ahat_{1} t + \ddot{y}_{t}
-  \]
-  #+end_export
-
-- De forma similar, eliminar la tendencia lineal de cada una de las
-  variables explicativas obteniendo $\ddot{x}_{1t}, \ddot{x}_{2t}, \dots, \ddot{x}_{kt}$.
-
-- Estimar por MCO los parámetros de una regresión de $\ddot{y}_t$
-  sobre $\ddot{x}_{1t}, \ddot{x}_{2t}, \dots, \ddot{x}_{kt}$.
-
-
-** Estacionalidad
-
-- Con datos trimestrales y mensuales es usual observar variables con
-  fuertes oscilaciones estacionales.
-
-- Una forma simple de controlar este tipo de fluctuaciones es incluir
-  *variables ficticias estacionales* en el modelo de regresión.
-
-
-** Desestacionalización
-
-- Incluir variables ficticias en la regresión es equivalente a estimar
-  el modelo con las variables previamente *desestacionalizadas*.
-
-- Es frecuente encontrar variables que presentan oscilaciones
-  estacionales y comportamiento tendencial. Ambos tipos de efectos
-  pueden controlarse incluyendo simultáneamente una tendencia lineal y
-  variables ficticias estacionales.
+- Los contrastes de hipótesis se llevan a cabo utilizando una
+  estimación de $\var(\hat{\bm\beta})$ robusta a heteroscedasticidad y
+  autocorrelación.
