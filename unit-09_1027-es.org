@@ -56,6 +56,43 @@
   $\Exp(u_t | z_t, z_{t-1}, z_{t-2}, \dots) = 0$.
 
 
+** Equilibrio dinámico
+
+- Utilizaremos como ejemplo un modelo con dos retardos:
+  #+begin_export latex
+  \[
+    y_t = \alpha + \beta_0 z_{t} + \beta_1 z_{t-1} + \beta_2 z_{t-2} + u_t,
+  \]
+  #+end_export
+
+- En ausencia de perturbaciones, $u_t = 0$, en equilibrio dinámico las
+  variables toman siempre el mismo valor: $y_t = y^*$ y $z_t = z^*$.
+
+- Supongamos que, partiendo de un equilibrio dinámico, la variable $z$
+  aumenta permanentemente en una unidad en el periodo 3. ¿Cómo se
+  ajustarían las variables al nuevo equilibrio?
+
+
+** Ajuste a un nuevo equilibrio
+
+La tabla muestra como se ajustan las variable dependiente a un cambio
+unitario permanente de $z$. En el nuevo equilibrio $z_t = z^* + 1$ e
+$y_t = y^* + \beta_0 + \beta_1 + \beta_2$.
+
+
+#+ATTR_LATEX: :align @{}c@{\hspace{1cm}}l@{\hspace{1cm}}*{4}{c}@{\hspace{1cm}}l@{} :booktabs t
+| $t$      | $z_t$     | $\incr z_t$ | $\incr z_{t-1}$ | $\incr z_{t-2}$ | $\incr y_{t}$ | $y_t$                               |
+|----------+-----------+-------------+-----------------+-----------------+---------------+-------------------------------------|
+| $1$      | $z^*$     | $0$         | $0$             | $0$             | $0$           | $y^*$                               |
+| $2$      | $z^*$     | $0$         | $0$             | $0$             | $0$           | $y^*$                               |
+| $3$      | $z^* + 1$ | $1$         | $0$             | $0$             | $\beta_0$     | $y^* + \beta_0$                     |
+| $4$      | $z^* + 1$ | $0$         | $1$             | $0$             | $\beta_1$     | $y^* + \beta_0 + \beta_1$           |
+| $5$      | $z^* + 1$ | $0$         | $0$             | $1$             | $\beta_2$     | $y^* + \beta_0 + \beta_1 + \beta_2$ |
+| $6$      | $z^* + 1$ | $0$         | $0$             | $0$             | $0$           | $y^* + \beta_0 + \beta_1 + \beta_2$ |
+| $7$      | $z^* + 1$ | $0$         | $0$             | $0$             | $0$           | $y^* + \beta_0 + \beta_1 + \beta_2$ |
+| $\vdots$ |           |             |                 |                 |               |                                     |
+
+
 ** Multiplicadores dinámicos
 
 - El parámetro $\beta_0$ es el *multiplicador de impacto* o
@@ -279,15 +316,14 @@ independiente e idénticamente como $\Normal(0, \sigma^2)$.
 Los supuestos del modelo clásico de regresión con series temporales
 garantizan las siguientes propiedades del estimador de MCO:
 
-- *Insesgadez*: si se cumplen *TS.1* a *TS.3*.
+- *Insesgadez*: si se cumplen *TS.1*, *TS.2* y *TS.3*.
 
 - *Eficiencia*: si, además, se cumplen *TS.4* y *TS.5*. En este caso,
-  podemos usar las fórmulas de MCO para estimar los errores típicos de
+  se pueden usar las fórmulas de MCO de los errores típicos de
   $\hat{\beta_j}$.
 
-- *Normalidad*: si, además, se cumple *TS.6*. En este caso, podemos
-  contrastar hipótesis con las fórmulas tradicionales de los
-  contrastes $t$ y $F$.
+- *Normalidad*: si, además, se cumple *TS.6*. Las fórmulas
+  tradicionales de los contrastes $t$ y $F$ son válidas.
 
 
 ** Limitaciones del modelo clásico
@@ -335,6 +371,7 @@ el modelo:
 #+end_export
 donde $\{u_t\!: t = 1, 2, \dots, T\}$ es la secuencia de perturbaciones
 aleatorias.
+
 
 ** Ausencia de colinealidad perfecta
 
@@ -386,7 +423,21 @@ una combinación lineal perfecta de las otras explicativas.
 - *Normalidad asintótica*: si además se cumplen *TS.4'* y *TS.5'*.
 
 
+** Conclusiones
+
+- Con muestras de tamaño moderado o grande, bastan los supuestos
+  *ST.1'* a *ST.5'* para garantizar buenas propiedades del estimador
+  MCO.
+
+- En particular, no es necesario realizar supuestos muy restrictivos
+  como exogeneidad estricta o normalidad.
+
+- Por otro lado, el supuesto *ST.1'* requiere estacionariedad y
+  dependencia débil de la variable dependiente y de las variables
+  explicativas.
+
 * Inferencia asintótica
+
 
 ** Introducción
 
@@ -400,16 +451,18 @@ una combinación lineal perfecta de las otras explicativas.
 - También es frecuente, especialmente en modelos financieros,
   la presencia de heteroscedasticidad.
 
+
 ** Inferencia robusta
 
 - Las aportaciones de Newey y West, y de autores posteriores, muestran
-  como pueden obtenerse estimaciones de $\var(\hat{\beta})$ que
-  sean válidas aun en presencia de correlación serial y
-  heteroscedasticidad.
+  como pueden obtenerse estimaciones de $\var(\hat{\beta})$ que sólo
+  requieren los supuestos *ST.1'*, *ST.2'* y *ST.3'* y que son válidas
+  aun en presencia de correlación serial y heteroscedasticidad.
 
 - Se suele usar el acrónimo *HAC* (/heteroskedasticity and
   autocorrelation consistent/) para referirse a esos errores típicos
   robustos.
+
 
 ** Contrastes $t$ robustos
 
@@ -435,6 +488,7 @@ $\se_{\text{HAC}}(\bhat_j)$:
   parámetros del modelo, utilizamos contrastes de Wald construidos con
   estimaciones de $\var(\hat{\bm\beta})$ robustas a
   heteroscedasticidad y autocorrelación.
+
 
 ** Estimación e inferencia robusta con MCO
 
