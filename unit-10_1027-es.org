@@ -11,6 +11,7 @@
 * Introducción
 
 
+
 ** El modelo
 
 #+begin_export latex
@@ -18,3 +19,58 @@
   y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + u_i
 \]
 #+end_export
+
+
+* Otras cuestiones
+
+
+** Regresión espuria
+
+- *Regresión espuria*: Encontrar una relación aparente entre dos o más
+  variables que presentan tendencias pero que no tienen relación entre
+  sí.
+
+- Factores no observables provocan tendencias en la dependiente y las
+  explicativas.
+
+- Una solución simple es incluir una tendencia lineal como un regresor
+  adicional.
+
+
+** Tendencias lineales
+
+Incluir una tendencia lineal es equivalente a:
+
+- Eliminar la tendencia lineal de la variable dependiente, calculando
+  $\ddot{y}_t$, los residuos de la regresión:
+  #+begin_export latex
+  \[
+    y_{t} = \ahat_{0} + \ahat_{1} t + \ddot{y}_{t}
+  \]
+  #+end_export
+
+- De forma similar, eliminar la tendencia lineal de cada una de las
+  variables explicativas obteniendo $\ddot{x}_{1t}, \ddot{x}_{2t}, \dots, \ddot{x}_{kt}$.
+
+- Estimar por MCO los parámetros de una regresión de $\ddot{y}_t$
+  sobre $\ddot{x}_{1t}, \ddot{x}_{2t}, \dots, \ddot{x}_{kt}$.
+
+
+** Estacionalidad
+
+- Con datos trimestrales y mensuales es usual observar variables con
+  fuertes oscilaciones estacionales.
+
+- Una forma simple de controlar este tipo de fluctuaciones es incluir
+  *variables ficticias estacionales* en el modelo de regresión.
+
+
+** Desestacionalización
+
+- Incluir variables ficticias en la regresión es equivalente a estimar
+  el modelo con las variables previamente *desestacionalizadas*.
+
+- Es frecuente encontrar variables que presentan oscilaciones
+  estacionales y comportamiento tendencial. Ambos tipos de efectos
+  pueden controlarse incluyendo simultáneamente una tendencia lineal y
+  variables ficticias estacionales.
