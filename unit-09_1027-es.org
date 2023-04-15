@@ -12,6 +12,7 @@
 
 * Modelos de regresión con series temporales
 
+
 ** Introducción
 
 - Con series temporales es posible investigar las relaciones dinámicas
@@ -38,6 +39,7 @@
   2, \dots, T$ y $u_t$ es un término de error no observable tal que
   $\Exp(u_t | z_t) = 0$.
 
+
 ** Modelos de retardos distribuidos
 
 - En un *modelo de retardos distribuidos* los cambios en las
@@ -53,6 +55,7 @@
   donde $L$ es el número de retardos que aparecen en el modelo, y
   $\Exp(u_t | z_t, z_{t-1}, z_{t-2}, \dots) = 0$.
 
+
 ** Multiplicadores dinámicos
 
 - El parámetro $\beta_0$ es el *multiplicador de impacto* o
@@ -67,6 +70,7 @@
     \iratio{y_t}{z_{t-h}} = \iratio{y_{t+h}}{z_{t}} = \beta_h.
   \]
   #+end_export
+
 
 ** Multiplicadores acumulativos
 
@@ -125,37 +129,37 @@
 
 * El modelo clásico de regresión con series temporales
 
-** Notación
 
-- Nuestra especificación admite modelos dinámicos.
+** Introducción
 
-- $\bm{x_t}$: los valores que toman las explicativas en el periodo $t$.
+- ¿Podemos usar MCO para estimar modelos de series temporales?
 
-- $\bm{X}$: los valores de todas las explicativas en todos los periodos
-  de tiempo.
-
-
-** Propiedades de MCO con series temporales
-
--  ¿Qué tiene que cumplirse para que MCO tenga buenas propiedades
+- ¿Qué tiene que cumplirse para que MCO tenga buenas propiedades
   exactas?
-
-- ¿Qué supuestos son necesarios para que se cumplan las propiedades
-  asintóticas?
 
 
 
 ** Supuestos
 
-- *TS.1*: Linealidad en los parámetros.
-- *TS.2*: Ausencia de colinealidad perfecta.
-- *TS.3*: Exogeneidad estricta.
-- *TS.4*: Homoscedasticidad.
-- *TS.5*: Ausencia de correlación serial.
-- *TS.6*: Normalidad.
+Los supuestos del *modelo clásico de regresión lineal con series
+temporales* son:
+
+- *ST.1*: Linealidad en los parámetros.
+
+- *ST.2*: Ausencia de colinealidad perfecta.
+
+- *ST.3*: Media condicional nula.
+
+- *ST.4*: Homoscedasticidad.
+
+- *ST.5*: Ausencia de correlación serial.
+
+- *ST.6*: Normalidad.
 
 
 ** Linealidad en los parámetros
+
+*ST.1*: *Linealidad en los parámetros*.
 
 El proceso estocástico $\{(y_t, x_{1t}, x_{2t}, \dots, x_{kt})\!: t = 1,
 2, \dots, T\}$ sigue el modelo:
@@ -165,10 +169,32 @@ El proceso estocástico $\{(y_t, x_{1t}, x_{2t}, \dots, x_{kt})\!: t = 1,
 \]
 #+end_export
 donde $\{u_t\!: t = 1, 2, \dots, T\}$ es una secuencia de perturbaciones
-aleatorias.
+aleatorias no observables.
+
+
+
+** Notación
+
+- Nuestra especificación:
+  #+begin_export latex
+  \[
+    y_t = \beta_0 + \beta_1 x_{1t} + \beta_1 x_{2t} + \dots + \beta_1 x_{kt} + u_t,
+  \]
+  #+end_export
+  admite modelos dinámicos. Por ejemplo, obtenemos un modelo retardos
+  distribuidos si definimos $x_{1t} = z_t, x_{2t} = z_{t-1}, \dots$
+
+- $\bm{x_t} = (x_{1t}, x_{2t}, \dots, x_{kt})$: los valores que toman
+  las explicativas en el periodo $t$.
+
+- $\bm{X} = (\bm{x_1}, \bm{x_2}, \dots, \bm{x_T})$: los valores de
+  todas las explicativas en todos los periodos de la muestra.
+
 
 
 ** Ausencia de colinealidad perfecta
+
+*ST.2*: *Ausencia de colinealidad perfecta*.
 
 En la muestra ninguna de las variables explicativas es constante ni
 una combinación lineal perfecta de las otras explicativas.
@@ -176,8 +202,10 @@ una combinación lineal perfecta de las otras explicativas.
 
 ** Media condicional nula
 
-Condicional a los valores que toman las explicativas en *todos* los
-periodos de tiempo, la media del término de error es $0$:
+*ST.3*: *Media condicional nula*.
+
+La media del término de error es $0$ condicional a los valores que
+toman las explicativas en *todos* los periodos de tiempo :
 #+begin_export latex
 \[
   \Exp(u_t | \bm{X}) = 0,\quad t = 1, 2, \dots, T.
@@ -187,12 +215,34 @@ periodos de tiempo, la media del término de error es $0$:
 
 ** Exogeneidad estricta
 
-- *TS.2* implica que las variables explicativas son *estrictamente
-  exógenas*: $u_t$ debe estar interrelacionado con todas las
-  explicativas en *todos* los periodos de tiempo.
+*ST.3* implica que las variables explicativas son *estrictamente
+exógenas*. El término de error $u_t$ debe estar incorrelacionado con
+todas las explicativas en *todos* los periodos de tiempo:
+
+- $\Exp(u_t | \bm{x_t}) = 0$: *exogeneidad contemporánea*.
+
+- $\Exp(u_t | \bm{x_{t-1}}, \bm{x_{t-2}}, \dots, \bm{x_{1}}) =
+  0$: incorrelación con valores pasados de $\bm{x_t}$.
+
+- $\Exp(u_t | \bm{x_{t+1}}, \bm{x_{t+2}}, \dots, \bm{x_{T}}) = 0$:
+  incorrelación con valores futuros de $\bm{x_t}$.
+
+
+
+** Restricciones que impone la exogeneidad estricta
+
+La exogeneidad estricta es incompatible con algunos casos importantes:
+
+  + Efectos de *retroalimentación*: los valores que toma $y_t$ afectan
+    a los valores futuros de las variables explicativas:
+    $\bm{x_{t+1}}, \dots, \bm{x_{T}}$.
+
+  + Modelos autorregresivos.
 
 
 ** Homoscedasticidad
+
+*ST.4*: *Homoscedasticidad*.
 
 Condicional a $\bm{X}$, la varianza de $u_t$ es la misma en todos los
 periodos:
@@ -205,6 +255,8 @@ periodos:
 
 ** Ausencia de correlación serial
 
+*ST.5*: *Ausencia de correlación serial*.
+
 Condicional a $\bm{X}$, las perturbaciones aleatorias de dos periodos
 diferentes están incorrelacionadas:
 #+begin_export latex
@@ -215,6 +267,8 @@ diferentes están incorrelacionadas:
 
 
 ** Normalidad
+
+*ST.6*: *Normalidad*.
 
 El término de error $u_t$ es independiente de $\bm{X}$ y se distribuye
 independiente e idénticamente como $\Normal(0, \sigma^2)$.
@@ -227,73 +281,38 @@ garantizan las siguientes propiedades del estimador de MCO:
 
 - *Insesgadez*: si se cumplen *TS.1* a *TS.3*.
 
-- *Eficiencia*: si, además, se cumplen *TS.4* y *TS.5*.
+- *Eficiencia*: si, además, se cumplen *TS.4* y *TS.5*. En este caso,
+  podemos usar las fórmulas de MCO para estimar los errores típicos de
+  $\hat{\beta_j}$.
 
-- *Normalidad*: si, además, se cumple *TS.6*.
-
-
-** Limitaciones de la exogeneidad estricta
-
-La exogeneidad estricta es incompatible con algunos casos importantes:
-
-  + Efectos de retroalimentación.
-
-  + Modelos autorregresivos.
+- *Normalidad*: si, además, se cumple *TS.6*. En este caso, podemos
+  contrastar hipótesis con las fórmulas tradicionales de los
+  contrastes $t$ y $F$.
 
 
-** Regresión espuria
+** Limitaciones del modelo clásico
 
-- *Regresión espuria*: Encontrar una relación aparente entre dos o más
-  variables que presentan tendencias pero que no tienen relación entre
-  sí.
+- No es posible obtener estimaciones insesgadas de los parámetros de
+  modelos que incluyan retardos de la variable dependiente.
 
-- Factores no observables provocan tendencias en la dependiente y las
-  explicativas.
+- El estimador MCO tampoco tienen buenas propiedades exactas en
+  presencia de efectos de retroalimentación.
 
-- Una solución simple es incluir una tendencia lineal como un regresor
-  adicional.
-
-
-** Tendencias lineales
-
-Incluir una tendencia lineal es equivalente a:
-
-- Eliminar la tendencia lineal de la variable dependiente, calculando
-  $\ddot{y}_t$, los residuos de la regresión:
-  #+begin_export latex
-  \[
-    y_{t} = \ahat_{0} + \ahat_{1} t + \ddot{y}_{t}
-  \]
-  #+end_export
-
-- De forma similar, eliminar la tendencia lineal de cada una de las
-  variables explicativas obteniendo $\ddot{x}_{1t}, \ddot{x}_{2t}, \dots, \ddot{x}_{kt}$.
-
-- Estimar por MCO los parámetros de una regresión de $\ddot{y}_t$
-  sobre $\ddot{x}_{1t}, \ddot{x}_{2t}, \dots, \ddot{x}_{kt}$.
-
-
-** Estacionalidad
-
-- Con datos trimestrales y mensuales es usual observar variables con
-  fuertes oscilaciones estacionales.
-
-- Una forma simple de controlar este tipo de fluctuaciones es incluir
-  *variables ficticias estacionales* en el modelo de regresión.
-
-
-** Desestacionalización
-
-- Incluir variables ficticias en la regresión es equivalente a estimar
-  el modelo con las variables previamente *desestacionalizadas*.
-
-- Es frecuente encontrar variables que presentan oscilaciones
-  estacionales y comportamiento tendencial. Ambos tipos de efectos
-  pueden controlarse incluyendo simultáneamente una tendencia lineal y
-  variables ficticias estacionales.
+- Algunos de los supuestos del modelo clásico son muy restrictivos:
+  normalidad, exogeneidad estricta, ausencia de correlación serial,
+  etc.
 
 
 * Propiedades asintóticas de MCO con series temporales
+
+
+** Propiedades de MCO con series temporales
+
+-  ¿Qué tiene que cumplirse para que MCO tenga buenas propiedades
+  exactas?
+
+- ¿Qué supuestos son necesarios para que se cumplan las propiedades
+  asintóticas?
 
 
 ** Supuestos
@@ -406,3 +425,58 @@ donde $u_t$ es un proceso estacionario y débilmente dependiente.
 - *Consistencia*: si se cumplen *TS.1'* a *TS.3'*.
 
 - *Normalidad asintótica*: si además se cumplen *TS.4'* y *TS.5'*.
+
+
+* Otras cuestiones
+
+
+** Regresión espuria
+
+- *Regresión espuria*: Encontrar una relación aparente entre dos o más
+  variables que presentan tendencias pero que no tienen relación entre
+  sí.
+
+- Factores no observables provocan tendencias en la dependiente y las
+  explicativas.
+
+- Una solución simple es incluir una tendencia lineal como un regresor
+  adicional.
+
+
+** Tendencias lineales
+
+Incluir una tendencia lineal es equivalente a:
+
+- Eliminar la tendencia lineal de la variable dependiente, calculando
+  $\ddot{y}_t$, los residuos de la regresión:
+  #+begin_export latex
+  \[
+    y_{t} = \ahat_{0} + \ahat_{1} t + \ddot{y}_{t}
+  \]
+  #+end_export
+
+- De forma similar, eliminar la tendencia lineal de cada una de las
+  variables explicativas obteniendo $\ddot{x}_{1t}, \ddot{x}_{2t}, \dots, \ddot{x}_{kt}$.
+
+- Estimar por MCO los parámetros de una regresión de $\ddot{y}_t$
+  sobre $\ddot{x}_{1t}, \ddot{x}_{2t}, \dots, \ddot{x}_{kt}$.
+
+
+** Estacionalidad
+
+- Con datos trimestrales y mensuales es usual observar variables con
+  fuertes oscilaciones estacionales.
+
+- Una forma simple de controlar este tipo de fluctuaciones es incluir
+  *variables ficticias estacionales* en el modelo de regresión.
+
+
+** Desestacionalización
+
+- Incluir variables ficticias en la regresión es equivalente a estimar
+  el modelo con las variables previamente *desestacionalizadas*.
+
+- Es frecuente encontrar variables que presentan oscilaciones
+  estacionales y comportamiento tendencial. Ambos tipos de efectos
+  pueden controlarse incluyendo simultáneamente una tendencia lineal y
+  variables ficticias estacionales.
