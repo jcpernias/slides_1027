@@ -72,7 +72,7 @@ Ruido blanco, $\sigma^2_e = 4$, $T = 60$.
 
 #+MATS: figcol fig-08b_1027-wn-lag-*.pdf 0.5
 
-- $e_t$ no está correlacinado con sus retardos.
+- $e_t$ no está correlacionado con sus retardos.
 
 - Los coeficientes de autocorrelación de un ruido blanco son todos
   iguales a 0: $\rho_h = 0$, para todo $h > 0$.
@@ -306,17 +306,17 @@ Ruido blanco, $\sigma^2_e = 4$, $T = 60$.
   #+end_export
 
 
-** Autocorrelograma
-
-#+MATS: figcol fig-08b_1027-ar1-p8-corr-*.pdf 0.5
-
-Un autocorrelograma se balanceaba sobre la tela de una araña.
-
-
-
 ** Estacionariedad y dependencia débil
 
-- Si $\abs{\rho} < 1$ el proceso AR(1) es estacionario:
+- $y_t$ sigue un proceso AR(1):
+  #+begin_export latex
+  \[
+    y_{t} = \rho y_{t-1} +  e_{t},
+  \]
+  #+end_export
+
+
+- Si $\abs{\rho} < 1$, $y_t$ es un proceso estacionario:
 
   + $\Exp(y_t) = 0$.
 
@@ -329,33 +329,54 @@ Un autocorrelograma se balanceaba sobre la tela de una araña.
   \to \infty$ y la convergencia es geométrica.
 
 
+** Algunos ejemplos (I)
+
+Proceso AR(1), $\rho = 0.8$, $\sigma^2_e = 4$, $T = 60$.
+#+MATS: fig fig-08b_1027-ar8-ts-*.pdf
+
+Proceso AR(1), $\rho = 0.2$, $\sigma^2_e = 4$, $T = 60$.
+#+MATS: fig fig-08b_1027-ar2-ts-*.pdf
+
+** Algunos ejemplos (y II)
+
+#+MATS: col 0.5
+Proceso AR(1), $\rho = 0.8$, $\sigma^2_e = 4$, $T = 60$.
+#+MATS: fig fig-08b_1027-ar8-lag-*.pdf
+
+#+MATS: col 0.5
+Proceso AR(1), $\rho = 0.2$, $\sigma^2_e = 4$, $T = 60$.
+#+MATS: fig fig-08b_1027-ar2-lag-*.pdf
+
+
 * Paseo aleatorio
 
 
 ** Definición
 
-- Un *paseo aleatorio* es un proceso estocástico que se puede expresar
-  como:
-  #+begin_export latex
-  \[
-     y_t = y_{t-1} + e_t,
-  \]
-  #+end_export
-  donde $e_t$ es un ruido blanco.
+Un *paseo aleatorio* es un proceso estocástico que se puede expresar
+como:
+#+begin_export latex
+\[
+   y_t = y_{t-1} + e_t,
+\]
+#+end_export
+donde $e_t$ es un ruido blanco.
 
-- Sustituyendo recursivamente se obtiene:
-  #+begin_export latex
-  \[
-    y_t = e_t + e_{t-1} + \dots + e_1 + y_0,
-  \]
-  #+end_export
-  donde $y_0$ es el valor inicial del proceso. Supondremos que $y_0 =
-  0$, por lo que:
-  #+begin_export latex
-  \[
-    y_t = e_t + e_{t-1} + \dots + e_1.
-  \]
-  #+end_export
+** Sustitución recursiva
+
+Sustituyendo recursivamente se obtiene:
+#+begin_export latex
+\[
+  y_t = e_t + e_{t-1} + \dots + e_1 + y_0,
+\]
+#+end_export
+donde $y_0$ es el valor inicial del proceso. Supondremos que $y_0 =
+0$, por lo que:
+#+begin_export latex
+\[
+  y_t = e_t + e_{t-1} + \dots + e_1.
+\]
+#+end_export
 
 
 ** Esperanza y varianza
@@ -419,6 +440,14 @@ débil:
   convergencia es muy lenta.
 
 
+** Ejemplo
+
+Paseo aleatorio, $\sigma^2_e = 4$, $T = 60$.
+
+#+MATS: fig fig-08b_1027-rw-ts-*.pdf
+
+
+
 * Tendencias
 
 
@@ -448,6 +477,34 @@ débil:
   #+end_export
 
 
+** Ejemplo
+
+Paseo aleatorio con deriva, $\alpha_0 = 1$, $\sigma^2_e = 4$, $T = 60$.
+
+#+MATS: fig fig-08b_1027-rwd-ts-*.pdf
+
+
+** Procesos estacionarios con tendencia
+
+- Los paseos aleatorios con deriva no son los únicos procesos que
+  presentan tendencias.
+
+- Un *proceso estacionario con tendencia* puede escribirse como:
+  #+begin_export latex
+  \[
+    y_t = \beta_0 + \beta_1 t + u_t,
+  \]
+  #+end_export
+  donde $u_t$ es un proceso estacionario y débilmente dependiente.
+
+** Ejemplo
+
+$y_t = \beta_0 + \beta_1 t + u_t$, $\beta_1 = 1$, $u_t \sim AR(1)$, $T = 60$.
+
+#+MATS: fig fig-08b_1027-tst-ts-*.pdf
+
+
+
 * Procesos integrados
 
 
@@ -474,6 +531,14 @@ débil:
   \]
   #+end_export
 
+
+** Diferencias y dependencia débil
+
+- La diferencia de un paseo aleatorio es un ruido blanco, un proceso
+  débilmente dependiente.
+
+- Existen otros procesos estocásticos que, después de diferenciarlos,
+  son débilmente dependientes.
 
 ** Procesos integrados
 

@@ -39,6 +39,7 @@
   \end{tikzpicture}
 #+end_src
 
+
 ** Scatter plot against first lag
 
 #+begin_src latex :tangle fig-08b_1027-wn-lag.tex
@@ -75,7 +76,183 @@
   \end{tikzpicture}
 #+end_src
 
+
 * Procesos AR(1)
+
+** Time series plot rho = 0.8
+
+#+begin_src latex :tangle fig-08b_1027-ar8-ts.tex
+  \begin{tikzpicture}
+    \begin{axis}[
+      xmin = -2, xmax = 63,
+      width = 12cm, height = 3.5cm,
+      xlabel = $t$,
+      ylabel = $y_{t}$,
+      ticklabel style = {font = \footnotesize},
+      xlabel near ticks,
+      every axis y label/.style = {
+        at={(0, 1)}, rotate = 0, above left, xshift = 0pt
+      },
+      xtick = {10, 20, ..., 60},
+      ]
+      \addplot[
+      thick,
+      mark = *,
+      mark size = 0.65,
+      line join = round,
+      ] table [
+      col sep = comma,
+      x = Index,
+      y = ar8,
+      ]{R/unit-08b_1027-sim.csv}
+      ;
+      \draw[ultra thin] (axis cs:\pgfkeysvalueof{/pgfplots/xmin}, 0) --
+        (axis cs:\pgfkeysvalueof{/pgfplots/xmax}, 0);
+    \end{axis}
+  \end{tikzpicture}
+#+end_src
+
+** Scatter plot against first lag
+
+#+begin_src latex :tangle fig-08b_1027-ar8-lag.tex
+  \begin{tikzpicture}
+    \begin{axis}[
+      axis lines = middle,
+      axis line style = {stealth-stealth, semithick},
+      xmin = -7, xmax = 7,
+      ymin = -7, ymax = 7,
+      width = 5cm, height = 5cm,
+      xlabel = $e_{t-1}$,
+      ylabel = $e_{t}$,
+      ticks = none,
+      y label style = {
+        at={(axis description cs:0.5,1)}, rotate = 0, anchor = east, xshift = 0pt
+      },
+      x label style = {
+        at={(axis description cs:1,0.5)}, rotate = 0, anchor = north, xshift = 0pt
+      },
+      ]
+      \addplot[
+      thick,
+      only marks,
+      mark = *,
+      mark size = 0.7,
+      line join = round,
+      ] table [
+      col sep = comma,
+      x = ar8_1,
+      y = ar8,
+      ]{R/unit-08b_1027-sim.csv}
+      ;
+    \end{axis}
+  \end{tikzpicture}
+#+end_src
+
+
+** Time series plot rho = 0.2
+
+#+begin_src latex :tangle fig-08b_1027-ar2-ts.tex
+  \begin{tikzpicture}
+    \begin{axis}[
+      xmin = -2, xmax = 63,
+      width = 12cm, height = 3.5cm,
+      xlabel = $t$,
+      ylabel = $y_{t}$,
+      ticklabel style = {font = \footnotesize},
+      xlabel near ticks,
+      every axis y label/.style = {
+        at={(0, 1)}, rotate = 0, above left, xshift = 0pt
+      },
+      xtick = {10, 20, ..., 60},
+      ]
+      \addplot[
+      thick,
+      mark = *,
+      mark size = 0.65,
+      line join = round,
+      ] table [
+      col sep = comma,
+      x = Index,
+      y = ar2,
+      ]{R/unit-08b_1027-sim.csv}
+      ;
+      \draw[ultra thin] (axis cs:\pgfkeysvalueof{/pgfplots/xmin}, 0) --
+        (axis cs:\pgfkeysvalueof{/pgfplots/xmax}, 0);
+    \end{axis}
+  \end{tikzpicture}
+#+end_src
+
+** Scatter plot against first lag
+
+#+begin_src latex :tangle fig-08b_1027-ar2-lag.tex
+  \begin{tikzpicture}
+    \begin{axis}[
+      axis lines = middle,
+      axis line style = {stealth-stealth, semithick},
+      xmin = -7, xmax = 7,
+      ymin = -7, ymax = 7,
+      width = 5cm, height = 5cm,
+      xlabel = $e_{t-1}$,
+      ylabel = $e_{t}$,
+      ticks = none,
+      y label style = {
+        at={(axis description cs:0.5,1)}, rotate = 0, anchor = east, xshift = 0pt
+      },
+      x label style = {
+        at={(axis description cs:1,0.5)}, rotate = 0, anchor = north, xshift = 0pt
+      },
+      ]
+      \addplot[
+      thick,
+      only marks,
+      mark = *,
+      mark size = 0.7,
+      line join = round,
+      ] table [
+      col sep = comma,
+      x = ar2_1,
+      y = ar2,
+      ]{R/unit-08b_1027-sim.csv}
+      ;
+    \end{axis}
+  \end{tikzpicture}
+#+end_src
+
+
+** Time series plot rho = -0.6
+
+#+begin_src latex :tangle fig-08b_1027-arm6-ts.tex
+  \begin{tikzpicture}
+    \begin{axis}[
+      xmin = -2, xmax = 63,
+      width = 12cm, height = 4cm,
+      xlabel = $t$,
+      ylabel = $y_{t}$,
+      ticklabel style = {font = \footnotesize},
+      xlabel near ticks,
+      every axis y label/.style = {
+        at={(0, 1)}, rotate = 0, above left, xshift = 0pt
+      },
+      xtick = {10, 20, ..., 60},
+      ]
+      \addplot[
+      thick,
+      mark = *,
+      mark size = 0.65,
+      line join = round,
+      ] table [
+      col sep = comma,
+      x = Index,
+      y = arm6,
+      ]{R/unit-08b_1027-sim.csv}
+      ;
+      \draw[ultra thin] (axis cs:\pgfkeysvalueof{/pgfplots/xmin}, 0) --
+        (axis cs:\pgfkeysvalueof{/pgfplots/xmax}, 0);
+    \end{axis}
+  \end{tikzpicture}
+#+end_src
+
+
 
 ** Correlograma
 #+begin_src latex :tangle fig-08b_1027-ar1-p8-corr.tex
@@ -110,9 +287,112 @@
       ] table [
       col sep = comma,
       x = h,
-      y = arm6,
+      y = ar8,
       ]{R/unit-08b_1027-acf.csv}
       ;
+    \end{axis}
+  \end{tikzpicture}
+#+end_src
+
+* Random walk
+
+** Time series plot
+
+#+begin_src latex :tangle fig-08b_1027-rw-ts.tex
+  \begin{tikzpicture}
+    \begin{axis}[
+      xmin = -2, xmax = 63,
+      width = 12cm, height = 7cm,
+      xlabel = $t$,
+      ylabel = $y_{t}$,
+      ticklabel style = {font = \footnotesize},
+      xlabel near ticks,
+      every axis y label/.style = {
+        at={(0, 1)}, rotate = 0, above left, xshift = 0pt
+      },
+      xtick = {10, 20, ..., 60},
+      ]
+      \addplot[
+      thick,
+      mark = *,
+      mark size = 0.65,
+      line join = round,
+      ] table [
+      col sep = comma,
+      x = Index,
+      y = rw,
+      ]{R/unit-08b_1027-sim.csv}
+      ;
+      \draw[ultra thin] (axis cs:\pgfkeysvalueof{/pgfplots/xmin}, 0) --
+        (axis cs:\pgfkeysvalueof{/pgfplots/xmax}, 0);
+    \end{axis}
+  \end{tikzpicture}
+#+end_src
+
+** Time series plot: random walk with drift
+
+#+begin_src latex :tangle fig-08b_1027-rwd-ts.tex
+  \begin{tikzpicture}
+    \begin{axis}[
+      xmin = -2, xmax = 63,
+      width = 12cm, height = 7cm,
+      xlabel = $t$,
+      ylabel = $y_{t}$,
+      ticklabel style = {font = \footnotesize},
+      xlabel near ticks,
+      every axis y label/.style = {
+        at={(0, 1)}, rotate = 0, above left, xshift = 0pt
+      },
+      xtick = {10, 20, ..., 60},
+      ]
+      \addplot[
+      thick,
+      mark = *,
+      mark size = 0.65,
+      line join = round,
+      ] table [
+      col sep = comma,
+      x = Index,
+      y = rwd,
+      ]{R/unit-08b_1027-sim.csv}
+      ;
+      \draw[thin, black, dashed] (1, 1) -- (60, 60) ;
+
+      \draw[ultra thin] (axis cs:\pgfkeysvalueof{/pgfplots/xmin}, 0) --
+        (axis cs:\pgfkeysvalueof{/pgfplots/xmax}, 0);
+    \end{axis}
+  \end{tikzpicture}
+#+end_src
+
+#+begin_src latex :tangle fig-08b_1027-tst-ts.tex
+  \begin{tikzpicture}
+    \begin{axis}[
+      xmin = -2, xmax = 63,
+      width = 12cm, height = 7cm,
+      xlabel = $t$,
+      ylabel = $y_{t}$,
+      ticklabel style = {font = \footnotesize},
+      xlabel near ticks,
+      every axis y label/.style = {
+        at={(0, 1)}, rotate = 0, above left, xshift = 0pt
+      },
+      xtick = {10, 20, ..., 60},
+      ]
+      \addplot[
+      thick,
+      mark = *,
+      mark size = 0.65,
+      line join = round,
+      ] table [
+      col sep = comma,
+      x = Index,
+      y = tst,
+      ]{R/unit-08b_1027-sim.csv}
+      ;
+      \draw[thin, black, dashed] (1, 6) -- (60, 65) ;
+
+      \draw[ultra thin] (axis cs:\pgfkeysvalueof{/pgfplots/xmin}, 0) --
+        (axis cs:\pgfkeysvalueof{/pgfplots/xmax}, 0);
     \end{axis}
   \end{tikzpicture}
 #+end_src

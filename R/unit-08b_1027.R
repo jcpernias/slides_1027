@@ -44,10 +44,13 @@ ar8 <- ar1_build(wn, rho =  0.8)
 ar8_1 <- lag(ar8, k = -1)
 
 ar5 <- ar1_build(wn, rho =  0.5)
+ar5_1 <- lag(ar5, k = -1)
 
 ar2 <- ar1_build(wn, rho =  0.2)
+ar2_1 <- lag(ar2, k = -1)
 
 arm6 <- ar1_build(wn, rho =  -0.6)
+arm6_1 <- lag(arm6, k = -1)
 
 ## Random walk
 drw <- zooreg(c(0, wn), start = 0)
@@ -59,7 +62,8 @@ rwd <- cumsum(drw + 1)
 ## Trend stationarity
 tst <- 5 + 0:T + ar5
 
-series <- merge(wn, wn_1, ar8, ar8_1, ar5, ar2, arm6, rw, rwd, tst) |>
+series <- merge(wn, wn_1, ar8, ar8_1, ar5, ar5_1,
+                ar2, ar2_1, arm6, arm6_1, rw, rwd, tst) |>
     window(start = 1, end = T)
 
 write_csv(series, "unit-08b_1027-sim.csv")
