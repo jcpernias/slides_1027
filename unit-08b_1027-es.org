@@ -329,6 +329,8 @@ Ruido blanco, $\sigma^2_e = 4$, $T = 60$.
   \to \infty$ y la convergencia es geométrica.
 
 
+#+latex: \mode<article>{\clearpage}
+
 ** Algunos ejemplos (I)
 
 Proceso AR(1), $\rho = 0.8$, $\sigma^2_e = 4$, $T = 60$.

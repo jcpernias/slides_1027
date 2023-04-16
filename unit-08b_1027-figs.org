@@ -306,7 +306,7 @@
   \begin{tikzpicture}
     \begin{axis}[
       xmin = -2, xmax = 63,
-      width = 12cm, height = 7cm,
+      width = 12cm, height = 6cm,
       xlabel = $t$,
       ylabel = $y_{t}$,
       ticklabel style = {font = \footnotesize},
@@ -340,7 +340,7 @@
   \begin{tikzpicture}
     \begin{axis}[
       xmin = -2, xmax = 63,
-      width = 12cm, height = 7cm,
+      width = 12cm, height = 6cm,
       xlabel = $t$,
       ylabel = $y_{t}$,
       ticklabel style = {font = \footnotesize},
