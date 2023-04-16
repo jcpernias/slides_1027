@@ -3,38 +3,6 @@
 
 #+TITLE: {{{unit08}}} (I)
 
-#+PROPERTY: header-args:R :session *R-ts-intro*
-#+PROPERTY: header-args:R+ :tangle yes
-#+PROPERTY: header-args:R+ :exports both
-#+PROPERTY: header-args:R+ :results output
-
-#+begin_src R :exports none :tangle no :results silent
-  ## load R libraries
-  options(tidyverse.quiet = TRUE)
-  library(tidyverse)
-  library(readxl)
-  library(zoo, warn.conflicts = FALSE)
-
-  ## Set ggplot2 theme
-  theme_set(theme_bw())
-
-  theme_update(panel.border = element_blank(),
-               axis.line.x = element_line(linewidth = 0.2),
-               axis.line.y = element_line(linewidth = 0.2),
-               text = element_text(size = 9))
-
-
-  ## Read data
-  ipc_db <- read_xlsx("data/IPCa.xlsx", range = "b9:b322",
-                      col_names = "ipc")
-  ipc <- zooreg(ipc_db$ipc, start = c(1997, 1), frequency = 12)
-
-  ## Compute inflation rates
-  lp <- log(ipc)
-  infl <- 100 * diff(lp, lag = 12)
-#+end_src
-
-
 #+MATS: bib
 #+begin_bibbox
 - Wooldridge: ::  /Introducción a la Econometría/. Capítulo 10,
@@ -98,17 +66,7 @@ general de España. Fuente: INE.
 Tasa interanual de inflación calculada a partir del IPC armonizado
 general de España. Fuente: INE.
 
-#+NAME: fig1
-#+header: :width 4.0 :height 2.47 :family "Times" :R-dev-args encoding = "ISOLatin9.enc"
-#+begin_src R :results output graphics file :exports results :file figures/infl.pdf
-  autoplot(window(infl, start = "1999-1")) +
-    scale_y_continuous(breaks = seq(0, 10, 2)) +
-    scale_x_yearmon(breaks = seq(2000, 2023, 5), format = "%Y",
-                    minor_breaks = seq(1999, 2023, 1)) +
-    labs(x = NULL, y = NULL)
-#+end_src
-#+ATTR_LATEX: :centering t
-#+RESULTS: fig1
+#+MATS: fig fig-08a_1027-infl.pdf
 
 
 ** Principales dificultades
@@ -255,26 +213,11 @@ tasas de crecimiento.
 
 ** Tendencias
 
-- En series económicas, es frecuente encontrar *tendencias*: la
-  esperanza del proceso tiende a crecer (o disminuir) con el paso del
-  tiempo.
+- En series económicas, es frecuente encontrar *tendencias*.
 
-- PIB a precios de mercado de España. Millones de euros. Fuente: INE.
-  #+NAME: fig2
-  #+header: :width 4.0 :height 2.47 :family "Times" :R-dev-args encoding = "ISOLatin9.enc"
-  #+begin_src R :results output graphics file :exports results :file figures/pib.pdf
-    pib_db <- read_xlsx("data/pib.xlsx", range = "b2:b28",
-                        col_names = "pib")
+- PIB a precios de mercado de España. Miles de millones de euros. Fuente: INE.
 
-    pib <- zooreg(pib_db$pib, start = 1995, frequency = 1)
-
-    autoplot(pib) +
-      scale_x_continuous(breaks = seq(1995, 2023, 5),
-                        minor_breaks = seq(1995, 2023, 1)) +
-      labs(x = NULL, y = NULL)
-  #+end_src
-  #+ATTR_LATEX: :centering t
-  #+RESULTS: fig2
+#+MATS: fig fig-08a_1027-gdp.pdf
 
 
 ** Estacionalidad
@@ -284,23 +227,7 @@ tasas de crecimiento.
   a año.
 - Índice de cifra de negocios del comercio al por menor. Precios corrientes. Base 2015. Fuente: INE.
 
-  #+NAME: fig3
-  #+header: :width 4.0 :height 2.30 :family "Times" :R-dev-args encoding = "ISOLatin9.enc"
-  #+begin_src R :results output graphics file :exports results :file figures/icom.pdf
-    com_db <- read_xlsx("data/IComMinor.xlsx", range = "b9:b285",
-                        col_names = "icom")
-
-    icom <- zooreg(com_db$icom, start = c(2000, 1), frequency = 12)
-
-    autoplot(window(icom, end = "2022-12")) +
-      #scale_y_continuous(breaks = seq(0, 10, 2)) +
-      scale_x_yearmon(breaks = seq(2000, 2023, 5), format = "%Y",
-                      minor_breaks = seq(2000, 2023, 1)) +
-      labs(x = NULL, y = NULL)
-  #+end_src
-  #+ATTR_LATEX: :centering t
-  #+RESULTS: fig3
-
+#+MATS: fig fig-08a_1027-retail.pdf
 
 
 ** Varianza
