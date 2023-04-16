@@ -337,6 +337,7 @@ Proceso AR(1), $\rho = 0.8$, $\sigma^2_e = 4$, $T = 60$.
 Proceso AR(1), $\rho = 0.2$, $\sigma^2_e = 4$, $T = 60$.
 #+MATS: fig fig-08b_1027-ar2-ts-*.pdf
 
+
 ** Algunos ejemplos (y II)
 
 #+MATS: col 0.5
@@ -361,6 +362,7 @@ como:
 \]
 #+end_export
 donde $e_t$ es un ruido blanco.
+
 
 ** Sustitución recursiva
 
@@ -497,6 +499,7 @@ Paseo aleatorio con deriva, $\alpha_0 = 1$, $\sigma^2_e = 4$, $T = 60$.
   #+end_export
   donde $u_t$ es un proceso estacionario y débilmente dependiente.
 
+
 ** Ejemplo
 
 $y_t = \beta_0 + \beta_1 t + u_t$, $\beta_1 = 1$, $u_t \sim AR(1)$, $T = 60$.
@@ -540,6 +543,7 @@ $y_t = \beta_0 + \beta_1 t + u_t$, $\beta_1 = 1$, $u_t \sim AR(1)$, $T = 60$.
 - Existen otros procesos estocásticos que, después de diferenciarlos,
   son débilmente dependientes.
 
+
 ** Procesos integrados
 
 - El proceso $y_t$ es *integrado de orden 1*, I(1), si $y_t$ es un
@@ -552,3 +556,46 @@ $y_t = \beta_0 + \beta_1 t + u_t$, $\beta_1 = 1$, $u_t \sim AR(1)$, $T = 60$.
 
 - Un proceso débilmente dependiente es *integrado de orden 0*, I(0),
   puesto que no es necesario aplicar ninguna diferencia.
+
+** Ejemplo: IPC armonizado
+
+Logaritmo del IPC armonizado de España, febrero de 1998 hasta febrero
+de 2023. Fuente: INE.
+
+#+MATS: fig fig-08b_1027-lp-ts-*.pdf
+
+** Ejemplo: Inflación interanual
+
+Tasa de inflación interanual:
+#+begin_export latex
+\[
+  \pi_t = 100 \incr_{12} \log(p_t) = 100 \big(\log(p_t) - \log(p_{t-12})\big).
+\]
+#+end_export
+#+MATS: fig fig-08b_1027-infl-ts-*.pdf
+
+** Ejemplo: Variación mensual de la inflación
+
+Variación mensual de la inflación:
+#+begin_export latex
+\[
+  \incr \pi_t = \pi_t - \pi_{t-1}.
+\]
+#+end_export
+#+MATS: fig fig-08b_1027-dinfl-ts-*.pdf
+
+** Ejemplo: Procesos integrados
+
+- El índice de precios es altamente persistente. Al tomar diferencias
+  se obtiene la tasa de inflación que también es altamente
+  persistente. La variación de la tasa de inflación se comporta como
+  un proceso débilmente dependiente.
+
+- Las tres series tienen diferentes órdenes de integración:
+  #+begin_export latex
+  \begin{gather*}
+    \log(p_{t}) \sim \text{I}(2), \\
+    \pi_{t} \sim \text{I}(1), \\
+    \incr \pi_{t} \sim \text{I}(0).
+  \end{gather*}
+  #+end_export

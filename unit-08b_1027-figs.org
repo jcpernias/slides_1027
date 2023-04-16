@@ -112,6 +112,7 @@
   \end{tikzpicture}
 #+end_src
 
+
 ** Scatter plot against first lag
 
 #+begin_src latex :tangle fig-08b_1027-ar8-lag.tex
@@ -181,6 +182,7 @@
     \end{axis}
   \end{tikzpicture}
 #+end_src
+
 
 ** Scatter plot against first lag
 
@@ -294,7 +296,9 @@
   \end{tikzpicture}
 #+end_src
 
+
 * Random walk
+
 
 ** Time series plot
 
@@ -328,6 +332,7 @@
     \end{axis}
   \end{tikzpicture}
 #+end_src
+
 
 ** Time series plot: random walk with drift
 
@@ -391,6 +396,109 @@
       ;
       \draw[thin, black, dashed] (1, 6) -- (60, 65) ;
 
+      \draw[ultra thin] (axis cs:\pgfkeysvalueof{/pgfplots/xmin}, 0) --
+        (axis cs:\pgfkeysvalueof{/pgfplots/xmax}, 0);
+    \end{axis}
+  \end{tikzpicture}
+#+end_src
+
+
+* Integrated processes
+
+#+begin_src latex :tangle fig-08b_1027-lp-ts.tex
+  \begin{tikzpicture}
+    \begin{axis}[
+      xmin = 8, xmax = 322,
+      width = 12cm, height = 6.5cm,
+      xlabel = $t$,
+      ylabel = $\log(p_{t})$,
+      ticklabel style = {font = \footnotesize},
+      xlabel near ticks,
+      every axis y label/.style = {
+        at={(0, 1)}, rotate = 0, above left, xshift = 18pt
+      },
+      xtick = {37, 97, 157, 217, 277},
+      xticklabels = {2000, 2005, 2010, 2015, 2020 },
+      minor xtick = { 25, 37, ..., 313},
+      ]
+      \addplot[
+      thick,
+      %mark = *,
+      %mark size = 0.65,
+      line join = round,
+      ] table [
+      col sep = comma,
+      x = tidx,
+      y = lp,
+      ]{R/unit-08b_1027-int.csv}
+      ;
+      % \draw[ultra thin] (axis cs:\pgfkeysvalueof{/pgfplots/xmin}, 0) --
+      %   (axis cs:\pgfkeysvalueof{/pgfplots/xmax}, 0);
+    \end{axis}
+  \end{tikzpicture}
+#+end_src
+
+
+#+begin_src latex :tangle fig-08b_1027-infl-ts.tex
+  \begin{tikzpicture}
+    \begin{axis}[
+      xmin = 8, xmax = 322,
+      width = 12cm, height = 6.5cm,
+      xlabel = $t$,
+      ylabel = $\pi_{t}$,
+      ticklabel style = {font = \footnotesize},
+      xlabel near ticks,
+      every axis y label/.style = {
+        at={(0, 1)}, rotate = 0, above left, xshift = 0pt
+      },
+      xtick = {37, 97, 157, 217, 277},
+      xticklabels = {2000, 2005, 2010, 2015, 2020 },
+      minor xtick = { 25, 37, ..., 313},
+      ]
+      \addplot[
+      thick,
+      %mark = *,
+      %mark size = 0.65,
+      line join = round,
+      ] table [
+      col sep = comma,
+      x = tidx,
+      y = infl,
+      ]{R/unit-08b_1027-int.csv}
+      ;
+      \draw[ultra thin] (axis cs:\pgfkeysvalueof{/pgfplots/xmin}, 0) --
+        (axis cs:\pgfkeysvalueof{/pgfplots/xmax}, 0);
+    \end{axis}
+  \end{tikzpicture}
+#+end_src
+
+#+begin_src latex :tangle fig-08b_1027-dinfl-ts.tex
+  \begin{tikzpicture}
+    \begin{axis}[
+      xmin = 8, xmax = 322,
+      width = 12cm, height = 6.5cm,
+      xlabel = $t$,
+      ylabel = $\incr \pi_{t}$,
+      ticklabel style = {font = \footnotesize},
+      xlabel near ticks,
+      every axis y label/.style = {
+        at={(0, 1)}, rotate = 0, above left, xshift = 0pt
+      },
+      xtick = {37, 97, 157, 217, 277},
+      xticklabels = {2000, 2005, 2010, 2015, 2020 },
+      minor xtick = { 25, 37, ..., 313},
+      ]
+      \addplot[
+      thick,
+      %mark = *,
+      %mark size = 0.65,
+      line join = round,
+      ] table [
+      col sep = comma,
+      x = tidx,
+      y = dinfl,
+      ]{R/unit-08b_1027-int.csv}
+      ;
       \draw[ultra thin] (axis cs:\pgfkeysvalueof{/pgfplots/xmin}, 0) --
         (axis cs:\pgfkeysvalueof{/pgfplots/xmax}, 0);
     \end{axis}
