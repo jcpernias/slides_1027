@@ -80,7 +80,7 @@ unitario permanente de $z$. En el nuevo equilibrio $z_t = z^* + 1$ e
 $y_t = y^* + \beta_0 + \beta_1 + \beta_2$.
 
 
-#+ATTR_LATEX: :align @{}c@{\hspace{1cm}}l@{\hspace{1cm}}*{4}{c}@{\hspace{1cm}}l@{} :booktabs t
+#+ATTR_LATEX: :align c@{\hspace{1cm}}l@{\hspace{1cm}}*{4}{c}@{\hspace{1cm}}l :booktabs t
 | $t$      | $z_t$     | $\incr z_t$ | $\incr z_{t-1}$ | $\incr z_{t-2}$ | $\incr y_{t}$ | $y_t$                               |
 |----------+-----------+-------------+-----------------+-----------------+---------------+-------------------------------------|
 | $1$      | $z^*$     | $0$         | $0$             | $0$             | $0$           | $y^*$                               |
@@ -435,6 +435,7 @@ una combinación lineal perfecta de las otras explicativas.
 - Por otro lado, el supuesto *ST.1'* requiere estacionariedad y
   dependencia débil de la variable dependiente y de las variables
   explicativas.
+
 
 * Inferencia asintótica
 
