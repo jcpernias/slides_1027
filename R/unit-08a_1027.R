@@ -1,6 +1,5 @@
 ## load R libraries
-options(tidyverse.quiet = TRUE)
-library(tidyverse)
+library(ggplot2)
 library(readxl)
 library(zoo, warn.conflicts = FALSE)
 

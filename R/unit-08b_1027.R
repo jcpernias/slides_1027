@@ -1,6 +1,5 @@
 ## load R libraries
-options(tidyverse.quiet = TRUE)
-library(tidyverse)
+library(ggplot2)
 library(readxl)
 library(zoo, warn.conflicts = FALSE)
 
@@ -94,9 +93,9 @@ ipc <- zooreg(ipc_db$ipc, start = c(1997, 1), frequency = 12)
 lp <- log(ipc)
 infl <- 100 * diff(lp, lag = 12)
 dinfl <- diff(infl)
-tidx <- zooreg(1:NROW(ipc), order.by = index(ipc), frequency = frequency(ipc))
+tidx <- zooreg(1:NROW(ipc), order.by = time(ipc), frequency = frequency(ipc))
 month <- cycle(ipc)
-year <- year(ipc)
+year <- as.integer(format(time(ipc), "%Y"))
 
 series <- merge(tidx, year, month, lp, infl, dinfl) |>
     window(start = "feb 1998", end = "feb 2023")
