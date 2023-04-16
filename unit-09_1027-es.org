@@ -406,7 +406,6 @@ una combinación lineal perfecta de las otras explicativas.
   \var(u_t|\bm{x}_t) = \sigma^2.
 \]
 #+end_export
-#+latex: \vspace*{2ex}
 
 *ST.5'*: *Ausencia de correlación serial*.
 #+begin_export latex
