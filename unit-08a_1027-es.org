@@ -210,6 +210,7 @@ tasas de crecimiento.
   \]
   #+end_export
 
+#+latex: \mode<article>{\clearpage}
 
 ** Tendencias
 
@@ -341,60 +342,3 @@ En economía es frecuente encontrar series *no estacionarias*:
   incorrela\-cionado* si $\rho_h \to 0$ conforme $h \to \infty$. La
   dependencia débil exige, además, que la convergencia sea lo
   suficientemente rápida.
-
-
-* COMMENT Características de las series temporales
-
-
-* COMMENT Ejemplos
-
-- PIB y agregados macro.
-
-- Índices de precios.
-
-- Otros números índices.
-
-- Tipos de interés.
-
-- Cotizaciones de bolsa.
-
-- Indicadores de turismo.
-
-
-* COMMENT Características de las series temporales
-
-- Dependencia temporal: en general, lo que ocurra mañana será muy
-  parecido a lo que ocurre hoy. Base para muchos métodos de
-  predicción: extrapolación sofisticada de lo que ocurrió en el
-  pasado. Autocorrelación.
-
-- Tendencias.
-
-- Uso de logaritmos.
-
-- Diferencias y retardos.
-
-- Estacionalidad.
-
-
-* COMMENT Modelo autorregresivos
-
-- Modelo AR(1). Estacionariedad. Diferencias.
-
-- Predicción y errores de predicción. Predicción con diferencias.
-
-- Modelo AR(p).
-
-- Predicción.
-
-- Selección del número de retardos
-
-
-* COMMENT Tendencias, estacionalidad y análisis de intervención
-
-- Tendencias deterministas. Tendencia lineal. Tendencias con datos en
-  logaritmos.
-
-- Estacionalidad.
-
-- Análisis de intervención. Variables ficticias: impulso, escalón, etc.
