@@ -90,6 +90,7 @@
   #+end_export
   Se diferencia del AIC en una mayor penalización del número de parámetros.
 
+
 ** Comparación entre criterios
 
 - Usando el BIC se obtiene una estimación consistente del número de
@@ -100,7 +101,7 @@
 
 
 
-* Variables altamente persistentes
+* Regresión espuria
 
 
 ** En cortes transversales
@@ -158,6 +159,7 @@
 
 - Regresiones espurias.
 
+
 ** Regresión espuria
 
 - *Regresión espuria*: Encontrar una relación aparente entre dos o más
@@ -192,6 +194,7 @@
 
 * Contrastes de raíz unitaria
 
+
 ** Modelo AR(1)
 
 El modelo autorregresivo de orden 1, \AR{1}, puede escribirse como:
@@ -200,7 +203,8 @@ El modelo autorregresivo de orden 1, \AR{1}, puede escribirse como:
   y_t = \alpha + \rho y_{t-1} + u_t,
 \]
 #+end_export
-donde $u_t$ es un ruido blanco tal que $\Exp(u_t | y_{t-1}) = 0$.
+donde $u_t$ es un ruido blanco.
+
 
 ** Estacionariedad y dependencia débil
 
@@ -211,10 +215,6 @@ Las propiedades dinámicas del proceso \AR{1} dependen del valor de $\rho$:
 - $y_t$ es un paseo aleatorio si $\rho = 1$.
 
 - $y_t$ tiene un comportamiento explosivo cuando $\rho > 1$.
-
-** Raíces unitarias
-
-- Definición de *raíz unitaria*.
 
 
 ** Regresión de Dickey-Fuller
@@ -242,7 +242,8 @@ Las propiedades dinámicas del proceso \AR{1} dependen del valor de $\rho$:
   \]
   #+end_export
 
-** Contraste $t$ de Dickey-Fuller
+
+** Contraste $\bm{t}$ de Dickey-Fuller
 
 - Regresión de Dickey y Fuller:
   #+begin_export latex
@@ -257,9 +258,12 @@ Las propiedades dinámicas del proceso \AR{1} dependen del valor de $\rho$:
   0$ frente a la  alternativa $H_1\!: \beta < 0$ mediante un
   contraste $t$ de una cola.
 
+
 ** Distribución del contraste de Dickey-Fuller
 
-- Robusto a heteroscedasticidad.
+- *No debe usarse un contraste $\bm{t}$ robusto a heteroscedasticidad*. Bajo
+  la hipótesis nula el contraste $t$ tradicional es válido aunque haya
+  heteroscedasticidad.
 
 - El contraste de Dickey-Fuller bajo la hipótesis nula no sigue una
   distribución normal ni ninguna otra distribución convencional.
@@ -287,14 +291,14 @@ Las propiedades dinámicas del proceso \AR{1} dependen del valor de $\rho$:
 - Los valores críticos de Dickey-Fuller son válidos para contrastar
   $H_0\!: \beta = 0$ frente a $H_1\!: \beta < 0$.
 
-- Contrastes sobre $\phi_j$.
 
 ** Selección de retardos
 
-- Criterios de información.
+- Es conveniente utilizar un criterio de información para seleccionar
+  el número de retardos a incluir en la regresión de Dickey-Fuller.
 
-- En este caso es mejor utilizar el AIC para seleccionar el número de
-  retardos.
+- Para el constraste de Dickey-Fuller aumentado es preferible el AIC.
+
 
 ** Tendencias
 
@@ -316,17 +320,19 @@ Las propiedades dinámicas del proceso \AR{1} dependen del valor de $\rho$:
   |---------+---------+---------|
   | $-3.12$ | $-3.41$ | $-3.96$ |
 
-- Contrastes sobre $\delta$.
+
 
 ** Resumen
 
-- Gráficos: ¿Hay tendencias?
+- Mediante la inspección de gráficos, se determina si es necesario
+  incluir una tendencia lineal en la regresión de Dickey-Fuller.
 
-- Selección número de retardos con AIC.
+- Se selecciona el número de retardos en la regresión de Dickey-Fuller
+  de acuerdo con el valor del AIC.
 
-- Se rechaza la presencia de raíz unitaria si el valor del contraste
-  $t$ para $H_0\!: \beta = 0$ frente a $H_1\!: \beta < 0$ es menor
-  que los valores críticos de la siguiente tabla:
+- Se rechaza la presencia de raíz unitaria cuando el valor del
+  cociente $t$ para $H_0\!: \beta = 0$ frente a $H_1\!: \beta < 0$ es
+  menor que los valores críticos de la siguiente tabla:
   #+ATTR_LATEX:  :align l*{3}{@{\hspace{3mm}}r} :booktabs t
   | Tendencia lineal | $10\%$  | $5\%$   | $1\%$   |
   |------------------+---------+---------+---------|
@@ -393,5 +399,6 @@ Incluir una tendencia lineal es equivalente a:
 
 
 ** Cambio estructural
+
 
 ** Estimación multiplicadores acumulativos
