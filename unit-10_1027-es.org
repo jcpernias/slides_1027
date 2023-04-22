@@ -82,13 +82,13 @@
   $\SCR$ es la suma del cuadrado de los residuos y $K$ es el número de
   parámetros.
 
-- *BIC*: criterio bayesiano de información .
+- *BIC*: criterio de información bayesiano.
   #+begin_export latex
   \[
      \text{BIC} = C + T \log\left(\frac{\SCR}{T}\right) + \log(T) (K + 1).
   \]
   #+end_export
-  Se diferencia del AIC en una mayor penalización del número de parámetros.
+  Se diferencia del AIC en que penaliza más el número de parámetros.
 
 
 ** Comparación entre criterios
@@ -302,8 +302,9 @@ Las propiedades dinámicas del proceso \AR{1} dependen del valor de $\rho$:
 
 ** Tendencias
 
-- Si $y_t$ presenta una tendencia es aconsejable añadir una tendencia
-  lineal a la regresión de Dickey-Fuller:
+- Si $y_t$ presenta una tendencia creciente o decreciente es
+  aconsejable añadir una tendencia lineal a la regresión de
+  Dickey-Fuller:
   #+begin_export latex
   \[
     \incr y_t =
