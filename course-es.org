@@ -25,5 +25,5 @@
 
 #+MACRO: unit08 Introducción a las series temporales
 #+MACRO: unit09 El estimador MCO con series temporales
-#+MACRO: unit10 Regresión con series temporales: otros temas
+#+MACRO: unit10 Regresión con series temporales
 #+MACRO: unit11 Autocorrelación
