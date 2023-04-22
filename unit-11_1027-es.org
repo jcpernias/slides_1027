@@ -8,13 +8,12 @@
 - Wooldridge: ::  /Introducción a la Econometría/. Capítulo 0.
 #+end_bibbox
 
-* Introducción
+* Consecuencias de la autocorrelación
 
+* Inferencia robusta a autocorrelación
 
-** El modelo
+* Contrastes de autocorrelación
 
-#+begin_export latex
-\[
-  y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + u_i
-\]
-#+end_export
+* Dinámica completa y autocorrelación
+
+* Estimación eficiente
