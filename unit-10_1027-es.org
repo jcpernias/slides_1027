@@ -11,6 +11,7 @@
 
 * Selección del número de retardos
 
+
 ** Introducción
 
 - Modelo ARDL($p$, $q$):
@@ -104,19 +105,49 @@
 * Regresión espuria
 
 
-** En cortes transversales
+** Regresión espuria en cortes transversales
 
-- Relacionado con sesgo de variable omitida.
 
-- Dos variables están relacionadas a través de su correlación con una
-  tercera variable.
+- Dos variables, $y$ y $x$, parecen estar muy correlacionadas y la
+  regresión de $y$ sobre $x$ produce resultados significativos.
+
+- La relación entre $y$ y $x$ desaparece cuando se incluye una tercera
+  variable, $z$, en la regresión.
+
+- La regresión de $y$ sobre $x$ es un ejemplo de *regresión espuria*.
+
+** Regresión espuria en series temporales
+
+- La omisión de variables relevantes también puede producir
+  regresiones espurias con datos de series temporales.
+
+- Además, es muy frecuente encontrar regresiones espurias cuando se
+  incluyen series temporales con tendencia o que sean altamente
+  persistentes.
 
 
 ** Tipos de tendencia
 
-- *Tendencias deterministas*.
+- La *tendencia* de una serie temporal está constituida por
+  movimientos persistentes a largo plazo.
 
-- *Tendencias estocásticas*.
+- Una *tendencia determinista* es función no aleatoria del tiempo. Por
+  ejemplo, si $y_t$ fluctúa alrededor de una *tendencia lineal*:
+  #+begin_export latex
+  \[
+    y_t = \alpha + \delta t + u_t,
+  \]
+  #+end_export
+  donde $u_t$ es un proceso estacionario y débilmente dependiente.
+
+- Una *tendencias estocástica*: es aleatoria y varía con el paso del
+  tiempo. El ejemplo más simple de una variable con tendencia
+  estocástica es el paseo aleatorio:
+  #+begin_export latex
+  \[
+    y_t = y_{t-1} + e_t.
+  \]
+  #+end_export
 
 
 ** Variables con tendencia
@@ -215,6 +246,19 @@ Las propiedades dinámicas del proceso \AR{1} dependen del valor de $\rho$:
 - $y_t$ es un paseo aleatorio si $\rho = 1$.
 
 - $y_t$ tiene un comportamiento explosivo cuando $\rho > 1$.
+
+** Detección de raíces unitarias
+
+- Los estadísticos habituales no pueden usarse para contrastar la
+  existencia de una raíz unitaria.
+
+- La estimación MCO del parámetro $\rho$ está sesgada hacia abajo y el
+  sesgo aumenta cuanto más cerca está $\rho$ de 1.
+
+- La distribución del estadístico $t = (\hat{\rho} - 1)/\se({\rho})$
+  es muy diferente de una $t_{T-2}$ o de una normal cuando $\rho$
+  tiene un valor cercano a 1.
+
 
 
 ** Regresión de Dickey-Fuller
