@@ -107,6 +107,7 @@
 
 * Regresión espuria
 
+
 ** Regresión espuria en cortes transversales
 
 - Dos variables, $y$ y $x$, parecen estar muy correlacionadas y la
@@ -150,6 +151,7 @@ persistentes a largo plazo. Distinguimos entre:
   #+end_export
   donde $u_t$ es un proceso estacionario y débilmente dependiente.
 
+
 ** Regresión y tendencias lineales
 
 - Regresión con dos variables, $y_t$ y $x_t$, las cuales no están
@@ -172,6 +174,7 @@ persistentes a largo plazo. Distinguimos entre:
   \]
   #+end_export
 
+
 ** Tendencias estocásticas
 
 - Una *tendencia estocástica* es aleatoria y varía con el paso del
@@ -188,6 +191,7 @@ persistentes a largo plazo. Distinguimos entre:
 - Un paseo aleatorio alterna episodios de crecimiento durante varios
   periodos, con episodios donde la tendencia es decreciente.
 
+
 ** Paseo aleatorio con deriva
 
 - Algunas series tienen una tendencia de crecimiento sostenido a largo
@@ -202,6 +206,7 @@ persistentes a largo plazo. Distinguimos entre:
 
 - Si el parámetro $\delta > 0$ la variable $y_t$ tiende a crecer con
   el paso del tiempo.
+
 
 ** Raíces unitarias
 
@@ -228,15 +233,18 @@ persistentes a largo plazo. Distinguimos entre:
 - Un proceso con una raíz unitaria es un proceso integrado de orden 1,
   I(1).
 
+
 ** Regresión espuria y tendencias estocásticas
 
 - Si $y_t$ y $x_t$ son procesos I(1), la regresión de $y_t$ sobre
   $x_t$ mostrará con mucha frecuencia resultados muy significativos
   aunque, en realidad, las dos variables no estén relacionadas.
 
-- Si las variables están relacionadas directamente, los residuos de la
-  regresión de $y_t$ sobre $x_t$ deberían comportarse como un proceso
-  I(0). En ese caso las variables están *cointegradas*.
+- Cuando $y_t$ y $x_t$ están relacionadas y tienen una tendencia
+  común, los residuos de la regresión de $y_t$ sobre $x_t$ deberían
+  comportarse como un proceso I(0). En ese caso las variables están
+  *cointegradas*.
+
 
 ** Regresión con variables con tendencias
 
@@ -454,12 +462,12 @@ Las propiedades dinámicas del proceso \AR{1} dependen del valor de $\rho$:
   parámetros:
   #+begin_export latex
   \[
-     \delta_{\text{LP}} = \frac{\sum_{j=0}^q \beta_j}{1 - \sum_{j=0}^p \rho_j}.
+     \delta_{\text{LP}} = \frac{\sum_{j=0}^q \beta_j}{1 - \sum_{j=1}^p \rho_j}.
   \]
   #+end_export
 
 - En este curso no se tratará como obtener los multiplicadores
-  acumulativos y sus errores típicos.
+  acumulativos y sus errores típicos en modelos ARDL.
 
 
 ** Cambio estructural
@@ -511,7 +519,7 @@ Las propiedades dinámicas del proceso \AR{1} dependen del valor de $\rho$:
   \]
   #+end_export
 
-- Bajo la hipótesis nula de que no se ha producido cambio estructural
+- Bajo la hipótesis nula de que no se ha producido cambio estructural,
   los términos que se han añadido no son significativos.
 
 - Puede usarse un estadístico $F$ para contrastar $\theta_0 = \theta_1
@@ -530,13 +538,14 @@ Las propiedades dinámicas del proceso \AR{1} dependen del valor de $\rho$:
 - Una forma simple de controlar este tipo de variación es incluir
   *variables ficticias estacionales* en el modelo de regresión.
 
+
 ** Variables ficticias estacionales
 
 - Con datos trimestrales podemos definir cuatro variables ficticias
   estacionales $D^s_t$, $s = 1, \dots, 4$:
   #+begin_export latex
   \[
-    D_t =
+    D^s_t =
     \begin{cases}
       0 & \text{si $t$ corresponde al trimestre $s$}, \\
       1 & \text{en caso contrario}.
@@ -552,7 +561,7 @@ Las propiedades dinámicas del proceso \AR{1} dependen del valor de $\rho$:
   estacionales.
 
 
-** Desestacionalización
+** COMMENT Desestacionalización
 
 - Incluir variables ficticias en la regresión es equivalente a estimar
   el modelo con las variables previamente *desestacionalizadas*.
