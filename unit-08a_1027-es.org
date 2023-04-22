@@ -212,6 +212,7 @@ tasas de crecimiento.
 
 #+latex: \mode<article>{\clearpage}
 
+
 ** Tendencias
 
 - En series económicas, es frecuente encontrar *tendencias*.
