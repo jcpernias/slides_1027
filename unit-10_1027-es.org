@@ -5,7 +5,10 @@
 
 #+MATS: bib
 #+begin_bibbox
-- Wooldridge: ::  /Introducción a la Econometría/. Capítulo 0.
+- Wooldridge: ::  /Introducción a la Econometría/. Capítulos 10.4,
+  10.5, 11.3, 18.2 y 18.3.
+- Stock y Watson: :: /Introducción a la Econometría/. Capítulos 14.5,
+  14.6, 14.7 y 15.3.
 #+end_bibbox
 
 
@@ -104,9 +107,7 @@
 
 * Regresión espuria
 
-
 ** Regresión espuria en cortes transversales
-
 
 - Dos variables, $y$ y $x$, parecen estar muy correlacionadas y la
   regresión de $y$ sobre $x$ produce resultados significativos.
@@ -115,6 +116,7 @@
   variable, $z$, en la regresión.
 
 - La regresión de $y$ sobre $x$ es un ejemplo de *regresión espuria*.
+
 
 ** Regresión espuria en series temporales
 
@@ -128,11 +130,19 @@
 
 ** Tipos de tendencia
 
-- La *tendencia* de una serie temporal está constituida por
-  movimientos persistentes a largo plazo.
+La *tendencia* de una serie temporal está constituida por movimientos
+persistentes a largo plazo. Distinguimos entre:
 
-- Una *tendencia determinista* es función no aleatoria del tiempo. Por
-  ejemplo, si $y_t$ fluctúa alrededor de una *tendencia lineal*:
+- Tendecias deterministas.
+
+- Tendencias estocásticas.
+
+
+** Tendencias deterministas
+
+- Una *tendencia determinista* es una función no aleatoria del tiempo.
+
+- Por ejemplo, si $y_t$ fluctúa alrededor de una *tendencia lineal*:
   #+begin_export latex
   \[
     y_t = \alpha + \delta t + u_t,
@@ -140,32 +150,58 @@
   #+end_export
   donde $u_t$ es un proceso estacionario y débilmente dependiente.
 
-- Una *tendencias estocástica*: es aleatoria y varía con el paso del
-  tiempo. El ejemplo más simple de una variable con tendencia
-  estocástica es el paseo aleatorio:
+** Regresión y tendencias lineales
+
+- Regresión con dos variables, $y_t$ y $x_t$, las cuales no están
+  relacionadas pero presentan *tendencias lineales*:
+  #+begin_export latex
+  \[
+    y_t = \alpha + \beta x_t + u_t.
+  \]
+  #+end_export
+
+- A pesar de que $\beta = 0$, la regresión anterior con frecuencia
+  indicaría que existe una relación significativa entre las dos
+  variables.
+
+- Para evitar encontrar regresiones espurias, es aconsejable
+  introducir una tendencia lineal en la regresión anterior:
+  #+begin_export latex
+  \[
+    y_t = \alpha + \beta x_t + \delta t + u_t.
+  \]
+  #+end_export
+
+** Tendencias estocásticas
+
+- Una *tendencia estocástica* es aleatoria y varía con el paso del
+  tiempo.
+
+- El ejemplo más simple de una variable con tendencia estocástica es
+  el *paseo aleatorio*:
   #+begin_export latex
   \[
     y_t = y_{t-1} + e_t.
   \]
   #+end_export
 
+- Un paseo aleatorio alterna episodios de crecimiento durante varios
+  periodos, con episodios donde la tendencia es decreciente.
 
-** Variables con tendencia
+** Paseo aleatorio con deriva
 
-- 10.5 Regresiones con variables estacionarias alrededor de una tendencia
-  lineal.
+- Algunas series tienen una tendencia de crecimiento sostenido a largo
+  plazo.
 
-- Incluyendo una tendencia como un regresor adicional se puede
-  solucionar el problema.
+- *Paseo aleatorio con deriva*:
+  #+begin_export latex
+  \[
+    y_t = \delta + y_{t-1} + e_t.
+  \]
+  #+end_export
 
-
-** Tendencias estocásticas
-
-- 18.3 Procesos como los paseos aleatorios con deriva generan tendencia
-  estocásticas.
-
-- En este caso añadir una tendencia lineal puede no ser suficiente.
-
+- Si el parámetro $\delta > 0$ la variable $y_t$ tiende a crecer con
+  el paso del tiempo.
 
 ** Raíces unitarias
 
@@ -173,54 +209,45 @@
   1$, incumpliendo la condición de estabilidad.
 
 - La condición de estabilidad de procesos \AR{p} es más complicada y
-  depende del valor de las raíces de un polinomio de orden p formado a
-  partir de los coeficientes del proceso \AR{p}.
+  depende del valor de las raíces del *polinomio característico*: un
+  polinomio de orden $p$ formado a partir de los coeficientes del
+  proceso \AR{p}.
 
-- En el caso que tenga una raíz igual a 1 el proceso tiene una raíz
-  unitaria. Si un proceso tiene una raíz unitaria entonces tiene una
+- Cuando una de esas raíces sea igual a 1, se dice que el proceso tiene
+  una *raíz unitaria*.
+
+
+** Raíces unitarias, tendencias estocásticas y procesos I(1)
+
+- Si un proceso tiene una raíz unitaria entonces tiene una
   tendencia estocástica.
 
-- Raíces unitarias y procesos I(1).
+- La diferencia de un proceso con una raíz unitaria no tiene tendencia
+  estocástica.
 
+- Un proceso con una raíz unitaria es un proceso integrado de orden 1,
+  I(1).
 
-** Problemas con tendencias estocásticas
+** Regresión espuria y tendencias estocásticas
 
-- La estimación de los coeficientes autorregresivos severamente
-  sesgada hacia abajo. También las del estadístico $t$.
+- Si $y_t$ y $x_t$ son procesos I(1), la regresión de $y_t$ sobre
+  $x_t$ mostrará con mucha frecuencia resultados muy significativos
+  aunque, en realidad, las dos variables no estén relacionadas.
 
-- Regresiones espurias.
+- Si las variables están relacionadas directamente, los residuos de la
+  regresión de $y_t$ sobre $x_t$ deberían comportarse como un proceso
+  I(0). En ese caso las variables están *cointegradas*.
 
+** Regresión con variables con tendencias
 
-** Regresión espuria
+- Debemos añadir un término de tendencia lineal cuando alguna de las
+  variables presente tendencias deterministas.
 
-- *Regresión espuria*: Encontrar una relación aparente entre dos o más
-  variables que presentan tendencias pero que no tienen relación entre
-  sí.
+- Las variables con raíz unitaria deben ser diferenciadas para
+  eliminar las tendencias estocásticas.
 
-- Factores no observables provocan tendencias en la dependiente y las
-  explicativas.
-
-- Una solución simple es incluir una tendencia lineal como un regresor
-  adicional.
-
-
-
-
-** Procesos I(1)
-
-- Incluso aunque no presenten tendencias las regresiones de dos
-  procesos I(1) independientes pueden aparecer como significativas.
-
-
-** Diferenciación
-
-- Las tendencias estocásticas se eliminan diferenciando las series.
-
-
-** Otras soluciones
-
-- *Cointegración*.
-
+- La posibilidad de que haya relaciones de cointegración entre
+  variables I(1) no se explorará en este curso.
 
 
 * Contrastes de raíz unitaria
@@ -246,6 +273,7 @@ Las propiedades dinámicas del proceso \AR{1} dependen del valor de $\rho$:
 - $y_t$ es un paseo aleatorio si $\rho = 1$.
 
 - $y_t$ tiene un comportamiento explosivo cuando $\rho > 1$.
+
 
 ** Detección de raíces unitarias
 
@@ -385,20 +413,154 @@ Las propiedades dinámicas del proceso \AR{1} dependen del valor de $\rho$:
   | Sí               | $-3.12$ | $-3.41$ | $-3.96$ |
 
 
-** Ejemplo
-
-
-** Limitaciones y otros contrastes
-
-- No rechazar la nula no implica la existencia de una raíz unitaria.
-
-- Escasa potencia.
-
-- Se han propuesto muchas alternativas, pero ninguna es claramente superior.
-
-
 * Otras cuestiones
 
+
+
+** Multiplicadores de largo plazo (I)
+
+- Modelo con tres retardos de la variable explicativa:
+  #+begin_export latex
+  \[
+     y_t = \alpha + \beta_0 z_t + \beta_1 z_{t-1} + \beta_2 z_{t-2} + \beta_3 z_{t-3} + u_t.
+  \]
+  #+end_export
+
+- Es posible reescribir el modelo anterior como:
+  #+begin_export latex
+  \[
+     y_t = \alpha + \delta_0 \incr z_t + \delta_1 \incr z_{t-1} +
+     \delta_2 \incr z_{t-2} + \delta_3 z_{t-3} + u_t
+  \]
+  #+end_export
+
+- Con la regresión anterior se estiman directamente los
+  multiplicadores acumulativos y de largo plazo y sus correspondientes
+  errores típicos.
+
+
+** Multiplicadores de largo plazo (y II)
+
+- Modelo ARDL($p$, $q$):
+  #+begin_export latex
+  \[
+     y_t = \alpha + \rho_1 y_{t-1} + \dots + \rho_p y_{t-p} +
+     \beta_0 z_t + \beta_1 z_{t-1} + \dots + \beta_q z_{t-q} +
+     u_t
+  \]
+  #+end_export
+
+- El multiplicador de largo plazo es una función no lineal de los
+  parámetros:
+  #+begin_export latex
+  \[
+     \delta_{\text{LP}} = \frac{\sum_{j=0}^q \beta_j}{1 - \sum_{j=0}^p \rho_j}.
+  \]
+  #+end_export
+
+- En este curso no se tratará como obtener los multiplicadores
+  acumulativos y sus errores típicos.
+
+
+** Cambio estructural
+
+- Se produce un *cambio estructural* cuando los parámetros del modelo
+  de regresión no permanecen constantes a lo largo de todo el periodo
+  muestral.
+
+- Consideraremos el caso de que los parámetros sólo cambian una vez y
+  que conocemos en qué periodo se produce el cambio.
+
+
+** Contraste de Chow (I)
+
+- Modelo de regresión original:
+  #+begin_export latex
+  \[
+    y_t = \beta_0 + \beta_1 x_{1t}  + \beta_2 x_{2t} + u_t.
+  \]
+  #+end_export
+
+- El *contraste de Chow* puede usarse cuando se sospecha de la
+  existencia de un cambio estructural en el periodo $\tau$, $1 < \tau
+  < T$.
+
+- Creamos una variable ficticia $D_t$ que toma el valor 0 en todos
+  los periodos anteriores a $\tau$ y valor 1 a partir del periodo
+  $\tau$.
+  #+begin_export latex
+  \[
+    D_t =
+    \begin{cases}
+      0 & \text{si $t < \tau$}, \\
+      1 & \text{si $t \geq \tau$}.
+    \end{cases}
+  \]
+  #+end_export
+
+
+** Contraste de Chow (y II)
+
+- Añadimos al modelo original la variable $D_t$ así como
+  interacciones de $D_t$ con todas las variables explicativas:
+  #+begin_export latex
+  \[
+    y_t = \beta_0 + \beta_1 x_{1t}  + \beta_2 x_{2t} +
+    \theta_0 D_t + \theta_1 D_t x_{1t}   + \theta_2 D_t x_{2t}
+    + u_t.
+  \]
+  #+end_export
+
+- Bajo la hipótesis nula de que no se ha producido cambio estructural
+  los términos que se han añadido no son significativos.
+
+- Puede usarse un estadístico $F$ para contrastar $\theta_0 = \theta_1
+  = \theta_2 = 0$.
+
+- En caso que se rechace la hipótesis nula, el parámetro $\theta_j$
+  muestra como ha cambiado el parámetro $\beta_j$ a partir del periodo
+  $\tau$.
+
+
+** Estacionalidad
+
+- Con datos trimestrales y mensuales es usual observar variables con
+  fuertes oscilaciones estacionales.
+
+- Una forma simple de controlar este tipo de variación es incluir
+  *variables ficticias estacionales* en el modelo de regresión.
+
+** Variables ficticias estacionales
+
+- Con datos trimestrales podemos definir cuatro variables ficticias
+  estacionales $D^s_t$, $s = 1, \dots, 4$:
+  #+begin_export latex
+  \[
+    D_t =
+    \begin{cases}
+      0 & \text{si $t$ corresponde al trimestre $s$}, \\
+      1 & \text{en caso contrario}.
+    \end{cases}
+  \]
+  #+end_export
+
+- En la regresión sólo incluiríamos tres de estas variables. De otra
+  forma, incurriríamos en la *trampa de la variables ficticias*.
+
+- De la misma manera, para controlar la estacionalidad en datos
+  mensuales incluiríamos un conjunto de 11 variables ficticias
+  estacionales.
+
+
+** Desestacionalización
+
+- Incluir variables ficticias en la regresión es equivalente a estimar
+  el modelo con las variables previamente *desestacionalizadas*.
+
+- Es frecuente encontrar variables que presentan oscilaciones
+  estacionales y comportamiento tendencial. Ambos tipos de efectos
+  pueden controlarse incluyendo simultáneamente una tendencia lineal y
+  variables ficticias estacionales.
 
 
 ** COMMENT Tendencias lineales
@@ -418,32 +580,3 @@ Incluir una tendencia lineal es equivalente a:
 
 - Estimar por MCO los parámetros de una regresión de $\ddot{y}_t$
   sobre $\ddot{x}_{1t}, \ddot{x}_{2t}, \dots, \ddot{x}_{kt}$.
-
-
-** Estacionalidad
-
-- Con datos trimestrales y mensuales es usual observar variables con
-  fuertes oscilaciones estacionales.
-
-- Una forma simple de controlar este tipo de fluctuaciones es incluir
-  *variables ficticias estacionales* en el modelo de regresión.
-
-
-** Desestacionalización
-
-- Incluir variables ficticias en la regresión es equivalente a estimar
-  el modelo con las variables previamente *desestacionalizadas*.
-
-- Es frecuente encontrar variables que presentan oscilaciones
-  estacionales y comportamiento tendencial. Ambos tipos de efectos
-  pueden controlarse incluyendo simultáneamente una tendencia lineal y
-  variables ficticias estacionales.
-
-
-** Análisis de intervención
-
-
-** Cambio estructural
-
-
-** Estimación multiplicadores acumulativos
