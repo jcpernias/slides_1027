@@ -5,15 +5,117 @@
 
 #+MATS: bib
 #+begin_bibbox
-- Wooldridge: ::  /Introducción a la Econometría/. Capítulo 0.
+- Wooldridge: ::  /Introducción a la Econometría/. Capítulo 12, excepto 12.6.
+- Stock y Watson: ::  /Introducción a la Econometría/. Capítulo 15,
+  secciones 15.4 y 15.5.
 #+end_bibbox
 
-* Consecuencias de la autocorrelación
+
+* Propiedades de MCO con autocorrelación del término de error
+
+** Introducción
+
+- El supuesto *ST.5'* requiere que el término de error no esté
+  correlacionado consigo mismo y que se cumpla:
+  #+begin_export latex
+  \[
+    \Exp(u_{t} u_{s} | \bm{x_{t}}, \bm{x_{s}}) = 0, \quad t \neq s.
+  \]
+  #+end_export
+
+- ¿Qué consecuencias tiene el incumplimiento de este supuesto? ¿Cómo
+  se puede detectar? ¿Cómo se debe proceder en presencia de
+  autocorrelación?
+
+** Insesgadez y consistencia
+
+Las propiedades de insesgadez y consistencia no dependen del supuesto
+de no correlación serial.
+
+** Eficiencia
+
+- El teorema de Gauss-Markov requiere que el término de error no
+  presente correlación serial.
+
+- Con autocorrelación MCO no es eficiente.
+
+** Inferencia
+
+- Las fórmulas de MCO para estimar los errores típicos de $\bhat_j$
+  no son válidas en presencia de autocorrelación.
+
+- Las fórmulas de MCO frecuentemente subestiman los errores típicos y
+  las estimaciones parecen ser más precisas de lo que realmente son.
+
+- Las fórmulas tradicionales de los contrastes $t$ y $F$ no son
+  válidas con autocorrelación del término de error.
+
+** Variable dependiente retardada (I)
+
+- A veces se observa que MCO es inconsistente cuando hay
+  autocorrelación en modelos con variable dependiente retardada.
+
+- Sin embargo, esta conclusión no es válida en modelos cuya
+  especificación dinámica es correcta.
+
+
+** Variable dependiente retardada (II)
+
+- Modelo autorregresivo donde el término de error sigue un proceso
+  \AR{1}:
+  #+begin_export latex
+  \begin{gather*}
+    y_{t} = \beta_{0} + \beta_{1} y _{t-1} + u_{t}, \\
+    u_{t} = \rho u_{t-1} + e_{t},
+  \end{gather*}
+  #+end_export
+  donde $\abs{\beta_1} < 1$, $\abs{\rho} < 1$ y $e_t$ es un ruido
+  blanco.
+
+- No se cumple la condición de esperanza condicional nula:
+  #+begin_export latex
+  \[
+    \cov(y_{t-1}, u_t) = \cov(y_{t-1}, \rho u_{t-1} + e_{t}) = \rho
+    \cov(y_{t-1}, u_{t-1}) \neq 0.
+  \]
+  #+end_export
+
+** Variable dependiente retardada (III)
+
+- El modelo anterior puede reescribirse como:
+  #+begin_export latex
+  \[
+    y_{t} = \phi_{0} + \phi_{1} y_{t-1} + \phi_{2} y_{t-2} + e_{t},
+  \]
+  #+end_export
+  donde $\phi_0 = \beta_0 (1 - \rho)$, $\phi_1 = \beta_1 + \rho$ y
+  $\phi_2 = -\beta_1 \rho$.
+
+- Por tantos, el valor esperado de $y_t$ condicional a sus valores
+  pasados depende de *dos* retardos:
+  #+begin_export latex
+  \[
+    \Exp(y_t | y_{t-1}, y_{t-2}, y_{t-3}, \dots ) =
+    \Exp(y_t | y_{t-1}, y_{t-2}) =
+    \phi_{0} + \phi_{1} y_{t-1} + \phi_{2} y_{t-2}
+  \]
+  #+end_export
+
+** Variable dependiente retardada (y IV)
+
+En general, la correlación serial de los errores de un modelo con
+variable dependiente retardada es una indicación de que la
+especificación dinámica es incompleta.
+
+
 
 * Inferencia robusta a autocorrelación
 
+
 * Contrastes de autocorrelación
 
+
 * Dinámica completa y autocorrelación
+
 
 * Estimación eficiente
