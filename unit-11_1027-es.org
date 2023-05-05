@@ -11,7 +11,7 @@
 #+end_bibbox
 
 
-* Propiedades de MCO con autocorrelación del término de error
+* Propiedades de MCO y autocorrelación del término de error
 
 ** Introducción
 
@@ -19,7 +19,7 @@
   correlacionado consigo mismo y que se cumpla:
   #+begin_export latex
   \[
-    \Exp(u_{t} u_{s} | \bm{x_{t}}, \bm{x_{s}}) = 0, \quad t \neq s.
+    \cov(u_{t}, u_{s} | \bm{x_{t}}, \bm{x_{s}}) = 0, \quad t \neq s.
   \]
   #+end_export
 
@@ -50,9 +50,20 @@ de no correlación serial.
 - Las fórmulas tradicionales de los contrastes $t$ y $F$ no son
   válidas con autocorrelación del término de error.
 
+** Estimación e inferencia robusta con MCO
+
+- Se estiman por MCO los parámetros del modelo de regresión. MCO es
+  consistente si se cumplen los supuestos *ST.1'*, *ST.2'* y *ST.3'*.
+
+- Los contrastes de hipótesis sobre los parámetros del modelo de
+  regresión se llevan a cabo utilizando una estimación de
+  $\var(\hat{\bm\beta})$ robusta a heteroscedasticidad y
+  autocorrelación.
+
+
 ** Variable dependiente retardada (I)
 
-- A veces se observa que MCO es inconsistente cuando hay
+- Algunos autores señalan que MCO es inconsistente cuando hay
   autocorrelación en modelos con variable dependiente retardada.
 
 - Sin embargo, esta conclusión no es válida en modelos cuya
@@ -72,7 +83,8 @@ de no correlación serial.
   donde $\abs{\beta_1} < 1$, $\abs{\rho} < 1$ y $e_t$ es un ruido
   blanco.
 
-- No se cumple la condición de esperanza condicional nula:
+- La condición de esperanza condicional nula requiere que
+  $\cov(y_{t-1}, u_t) = 0$, pero:
   #+begin_export latex
   \[
     \cov(y_{t-1}, u_t) = \cov(y_{t-1}, \rho u_{t-1} + e_{t}) = \rho
@@ -108,14 +120,272 @@ variable dependiente retardada es una indicación de que la
 especificación dinámica es incompleta.
 
 
-
-* Inferencia robusta a autocorrelación
-
-
 * Contrastes de autocorrelación
 
+** Introducción
 
-* Dinámica completa y autocorrelación
+- Se han propuesto diferentes métodos para detectar la autocorrelación
+  del término de error.
 
+- La hipótesis nula de estos contrastes es que no existe correlación
+  serial en el término de error.
+
+- Algunas de las propuestas más conocidas sólo son válidas bajo
+  supuestos restrictivos.
+
+** Autocorrelación de orden 1
+
+- Modelo de regresión:
+  #+begin_export latex
+  \[
+    y_{t} = \beta_{0} + \beta_{1} x_{1t} + \dots + \beta_{k} x_{tk} + u_{t}.
+  \]
+  #+end_export
+
+- El término de error sigue un proceso \AR{1}:
+  #+begin_export latex
+  \[
+     u_{t} = \rho u_{t-1} + e_{t}.
+  \]
+  #+end_export
+
+
+** Contraste de Breusch-Godfrey
+
+- Se estiman los parámetros del modelo de regresión por MCO y se
+  obtienen los residuos $\uhat_t$.
+
+- Se estima por MCO la regresión auxiliar:
+  #+begin_export latex
+  \[
+    \uhat_{t} = \theta_{0} + \theta_{1} x_{1t} + \dots + \theta_{k} x_{kt} + \rho \uhat_{t-1}
+    + \text{error}.
+  \]
+  #+end_export
+
+- Bajo la hipótesis nula de que $\rho = 0$, el estadístico de
+  multiplicadores de Lagrange, $LM = n_\text{aux} R^2_\text{aux}$, se
+  distribuye como una $\chi^2$ con un grado de libertad.
+
+- También se puede usar un contraste $F$ o un contraste $t$ de la
+  hipótesis $\rho = 0$ en la regresión auxiliar.
+
+** Extensiones del contraste de Breusch-Godfrey
+
+- Se puede extender el contraste a órdenes superiores de
+  autocorrelación incluyendo $p$ retardos de los residuos en la
+  regresión auxiliar:
+  #+begin_export latex
+  \[
+    \uhat_{t} = \theta_{0} + \theta_{1} x_{1t} + \dots + \theta_{k} x_{kt} +
+    \rho_1 \uhat_{t-1} + \dots + \rho_p \uhat_{t-p}
+    + \text{error}.
+  \]
+  #+end_export
+
+- Bajo la hipótesis nula de no autocorrelación, $\rho_1 = \dots =
+  \rho_p = 0$, el estadístico $LM = n_\text{aux} R^2_\text{aux}$, se
+  distribuye como una $\chi^2$ con $p$ grados de libertad.
+
+- También se puede usar un contraste $F$ de significación conjunta de
+  los retardos de los residuos en la regresión auxiliar.
+
+** Contrastes de Breusch-Godfrey y heteroscedasticidad
+
+Pueden obtenerse contrastes de autocorrelación que son validos aun un
+presencia de heteroscedasticidad usando estimaciones de $\var(\bhat)$
+robustas a heteroscedasticidad en la regresión auxiliar.
+
+** Otros contrastes de autocorrelación
+
+- El contraste de Breusch-Godfrey sólo requiere la exogeneidad
+  contemporánea de los regresores y es fácil hacerlo robusto a
+  heteroscedasticidad.
+
+- Si los *regresores son estrictamente exógenos* se pueden omitir las
+  variables explicativas de la regresión auxiliar y basar el contraste
+  en la regresión auxiliar:
+  #+begin_export latex
+  \[
+    \uhat_{t} = \theta_{0} +
+    \rho_1 \uhat_{t-1} + \dots + \rho_p \uhat_{t-p}
+    + \text{error}.
+  \]
+  #+end_export
+
+** El contraste de Durbin-Watson
+
+- El estadístico de *Durbin y Watson* se ha usado tradicionalmente
+  para contrastar la hipótesis de no autocorrelación frente a la
+  alternativa de que $u_t$ sigue un \AR{1}:
+  #+begin_export latex
+  \[
+    DW = \frac{%
+      \sum_{t=2}^{T}(\uhat_{t} - \uhat_{t-1})^{2}}{%
+      \sum_{t=1}^{T} \uhat_{t-1}^{2}}.
+  \]
+  #+end_export
+
+- Se puede expresar aproximadamente usando $\hat{\rho}$ la estimación
+  de la pendiente de la regresión de $\uhat_t$ sobre $\uhat_{t-1}$:
+  #+begin_export latex
+  \[
+    DW \approx 2 (1 - \hat{\rho}).
+  \]
+  #+end_export
+
+** La distribución del contraste Durbin-Watson
+
+- El estadístico de Durbin-Watson toma valores entre 0 y 4. Bajo la
+  hipótesis nula de no autocorrelación $DW \approx 2$. Valores
+  cercanos a $0$ indican autocorrelación positiva, mientras que
+  valores próximos a 4 señalan la existencia de correlación serial
+  negativa.
+
+- Durbin y Watson dedujeron la distribución exacta de $DW$ bajo los
+  supuestos del *modelo clásico*. Además, la distribución depende de
+  los valores de las explicativas en la muestra, del número de
+  regresores, del tamaño muestral y de la inclusión de un término
+  constante.
+
+- En general, no es recomendable el uso del Durbin-Watson.
 
 * Estimación eficiente
+
+** Ineficiencia de Mínimos Cuadrados Ordinarios
+
+- El estimador MCO puede ser muy ineficiente en presencia de
+  correlación serial.
+
+- Si los regresores son estrictamente exógenos es posible usar
+  estimadores más eficientes pertenecientes a la familia de Mínimos
+  Cuadrados Generalizados, MCG.
+
+** Regresión con término de error AR(1)
+
+- Modelo de regresión simple:
+  #+begin_export latex
+  \[
+    y_{t} = \beta_{0} + \beta_{1} x_{t} + u_{t}.
+  \]
+  #+end_export
+
+- El término de error sigue un \AR{1}:
+  #+begin_export latex
+  \[
+    u_{t} = \rho u_{t-1} + e_t,
+  \]
+  #+end_export
+  donde $e_t$ es un ruido blanco.
+
+** Transformación del modelo de regresión
+
+- Escribimos el modelo de regresión para $t-1$ y multiplicamos por
+  $\rho$ para obtener:
+  #+begin_export latex
+  \[
+    \rho y_{t - 1} = \rho \beta_{0} + \beta_{1} \rho x_{t - 1} + \rho u_{t - 1}.
+  \]
+  #+end_export
+
+- Restamos la ecuación anterior al modelo de regresión:
+  #+begin_export latex
+  \[
+    y_{t} - \rho y_{t} =
+    \beta_{0} (1 - \rho)  +
+    \beta_{1} (x_{t} - \rho x_{t - 1}) +
+    u_{t} - \rho u_{t - 1}.
+  \]
+  #+end_export
+
+** Mínimos Cuadrados Generalizados
+
+- Finalmente escribimos el modelo transformado como:
+  #+begin_export latex
+  \[
+    \tilde{y}_{t} =
+    \beta_{0} \tilde{x}_{0t}+
+    \beta_{1} \tilde{x}_{t} +
+    e_{t},
+  \]
+  #+end_export
+  donde $\tilde{y}_{t} = y_{t} - \rho y_{t}$ y $\tilde{x}_{t} =
+  x_{t} - \rho x_{t - 1}$ son las variables en *cuasi diferencias* y
+  $\tilde{x}_{0t} = (1 - \rho)$.
+
+- El estimador MCG consiste en aplicar MCO al modelo transformado
+  donde las variables aparecen en cuasi diferencias.
+
+** Extensiones
+
+- MCG se puede aplicar a modelos de regresión con más de una variable
+  explicativa. En el modelo transformado todos los regresores se cuasi
+  diferencian:
+  #+begin_export latex
+  \[
+    \tilde{y}_{t} =
+    \beta_{0} \tilde{x}_{0t}+
+    \beta_{1} \tilde{x}_{1t} +
+    \dots +
+    \beta_{k} \tilde{x}_{kt} +
+    e_{t},
+  \]
+  #+end_export
+
+- Al calcular las cuasi diferencias se pierde una observación. *Prais
+  y Winsten* proponen una transformación que permite conservar la
+  primera observación en la estimación MCG.
+
+
+** Mínimos Cuadrados Generalizados Factibles
+
+- Para calcular las cuasi diferencias de las variables sería necesario
+  conocer el valor de $\rho$.
+
+- El estimador de Mínimos Cuadrados Generalizados Factibles, MCGF,
+  reemplaza el parámetro desconocido $\rho$ por una estimación,
+  $\hat{\rho}$.
+
+
+** Aplicación de MCGF a errores AR(1)
+
+- Se estiman los parámetros del modelo de regresión por MCO y se
+  obtienen los residuos, $\uhat_t$.
+
+- Se obtiene $\hat{\rho}$ estimando por MCO una autorregresión con los
+  residuos:
+  #+begin_export latex
+  \[
+    \uhat_t = \mu + \rho \uhat_{t-1} + \text{error}.
+  \]
+  #+end_export
+
+- Se construyen las cuasi diferencias de las variables utilizando
+  $\hat{\rho}$ y se estima por MCO el modelo transformado.
+
+** Extensiones del estimador MCGF
+
+- El procedimiento descrito anteriormente se denomina *método de
+  Cochrane-Orcutt*. Es posible utilizar la propuesta de Prais-Winsten
+  para conservar la primera observación.
+
+- El estimador MCGF se suele iterar: a partir de los residuos MCGF se
+  calcula una nueva estimación de $\rho$ y se repite el proceso hasta
+  que las estimaciones se estabilizan.
+
+- Es posible extender el método para considerar esquemas de
+  autocorrelación más complejos que un \AR{1}.
+
+
+** Comparación de MCO y MCGF
+
+- La consistencia de MCO sólo requiere exogeneidad contemporánea.
+
+- La consistencia de MCGF requiere exogeneidad estricta y no es
+  consistente si el modelo de regresión incorpora retardos de la
+  variable dependiente o si hay retroalimentación.
+
+- En el caso en que MCO y MCGF proporciones resultados similares,
+  serían preferibles las estimaciones de MCGF. Si hay grandes
+  diferencias en las estimaciones de ambos métodos, MCO sería
+  preferible al ser consistente en condiciones menos exigentes.
