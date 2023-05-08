@@ -13,6 +13,7 @@
 
 * Propiedades de MCO y autocorrelación del término de error
 
+
 ** Introducción
 
 - El supuesto *ST.5'* requiere que el término de error no esté
@@ -27,10 +28,12 @@
   se puede detectar? ¿Cómo se debe proceder en presencia de
   autocorrelación?
 
+
 ** Insesgadez y consistencia
 
 Las propiedades de insesgadez y consistencia no dependen del supuesto
 de no correlación serial.
+
 
 ** Eficiencia
 
@@ -38,6 +41,7 @@ de no correlación serial.
   presente correlación serial.
 
 - Con autocorrelación MCO no es eficiente.
+
 
 ** Inferencia
 
@@ -49,6 +53,7 @@ de no correlación serial.
 
 - Las fórmulas tradicionales de los contrastes $t$ y $F$ no son
   válidas con autocorrelación del término de error.
+
 
 ** Estimación e inferencia robusta con MCO
 
@@ -92,6 +97,7 @@ de no correlación serial.
   \]
   #+end_export
 
+
 ** Variable dependiente retardada (III)
 
 - El modelo anterior puede reescribirse como:
@@ -113,6 +119,7 @@ de no correlación serial.
   \]
   #+end_export
 
+
 ** Variable dependiente retardada (y IV)
 
 En general, la correlación serial de los errores de un modelo con
@@ -121,6 +128,7 @@ especificación dinámica es incompleta.
 
 
 * Contrastes de autocorrelación
+
 
 ** Introducción
 
@@ -132,6 +140,7 @@ especificación dinámica es incompleta.
 
 - Algunas de las propuestas más conocidas sólo son válidas bajo
   supuestos restrictivos.
+
 
 ** Autocorrelación de orden 1
 
@@ -170,6 +179,7 @@ especificación dinámica es incompleta.
 - También se puede usar un contraste $F$ o un contraste $t$ de la
   hipótesis $\rho = 0$ en la regresión auxiliar.
 
+
 ** Extensiones del contraste de Breusch-Godfrey
 
 - Se puede extender el contraste a órdenes superiores de
@@ -190,11 +200,13 @@ especificación dinámica es incompleta.
 - También se puede usar un contraste $F$ de significación conjunta de
   los retardos de los residuos en la regresión auxiliar.
 
+
 ** Contrastes de Breusch-Godfrey y heteroscedasticidad
 
 Pueden obtenerse contrastes de autocorrelación que son validos aun un
 presencia de heteroscedasticidad usando estimaciones de $\var(\bhat)$
 robustas a heteroscedasticidad en la regresión auxiliar.
+
 
 ** Otros contrastes de autocorrelación
 
@@ -212,6 +224,7 @@ robustas a heteroscedasticidad en la regresión auxiliar.
     + \text{error}.
   \]
   #+end_export
+
 
 ** El contraste de Durbin-Watson
 
@@ -234,6 +247,7 @@ robustas a heteroscedasticidad en la regresión auxiliar.
   \]
   #+end_export
 
+
 ** La distribución del contraste Durbin-Watson
 
 - El estadístico de Durbin-Watson toma valores entre 0 y 4. Bajo la
@@ -250,7 +264,9 @@ robustas a heteroscedasticidad en la regresión auxiliar.
 
 - En general, no es recomendable el uso del Durbin-Watson.
 
+
 * Estimación eficiente
+
 
 ** Ineficiencia de Mínimos Cuadrados Ordinarios
 
@@ -260,6 +276,7 @@ robustas a heteroscedasticidad en la regresión auxiliar.
 - Si los regresores son estrictamente exógenos es posible usar
   estimadores más eficientes pertenecientes a la familia de Mínimos
   Cuadrados Generalizados, MCG.
+
 
 ** Regresión con término de error AR(1)
 
@@ -277,6 +294,7 @@ robustas a heteroscedasticidad en la regresión auxiliar.
   \]
   #+end_export
   donde $e_t$ es un ruido blanco.
+
 
 ** Transformación del modelo de regresión
 
@@ -298,6 +316,7 @@ robustas a heteroscedasticidad en la regresión auxiliar.
   \]
   #+end_export
 
+
 ** Mínimos Cuadrados Generalizados
 
 - Finalmente escribimos el modelo transformado como:
@@ -309,12 +328,13 @@ robustas a heteroscedasticidad en la regresión auxiliar.
     e_{t},
   \]
   #+end_export
-  donde $\tilde{y}_{t} = y_{t} - \rho y_{t}$ y $\tilde{x}_{t} =
+  donde $\tilde{y}_{t} = y_{t} - \rho y_{t-1}$ y $\tilde{x}_{t} =
   x_{t} - \rho x_{t - 1}$ son las variables en *cuasi diferencias* y
   $\tilde{x}_{0t} = (1 - \rho)$.
 
 - El estimador MCG consiste en aplicar MCO al modelo transformado
   donde las variables aparecen en cuasi diferencias.
+
 
 ** Extensiones
 
@@ -362,6 +382,7 @@ robustas a heteroscedasticidad en la regresión auxiliar.
 
 - Se construyen las cuasi diferencias de las variables utilizando
   $\hat{\rho}$ y se estima por MCO el modelo transformado.
+
 
 ** Extensiones del estimador MCGF
 
