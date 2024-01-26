@@ -12,14 +12,9 @@
 * {{{part01}}}
 
 
-** {{{unit01}}} (I)
+** {{{unit01}}}
 
 #+include: "unit-01_1027-es.org" :lines "6-"
-
-
-** {{{unit01}}} (y II)
-
-#+include: "unit-02_1027-es.org" :lines "6-"
 
 
 ** {{{unit03}}}
