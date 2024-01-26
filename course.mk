@@ -3,21 +3,18 @@
 subject_code := 1027
 units := \
 	01 \
-	02 \
 	03 \
 	04 \
-	05 \
 	06 \
 	07 \
-	08a \
-	08b \
+	08 \
 	09 \
 	10 \
 	11
 
 unit_figs := \
 	02 \
-	08b
+	08
 
 LANGUAGES := es
 

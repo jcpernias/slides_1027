@@ -22,14 +22,9 @@
 #+include: "unit-03_1027-es.org" :lines "6-"
 
 
-** {{{unit04}}} (I)
+** {{{unit04}}}
 
 #+include: "unit-04_1027-es.org" :lines "6-"
-
-
-** {{{unit04}}} (y II)
-
-#+include: "unit-05_1027-es.org" :lines "6-"
 
 
 ** {{{unit06}}}
@@ -45,14 +40,9 @@
 * {{{part02}}}
 
 
-** {{{unit08}}} (I)
+** {{{unit08}}}
 
-#+include: "unit-08a_1027-es.org" :lines "6-"
-
-
-** {{{unit08}}} (y II)
-
-#+include: "unit-08b_1027-es.org" :lines "6-"
+#+include: "unit-08_1027-es.org" :lines "6-"
 
 
 ** {{{unit09}}}

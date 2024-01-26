@@ -1,0 +1,935 @@
+# -*- ispell-dictionary: "spanish" -*-
+#+SETUPFILE: ./course-es.org
+
+#+TITLE: {{{unit08}}} (I)
+
+#+MATS: bib
+#+begin_bibbox
+- Wooldridge: ::  /Introducción a la Econometría/. Capítulo 10,
+  secciones 10.1, 10.2, 10.4 y 10.5.
+- Stock y Watson: ::  /Introducción a la Econometría/. Capítulo 14,
+  secciones 14.1 a 14.5.
+#+end_bibbox
+
+* Introducción
+
+
+** Datos de series temporales
+
+- Una muestra de datos de *series temporales* está formada por
+  observaciones de una o más variables *en periodos de tiempo
+  consecutivos*.
+
+
+** Comparación con datos de corte transversal
+
+- Los datos no provienen de un *muestreo aleatorio*.
+
+- El paso del tiempo proporciona un *orden* natural a las
+  observaciones de series temporales.
+
+
+** Series temporales regulares
+
+- *Series temporales regulares*: el intervalo de tiempo que transcurre
+  entre una observación y la siguiente es siempre el mismo: un año, un
+  semestre, un cuatrimestre, un mes, etc.
+
+- De acuerdo con la *frecuencia* con que se observan los valores de
+  una variable, hablamos de series temporales anuales, trimestrales,
+  mensuales, etc.
+
+
+** Ejemplo: inflación interanual en España
+
+
+Tasa interanual de inflación calculada a partir del IPC armonizado
+general de España. Fuente: INE.
+
+#+ATTR_LATEX: :font \scriptsize :align @{}l*{12}{@{\hspace{3mm}}>{$}r<{$}}@{} :booktabs t
+|------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------|
+|      | \text{Ene} | \text{Feb} | \text{Mar} | \text{Abr} | \text{May} | \text{Jun} | \text{Jul} | \text{Ago} | \text{Sep} | \text{Oct} | \text{Nov} | \text{Dic} |
+|------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------|
+| 2016 |       -0.4 |       -1.0 |       -1.0 |       -1.2 |       -1.1 |       -0.9 |       -0.7 |       -0.3 |        0.0 |        0.5 |        0.5 |        1.4 |
+| 2017 |        2.9 |        3.0 |        2.1 |        2.6 |        2.0 |        1.6 |        1.7 |        2.0 |        1.8 |        1.7 |        1.8 |        1.2 |
+| 2018 |        0.7 |        1.2 |        1.3 |        1.1 |        2.1 |        2.3 |        2.3 |        2.2 |        2.3 |        2.3 |        1.7 |        1.2 |
+| 2019 |        1.0 |        1.1 |        1.3 |        1.6 |        0.9 |        0.6 |        0.6 |        0.4 |        0.2 |        0.2 |        0.5 |        0.8 |
+| 2020 |        1.1 |        0.9 |        0.1 |       -0.7 |       -0.9 |       -0.3 |       -0.7 |       -0.6 |       -0.6 |       -0.9 |       -0.8 |       -0.6 |
+| 2021 |        0.4 |       -0.1 |        1.2 |        2.0 |        2.4 |        2.5 |        2.9 |        3.3 |        4.0 |        5.4 |        5.5 |        6.6 |
+| 2022 |        6.2 |        7.6 |        9.8 |        8.3 |        8.5 |       10.0 |       10.7 |       10.5 |        9.0 |        7.3 |        6.7 |        5.5 |
+| 2023 |        5.9 |        6.0 |            |            |            |            |            |            |            |            |            |            |
+|------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------|
+
+
+** Gráfico de series temporales
+
+Tasa interanual de inflación calculada a partir del IPC armonizado
+general de España. Fuente: INE.
+
+#+MATS: fig fig-08a_1027-infl.pdf
+
+
+** Principales dificultades
+
++ Muestras relativamente pequeñas.
+
++ Los procesos que determinan los valores que toma una serie temporal
+  pueden cambiar con el paso del tiempo.
+
++ Un hecho que ocurra en un momento del tiempo puede tener influencia
+  en sucesivos periodos, creando dependencia entre observaciones
+  consecutivas de una serie temporal.
+
+
+* Conceptos básicos
+
+
+** Notación
+
+- $y_t$: observación de la serie temporal $y$ en el periodo $t$.
+
+- El índice $t$ va desde $1$, para el primer periodo en la muestra,
+  hasta $T$, para el último.
+
+
+** Retardos
+
+- El *primer retardo* (/first lag/) de la serie $y$ es $y_{t-1}$, el
+  valor que tomaba la variable el período anterior.
+
+- De forma análoga, podemos definir el segundo y sucesivos retardos de
+  la serie $y$: $y_{t-2}, y_{t-3}, \dots$
+
+
+** Ejemplo: retardos
+
+La serie anual $Y_t$ contiene los valores del PIB español a precios de
+mercado desde el año 2000 hasta el 2008. Se mide en millones de euros.
+
+#+ATTR_LATEX: :font \footnotesize :align @{}rr*{4}{@{\hspace{8mm}}r}@{} :booktabs t
+|  Año | $t$ | $Y_{t}$       | $Y_{t-1}$     | $Y_{t-2}$     | $Y_{t-3}$    |
+|------+-----+---------------+---------------+---------------+--------------|
+| 2000 |   1 | \num{ 647851} | \text{---}    | \text{---}    | \text{---}   |
+| 2001 |   2 | \num{ 700993} | \num{ 647851} | \text{---}    | \text{---}   |
+| 2002 |   3 | \num{ 749552} | \num{ 700993} | \num{ 647851} | \text{---}   |
+| 2003 |   4 | \num{ 802266} | \num{ 749552} | \num{ 700993} | \num{647851} |
+| 2004 |   5 | \num{ 859437} | \num{ 802266} | \num{ 749552} | \num{700993} |
+| 2005 |   6 | \num{ 927357} | \num{ 859437} | \num{ 802266} | \num{749552} |
+| 2006 |   7 | \num{1003823} | \num{ 927357} | \num{ 859437} | \num{802266} |
+| 2007 |   8 | \num{1075539} | \num{1003823} | \num{ 927357} | \num{859437} |
+| 2008 |   9 | \num{1109541} | \num{1075539} | \num{1003823} | \num{927357} |
+
+
+** Diferencias
+
+- La *diferencia* de la serie $y_t$ es $\incr y_t = y_{t} - y_{t-1}$,
+  el incremento de la variable de un periodo a otro.
+
+- Podemos calcular $\mathit{gy}_t$, la tasa porcentual de crecimiento
+  de $y_t$, a partir de la diferencia y del primer retardo:
+  #+begin_export latex
+  \[
+    \mathit{gy}_t = 100 \frac{\incr y_t}{y_{t-1}}
+  \]
+  #+end_export
+
+
+** Ejemplo: diferencias
+
+Diferencia y tasa de crecimiento de  $Y_t$.
+
+#+ATTR_LATEX: :font \footnotesize :align @{}rr*{4}{@{\hspace{8mm}}r}@{} :booktabs t
+|  Año | $t$ | $Y_{t}$       | $Y_{t-1}$     | $\incr Y_{t}$ | $gY_{t}$   |
+|------+-----+---------------+---------------+---------------+------------|
+| 2000 |   1 | \num{ 647851} | \text{---}    | \text{---}    | \text{---} |
+| 2001 |   2 | \num{ 700993} | \num{ 647851} | \num{53142}   | \num{8.2}  |
+| 2002 |   3 | \num{ 749552} | \num{ 700993} | \num{48559}   | \num{6.9}  |
+| 2003 |   4 | \num{ 802266} | \num{ 749552} | \num{52714}   | \num{7.0}  |
+| 2004 |   5 | \num{ 859437} | \num{ 802266} | \num{57171}   | \num{7.1}  |
+| 2005 |   6 | \num{ 927357} | \num{ 859437} | \num{67920}   | \num{7.9}  |
+| 2006 |   7 | \num{1003823} | \num{ 927357} | \num{76466}   | \num{8.2}  |
+| 2007 |   8 | \num{1075539} | \num{1003823} | \num{71716}   | \num{7.1}  |
+| 2008 |   9 | \num{1109541} | \num{1075539} | \num{34002}   | \num{3.2}  |
+
+
+** Logaritmos y tasas de crecimiento
+
+- En el análisis de series temporales es muy común usar las variables
+  en logaritmos.
+
+- Es muy frecuente calcular la tasa de crecimiento de $y_t$ usando la
+  diferencia del logaritmo de $y_t$:
+  #+begin_export latex
+  \[
+    \mathit{gy}_t \approx 100 \incr \log(y_t)
+  \]
+  #+end_export
+
+
+** Ejemplo: logaritmos y tasas de crecimiento
+
+No hay grandes diferencias entre las diferentes formas de calcular las
+tasas de crecimiento.
+
+#+ATTR_LATEX: :font \footnotesize :align @{}rr*{2}{@{\hspace{15mm}}r@{\hspace{2mm}}r}@{} :booktabs t
+|  Año | $t$ | $Y_{t}$       | $100 \incr Y_{t} / Y_{t-1}$ | $\log(Y_{t})$ | $100 \incr \log(Y_{t})$ |
+|------+-----+---------------+-----------------------------+---------------+-------------------------|
+| 2000 |   1 | \num{ 647851} | \text{---}                  | \num{13.38}   | \text{---}              |
+| 2001 |   2 | \num{ 700993} | \num{8.2}                   | \num{13.46}   | \num{7.9}               |
+| 2002 |   3 | \num{ 749552} | \num{6.9}                   | \num{13.53}   | \num{6.7}               |
+| 2003 |   4 | \num{ 802266} | \num{7.0}                   | \num{13.60}   | \num{6.8}               |
+| 2004 |   5 | \num{ 859437} | \num{7.1}                   | \num{13.66}   | \num{6.9}               |
+| 2005 |   6 | \num{ 927357} | \num{7.9}                   | \num{13.74}   | \num{7.6}               |
+| 2006 |   7 | \num{1003823} | \num{8.2}                   | \num{13.82}   | \num{7.9}               |
+| 2007 |   8 | \num{1075539} | \num{7.1}                   | \num{13.89}   | \num{6.9}               |
+| 2008 |   9 | \num{1109541} | \num{3.2}                   | \num{13.92}   | \num{3.1}               |
+
+
+** Procesos estocásticos
+
+- Los modelos estadísticos para estudiar series temporales se basan en
+  el concepto de *proceso estocástico*.
+
+- Un *proceso estocástico* es una secuencia de variables aleatorias
+  observadas en periodos consecutivos de tiempo: $\{y_1, y_2, \dots,
+  y_T\}$.
+
+- Notación abreviada: $\{y_t\!: t =  1, 2, \dots, T\}$.
+
+
+** Esperanza
+
+- En general, la esperanza del proceso estocástico es la secuencia de
+  esperanzas en cada momento del tiempo: $\{\Exp(y_t)\!: t = 1, \dots,
+  T\}$.
+
+- La esperanza de un proceso *estacionario en media* es constante:
+  #+begin_export latex
+  \[
+    \Exp(y_t) = \mu, \quad t = 1, \dots, T.
+  \]
+  #+end_export
+
+#+latex: \mode<article>{\clearpage}
+
+
+** Tendencias
+
+- En series económicas, es frecuente encontrar *tendencias*.
+
+- PIB a precios de mercado de España. Miles de millones de euros. Fuente: INE.
+
+#+MATS: fig fig-08a_1027-gdp.pdf
+
+
+** Estacionalidad
+
+- Algunas series con frecuencia superior a la anual presentan
+  *variaciones estacionales*: variaciones cíclicas que se repiten año
+  a año.
+- Índice de cifra de negocios del comercio al por menor. Precios corrientes. Base 2015. Fuente: INE.
+
+#+MATS: fig fig-08a_1027-retail.pdf
+
+
+** Varianza
+
+- Usamos la varianza para describir la dispersión de $y_t$ en cada
+  momento del tiempo: $\var(y_t) = \sigma^2_t$.
+
+- A menudo las variables económicas que presentan tendencias
+  crecientes también tienen varianzas crecientes. En esos casos, la
+  transformación logarítmica puede estabilizar las varianzas.
+
+
+** Autocovarianzas
+
+- Usamos las *autocovarianzas* para medir la dependencia de las
+  variables que forman un proceso estocástico.
+
+- La autocovarianza de orden $h$ se define como
+  #+begin_export latex
+  \[
+    \cov(y_t, y_{t-h}) =
+    \Exp\!\big[\big(y_{t} - \Exp(y_{t})\big) \big(y_{t-h} - \Exp(y_{t-h})\big)\big]
+  \]
+  #+end_export
+
+
+** Estacionariedad
+
+- El concepto de *estacionariedad* se refiere a la estabilidad de la
+  distribución de un proceso estocástico.
+
+- En su versión estricta requiere que la distribución conjunta de
+  $\{y_t\}$ no cambie conforme transcurre el tiempo.
+
+
+** Estacionariedad débil
+
+- *Estacionariedad débil* (o *estacionariedad en covarianza*) de $y_t$:
+
+  + Esperanza constante: $\Exp(y_t) = \mu$.
+
+  + Varianza constante: $\var(y_t) = \sigma^2 < \infty$.
+
+  + La autocovarianza entre $y_t$ e $y_{t-h}$ sólo depende de $h$ y no
+    cambia con $t$: $\cov(y_t, y_{t-h}) = \gamma_h$, para $h \geq 1$ y
+    cualquier $t$.
+
+- La estacionariedad estricta implica la estacionariedad débil, pero
+  no al revés.
+
+
+** No estacionariedad
+
+En economía es frecuente encontrar series *no estacionarias*:
+
+- Tendencias.
+
+- Variaciones estacionales.
+
+- Alternancia de periodos con alta y baja dispersión.
+
+- *Cambio estructural* (/structural breaks/).
+
+
+
+** Coeficientes de autocorrelación
+
+- Las autocovarianzas dependen de las unidades de $y_t$, lo que
+  dificulta su interpretación.
+
+- Es más frecuente usar los *coeficientes de autocorrelación* cuyo
+  rango de variación está acotado entre $-1$ y $1$.
+
+- El coeficiente de autocorrelación de orden $j$ se define como
+  #+begin_export latex
+  \[
+    \rho_j = \corr(y_t, y_{t-j}) =
+    \frac{\cov(y_t, y_{t-j})}{\sqrt{\var(y_t) \var(y_{t-j})}}
+  \]
+  #+end_export
+
+
+** Correlación serial
+
+- Una serie está *autocorrelacionada* cuando sus coeficientes de
+  autocorrelación son distintos de 0.
+
+- En economía las variables suelen presentar *autocorrelación
+  positiva*: el valor que toman en un periodo es similar al que tomó
+  en periodos inmediatamente anteriores.
+
+- En una variable con *autocorrelación negativa* se suelen alternar en
+  periodos consecutivos valores altos con valores bajos.
+
+
+** COMMENT Correlograma
+
+
+- Un *correlograma* es la representación gráfica de los coeficientes
+  de autocorrelación de una serie temporal.
+
+
+
+** Dependencia débil
+
+- La *dependencia débil* implica que la dependencia entre $y_t$ e
+  $y_{t+h}$ decrece conforme aumenta $h$ y que decrece a un ritmo
+  rápido.
+
+- Un proceso débilmente dependiente está *asintóticamente
+  incorrela\-cionado* si $\rho_h \to 0$ conforme $h \to \infty$. La
+  dependencia débil exige, además, que la convergencia sea lo
+  suficientemente rápida.
+
+
+# * Introducción
+
+
+# ** Algunos procesos estocásticos
+
+# Examinaremos las principales características de algunos procesos
+# estocásticos importantes:
+
+# - Ruido blanco.
+
+# - Procesos autorregresivos.
+
+# - Paseo aleatorio.
+
+# - Procesos integrados.
+
+
+* Ruido blanco
+
+
+** Definición
+
+El proceso estocástico $\{e_t\}$ es un *ruido blanco* si:
+
+- $\Exp(e_t) = 0$.
+
+- $\var(e_t) = \sigma^2_e < \infty$.
+
+- $\cov(e_{t+h}, e_t) = 0$, para todo $h > 0$.
+
+
+** Ejemplo
+
+Ruido blanco, $\sigma^2_e = 4$, $T = 60$.
+
+#+MATS: fig fig-08b_1027-wn-ts-*.pdf
+
+
+** Características
+
+- Un ruido blanco es un proceso estacionario y débilmente
+  estacionario.
+
+- Conocer los valores pasados de un ruido blanco no ayuda a predecir
+  mejor $e_t$:
+  #+begin_export latex
+  \[
+    \Exp(e_t | e_{t-1}, e_{t-2}, \dots) = \Exp(e_t) = 0.
+  \]
+  #+end_export
+
+- Un ruido blanco no tiene *memoria*: el valor que toma en un periodo no
+  tienen ninguna influencia sobre los valores futuros.
+
+
+** Autocorrelación
+
+#+MATS: figcol fig-08b_1027-wn-lag-*.pdf 0.5
+
+- $e_t$ no está correlacionado con sus retardos.
+
+- Los coeficientes de autocorrelación de un ruido blanco son todos
+  iguales a 0: $\rho_h = 0$, para todo $h > 0$.
+
+
+** Relación con otros conceptos
+
+- Un ruido blanco es un proceso *i.i.d.* (independiente e
+  idénticamente distribuido).
+
+- En algunos campos coincide con el concepto de *innovaciones*.
+
+- Un *ruido blanco gaussiano*, además de las anteriores, cumple la
+  condición:
+  #+begin_export latex
+  \[
+    e_t \sim \Normal(0, \sigma^2_e)
+  \]
+  #+end_export
+
+
+* Procesos autorregresivos
+
+
+** Procesos autorregresivos
+
+- El valor presente de un *proceso autorregresivo* depende de los
+  valores que tomó el proceso en periodos anteriores.
+
+- Un proceso autorregresivo de orden $p$, AR($p$), cumple la siguiente
+  ecuación:
+  #+begin_export latex
+  \[
+    y_{t} = \rho_{1} y_{t-1} + \rho_{2} y_{t-2} + \dots \rho_{p} y_{t-p} + e_{t},
+  \]
+  #+end_export
+  donde $\rho_1, \rho_2, \dots, \rho_p$ son parámetros y $\{e_t\}$ es
+  un ruido blanco. El valor inicial de la secuencia es 0: $y_0 = 0$.
+
+
+** Proceso AR(1)
+
+- Nos centraremos en el proceso autorregresivo de orden 1, AR(1):
+  #+begin_export latex
+  \[
+    y_{t} = \rho y_{t-1} +  e_{t},
+  \]
+  #+end_export
+
+- La *condición de estabilidad* de un proceso AR(1) es:
+  #+begin_export latex
+  \[
+    \abs{\rho} < 1
+  \]
+  #+end_export
+
+- Un *proceso AR estable* es estacionario y débilmente dependiente.
+
+
+** Esperanza de un proceso AR(1)
+
+- $y_t$ sigue un proceso AR(1): $y_{t} = \rho y_{t-1} +  e_{t}$.
+
+- Tomando esperanzas:
+  #+begin_export latex
+  \[
+    \Exp(y_{t}) = \rho \Exp(y_{t-1}) +  \Exp(e_{t}).
+  \]
+  #+end_export
+
+- Si $y_t$ es estacionario: $\Exp(y_t) = \Exp(y_{t-1})œ$. Por otro
+  lado, $\Exp(e_t) = 0$. Por tanto, la expresión anterior se reduce a:
+  #+begin_export latex
+  \[
+     \Exp(y_{t}) = \rho \Exp(y_{t}).
+  \]
+  #+end_export
+
+- Para que la ecuación anterior sea cierta para cualquier $\rho$, se
+  tiene que cumplir que $\Exp(y_t) = 0$.
+
+
+** Varianza de un proceso AR(1)
+
+- $y_t$ sigue un proceso AR(1): $y_{t} = \rho y_{t-1} +  e_{t}$.
+
+- La varianza de $y_t$ es:
+  #+begin_export latex
+  \[
+     \var(y_{t}) = \rho^2 \var(y_{t-1}) + \var(e_t).
+  \]
+  #+end_export
+
+- Si $y_t$ es estacionario, $\var(y_{t}) = \var(y_{t-1}) =
+  \sigma^2_y$. Podemos escribir la expresión anterior como:
+  #+begin_export latex
+  \[
+     \sigma^2_y = \rho^2 \sigma^2_y + \sigma^2_e.
+  \]
+  #+end_export
+
+- Finalmente, la varianza de $y_t$ es:
+  #+begin_export latex
+  \[
+     \sigma^2_y = \frac{\sigma^2_e}{1 - \rho^2}.
+  \]
+  #+end_export
+
+
+** Autocovarianzas de un proceso AR(1) (I)
+
+- Ya que $\Exp(y_t) = 0$, la autocovarianza de $y_{t+h}$ e $y_ {t}$ es:
+  #+begin_export latex
+  \[
+    \cov(y_{t+h}, y_t) = \Exp(y_{t+h}  y_t)
+  \]
+  #+end_export
+
+- Cuando $h = 1$:
+  #+begin_export latex
+  \[
+    \cov(y_{t+1}, y_t) = \Exp(y_{t+1}  y_t)
+  \]
+  #+end_export
+
+- Sustituyendo $y_{t+1} = \rho y_t + e_{t+1}$:
+  #+begin_export latex
+  \[
+    \cov(y_{t+1}, y_t) =
+    \Exp\!\big[(\rho y_t + e_{t+1}) y_t\big] =
+    \Exp\!\big[\rho y^{2}_t + y_t e_{t+1} \big]
+  \]
+  #+end_export
+
+- Teniendo en cuenta que $\Exp(y^2_t) = \sigma^2_y$ y que $\Exp(y_t e_s) =
+  0$ para $t \neq s$:
+  #+begin_export latex
+  \[
+    \cov(y_{t+1}, y_t) = \rho \sigma^2_y.
+  \]
+  #+end_export
+
+
+** Autocovarianzas de un proceso AR(1) (II)
+
+- Ahora escribimos el proceso autorregresivo para $t+2$:
+  #+begin_export latex
+  \[
+    y_{t + 2} = \rho y_{t + 1} +  e_{t + 2}.
+  \]
+  #+end_export
+
+- Sustituimos $y_{t+1} = \rho y_t + e_{t+1}$:
+  #+begin_export latex
+  \[
+    y_{t + 2} = \rho^2 y_{t} + \rho e_{t+1}+  e_{t + 2}.
+  \]
+  #+end_export
+
+- La autocovarianza de $y_{t+2}$ e $y_ {t}$ es:
+  #+begin_export latex
+  \[
+    \cov(y_{t+2}, y_t) = \Exp(y_{t+2}  y_t) =
+    \Exp\!\big[(\rho^2 y_{t} + \rho e_{t+1}+  e_{t + 2}) y_t\big].
+  \]
+  #+end_export
+
+- Finalmente:
+  #+begin_export latex
+  \[
+    \cov(y_{t+2}, y_t) = \rho^2 \sigma^2_y.
+  \]
+  #+end_export
+
+
+** Autocovarianzas de un proceso AR(1) (y III)
+
+- Mediante sustitución recursiva obtenemos:
+  #+begin_export latex
+  \[
+    y_{t + h} =
+    \rho^h y_{t} +
+    \rho^{h-1} e_{t+1}  +
+    \rho^{h-2} e_{t+2} + \dots +
+    \rho e_{t+h-1} +
+    e_{t + h}.
+  \]
+  #+end_export
+
+- La autocovarianza de $y_{t+h}$ e $y_ {t}$ es:
+  #+begin_export latex
+  \[
+    \cov(y_{t+h}, y_t) =
+    \Exp\!\big[(\rho^h y_{t} +
+    \rho^{h-1} e_{t+1}  +
+    \dots +
+    e_{t + h})
+    y_t\big].
+  \]
+  #+end_export
+
+- Dado que $\Exp(y^2_t) = \sigma^2_y$ y que $\Exp(y_t e_s) = 0$ para $t \neq
+  s$:
+  #+begin_export latex
+  \[
+    \cov(y_{t+h}, y_t) = \rho^h \sigma^2_y.
+  \]
+  #+end_export
+
+
+** Autocorrelaciones de un proceso AR(1)
+
+- Autocorrelación entre $y_{t+h}$ e $y_ {t}$:
+  #+begin_export latex
+  \[
+    \corr(y_{t+h}, y_{t}) = \frac{\cov(y_{t+h}, y_{t})}{
+      \sqrt{\var(y_{t+h})\var(y_{t})}
+    }
+  \]
+  #+end_export
+
+- Teniendo en cuenta que
+  #+begin_export latex
+  \begin{gather*}
+    \var(y_{t+h}) = \var(y_{t}) = \sigma^2_y, \\
+    \intertext{y que}
+    \cov(y_{t+h}, y_{t}) = \rho^h \sigma^2_y, \\
+    \intertext{se obtiene:}
+    \corr(y_{t+h}, y_{t}) = \rho^h.
+  \end{gather*}
+  #+end_export
+
+
+** Estacionariedad y dependencia débil
+
+- $y_t$ sigue un proceso AR(1):
+  #+begin_export latex
+  \[
+    y_{t} = \rho y_{t-1} +  e_{t},
+  \]
+  #+end_export
+
+
+- Si $\abs{\rho} < 1$, $y_t$ es un proceso estacionario:
+
+  + $\Exp(y_t) = 0$.
+
+  + $\var(y_t) = \sigma^2_e / (1 - \rho^2)$.
+
+  + $\cov(y_{t+h}, y_{t}) = \rho^h \sigma^2_y$, para $h > 0$.
+
+- Si $\abs{\rho} < 1$ el proceso AR(1) es débilmente dependiente,
+  puesto que $\corr(y_{t+h}, y_t) = \rho^h$ converge a 0 conforme $h
+  \to \infty$ y la convergencia es geométrica.
+
+
+#+latex: \mode<article>{\clearpage}
+
+** Algunos ejemplos (I)
+
+Proceso AR(1), $\rho = 0.8$, $\sigma^2_e = 4$, $T = 60$.
+#+MATS: fig fig-08b_1027-ar8-ts-*.pdf
+
+Proceso AR(1), $\rho = 0.2$, $\sigma^2_e = 4$, $T = 60$.
+#+MATS: fig fig-08b_1027-ar2-ts-*.pdf
+
+
+** Algunos ejemplos (y II)
+
+#+MATS: col 0.5
+Proceso AR(1), $\rho = 0.8$, $\sigma^2_e = 4$, $T = 60$.
+#+MATS: fig fig-08b_1027-ar8-lag-*.pdf
+
+#+MATS: col 0.5
+Proceso AR(1), $\rho = 0.2$, $\sigma^2_e = 4$, $T = 60$.
+#+MATS: fig fig-08b_1027-ar2-lag-*.pdf
+
+
+* Paseo aleatorio
+
+
+** Definición
+
+Un *paseo aleatorio* es un proceso estocástico que se puede expresar
+como:
+#+begin_export latex
+\[
+   y_t = y_{t-1} + e_t,
+\]
+#+end_export
+donde $e_t$ es un ruido blanco.
+
+
+** Sustitución recursiva
+
+Sustituyendo recursivamente se obtiene:
+#+begin_export latex
+\[
+  y_t = e_t + e_{t-1} + \dots + e_1 + y_0,
+\]
+#+end_export
+donde $y_0$ es el valor inicial del proceso. Supondremos que $y_0 =
+0$, por lo que:
+#+begin_export latex
+\[
+  y_t = e_t + e_{t-1} + \dots + e_1.
+\]
+#+end_export
+
+
+** Esperanza y varianza
+
+- La esperanza de un paseo aleatorio es 0:
+  #+begin_export latex
+  \[
+    \Exp(y_t) =  \Exp(e_t) +  \Exp(e_{t-1}) + \dots +  \Exp(e_1) = 0.
+  \]
+  #+end_export
+
+
+- La varianza de un paseo aleatorio es creciente en el tiempo:
+  #+begin_export latex
+  \[
+    \var(y_t) =  \var(e_t) +  \var(e_{t-1}) + \dots +  \var(e_1) = t \sigma^2_e.
+  \]
+  #+end_export
+
+
+** Autocovarianzas y autocorrelaciones
+
+- La autocovarianza entre $y_{t+h}$ e $y_t$ es:
+  #+begin_export latex
+  \[
+    \cov(y_{t+h}, y_t) = \Exp(y_{t+h} y_t) =
+    \Exp\!\big[( y_{t} + e_{t+1}  + \dots + e_{t + h}) y_t\big]  = t \sigma^2_e.
+  \]
+  #+end_export
+
+- La autocorrelación entre $y_{t+h}$ e $y_t$ es:
+  #+begin_export latex
+  \[
+    \corr(y_{t+h}, y_t) = \sqrt{\frac{t}{t+h}}
+  \]
+  #+end_export
+
+
+** No estacionariedad
+
+Un paseo aleatorio no cumple las condiciones de la estacionariedad
+débil:
+
+- $\Exp(y_t) = 0$.
+
+- $\var(y_t) = t \sigma^2_e$.
+
+- $\cov(y_{t+h}, y_{t}) = t \sigma^2_e$, para $h > 0$.
+
+
+** Dependencia fuerte
+
+- Las autocorrelaciones de un paseo aleatorio son:
+  #+begin_export latex
+  \[
+    \corr(y_{t+h}, y_t) = \sqrt{\frac{t}{t+h}}
+  \]
+  #+end_export
+
+- $\corr(y_{t+h}, y_t)$ converge a 0 conforme $h \to \infty$, pero la
+  convergencia es muy lenta.
+
+
+** Ejemplo
+
+Paseo aleatorio, $\sigma^2_e = 4$, $T = 60$.
+
+#+MATS: fig fig-08b_1027-rw-ts-*.pdf
+
+
+
+* Tendencias
+
+
+** Paseo aleatorio con deriva
+
+- Un *paseo aleatorio con deriva* se puede expresar como:
+  #+begin_export latex
+  \[
+     y_t = \alpha_0 + y_{t-1} + e_t,
+  \]
+  #+end_export
+  donde $e_t$ es un ruido blanco y el parámetro $\alpha_0$ es el
+  *término de deriva*.
+
+- Sustituyendo recursivamente y teniendo en cuenta que $y_0 = 0$:
+  #+begin_export latex
+  \[
+    y_t = \alpha_0 t + e_t + e_{t-1} + \dots + e_1.
+  \]
+  #+end_export
+
+- El valor esperado de $y$ es función de $t$:
+  #+begin_export latex
+  \[
+     \Exp(y_t) = \alpha_0 t
+  \]
+  #+end_export
+
+
+** Ejemplo
+
+Paseo aleatorio con deriva, $\alpha_0 = 1$, $\sigma^2_e = 4$, $T = 60$.
+
+#+MATS: fig fig-08b_1027-rwd-ts-*.pdf
+
+
+** Procesos estacionarios con tendencia
+
+- Los paseos aleatorios con deriva no son los únicos procesos que
+  presentan tendencias.
+
+- Un *proceso estacionario con tendencia* puede escribirse como:
+  #+begin_export latex
+  \[
+    y_t = \beta_0 + \beta_1 t + u_t,
+  \]
+  #+end_export
+  donde $u_t$ es un proceso estacionario y débilmente dependiente.
+
+
+** Ejemplo
+
+$y_t = \beta_0 + \beta_1 t + u_t$, $\beta_1 = 1$, $u_t \sim AR(1)$, $T = 60$.
+
+#+MATS: fig fig-08b_1027-tst-ts-*.pdf
+
+
+
+* Procesos integrados
+
+
+** La diferencia de un paseo aleatorio
+
+- Un paseo aleatorio puede escribirse como:
+  #+begin_export latex
+  \[
+    y_t = y_{t-1} + e_t
+  \]
+  #+end_export
+
+- Restando $y_{t-1}$ de ambos lados:
+  #+begin_export latex
+  \[
+    y_t - y_{t-1} = e_t
+  \]
+  #+end_export
+
+- La diferencia de un paseo aleatorio es un ruido blanco:
+  #+begin_export latex
+  \[
+     \incr y_t = e_t
+  \]
+  #+end_export
+
+
+** Diferencias y dependencia débil
+
+- La diferencia de un paseo aleatorio es un ruido blanco, un proceso
+  débilmente dependiente.
+
+- Existen otros procesos estocásticos que, después de diferenciarlos,
+  son débilmente dependientes.
+
+
+** Procesos integrados
+
+- El proceso $y_t$ es *integrado de orden 1*, I(1), si $y_t$ es un
+  proceso altamente persistente, pero su diferencia, $\incr y_t$, es
+  débilmente dependiente.
+
+- Si es necesario diferenciar dos veces para obtener un proceso
+  débilmente dependiente, el proceso $y_t$ es *integrado de orden 2*,
+  I(2).
+
+- Un proceso débilmente dependiente es *integrado de orden 0*, I(0),
+  puesto que no es necesario aplicar ninguna diferencia.
+
+** Ejemplo: IPC armonizado
+
+Logaritmo del IPC armonizado de España, febrero de 1998 hasta febrero
+de 2023. Fuente: INE.
+
+#+MATS: fig fig-08b_1027-lp-ts-*.pdf
+
+** Ejemplo: Inflación interanual
+
+Tasa de inflación interanual:
+#+begin_export latex
+\[
+  \pi_t = 100 \incr_{12} \log(p_t) = 100 \big(\log(p_t) - \log(p_{t-12})\big).
+\]
+#+end_export
+#+MATS: fig fig-08b_1027-infl-ts-*.pdf
+
+** Ejemplo: Variación mensual de la inflación
+
+Variación mensual de la inflación:
+#+begin_export latex
+\[
+  \incr \pi_t = \pi_t - \pi_{t-1}.
+\]
+#+end_export
+#+MATS: fig fig-08b_1027-dinfl-ts-*.pdf
+
+** Ejemplo: Procesos integrados
+
+- El índice de precios es altamente persistente. Al tomar diferencias
+  se obtiene la tasa de inflación que también es altamente
+  persistente. La variación de la tasa de inflación se comporta como
+  un proceso débilmente dependiente.
+
+- Las tres series tienen diferentes órdenes de integración:
+  #+begin_export latex
+  \begin{gather*}
+    \log(p_{t}) \sim \text{I}(2), \\
+    \pi_{t} \sim \text{I}(1), \\
+    \incr \pi_{t} \sim \text{I}(0).
+  \end{gather*}
+  #+end_export
