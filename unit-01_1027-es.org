@@ -265,11 +265,11 @@ El estimador de MCO es insesgado si se cumplen los supuestos *RLM.1* a
 - Cuando se omite $x_2$:
   #+begin_export latex
   \[
-    \Exp(\bhat_{1}) = \beta_{1} + \beta_2 \delta_{12}
+    \Exp(\bhat_{1}) = \beta_{1} + \beta_2 \delta_{21}
   \]
   #+end_export
-  donde $\delta_{12}$ es la pendiente de la regresión de $x_1$ sobre
-  $x_2$.
+  donde $\delta_{21}$ es la pendiente de la regresión de $x_2$ sobre
+  $x_1$.
 
 - *Sesgo* por omisión de $x_2$:
   #+begin_export latex
@@ -286,7 +286,7 @@ condiciones:
 
 - $\beta_2 \neq 0$: las variables omitidas son *relevantes*.
 
-- $\delta_{12} \neq 0$: las variables omitidas están correlacionadas
+- $\delta_{21} \neq 0$: las variables omitidas están correlacionadas
   con alguna de las variables incluidas en la regresión.
 
 
