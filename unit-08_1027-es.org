@@ -1,7 +1,7 @@
 # -*- ispell-dictionary: "spanish" -*-
 #+SETUPFILE: ./course-es.org
 
-#+TITLE: {{{unit08}}} (I)
+#+TITLE: {{{unit08}}}
 
 #+MATS: bib
 #+begin_bibbox
