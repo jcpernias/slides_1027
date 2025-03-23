@@ -13,7 +13,7 @@ texdir := $(rootdir)/tex
 depsdir := $(rootdir)/.deps
 imgdir := $(rootdir)/img
 figdir := $(rootdir)/figures
-
+datadir := $(rootdir)/data
 
 ## Programs
 ## ================================================================================
