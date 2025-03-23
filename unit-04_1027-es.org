@@ -1,4 +1,3 @@
-# -*- ispell-dictionary: "spanish" -*-
 #+SETUPFILE: ./course-es.org
 
 #+TITLE: {{{unit04}}}
@@ -13,7 +12,7 @@
 
 ** Homoscedasticidad (I)
 
-#+MATS: figcol img/het1.pdf 0.5
+#+MATS: figcol file:img/het1.pdf 0.5
 
 *Homoscedasticidad*. La dispersión alrededor de la función de
 regresión poblacional, FRP, es constante:
@@ -26,7 +25,7 @@ regresión poblacional, FRP, es constante:
 
 ** Homoscedasticidad (y II)
 
-#+MATS: figcol img/het2.pdf 0.5
+#+MATS: figcol file:img/het2.pdf 0.5
 
 *Homoscedasticidad*. Todas las observaciones son igual de informativas
 a la hora de determinar por donde pasa la FRP.
@@ -34,7 +33,7 @@ a la hora de determinar por donde pasa la FRP.
 
 ** Heteroscedasticidad (I)
 
-#+MATS: figcol img/het3.pdf 0.5
+#+MATS: figcol file:img/het3.pdf 0.5
 
 *Heteroscedasticidad*. La dispersión alrededor de la FRP cambia con
 los valores de la explicativa:
@@ -47,7 +46,7 @@ los valores de la explicativa:
 
 ** Heteroscedasticidad (y II)
 
-#+MATS: figcol img/het4.pdf 0.5
+#+MATS: figcol file:img/het4.pdf 0.5
 
 *Heteroscedasticidad*. Algunas observaciones contienen menos
 información para estimar la FRP.
@@ -373,7 +372,7 @@ $\yhat$, y sus cuadrados, $\yhat^2$:
 
 ** Ineficiencia de MCO
 
-#+MATS: figcol img/het4.pdf 0.5
+#+MATS: figcol file:img/het4.pdf 0.5
 
 La *ineficiencia de MCO* se debe a que se tratan por igual todas las
 observaciones, aunque no todas contienen información igual de precisa
@@ -699,3 +698,9 @@ Los restantes pasos del procedimiento de estimación no se alterarían.
 
 - En general, es recomendable el uso de métodos de inferencia robustos
   a heteroscedasticidad con los estimadores de MCO y de MCP(F).
+
+
+
+# Local Variables:
+# ispell-local-dictionary: "spanish"
+# End:

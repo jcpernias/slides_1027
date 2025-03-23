@@ -1,4 +1,3 @@
-# -*- ispell-dictionary: "spanish" -*-
 #+SETUPFILE: ./course-es.org
 
 #+TITLE: {{{unit08}}}
@@ -66,7 +65,7 @@ general de España. Fuente: INE.
 Tasa interanual de inflación calculada a partir del IPC armonizado
 general de España. Fuente: INE.
 
-#+MATS: fig fig-08a_1027-infl.pdf
+#+MATS: fig file:fig-08a_1027-infl.pdf
 
 
 ** Principales dificultades
@@ -219,7 +218,7 @@ tasas de crecimiento.
 
 - PIB a precios de mercado de España. Miles de millones de euros. Fuente: INE.
 
-#+MATS: fig fig-08a_1027-gdp.pdf
+#+MATS: fig file:fig-08a_1027-gdp.pdf
 
 
 ** Estacionalidad
@@ -229,7 +228,7 @@ tasas de crecimiento.
   a año.
 - Índice de cifra de negocios del comercio al por menor. Precios corrientes. Base 2015. Fuente: INE.
 
-#+MATS: fig fig-08a_1027-retail.pdf
+#+MATS: fig file:fig-08a_1027-retail.pdf
 
 
 ** Varianza
@@ -380,7 +379,7 @@ El proceso estocástico $\{e_t\}$ es un *ruido blanco* si:
 
 Ruido blanco, $\sigma^2_e = 4$, $T = 60$.
 
-#+MATS: fig fig-08b_1027-wn-ts-*.pdf
+#+MATS: fig file:fig-08b_1027-wn-ts-*.pdf
 
 
 ** Características
@@ -402,7 +401,7 @@ Ruido blanco, $\sigma^2_e = 4$, $T = 60$.
 
 ** Autocorrelación
 
-#+MATS: figcol fig-08b_1027-wn-lag-*.pdf 0.5
+#+MATS: figcol file:fig-08b_1027-wn-lag-*.pdf 0.5
 
 - $e_t$ no está correlacionado con sus retardos.
 
@@ -666,21 +665,21 @@ Ruido blanco, $\sigma^2_e = 4$, $T = 60$.
 ** Algunos ejemplos (I)
 
 Proceso AR(1), $\rho = 0.8$, $\sigma^2_e = 4$, $T = 60$.
-#+MATS: fig fig-08b_1027-ar8-ts-*.pdf
+#+MATS: fig file:fig-08b_1027-ar8-ts-*.pdf
 
 Proceso AR(1), $\rho = 0.2$, $\sigma^2_e = 4$, $T = 60$.
-#+MATS: fig fig-08b_1027-ar2-ts-*.pdf
+#+MATS: fig file:fig-08b_1027-ar2-ts-*.pdf
 
 
 ** Algunos ejemplos (y II)
 
 #+MATS: col 0.5
 Proceso AR(1), $\rho = 0.8$, $\sigma^2_e = 4$, $T = 60$.
-#+MATS: fig fig-08b_1027-ar8-lag-*.pdf
+#+MATS: fig file:fig-08b_1027-ar8-lag-*.pdf
 
 #+MATS: col 0.5
 Proceso AR(1), $\rho = 0.2$, $\sigma^2_e = 4$, $T = 60$.
-#+MATS: fig fig-08b_1027-ar2-lag-*.pdf
+#+MATS: fig file:fig-08b_1027-ar2-lag-*.pdf
 
 
 * Paseo aleatorio
@@ -780,7 +779,7 @@ débil:
 
 Paseo aleatorio, $\sigma^2_e = 4$, $T = 60$.
 
-#+MATS: fig fig-08b_1027-rw-ts-*.pdf
+#+MATS: fig file:fig-08b_1027-rw-ts-*.pdf
 
 
 
@@ -817,7 +816,7 @@ Paseo aleatorio, $\sigma^2_e = 4$, $T = 60$.
 
 Paseo aleatorio con deriva, $\alpha_0 = 1$, $\sigma^2_e = 4$, $T = 60$.
 
-#+MATS: fig fig-08b_1027-rwd-ts-*.pdf
+#+MATS: fig file:fig-08b_1027-rwd-ts-*.pdf
 
 
 ** Procesos estacionarios con tendencia
@@ -838,7 +837,7 @@ Paseo aleatorio con deriva, $\alpha_0 = 1$, $\sigma^2_e = 4$, $T = 60$.
 
 $y_t = \beta_0 + \beta_1 t + u_t$, $\beta_1 = 1$, $u_t \sim AR(1)$, $T = 60$.
 
-#+MATS: fig fig-08b_1027-tst-ts-*.pdf
+#+MATS: fig file:fig-08b_1027-tst-ts-*.pdf
 
 
 
@@ -896,7 +895,7 @@ $y_t = \beta_0 + \beta_1 t + u_t$, $\beta_1 = 1$, $u_t \sim AR(1)$, $T = 60$.
 Logaritmo del IPC armonizado de España, febrero de 1998 hasta febrero
 de 2023. Fuente: INE.
 
-#+MATS: fig fig-08b_1027-lp-ts-*.pdf
+#+MATS: fig file:fig-08b_1027-lp-ts-*.pdf
 
 ** Ejemplo: Inflación interanual
 
@@ -906,7 +905,7 @@ Tasa de inflación interanual:
   \pi_t = 100 \incr_{12} \log(p_t) = 100 \big(\log(p_t) - \log(p_{t-12})\big).
 \]
 #+end_export
-#+MATS: fig fig-08b_1027-infl-ts-*.pdf
+#+MATS: fig file:fig-08b_1027-infl-ts-*.pdf
 
 ** Ejemplo: Variación mensual de la inflación
 
@@ -916,7 +915,7 @@ Variación mensual de la inflación:
   \incr \pi_t = \pi_t - \pi_{t-1}.
 \]
 #+end_export
-#+MATS: fig fig-08b_1027-dinfl-ts-*.pdf
+#+MATS: fig file:fig-08b_1027-dinfl-ts-*.pdf
 
 ** Ejemplo: Procesos integrados
 
@@ -933,3 +932,9 @@ Variación mensual de la inflación:
     \incr \pi_{t} \sim \text{I}(0).
   \end{gather*}
   #+end_export
+
+
+
+# Local Variables:
+# ispell-local-dictionary: "spanish"
+# End:

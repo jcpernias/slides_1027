@@ -1,4 +1,3 @@
-# -*- ispell-dictionary: "spanish" -*-
 #+SETUPFILE: ./course-es.org
 
 #+TITLE: {{{unit01}}}
@@ -379,7 +378,7 @@ $\beta_j$.
 
 ** Distribución bajo la hipótesis nula
 
-#+MATS: figcol fig-02_1027-tdens-*.pdf 0.5
+#+MATS: figcol file:fig-02_1027-tdens-*.pdf 0.5
 
 Si se cumplen los supuestos del modelo clásico de regresión lineal,
 *cuando la hipótesis nula es cierta* el estadístico $t$ se distribuye
@@ -404,7 +403,7 @@ nula:
 
 ** La región de rechazo
 
-#+MATS: figcol fig-02_1027-ttest-rejection-area-*.pdf 0.5
+#+MATS: figcol file:fig-02_1027-ttest-rejection-area-*.pdf 0.5
 
 La hipótesis alternativa determina la *región de rechazo*: valores
 grandes en valor absoluto del estadístico $t$ son evidencia en contra
@@ -436,7 +435,7 @@ de la hipótesis nula.
 ** Valores críticos de un contraste de dos colas
 
 
-#+MATS: figcol fig-02_1027-ttest-two-tails-*.pdf 0.5
+#+MATS: figcol file:fig-02_1027-ttest-two-tails-*.pdf 0.5
 
 En un contraste de $H_0\!: \beta_j = b_j$ frente a $H_1\!: \beta_j
 \neq b_j$, el valor crítico $c_{\alpha}$ cumple:
@@ -449,7 +448,7 @@ En un contraste de $H_0\!: \beta_j = b_j$ frente a $H_1\!: \beta_j
 
 ** Regla de decisión
 
-#+MATS: figcol fig-02_1027-ttest-h0-rejected-*.pdf 0.5
+#+MATS: figcol file:fig-02_1027-ttest-h0-rejected-*.pdf 0.5
 
 *Regla de decisión*: se rechaza $H_0$ (en favor de $H_1$) a un nivel
 de significación $\alpha$ cuando el estadístico $t$ cae en la región
@@ -463,7 +462,7 @@ de rechazo:
 
 ** No rechazo
 
-#+MATS: figcol fig-02_1027-ttest-h0-not-rejected-*.pdf 0.5
+#+MATS: figcol file:fig-02_1027-ttest-h0-not-rejected-*.pdf 0.5
 
 Decimos que *no se rechaza* la $H_0$ cuando el estadístico $t$ se
 sitúa fuera de la región de rechazo. Evitamos expresiones como
@@ -479,7 +478,7 @@ como el que se ha obtenido.
 
 ** Valor-$p$ de un contraste de dos colas
 
-#+MATS: figcol fig-02_1027-ttest-p-value-*.pdf 0.5
+#+MATS: figcol file:fig-02_1027-ttest-p-value-*.pdf 0.5
 
 El valor-$p$ se corresponde con el área de las dos colas delimitadas
 por el estadístico de contraste:
@@ -549,7 +548,7 @@ $\alpha$:
 
 ** Contrastes de una cola (I)
 
-#+MATS: figcol fig-02_1027-ttest-one-tail-pos-*.pdf 0.5
+#+MATS: figcol file:fig-02_1027-ttest-one-tail-pos-*.pdf 0.5
 
 - $H_0\!: \beta_j = b_j$ frente a $H_{1}\!: \beta_{j}
   > b_{j}$.
@@ -571,7 +570,7 @@ $\alpha$:
 
 ** Contrastes de una cola (y II)
 
-#+MATS: figcol fig-02_1027-ttest-one-tail-neg-*.pdf 0.5
+#+MATS: figcol file:fig-02_1027-ttest-one-tail-neg-*.pdf 0.5
 
 - $H_0\!: \beta_j = b_j$ frente a $H_{1}\!: \beta_{j}
   < b_{j}$.
@@ -627,7 +626,7 @@ una probabilidad $1-\alpha$:
 (*estimación puntual*), calculamos un intervalo de valores para el
 parámetro $\beta_j$.
 
-#+MATS: fig fig-02_1027-conf-interval-*.pdf
+#+MATS: fig file:fig-02_1027-conf-interval-*.pdf
 
 
 
@@ -638,7 +637,7 @@ $H_1\!: \beta_j \neq b_j$ a un nivel de significación $\alpha$ si
 $b_j$ no está incluido en el intervalo de confianza $(\bar{\beta}_j,
 \ubar{\beta}_j)$ construido a un nivel de confianza $1 - \alpha$.
 
-#+MATS: fig fig-02_1027-conf-interval-test-*.pdf
+#+MATS: fig file:fig-02_1027-conf-interval-test-*.pdf
 
 
 
@@ -662,7 +661,7 @@ distribución $t_{n-k-1}$ a un nivel de significación $\alpha$.
 El intervalo de confianza del parámetro $\beta_j$ es simétrico y su
 centro es la estimación $\bhat_j$.
 
-#+MATS: fig fig-02_1027-conf-interval-estimation-*.pdf
+#+MATS: fig file:fig-02_1027-conf-interval-estimation-*.pdf
 
 
 * Contrastes de hipótesis lineales sobre los parámetros
@@ -757,7 +756,7 @@ como una variable aleatoria $F$ con $q$ y $n - k - 1$ grados de libertad:
 
 ** Región de rechazo
 
-#+MATS: figcol fig-02_1027-ftest-rejection-area-*.pdf 0.5
+#+MATS: figcol file:fig-02_1027-ftest-rejection-area-*.pdf 0.5
 
 - Valor crítico a un nivel de significación $\alpha$:
   #+begin_export latex
@@ -854,3 +853,9 @@ restringido, $\Rsqr$, y del modelo no restringido, $\Rsqnr$:
 - Valor medio.
 
 - Valor de la variable dependiente.
+
+
+
+# Local Variables:
+# ispell-local-dictionary: "spanish"
+# End:
