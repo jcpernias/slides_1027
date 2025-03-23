@@ -52,7 +52,7 @@ MAKEORGDEPS := $(pythonbin) $(pythondir)/makeorgdeps.py
 MAKETEXDEPS := $(pythonbin) $(pythondir)/maketexdeps.py
 MAKEFIGDEPS := $(pythonbin) $(pythondir)/makefigdeps.py
 
-RSCRIPT := $(Rscriptbin) -e
+RSCRIPT := $(Rscriptbin) --no-save --no-restore
 
 tex_check_dirs := $(builddir) $(figdir) $(depsdir)
 
@@ -231,7 +231,7 @@ $(depsdir)/unit-%-figs.d: unit-%-figs.org | $(depsdir)
 
 # from R to latex
 $(builddir)/%.tex: $(builddir)/%.Rnw | $(builddir)
-	$(RSCRIPT) $(call knit,$<,$@)
+	$(RSCRIPT) -e $(call knit,$<,$@)
 
 define cp_rule
 $(builddir)/course-$(1).org: $(rootdir)/course-$(1).org | $(builddir)
@@ -249,6 +249,8 @@ $(foreach lang,$(LANGUAGES),$(eval $(call cp_rule,$(lang))))
 ifeq ($(INCLUDEDEPS),yes)
 include $(all_deps)
 endif
+
+-include R/R.mk
 
 ## Auxiliary directories
 ## --------------------------------------------------------------------------------
