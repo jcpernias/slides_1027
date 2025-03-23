@@ -31,7 +31,7 @@
       col sep = comma,
       x = Index,
       y = wn,
-      ]{R/unit-08b_1027-sim.csv}
+      ]{data/unit-08b_1027-sim.csv}
       ;
       \draw[ultra thin] (axis cs:\pgfkeysvalueof{/pgfplots/xmin}, 0) --
         (axis cs:\pgfkeysvalueof{/pgfplots/xmax}, 0);
@@ -70,7 +70,7 @@
       col sep = comma,
       x = wn_1,
       y = wn,
-      ]{R/unit-08b_1027-sim.csv}
+      ]{data/unit-08b_1027-sim.csv}
       ;
     \end{axis}
   \end{tikzpicture}
@@ -104,7 +104,7 @@
       col sep = comma,
       x = Index,
       y = ar8,
-      ]{R/unit-08b_1027-sim.csv}
+      ]{data/unit-08b_1027-sim.csv}
       ;
       \draw[ultra thin] (axis cs:\pgfkeysvalueof{/pgfplots/xmin}, 0) --
         (axis cs:\pgfkeysvalueof{/pgfplots/xmax}, 0);
@@ -143,7 +143,7 @@
       col sep = comma,
       x = ar8_1,
       y = ar8,
-      ]{R/unit-08b_1027-sim.csv}
+      ]{data/unit-08b_1027-sim.csv}
       ;
     \end{axis}
   \end{tikzpicture}
@@ -175,7 +175,7 @@
       col sep = comma,
       x = Index,
       y = ar2,
-      ]{R/unit-08b_1027-sim.csv}
+      ]{data/unit-08b_1027-sim.csv}
       ;
       \draw[ultra thin] (axis cs:\pgfkeysvalueof{/pgfplots/xmin}, 0) --
         (axis cs:\pgfkeysvalueof{/pgfplots/xmax}, 0);
@@ -214,7 +214,7 @@
       col sep = comma,
       x = ar2_1,
       y = ar2,
-      ]{R/unit-08b_1027-sim.csv}
+      ]{data/unit-08b_1027-sim.csv}
       ;
     \end{axis}
   \end{tikzpicture}
@@ -246,7 +246,7 @@
       col sep = comma,
       x = Index,
       y = arm6,
-      ]{R/unit-08b_1027-sim.csv}
+      ]{data/unit-08b_1027-sim.csv}
       ;
       \draw[ultra thin] (axis cs:\pgfkeysvalueof{/pgfplots/xmin}, 0) --
         (axis cs:\pgfkeysvalueof{/pgfplots/xmax}, 0);
@@ -290,7 +290,7 @@
       col sep = comma,
       x = h,
       y = ar8,
-      ]{R/unit-08b_1027-acf.csv}
+      ]{data/unit-08b_1027-acf.csv}
       ;
     \end{axis}
   \end{tikzpicture}
@@ -325,7 +325,7 @@
       col sep = comma,
       x = Index,
       y = rw,
-      ]{R/unit-08b_1027-sim.csv}
+      ]{data/unit-08b_1027-sim.csv}
       ;
       \draw[ultra thin] (axis cs:\pgfkeysvalueof{/pgfplots/xmin}, 0) --
         (axis cs:\pgfkeysvalueof{/pgfplots/xmax}, 0);
@@ -359,7 +359,7 @@
       col sep = comma,
       x = Index,
       y = rwd,
-      ]{R/unit-08b_1027-sim.csv}
+      ]{data/unit-08b_1027-sim.csv}
       ;
       \draw[thin, black, dashed] (1, 1) -- (60, 60) ;
 
@@ -392,7 +392,7 @@
       col sep = comma,
       x = Index,
       y = tst,
-      ]{R/unit-08b_1027-sim.csv}
+      ]{data/unit-08b_1027-sim.csv}
       ;
       \draw[thin, black, dashed] (1, 6) -- (60, 65) ;
 
@@ -430,7 +430,7 @@
       col sep = comma,
       x = tidx,
       y = lp,
-      ]{R/unit-08b_1027-int.csv}
+      ]{data/unit-08b_1027-int.csv}
       ;
       % \draw[ultra thin] (axis cs:\pgfkeysvalueof{/pgfplots/xmin}, 0) --
       %   (axis cs:\pgfkeysvalueof{/pgfplots/xmax}, 0);
@@ -464,7 +464,7 @@
       col sep = comma,
       x = tidx,
       y = infl,
-      ]{R/unit-08b_1027-int.csv}
+      ]{data/unit-08b_1027-int.csv}
       ;
       \draw[ultra thin] (axis cs:\pgfkeysvalueof{/pgfplots/xmin}, 0) --
         (axis cs:\pgfkeysvalueof{/pgfplots/xmax}, 0);
@@ -497,7 +497,7 @@
       col sep = comma,
       x = tidx,
       y = dinfl,
-      ]{R/unit-08b_1027-int.csv}
+      ]{data/unit-08b_1027-int.csv}
       ;
       \draw[ultra thin] (axis cs:\pgfkeysvalueof{/pgfplots/xmin}, 0) --
         (axis cs:\pgfkeysvalueof{/pgfplots/xmax}, 0);

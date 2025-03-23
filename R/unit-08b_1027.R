@@ -70,14 +70,14 @@ series <- merge(wn, wn_1, ar8, ar8_1, ar5, ar5_1,
                 ar2, ar2_1, arm6, arm6_1, rw, rwd, tst) |>
     window(start = 1, end = T)
 
-write_csv(series, "R/unit-08b_1027-sim.csv")
+write_csv(series, "data/unit-08b_1027-sim.csv")
 
 ## Theoretical autocorrelations
 h <- 1:10
 rho <- c(0.8, 0.5, 0.2, -0.6)
 acf_tab <- sapply(h, \(x) c(x, rho ^ x))  |> t()
 colnames(acf_tab) <- c("h", "ar8", "ar5", "ar2", "arm6")
-write.csv(acf_tab, file = "R/unit-08b_1027-acf.csv",
+write.csv(acf_tab, file = "data/unit-08b_1027-acf.csv",
           row.names = FALSE, quote = FALSE)
 
 
@@ -100,5 +100,5 @@ year <- as.integer(format(time(ipc), "%Y"))
 series <- merge(tidx, year, month, lp, infl, dinfl) |>
     window(start = "feb 1998", end = "feb 2023")
 
-write.csv(series, file = "R/unit-08b_1027-int.csv",
+write.csv(series, file = "data/unit-08b_1027-int.csv",
           row.names = FALSE, quote = FALSE)

@@ -13,3 +13,4 @@ local.mk
 *.log
 *.pdf
 *.synctex.gz
+/data/unit-08b_1027-*.csv

@@ -252,6 +252,30 @@ endif
 
 -include R/R.mk
 
+unit-08-sim-data-files := $(datadir)/unit-08b_1027-sim.csv \
+	$(datadir)/unit-08b_1027-acf.csv \
+	$(datadir)/unit-08b_1027-int.csv
+
+unit-08-fig-pdf-files := \
+	$(figdir)/fig-08b_1027-infl-ts-es.pdf \
+	$(figdir)/fig-08b_1027-dinfl-ts-es.pdf \
+	$(figdir)/fig-08a_1027-infl.pdf \
+	$(figdir)/fig-08a_1027-retail.pdf \
+	$(figdir)/fig-08b_1027-wn-lag-es.pdf \
+	$(figdir)/fig-08b_1027-rw-ts-es.pdf \
+	$(figdir)/fig-08a_1027-gdp.pdf \
+	$(figdir)/fig-08b_1027-ar8-lag-es.pdf \
+	$(figdir)/fig-08b_1027-rwd-ts-es.pdf \
+	$(figdir)/fig-08b_1027-ar8-ts-es.pdf \
+	$(figdir)/fig-08b_1027-lp-ts-es.pdf \
+	$(figdir)/fig-08b_1027-ar2-lag-es.pdf \
+	$(figdir)/fig-08b_1027-wn-ts-es.pdf \
+	$(figdir)/fig-08b_1027-ar2-ts-es.pdf \
+	$(figdir)/fig-08b_1027-tst-ts-es.pdf
+
+
+$(unit-08-fig-pdf-files): $(unit-08-sim-data-files)
+
 ## Auxiliary directories
 ## --------------------------------------------------------------------------------
 

@@ -26,6 +26,17 @@ unit-08a_1027-figures.intermediate: $(Rdir)/unit-08a_1027.R $(unit-08a-data-file
 	$(RSCRIPT) $<
 
 
+$(datadir)/unit-08b_1027-sim.csv \
+$(datadir)/unit-08b_1027-acf.csv \
+$(datadir)/unit-08b_1027-int.csv: \
+	unit-08b_1027-data-files.intermediate
+	@:
+
+.INTERMEDIATE: unit-08b_1027-data-files.intermediate
+unit-08b_1027-data-files.intermediate: $(Rdir)/unit-08b_1027.R $(datadir)/IPCa.xlsx
+	$(RSCRIPT) $<
+
+
 
 # Local Variables:
 # mode: makefile-gmake
