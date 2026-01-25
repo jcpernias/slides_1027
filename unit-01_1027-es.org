@@ -236,39 +236,44 @@ El estimador de MCO es insesgado si se cumplen los supuestos *RLM.1* a
 *RLM.4*.
 
 
-** Omisión de variables relevantes
+** Sesgo: ejemplo (I)
 
-- Ejemplo: modelo que cumple los supuestos *RLM.1* a *RLM.4*:
+- Ejemplo: modelo de regresión simple:
   #+begin_export latex
   \[
-    y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + u
+    y = \beta_0 + \beta_1 x_1 + u.
   \]
   #+end_export
 
-- Realizamos la regresión de $y$ sobre $x_1$ omitiendo la variable
-  $x_2$.
+- No se cumple el supuesto *RLM.4*: $E(u|x_1) \neq 0$.
 
-- ¿Qué ocurre si especificamos un modelo donde falta una de las
-  explicativas?
+** Sesgo: ejemplo (II)
 
-
-** Sesgo
-
-- Cuando se omite $x_2$:
+- El incumplimiento de *RLM.4* se debe a la omisión de la variable
+  $x_2$, de forma que:
   #+begin_export latex
   \[
-    \Exp(\bhat_{1}) = \beta_{1} + \beta_2 \delta_{21}
+    u = v + \beta_2 x_2.
   \]
   #+end_export
-  donde $\delta_{21}$ es la pendiente de la regresión de $x_2$ sobre
-  $x_1$.
 
-- *Sesgo* por omisión de $x_2$:
+- La esperanza condicional de $u$ puede reescribirse:
   #+begin_export latex
   \[
-    \operatorname{Sesgo}(\bhat_{1}) = \Exp(\bhat_{1}) - \beta_{1} = \beta_2 \delta_{12}
+    E(u|x_1) = E(v|x_1) + \beta_2 E(x_2|x_1).
   \]
   #+end_export
+
+** Sesgo: ejemplo (y III)
+
+Para que no se produzca sesgo, se debería cumplir $E(u|x_1) = 0$. Esto
+ocurre cuando:
+
+- $E(v|x_1) = 0$: una vez se tiene en cuenta la variable $x_2$, $x_1$
+  no está relacionada con el término de error.
+
+- O $\beta_2 = 0$ ($x_2$ no es relevante), o $E(x_2|x_1) = 0$ ($x_2$ y
+  $x_1$ no están correlacionadas).
 
 
 ** Sesgo de variable omitida
@@ -276,10 +281,10 @@ El estimador de MCO es insesgado si se cumplen los supuestos *RLM.1* a
 El estimador de MCO presenta sesgo cuando se cumplen *las dos*
 condiciones:
 
-- $\beta_2 \neq 0$: las variables omitidas son *relevantes*.
+- Se omiten variables explicativas *relevantes*.
 
-- $\delta_{21} \neq 0$: las variables omitidas están correlacionadas
-  con alguna de las variables incluidas en la regresión.
+- Las variables omitidas están correlacionadas con alguna de las
+  variables incluidas en la regresión.
 
 
 ** Varianza del estimador MCO
