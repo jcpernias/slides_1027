@@ -147,6 +147,7 @@ del cuadrado de los residuos:
 
 ** Sumas de cuadrados
 
+#+ATTR_LATEX: :booktabs t
 |-------------------+----------------------------------------------|
 | Suma de cuadrados | Fórmula                                      |
 |-------------------+----------------------------------------------|
