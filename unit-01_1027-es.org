@@ -112,7 +112,7 @@ su distribución es *normal* con media 0 y varianza $\sigma^2$:
 \]
 #+end_export
 donde:
-- $\yhat$ son los *predicciones*,
+- $\yhat$ son los *valores ajustados* o *valores predichos*,
 
 - $\bhat_0, \bhat_1, \dots, \bhat_k$ son las *estimaciones* de los parámetros.
 
@@ -145,46 +145,20 @@ del cuadrado de los residuos:
 #+end_export
 
 
-** Ecuaciones normales
-
-El estimador MCO se obtiene resolviendo las *ecuaciones normales*:
-#+begin_export latex
-\begin{gather*}
-  \sum_{i = 1}^n \uhat_{i} = 0 \\
-  \sum_{i = 1}^n \uhat_{i} x_{ji} = 0 \quad (j = 1, 2, \dots, k)
-\end{gather*}
-#+end_export
-
-
 ** Sumas de cuadrados
 
-Suma de cuadrados total:
-#+begin_export latex
-\[
-   \SCT = \sum_{1=1}^n (y_i - \ymean)^{2}
-\]
-#+end_export
+|-------------------+----------------------------------------------|
+| Suma de cuadrados | Fórmula                                      |
+|-------------------+----------------------------------------------|
+| Total             | $\SCT = \sum_{1=1}^n (y_i - \ymean)^{2}$     |
+| Explicada         | $\SCE = \sum_{1=1}^n (\yhat_i - \ymean)^{2}$ |
+| Residual          | $\SCR = \sum_{1=1}^n \uhat_i^{2}$            |
+|-------------------+----------------------------------------------|
 
-Suma de cuadrados explicada:
-#+begin_export latex
-\[
-   \SCE = \sum_{1=1}^n (\yhat_i - \ymean)^{2}
-\]
-#+end_export
+- La *suma de cuadrados total* mide la variación de la variable
+  dependiente.
 
-Suma de cuadrados de los residuos:
-#+begin_export latex
-\[
-  \SCR = \sum_{1=1}^n \uhat_i^{2}
-\]
-#+end_export
-
-La estimación por MCO garantiza que:
-#+begin_export latex
-\[
-  \SCT = \SCE + \SCR
-\]
-#+end_export
+- Si la regresión incluye un término constante, al estimar por MCO se obtiene: $\SCT = \SCE + \SCR$.
 
 
 ** Bondad del ajuste
