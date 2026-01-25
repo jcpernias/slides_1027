@@ -7,9 +7,6 @@
 - Wooldridge: ::  /Introducción a la Econometría/. Capítulos 3, 4, 6 y 7.
 #+end_bibbox
 
-#+PROPERTY: header-args:R :session *R* :exports results :results output :eval yes
-#+PROPERTY: header-args:R :var orgbackend=(prin1-to-string org-export-current-backend)
-#+MACRO: Rtable (eval (concat "#+header: :results output " (prin1-to-string org-export-current-backend)))
 
 * El modelo clásico de regresión lineal
 
@@ -836,23 +833,6 @@ restringido, $\Rsqr$, y del modelo no restringido, $\Rsqnr$:
 - Cualquier conjunto de restricciones lineales siempre puede
   transformarse en restricciones de exclusión mediante una
   reparametrización del modelo.
-
-
-* COMMENT Predicción
-
-
-** Predicción puntual
-
-- Predicción del valor medio.
-
-- Predicción del valor.
-
-
-** Intervalos de predicción
-
-- Valor medio.
-
-- Valor de la variable dependiente.
 
 
 
