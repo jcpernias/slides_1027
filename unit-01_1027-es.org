@@ -156,49 +156,70 @@ del cuadrado de los residuos:
 | Residual          | $\SCR = \sum_{1=1}^n \uhat_i^{2}$            |
 |-------------------+----------------------------------------------|
 
-- La *suma de cuadrados total* mide la variación de la variable
-  dependiente.
+- La *suma de cuadrados total* mide la variabilidad de $y_i$.
 
-- Si la regresión incluye un término constante, al estimar por MCO se obtiene: $\SCT = \SCE + \SCR$.
+- Si la regresión incluye un término constante, al estimar por MCO se
+  obtiene: $\SCT = \SCE + \SCR$.
 
 
 ** Bondad del ajuste
 
-- Error típico de la regresión:
-  #+begin_export latex
-  \[
-    \SER = \sqrt{\frac{\SCR}{n - k - 1}}
-  \]
-  #+end_export
-
+Medidas de bondad del ajuste:
 - Coeficiente de determinación:
   #+begin_export latex
   \[
-    \Rsq = 1 - \frac{\SCR}{\SCT}
+  \Rsq = 1 - \frac{\SCR}{\SCT}
   \]
   #+end_export
 
 - $\Rsq$ ajustado:
   #+begin_export latex
   \[
-    \Rbarsq = 1 - \frac{\SCR/(n - k - 1)}{\SCT/(n - 1)}
+  \Rbarsq = 1 - \frac{\SCR/(n - k - 1)}{\SCT/(n - 1)}
   \]
   #+end_export
 
 
+** Comparación de modelos
+
+- Las medidas de ajuste se pueden usar para comparar modelos estimados
+  con exactamente la misma muestra y cuya variable dependiente sea
+  idéntica.
+
+- Si la regresión incluye un término constante, $\Rsq$ se interpreta
+  como la proporción de la variación total explicada por los
+  regresores.
+
+- El $\Rsq$ ajustado se utiliza para comparar el ajuste de modelos de
+  regresión con diferente número de regresores.
+
+
+
 * Propiedades del estimador de MCO
 
+** Propiedades de los estimadores
 
-** Propiedades de muestras pequeñas
-
-- Se refieren al método de estimación, MCO, no a las estimaciones
-  obtenidas con una muestra particular.
+- Se refieren al método de estimación no a las estimaciones obtenidas
+  con una muestra particular.
 
 - Dependen del cumplimiento de los supuestos del modelo de regresión
   lineal clásico.
 
+- Distinguimos entre *propiedades de muestras pequeñas* y *propiedades
+  asintóticas*.
+
+** Propiedades de muestras pequeñas
+
 - No dependen del tamaño muestral: son válidas para cualquier $n$.
 
+- Estudiaremos las siguientes:
+
+  + *Insesgadez*: ¿Son válidas las estimaciones de los parámetros?
+
+  + *Eficiencia*: ¿Se está utilizando el método de estimación más preciso?
+
+  + *Distribución muestral*: ¿Podemos realizar contrastes de hipótesis
+    sobre los parámetros?
 
 
 ** Insesgadez
