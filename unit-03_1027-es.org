@@ -1,4 +1,3 @@
-# -*- ispell-dictionary: "spanish" -*-
 #+SETUPFILE: ./course-es.org
 
 #+TITLE: {{{unit03}}}
@@ -25,7 +24,7 @@ normalidad del término de error:
 ** Inferencia en el modelo clásico
 
 El supuesto de normalidad permite conocer la distribución de los
-contrates de hipótesis bajo la hipótesis nula.
+contrastes de hipótesis cuando se cumple la hipótesis nula.
 
 
 ** Falta de normalidad
@@ -83,14 +82,16 @@ Intuitivamente, cuanto mayor es el tamaño muestral más cerca está un estimado
 - Las propiedades de consistencia e insesgadez son independientes: una
   no implica la otra.
 
-- Un estimador es consistente si es insesgado y su varianza decrece y
-  converge a 0 conforme aumenta el tamaño muestral.
+- Un estimador insesgado es consistente si su varianza converge a 0
+  conforme aumenta el tamaño muestral.
 
+- Un estimador sesgado es consistente si tanto el sesgo como su
+  varianza convergen a 0 cuando aumenta el tamaño muestral.
 
 ** Distribución asintótica
 
-- La *distribución asintótica* de un estimador es su distribución en
-  el límite.
+- La *distribución asintótica* de un estimador se obtiene como el
+  límite cuando $n \to \infty$ de una secuencia de distribuciones.
 
 - Proporciona una aproximación a la distribución del estimador para un
   tamaño muestral finito.
@@ -136,10 +137,12 @@ Intuitivamente, cuanto mayor es el tamaño muestral más cerca está un estimado
 ** Inconsistencia
 
 - La *inconsistencia* de $\bhat_i$ es la diferencia entre el límite
-  del estimador y el parámetro poblacional. En el caso de MCO:
+  del estimador y el parámetro poblacional.
+
+- En el caso del modelo de regresión simple:
   #+begin_export latex
   \[
-    \plim \bhat_{i} - \beta_{i} = \frac{\cov(x_{i}, u)}{\var(x_{i})}.
+    \plim \bhat_{1} - \beta_{1} = \frac{\cov(x_{1}, u)}{\var(x_{1})}.
   \]
   #+end_export
 
@@ -149,16 +152,15 @@ Intuitivamente, cuanto mayor es el tamaño muestral más cerca está un estimado
 
 ** Variable relevante omitida
 
-- Se cumplen los supuestos *RLM.1* a *RLM.4* en el mod
-  elo poblacional:
+- Se cumplen los supuestos *RLM.1* a *RLM.4* en el modelo poblacional:
   #+begin_export latex
   \[
     y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + u.
   \]
   #+end_export
 
-- Si se omite la variable $x_2$, el sesgo del estimador MCO de
-  $\beta_1$ es:
+- Si se omite la variable $x_2$, la inconsistencia del estimador MCO
+  de $\beta_1$ es:
   #+begin_export latex
   \[
     \plim \bhat_{1} - \beta_{1} = \beta_2 \delta_{21},
@@ -178,7 +180,7 @@ Si se cumplen los supuestos de Gauss-Markov, *RLM.1* a *RLM.5*:
 
 - $\hat{\sigma}^2$ es un estimador consistente de $\var(u)$.
 
-- Las fórmulas para estimar las varianzas de los estimadores MCO son
+- Las estimaciones de MCO de las varianzas de los estimadores son
   válidas asintóticamente:
   #+begin_export latex
   \[
@@ -189,7 +191,8 @@ Si se cumplen los supuestos de Gauss-Markov, *RLM.1* a *RLM.5*:
 
 ** Normalidad asintótica del estimador MCO
 
-Si se cumplen los supuestos de Gauss-Markov, *RLM.1* a *RLM.5*, la distribución asintótica del estimador MCO es normal:
+Si se cumplen los supuestos de Gauss-Markov, *RLM.1* a *RLM.5*, la
+distribución asintótica del estimador MCO es normal:
   #+begin_export latex
   \[
     \frac{\bhat_{j} - \beta_{j}}{\sd(\bhat_{j})} \adistr \Normal(0, 1),
@@ -204,17 +207,18 @@ Si se cumplen los supuestos de Gauss-Markov, *RLM.1* a *RLM.5*, la distribución
 
 ** Contraste de hipótesis en muestras grandes
 
-- No es necesario el supuesto de normalidad del término de error para
-  usar los contrastes $t$ y $F$.
+- En muestras grandes no es necesario el supuesto de normalidad del
+  término de error para usar los contrastes $t$ y $F$.
 
-- Disponemos de otros contrastes que sólo son válidos asintóticamente.
+- También existen otros contrastes que sólo son válidos
+  asintóticamente.
 
 
 ** Contrastes $t$
 
 - Si se cumplen los supuestos de Gauss-Markov, podemos usar la
   distribución $t$ para determinar valores críticos y los valores-$p$
-  de los contrates $t$.
+  de los contrastes $t$.
   #+begin_export latex
   \[
     \frac{\bhat_{j} - \beta_{j}}{\se(\bhat_{j})} \adistr t_{n - k - 1}.
@@ -240,7 +244,7 @@ Si se cumplen los supuestos de Gauss-Markov, *RLM.1* a *RLM.5*, la distribución
 
 - Si se cumplen los supuestos de Gauss-Markov, podemos usar la
   distribución $F$ para determinar valores críticos y los valores-$p$
-  de los contrates $F$.
+  de los contrastes $F$.
   #+begin_export latex
   \[
     \frac{(\SCRr - \SCRnr) / q}{\SCRnr / (n - k - 1)}  \adistr F_{q,\, n - k - 1}.
@@ -283,7 +287,7 @@ generales sobre los parámetros y que sólo tienen validez asintótica:
 - Frecuentemente se calculan a partir de una *regresión auxiliar*.
 
 
-** Contraste de variables omitidas
+** Contraste de exclusión de variables
 
 - Modelo de regresión poblacional que cumple *RLM.1* a *RLM.5*:
   #+begin_export latex
@@ -301,7 +305,7 @@ generales sobre los parámetros y que sólo tienen validez asintótica:
 
 
 
-** Contraste $\LM$ de variables omitidas
+** Contraste $\LM$ de exclusión de variables
 
 - Estimación del modelo restringido por MCO:
   #+begin_export latex
@@ -347,3 +351,7 @@ Si la hipótesis nula que impone $q$ restricciones es correcta:
 
 - Son útiles cuando en modelos no lineales que se estiman con métodos
   diferentes a MCO.
+
+# Local Variables:
+# ispell-dictionary: "spanish"
+# End:
