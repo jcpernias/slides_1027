@@ -11,10 +11,10 @@
 * Introducción
 
 
-** Eventos cuantitativos
+** Eventos cualitativos
 
 ¿Es posible usar el modelo de regresión para analizar los
-determinantes de *eventos cuantitativos*?
+determinantes de *eventos cualitativos*?
 
 
 ** Variable dependiente binaria
@@ -31,7 +31,7 @@ La variable dependiente sólo toma dos valores:
 - Modelo de regresión:
   #+begin_export latex
   \[
-    y = \beta_0 + \beta_1 x_1 + \dots + \beta_k x_k + u.
+    y_i = \beta_0 + \beta_1 x_{1i} + \dots + \beta_k x_{ki} + u_i.
   \]
   #+end_export
 
@@ -41,59 +41,55 @@ La variable dependiente sólo toma dos valores:
 
 ** Probabilidad condicional
 
-- Si $y$ es una variable binaria, su esperanza condicional coincide
-  con la probabilidad condicional de que $y = 1$:
+- Si $y_i$ es una variable binaria, su esperanza condicional es:
   #+begin_export latex
   \[
-    \Exp(y | \bm{x}) = \Pr(y = 1 | \bm{x}).
+    \Exp(y_i | \bm{x_i}) = 1 \cdot \Pr(y_i = 1 | \bm{x_i})  + 0 \cdot \Pr(y_i = 0 | \bm{x_i}).
   \]
   #+end_export
 
-- *Modelo de probabilidad lineal* (MLP): la probabilidad de que $y$
-  tome el valor $1$ es una función lineal en los parámetros $\beta_0,
-  \beta_1, \dots, \beta_k$:
+- En ese caso, la esperanza condicional es igual a la *probabilidad de
+  ocurrencia*, $p_i = \Pr(y_i = 1 | \bm{x_i})$:
   #+begin_export latex
   \[
-    \Pr(y = 1 | \bm{x}) = \beta_0 + \beta_1 x_1 + \dots + \beta_k x_k.
+    \Exp(y_i | \bm{x_i}) = p_i.
   \]
   #+end_export
+
+** El modelo de probabilidad lineal
+
+*Modelo de probabilidad lineal* (MLP): la probabilidad de ocurrencia
+es una función lineal de las variables explicativas:
+#+begin_export latex
+\[
+    p_i = \beta_0 + \beta_1 x_{1i} + \dots + \beta_k x_{ki}.
+\]
+#+end_export
 
 
 ** Interpretación de los parámetros
 
-- Podemos expresar el MLP como:
+- Si $x_j$ es una explicativa continua, su pendiente, $\beta_j$, mide
+  la tasa a la que cambia la probabilidad de ocurrencia cuando cambia
+  $x_j$, manteniendo inalteradas el resto de explicativas:
   #+begin_export latex
   \[
-    p(\bm{x}) = \beta_0 + \beta_1 x_1  + \dots + \beta_k x_k,
-  \]
-  #+end_export
-  donde $p(\bm{x})$ es una forma abreviada de escribir $\Pr(y = 1 |
-  \bm{x})$.
-
-- La pendiente $\beta_j$ mide cómo cambia la probabilidad de que $y =
-  1$ cuando cambia $x_j$, manteniendo inalteradas el resto de
-  explicativas:
-  #+begin_export latex
-  \[
-    \beta_j = \frac{\Delta p(\bm{x})}{\Delta x_j}.
+    \beta_j = \frac{\Delta p_i}{\Delta x_{ji}}.
   \]
   #+end_export
 
+- Si $x_j$ es una variable ficticia, $\beta_j$ es la diferencia
+  entre las probabilidades de ocurrencia cuando $x_{ji} = 1$ y cuando
+  $x_{ji} = 0$, permaneciendo constantes el resto de explicativas:
+  #+begin_export latex
+  \[
+    \beta_j = p_i(x_{ji} = 1) - p_i(x_{ji} = 0).
+  \]
+  #+end_export
 
-
-** Ventajas y limitaciones
-
-- En comparación a otros modelos más sofisticados, el MLP:
-
-  + es más fácil de usar e interpretar;
-
-  + proporciona resultados similares cuando las variables explicativas
-    toman valores cercanos a sus medias.
-
-- El MLP puede generar probabilidades fuera del intervalo $(0, 1)$,
-  por lo que no es adecuado para algunas aplicaciones.
-
-
+- La constante, $\beta_0$, sería la probabilidad de ocurrencia cuando
+  todas las explicativas toman el valor 0. Con frecuencia, no tiene
+  especial interés.
 
 * Estimación por MCO
 
@@ -113,7 +109,7 @@ La variable dependiente sólo toma dos valores:
 ** Predicción
 
 - Las predicciones de MCO se pueden interpretar como estimaciones de
-  la probabilidad de $y = 1$:
+  la probabilidad de ocurrencia:
   #+begin_export latex
   \[
     \phat_i = \bhat_0 + \bhat_1 x_{1i} + \dots + \bhat_k x_{ki}
@@ -158,6 +154,7 @@ Tabulación cruzada de $y$ e $\ytilde$:
   n$. Se usa para medir la bondad del ajuste de modelos con
   variable dependiente binaria.
 
+
 ** Insesgadez y consistencia
 
 - Los supuestos *RLM.1* a *RLM.4* no son incompatibles con que la
@@ -174,7 +171,7 @@ Tabulación cruzada de $y$ e $\ytilde$:
 - La varianza condicional del término de error puede escribirse como:
   #+begin_export latex
   \[
-    \var(u|\bm{x}) = p(\bm{x})\big(1 - p(\bm{x})\big).
+    \var(u_i|\bm{x_i}) = p_i(1 - p_i).
   \]
   #+end_export
 
@@ -185,8 +182,7 @@ Tabulación cruzada de $y$ e $\ytilde$:
   por MCO.
 
 - Para contrastar hipótesis o construir intervalos de confianza es
-  necesario usar estimaciones robustas a heteroscedasticidad de
-  $\var(\bhat)$.
+  necesario usar errores típicos robustos a heteroscedasticidad.
 
 
 * Estimación eficiente
@@ -198,12 +194,12 @@ Tabulación cruzada de $y$ e $\ytilde$:
   escribirse como:
   #+begin_export latex
   \[
-    \var(u_i|\bm{x_i}) = p(\bm{x_i})\big(1 - p(\bm{x_i})\big).
+    \var(u_i|\bm{x_i}) = p_i(1 - p_i).
   \]
   #+end_export
 
-- La probabilidad $p_i = p(\bm{x_i})$ depende de parámetros
-  desconocidos.
+- La probabilidad de ocurrencia, $p_i$, depende de parámetros
+  desconocidos, $\beta_0, \dots, \beta_k$.
 
 - Se podría aplicar MCPF si se reemplaza $p_i$ por una estimación,
   $\phat_i$.
@@ -215,7 +211,7 @@ Tabulación cruzada de $y$ e $\ytilde$:
   insesgado.
 
 - Con las estimaciones $\bhat_0, \bhat_1, \dots, \bhat_k$ se estima la
-  probabilidad de que $y = 1$:
+  probabilidad de ocurrencia:
   #+begin_export latex
   \[
     \phat_i = \bhat_0 + \bhat_1 x_{1i} + \dots + \bhat_k x_{ki}
@@ -230,10 +226,24 @@ Tabulación cruzada de $y$ e $\ytilde$:
   #+end_export
 
 
-** Limitaciones
+** Limitaciones de MCPF
 
 - El estimador MCPF no puede obtenerse si para algunas observaciones
   se obtiene $\phat_i \leq 0$ o $\phat_i \geq 1$.
 
 - Aunque se han propuesto alternativas, en esos casos es mejor usar
   MCO y contrastes de hipótesis robustos a heteroscedasticidad.
+
+* Conclusiones
+
+** Ventajas y desventajas del MLP
+
+- En comparación a otros modelos más sofisticados, el MLP:
+
+  + es más fácil de usar e interpretar;
+
+  + proporciona resultados similares cuando las variables explicativas
+    toman valores cercanos a sus medias.
+
+- El MLP puede generar probabilidades fuera del intervalo $(0, 1)$,
+  por lo que no es adecuado para algunas aplicaciones.
