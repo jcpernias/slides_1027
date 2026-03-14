@@ -75,8 +75,10 @@ write_csv(series, "data/unit-08b_1027-sim.csv")
 ## Theoretical autocorrelations
 h <- 1:10
 rho <- c(0.8, 0.5, 0.2, -0.6)
-acf_tab <- sapply(h, \(x) c(x, rho ^ x))  |> t()
-colnames(acf_tab) <- c("h", "ar8", "ar5", "ar2", "arm6")
+acf_tab <- sapply(h, \(x) c(x, rho ^ x))  |> t() |>
+  cbind(c(0.8, 0.6, 0.2, -0.4, -0.1, 0.3, 0.2, -0.1, 0.1, -0.05))
+
+colnames(acf_tab) <- c("h", "ar8", "ar5", "ar2", "arm6", "ex")
 write.csv(acf_tab, file = "data/unit-08b_1027-acf.csv",
           row.names = FALSE, quote = FALSE)
 
@@ -98,7 +100,7 @@ month <- cycle(ipc)
 year <- as.integer(format(time(ipc), "%Y"))
 
 series <- merge(tidx, year, month, lp, infl, dinfl) |>
-    window(start = "feb 1998", end = "feb 2023")
+    window(start = "feb. 1998", end = "feb. 2023")
 
 write.csv(series, file = "data/unit-08b_1027-int.csv",
           row.names = FALSE, quote = FALSE)
