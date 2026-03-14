@@ -324,12 +324,42 @@ En economía es frecuente encontrar series *no estacionarias*:
   periodos consecutivos valores altos con valores bajos.
 
 
-** COMMENT Correlograma
+** Correlograma
 
 
-- Un *correlograma* es la representación gráfica de los coeficientes
-  de autocorrelación de una serie temporal.
+Un *correlograma* es la representación gráfica de los coeficientes de
+autocorrelación de una serie temporal.
+#+latex: \par\vspace*{1ex}
 
+#+MATS: col 0.5
+#+begin_export latex
+\centering
+\footnotesize%
+\pgfplotstabletypeset[
+col sep=comma,
+columns={h,ex},
+columns/h/.style={
+  column name={$h$},
+  column type={r}
+},
+columns/ex/.style={
+  fixed, fixed zerofill, precision=2,
+  column name={$\rho_h$},
+  column type={r}
+},
+every head row/.style={
+  before row=\toprule,
+  after row=\midrule
+},
+every last row/.style={
+  after row=\bottomrule
+}
+]{data/unit-08b_1027-acf.csv}
+#+end_export
+
+#+MATS: col 0.5
+#+ATTR_LATEX: :scale 0.8
+#+MATS: fig file:fig-08b_1027-ar1-ex-corr-*.pdf
 
 
 ** Dependencia débil
@@ -662,6 +692,7 @@ Ruido blanco, $\sigma^2_e = 4$, $T = 60$.
 
 #+latex: \mode<article>{\clearpage}
 
+
 ** Algunos ejemplos (I)
 
 Proceso AR(1), $\rho = 0.8$, $\sigma^2_e = 4$, $T = 60$.
@@ -671,7 +702,7 @@ Proceso AR(1), $\rho = 0.2$, $\sigma^2_e = 4$, $T = 60$.
 #+MATS: fig file:fig-08b_1027-ar2-ts-*.pdf
 
 
-** Algunos ejemplos (y II)
+** Algunos ejemplos (II)
 
 #+MATS: col 0.5
 Proceso AR(1), $\rho = 0.8$, $\sigma^2_e = 4$, $T = 60$.
@@ -680,6 +711,18 @@ Proceso AR(1), $\rho = 0.8$, $\sigma^2_e = 4$, $T = 60$.
 #+MATS: col 0.5
 Proceso AR(1), $\rho = 0.2$, $\sigma^2_e = 4$, $T = 60$.
 #+MATS: fig file:fig-08b_1027-ar2-lag-*.pdf
+
+** Algunos ejemplos (y III)
+
+#+MATS: col 0.5
+Proceso AR(1), $\rho = 0.8$, $\sigma^2_e = 4$, $T = 60$.
+#+ATTR_LATEX: :scale 0.8
+#+MATS: fig file:fig-08b_1027-ar1-p8-corr-*.pdf
+
+#+MATS: col 0.5
+Proceso AR(1), $\rho = 0.2$, $\sigma^2_e = 4$, $T = 60$.
+#+ATTR_LATEX: :scale 0.8
+#+MATS: fig file:fig-08b_1027-ar1-p2-corr-*.pdf
 
 
 * Paseo aleatorio
@@ -778,10 +821,42 @@ débil:
 ** Ejemplo
 
 Paseo aleatorio, $\sigma^2_e = 4$, $T = 60$.
-
 #+MATS: fig file:fig-08b_1027-rw-ts-*.pdf
 
+** Ejemplo
 
+Paseo aleatorio, $\sigma^2_e = 4$, $T = 60$.
+#+latex: \par\vspace*{1ex}
+
+#+MATS: col 0.5
+#+begin_export latex
+\centering
+\footnotesize%
+\pgfplotstabletypeset[
+col sep=comma,
+columns={h,rw},
+columns/h/.style={
+  column name={$h$},
+  column type={r}
+},
+columns/rw/.style={
+  fixed, fixed zerofill, precision=2,
+  column name={$\rho_h$},
+  column type={r}
+},
+every head row/.style={
+  before row=\toprule,
+  after row=\midrule
+},
+every last row/.style={
+  after row=\bottomrule
+}
+]{data/unit-08b_1027-acf.csv}
+#+end_export
+
+#+MATS: col 0.5
+#+ATTR_LATEX: :scale 0.8
+#+MATS: fig file:fig-08b_1027-ar1-rw-corr-*.pdf
 
 * Tendencias
 

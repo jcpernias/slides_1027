@@ -76,9 +76,10 @@ write_csv(series, "data/unit-08b_1027-sim.csv")
 h <- 1:10
 rho <- c(0.8, 0.5, 0.2, -0.6)
 acf_tab <- sapply(h, \(x) c(x, rho ^ x))  |> t() |>
-  cbind(c(0.8, 0.6, 0.2, -0.4, -0.1, 0.3, 0.2, -0.1, 0.1, -0.05))
+  cbind(c(0.8, 0.6, 0.2, -0.4, -0.1, 0.3, 0.2, -0.1, 0.1, -0.05)) |>
+  cbind(get_acf(rw, 10))
 
-colnames(acf_tab) <- c("h", "ar8", "ar5", "ar2", "arm6", "ex")
+colnames(acf_tab) <- c("h", "ar8", "ar5", "ar2", "arm6", "ex", "rw")
 write.csv(acf_tab, file = "data/unit-08b_1027-acf.csv",
           row.names = FALSE, quote = FALSE)
 
