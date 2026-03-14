@@ -25,7 +25,7 @@
 - Los datos no provienen de un *muestreo aleatorio*.
 
 - El paso del tiempo proporciona un *orden* natural a las
-  observaciones de series temporales.
+  observaciones de las series.
 
 
 ** Series temporales regulares
@@ -34,9 +34,8 @@
   entre una observación y la siguiente es siempre el mismo: un año, un
   semestre, un cuatrimestre, un mes, etc.
 
-- De acuerdo con la *frecuencia* con que se observan los valores de
-  una variable, hablamos de series temporales anuales, trimestrales,
-  mensuales, etc.
+- De acuerdo con la *frecuencia* con que se observa a una variable,
+  hablamos de series temporales anuales, trimestrales, mensuales, etc.
 
 
 ** Ejemplo: inflación interanual en España
@@ -167,8 +166,8 @@ Diferencia y tasa de crecimiento de  $Y_t$.
 
 ** Ejemplo: logaritmos y tasas de crecimiento
 
-No hay grandes diferencias entre las diferentes formas de calcular las
-tasas de crecimiento.
+Si las tasas de crecimiento son moderadas, no hay grandes diferencias
+entre las diferentes formas de calcularlas.
 
 #+ATTR_LATEX: :font \footnotesize :align @{}rr*{2}{@{\hspace{15mm}}r@{\hspace{2mm}}r}@{} :booktabs t
 |  Año | $t$ | $Y_{t}$       | $100 \incr Y_{t} / Y_{t-1}$ | $\log(Y_{t})$ | $100 \incr \log(Y_{t})$ |
@@ -302,11 +301,11 @@ En economía es frecuente encontrar series *no estacionarias*:
 - Es más frecuente usar los *coeficientes de autocorrelación* cuyo
   rango de variación está acotado entre $-1$ y $1$.
 
-- El coeficiente de autocorrelación de orden $j$ se define como
+- El coeficiente de autocorrelación de orden $h$ se define como
   #+begin_export latex
   \[
-    \rho_j = \corr(y_t, y_{t-j}) =
-    \frac{\cov(y_t, y_{t-j})}{\sqrt{\var(y_t) \var(y_{t-j})}}
+    \rho_h = \corr(y_t, y_{t-h}) =
+    \frac{\cov(y_t, y_{t-h})}{\sqrt{\var(y_t) \var(y_{t-h})}}
   \]
   #+end_export
 
@@ -335,7 +334,7 @@ autocorrelación de una serie temporal.
 #+begin_export latex
 \centering
 \footnotesize%
-\vspace*{6ex}\par%
+\vspace*{2ex}\par%
 \pgfplotstabletypeset[
 col sep=comma,
 columns={h,ex},
@@ -369,27 +368,14 @@ every last row/.style={
   $y_{t+h}$ decrece conforme aumenta $h$ y que decrece a un ritmo
   rápido.
 
-- Un proceso débilmente dependiente está *asintóticamente
-  incorrela\-cionado* si $\rho_h \to 0$ conforme $h \to \infty$. La
-  dependencia débil exige, además, que la convergencia sea lo
+- La *incorrelación asintótica* es una condición necesaria de la
+  dependencia débil. Los coeficientes de autocorrelación convergen a 0
+  conforme consideramos periodos más alejados: $\rho_h \to 0$ cuando
+  $h \to \infty$.
+
+- La dependencia débil exige, además, que esa convergencia sea lo
   suficientemente rápida.
 
-
-# * Introducción
-
-
-# ** Algunos procesos estocásticos
-
-# Examinaremos las principales características de algunos procesos
-# estocásticos importantes:
-
-# - Ruido blanco.
-
-# - Procesos autorregresivos.
-
-# - Paseo aleatorio.
-
-# - Procesos integrados.
 
 
 * Ruido blanco
@@ -403,7 +389,7 @@ El proceso estocástico $\{e_t\}$ es un *ruido blanco* si:
 
 - $\var(e_t) = \sigma^2_e < \infty$.
 
-- $\cov(e_{t+h}, e_t) = 0$, para todo $h > 0$.
+- $\cov(e_{t}, e_{t-h}) = 0$, para todo $h > 0$.
 
 
 ** Ejemplo
@@ -415,8 +401,7 @@ Ruido blanco, $\sigma^2_e = 4$, $T = 60$.
 
 ** Características
 
-- Un ruido blanco es un proceso estacionario y débilmente
-  estacionario.
+- Un ruido blanco es un proceso estacionario y débilmente dependiente.
 
 - Conocer los valores pasados de un ruido blanco no ayuda a predecir
   mejor $e_t$:
@@ -427,7 +412,7 @@ Ruido blanco, $\sigma^2_e = 4$, $T = 60$.
   #+end_export
 
 - Un ruido blanco no tiene *memoria*: el valor que toma en un periodo no
-  tienen ninguna influencia sobre los valores futuros.
+  tiene ninguna influencia sobre los valores futuros.
 
 
 ** Autocorrelación
@@ -438,22 +423,6 @@ Ruido blanco, $\sigma^2_e = 4$, $T = 60$.
 
 - Los coeficientes de autocorrelación de un ruido blanco son todos
   iguales a 0: $\rho_h = 0$, para todo $h > 0$.
-
-
-** Relación con otros conceptos
-
-- Un ruido blanco es un proceso *i.i.d.* (independiente e
-  idénticamente distribuido).
-
-- En algunos campos coincide con el concepto de *innovaciones*.
-
-- Un *ruido blanco gaussiano*, además de las anteriores, cumple la
-  condición:
-  #+begin_export latex
-  \[
-    e_t \sim \Normal(0, \sigma^2_e)
-  \]
-  #+end_export
 
 
 * Procesos autorregresivos
@@ -494,7 +463,7 @@ Ruido blanco, $\sigma^2_e = 4$, $T = 60$.
 - Un *proceso AR estable* es estacionario y débilmente dependiente.
 
 
-** Esperanza de un proceso AR(1)
+** COMMENT Esperanza de un proceso AR(1)
 
 - $y_t$ sigue un proceso AR(1): $y_{t} = \rho y_{t-1} +  e_{t}$.
 
@@ -517,7 +486,7 @@ Ruido blanco, $\sigma^2_e = 4$, $T = 60$.
   tiene que cumplir que $\Exp(y_t) = 0$.
 
 
-** Varianza de un proceso AR(1)
+** COMMENT Varianza de un proceso AR(1)
 
 - $y_t$ sigue un proceso AR(1): $y_{t} = \rho y_{t-1} +  e_{t}$.
 
@@ -544,7 +513,7 @@ Ruido blanco, $\sigma^2_e = 4$, $T = 60$.
   #+end_export
 
 
-** Autocovarianzas de un proceso AR(1) (I)
+** COMMENT Autocovarianzas de un proceso AR(1) (I)
 
 - Ya que $\Exp(y_t) = 0$, la autocovarianza de $y_{t+h}$ e $y_ {t}$ es:
   #+begin_export latex
@@ -578,7 +547,7 @@ Ruido blanco, $\sigma^2_e = 4$, $T = 60$.
   #+end_export
 
 
-** Autocovarianzas de un proceso AR(1) (II)
+** COMMENT Autocovarianzas de un proceso AR(1) (II)
 
 - Ahora escribimos el proceso autorregresivo para $t+2$:
   #+begin_export latex
@@ -610,7 +579,7 @@ Ruido blanco, $\sigma^2_e = 4$, $T = 60$.
   #+end_export
 
 
-** Autocovarianzas de un proceso AR(1) (y III)
+** COMMENT Autocovarianzas de un proceso AR(1) (y III)
 
 - Mediante sustitución recursiva obtenemos:
   #+begin_export latex
@@ -645,7 +614,7 @@ Ruido blanco, $\sigma^2_e = 4$, $T = 60$.
   #+end_export
 
 
-** Autocorrelaciones de un proceso AR(1)
+** COMMENT Autocorrelaciones de un proceso AR(1)
 
 - Autocorrelación entre $y_{t+h}$ e $y_ {t}$:
   #+begin_export latex
@@ -668,27 +637,28 @@ Ruido blanco, $\sigma^2_e = 4$, $T = 60$.
   #+end_export
 
 
-** Estacionariedad y dependencia débil
+** Estacionariedad
 
-- $y_t$ sigue un proceso AR(1):
-  #+begin_export latex
-  \[
-    y_{t} = \rho y_{t-1} +  e_{t},
-  \]
-  #+end_export
+Un proceso AR(1) estable cumple las condiciones de estacionariedad
+débil:
+#+begin_export latex
+\begin{gather*}
+  E(y_t) = 0, \\
+  \var(y_t) = \sigma^2_y = \sigma^2_e / (1 - \rho^2), \\
+  \cov(y_{t}, y_{t-h}) = \rho^h \sigma^2_y \quad \text{para $h > 0$}.
+\end{gather*}
+#+end_export
 
+** Dependencia débil
 
-- Si $\abs{\rho} < 1$, $y_t$ es un proceso estacionario:
-
-  + $\Exp(y_t) = 0$.
-
-  + $\var(y_t) = \sigma^2_e / (1 - \rho^2)$.
-
-  + $\cov(y_{t+h}, y_{t}) = \rho^h \sigma^2_y$, para $h > 0$.
-
-- Si $\abs{\rho} < 1$ el proceso AR(1) es débilmente dependiente,
-  puesto que $\corr(y_{t+h}, y_t) = \rho^h$ converge a 0 conforme $h
-  \to \infty$ y la convergencia es geométrica.
+Un proceso AR(1) estable es débilmente dependiente. Los coeficientes
+de autocorrelación:
+#+begin_export latex
+\[
+  \corr(y_{t}, y_{t-h}) = \rho^h,
+\]
+#+end_export
+convergen a 0 conforme $h \to \infty$ y la convergencia es geométrica.
 
 
 #+latex: \mode<article>{\clearpage}
@@ -741,7 +711,7 @@ como:
 donde $e_t$ es un ruido blanco.
 
 
-** Sustitución recursiva
+** COMMENT Sustitución recursiva
 
 Sustituyendo recursivamente se obtiene:
 #+begin_export latex
@@ -758,25 +728,7 @@ donde $y_0$ es el valor inicial del proceso. Supondremos que $y_0 =
 #+end_export
 
 
-** Esperanza y varianza
-
-- La esperanza de un paseo aleatorio es 0:
-  #+begin_export latex
-  \[
-    \Exp(y_t) =  \Exp(e_t) +  \Exp(e_{t-1}) + \dots +  \Exp(e_1) = 0.
-  \]
-  #+end_export
-
-
-- La varianza de un paseo aleatorio es creciente en el tiempo:
-  #+begin_export latex
-  \[
-    \var(y_t) =  \var(e_t) +  \var(e_{t-1}) + \dots +  \var(e_1) = t \sigma^2_e.
-  \]
-  #+end_export
-
-
-** Autocovarianzas y autocorrelaciones
+** COMMENT Autocovarianzas y autocorrelaciones
 
 - La autocovarianza entre $y_{t+h}$ e $y_t$ es:
   #+begin_export latex
@@ -834,7 +786,7 @@ Paseo aleatorio, $\sigma^2_e = 4$, $T = 60$.
 #+begin_export latex
 \centering%
 \footnotesize%
-\vspace*{6ex}\par%
+\vspace*{1ex}\par%
 \pgfplotstabletypeset[
 col sep=comma,
 columns={h,rw},
@@ -860,6 +812,27 @@ every last row/.style={
 #+MATS: col 0.5
 #+ATTR_LATEX: :scale 0.8
 #+MATS: fig file:fig-08b_1027-ar1-rw-corr-*.pdf
+
+** Comparación con AR(1)
+
+- Sustituyendo recursivamente, un proceso AR(1) estable puede
+  expresarse como:
+  #+begin_export latex
+  \[
+    y_t =  e_t +  \rho e_{t-1} + \rho^2 e_{t-2} + \rho^3 e_{t-3}  + \dots
+  \]
+  #+end_export
+  La influencia de innovaciones en periodos anteriores decrece con el
+  paso del tiempo.
+
+- Un paseo aleatorio puede expresarse como:
+  #+begin_export latex
+  \[
+    y_t =  e_t +  e_{t-1} + e_{t-2} + e_{t-3}  + \dots
+  \]
+  #+end_export
+  Las innovaciones no pierden influencia con el paso del tiempo.
+
 
 * Tendencias
 
@@ -1016,3 +989,5 @@ Variación mensual de la inflación:
 # Local Variables:
 # ispell-local-dictionary: "spanish"
 # End:
+
+#  LocalWords:  COMMENT AR Autocovarianzas
