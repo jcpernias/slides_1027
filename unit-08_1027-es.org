@@ -335,6 +335,7 @@ autocorrelación de una serie temporal.
 #+begin_export latex
 \centering
 \footnotesize%
+\vspace*{6ex}\par%
 \pgfplotstabletypeset[
 col sep=comma,
 columns={h,ex},
@@ -823,6 +824,7 @@ débil:
 Paseo aleatorio, $\sigma^2_e = 4$, $T = 60$.
 #+MATS: fig file:fig-08b_1027-rw-ts-*.pdf
 
+
 ** Ejemplo
 
 Paseo aleatorio, $\sigma^2_e = 4$, $T = 60$.
@@ -830,8 +832,9 @@ Paseo aleatorio, $\sigma^2_e = 4$, $T = 60$.
 
 #+MATS: col 0.5
 #+begin_export latex
-\centering
+\centering%
 \footnotesize%
+\vspace*{6ex}\par%
 \pgfplotstabletypeset[
 col sep=comma,
 columns={h,rw},
