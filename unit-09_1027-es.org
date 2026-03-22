@@ -1,4 +1,3 @@
-# -*- ispell-dictionary: "spanish" -*-
 #+SETUPFILE: ./course-es.org
 
 #+TITLE: {{{unit09}}}
@@ -18,14 +17,14 @@
 - Con series temporales es posible investigar las relaciones dinámicas
   entre variables.
 
-- En primer lugar, examinaremos algunos modelos comúnmente utilizados.
+- En primer lugar, se presentan algunos modelos comúnmente utilizados.
 
 
 ** Modelos estáticos
 
-- En un *modelo estático*, un cambio en una variable explicativa sólo
-  tiene efectos en el periodo en que se produce y no tiene influencia
-  en los periodos posteriores.
+- *Modelo estático*: un cambio en una variable explicativa sólo tiene
+  efectos en el periodo en que se produce y no tiene influencia en los
+  periodos posteriores.
 
 - Todas las variables del modelo se refieren al mismo periodo
   temporal:
@@ -42,8 +41,8 @@
 
 ** Modelos de retardos distribuidos
 
-- En un *modelo de retardos distribuidos* los cambios en las
-  variables explicativas tienen efectos en más de un periodo.
+- *Modelo de retardos distribuidos*: los cambios en las variables
+  explicativas tienen efectos en más de un periodo.
 
 - Estos modelos se caracterizan por incluir retardos de las variables
   explicativas:
@@ -58,7 +57,7 @@
 
 ** Equilibrio dinámico
 
-- Utilizaremos como ejemplo un modelo con dos retardos:
+- Modelo con dos retardos:
   #+begin_export latex
   \[
     y_t = \alpha + \beta_0 z_{t} + \beta_1 z_{t-1} + \beta_2 z_{t-2} + u_t,
@@ -67,13 +66,14 @@
 
 - En ausencia de perturbaciones, $u_t = 0$, en equilibrio dinámico las
   variables toman siempre el mismo valor: $y_t = y^*$ y $z_t = z^*$.
+  #+begin_export latex
+  \[
+    y^* = \alpha + (\beta_0 + \beta_1 + \beta_2) z^*.
+  \]
+  #+end_export
 
-- Supongamos que, partiendo de un equilibrio dinámico, la variable $z$
-  aumenta permanentemente en una unidad en el periodo 3. ¿Cómo se
-  ajustarían las variables al nuevo equilibrio?
 
-
-** Ajuste a un nuevo equilibrio
+** COMMENT Ajuste a un nuevo equilibrio
 
 La tabla muestra como se ajustan las variable dependiente a un cambio
 unitario permanente de $z$. En el nuevo equilibrio $z_t = z^* + 1$ e
@@ -104,7 +104,7 @@ $y_t = y^* + \beta_0 + \beta_1 + \beta_2$.
   después de $h$ periodos:
   #+begin_export latex
   \[
-    \iratio{y_t}{z_{t-h}} = \iratio{y_{t+h}}{z_{t}} = \beta_h.
+    \iratio{y_t}{z_{t-h}} = \beta_h.
   \]
   #+end_export
 
@@ -131,8 +131,8 @@ $y_t = y^* + \beta_0 + \beta_1 + \beta_2$.
 
 ** Modelos autorregresivos
 
-- En un *modelo autorregresivo* las variables explicativas son
-  retardos de la variable dependiente.
+- En un *modelo autorregresivo* los regresores son retardos de la
+  variable dependiente.
 
 - Modelo autorregresivo de orden p, AR(p):
   #+begin_export latex
@@ -171,8 +171,8 @@ $y_t = y^* + \beta_0 + \beta_1 + \beta_2$.
 
 - ¿Podemos usar MCO para estimar modelos de series temporales?
 
-- ¿Qué tiene que cumplirse para que MCO tenga buenas propiedades
-  exactas?
+- ¿Qué condiciones tienen que cumplirse para que MCO tenga buenas
+  propiedades exactas?
 
 
 
@@ -202,7 +202,7 @@ El proceso estocástico $\{(y_t, x_{1t}, x_{2t}, \dots, x_{kt})\!: t = 1,
 2, \dots, T\}$ sigue el modelo:
 #+begin_export latex
 \[
-  y_t = \beta_0 + \beta_1 x_{1t} + \beta_1 x_{2t} + \dots + \beta_1 x_{kt} + u_t
+  y_t = \beta_0 + \beta_1 x_{1t} + \beta_2 x_{2t} + \dots + \beta_k x_{kt} + u_t
 \]
 #+end_export
 donde $\{u_t\!: t = 1, 2, \dots, T\}$ es una secuencia de perturbaciones
@@ -215,7 +215,7 @@ aleatorias no observables.
 - Nuestra especificación:
   #+begin_export latex
   \[
-    y_t = \beta_0 + \beta_1 x_{1t} + \beta_1 x_{2t} + \dots + \beta_1 x_{kt} + u_t,
+    y_t = \beta_0 + \beta_1 x_{1t} + \beta_2 x_{2t} + \dots + \beta_k x_{kt} + u_t,
   \]
   #+end_export
   admite modelos dinámicos. Por ejemplo, obtenemos un modelo retardos
@@ -253,13 +253,13 @@ toman las explicativas en *todos* los periodos de tiempo :
 ** Exogeneidad estricta
 
 *ST.3* implica que las variables explicativas son *estrictamente
-exógenas*. El término de error $u_t$ debe estar incorrelacionado con
+exógenas*. El término de error $u_t$ debe estar no correlacionado con
 todas las explicativas en *todos* los periodos de tiempo:
 
 - $\Exp(u_t | \bm{x_t}) = 0$: *exogeneidad contemporánea*.
 
 - $\Exp(u_t | \bm{x_{t-1}}, \bm{x_{t-2}}, \dots, \bm{x_{1}}) =
-  0$: incorrelación con valores pasados de $\bm{x_t}$.
+  0$: ausencia de correlación con valores pasados de $\bm{x_t}$.
 
 - $\Exp(u_t | \bm{x_{t+1}}, \bm{x_{t+2}}, \dots, \bm{x_{T}}) = 0$:
   incorrelación con valores futuros de $\bm{x_t}$.
@@ -316,13 +316,13 @@ independiente e idénticamente como $\Normal(0, \sigma^2)$.
 Los supuestos del modelo clásico de regresión con series temporales
 garantizan las siguientes propiedades del estimador de MCO:
 
-- *Insesgadez*: si se cumplen *TS.1*, *TS.2* y *TS.3*.
+- *Insesgadez*: si se cumplen *ST.1*, *ST.2* y *ST.3*.
 
-- *Eficiencia*: si, además, se cumplen *TS.4* y *TS.5*. En este caso,
+- *Eficiencia*: si, además, se cumplen *ST.4* y *ST.5*. En este caso,
   se pueden usar las fórmulas de MCO de los errores típicos de
   $\hat{\beta_j}$.
 
-- *Normalidad*: si, además, se cumple *TS.6*. Las fórmulas
+- *Normalidad*: si, además, se cumple *ST.6*. Las fórmulas
   tradicionales de los contrastes $t$ y $F$ son válidas.
 
 
@@ -362,11 +362,11 @@ propiedades asintóticas en modelos de regresión con series temporales?
 *ST.1'*: *Linealidad y dependencia débil*.
 
 El proceso estocástico $\{(y_t, x_{1t}, x_{2t}, \dots, x_{kt})\!: t =
-1, 2, \dots, T\}$ es *estacionario* y *débilmente dependiente* sigue
+1, 2, \dots, T\}$ es *estacionario* y *débilmente dependiente* y sigue
 el modelo:
 #+begin_export latex
 \[
-  y_t = \beta_0 + \beta_1 x_{1t} + \beta_1 x_{2t} + \dots + \beta_1 x_{kt} + u_t
+  y_t = \beta_0 + \beta_1 x_{1t} + \beta_2 x_{2t} + \dots + \beta_k x_{kt} + u_t
 \]
 #+end_export
 donde $\{u_t\!: t = 1, 2, \dots, T\}$ es la secuencia de perturbaciones
@@ -393,9 +393,8 @@ una combinación lineal perfecta de las otras explicativas.
   \]
   #+end_export
 
-- Este supuesto no se viola si se dan fenómenos de retroalimentación o
-  si se incluyen retardos de la variable dependiente entre las
-  explicativas.
+- Este supuesto no excluye retroalimentación entre las variables ni la
+  inclusión de retardos de la variable dependiente.
 
 
 ** Homoscedasticidad y ausencia de autocorrelación
@@ -417,9 +416,9 @@ una combinación lineal perfecta de las otras explicativas.
 
 ** Propiedades asintóticas
 
-- *Consistencia*: si se cumplen *TS.1'* a *TS.3'*.
+- *Consistencia*: si se cumplen *ST.1'* a *ST.3'*.
 
-- *Normalidad asintótica*: si además se cumplen *TS.4'* y *TS.5'*.
+- *Normalidad asintótica*: si además se cumplen *ST.4'* y *ST.5'*.
 
 
 ** Conclusiones
@@ -431,9 +430,9 @@ una combinación lineal perfecta de las otras explicativas.
 - En particular, no es necesario realizar supuestos muy restrictivos
   como exogeneidad estricta o normalidad.
 
-- Por otro lado, el supuesto *ST.1'* requiere estacionariedad y
-  dependencia débil de la variable dependiente y de las variables
-  explicativas.
+- Por otro lado, el supuesto *ST.1'* requiere explícitamente
+  estacionariedad y dependencia débil de la variable dependiente y de
+  las variables explicativas.
 
 
 * Inferencia asintótica
@@ -498,3 +497,10 @@ $\se_{\text{HAC}}(\bhat_j)$:
 - Los contrastes de hipótesis se llevan a cabo utilizando una
   estimación de $\var(\hat{\bm\beta})$ robusta a heteroscedasticidad y
   autocorrelación.
+
+# Local Variables:
+# ispell-dictionary: "spanish"
+# End:
+
+#  LocalWords:  Newey West ST HAC heteroskedasticity and consistent
+#  LocalWords:  autocorrelation ARDL AR
