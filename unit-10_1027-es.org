@@ -42,14 +42,13 @@
 
 ** Selección de modelos
 
-- Se establece un número máximo de retardos a considerar procurando
-  que sea lo suficientemente elevado para capturar todas las
-  relaciones dinámicas.
+- Se establece un número máximo de retardos lo suficientemente alto
+  como para capturar todas las relaciones dinámicas.
 
-- Se estiman modelos de regresión con diferente número de
-  retardos. *La muestra debe ser la misma en todas las regresiones*.
+- Se estiman modelos con distinto número de retardos. *Todas las
+  regresiones deben estimarse con la misma muestra*.
 
-- Se utiliza algún indicador para determinar cuál es el modelo más
+- Se utiliza un indicador para determinar cuál es el modelo más
   adecuado.
 
 
@@ -69,14 +68,14 @@
   información*: medidas de la bondad del ajuste que incluyen una
   penalización creciente en el número de parámetros.
 
-- Se estiman todos los modelos con diferente número de retardos que se
-  quieran comparar. Se selecciona aquel con un menor valor del
-  criterio de información.
+- Se estiman todos los modelos que se quieran comparar. Se selecciona
+  aquel con un menor valor del criterio de información.
 
 
 ** Algunos criterios de información
 
-- *AIC*: criterio de información de Akaike. En los modelos de regresión puede escribirse como:
+- *AIC*: criterio de información de Akaike. En los modelos de
+  regresión puede escribirse como:
   #+begin_export latex
   \[
      \text{AIC} = C + T \log\left(\frac{\SCR}{T}\right) + 2 (K + 1),
@@ -134,7 +133,7 @@
 La *tendencia* de una serie temporal está constituida por movimientos
 persistentes a largo plazo. Distinguimos entre:
 
-- Tendecias deterministas.
+- Tendencias deterministas.
 
 - Tendencias estocásticas.
 
@@ -188,8 +187,8 @@ persistentes a largo plazo. Distinguimos entre:
   \]
   #+end_export
 
-- Un paseo aleatorio alterna episodios de crecimiento durante varios
-  periodos, con episodios donde la tendencia es decreciente.
+- Un paseo aleatorio puede alterna periodos prolongados de crecimiento
+  y de decrecimiento.
 
 
 ** Paseo aleatorio con deriva
@@ -248,14 +247,14 @@ persistentes a largo plazo. Distinguimos entre:
 
 ** Regresión con variables con tendencias
 
-- Debemos añadir un término de tendencia lineal cuando alguna de las
+- Se debe añadir un término de tendencia lineal cuando alguna de las
   variables presente tendencias deterministas.
 
 - Las variables con raíz unitaria deben ser diferenciadas para
   eliminar las tendencias estocásticas.
 
 - La posibilidad de que haya relaciones de cointegración entre
-  variables I(1) no se explorará en este curso.
+  variables I(1) no se abordará en este curso.
 
 
 * Contrastes de raíz unitaria
@@ -377,7 +376,7 @@ Las propiedades dinámicas del proceso \AR{1} dependen del valor de $\rho$:
 - Es conveniente utilizar un criterio de información para seleccionar
   el número de retardos a incluir en la regresión de Dickey-Fuller.
 
-- Para el constraste de Dickey-Fuller aumentado es preferible el AIC.
+- Para el contraste de Dickey-Fuller aumentado es preferible el AIC.
 
 
 ** Tendencias
@@ -547,14 +546,14 @@ Las propiedades dinámicas del proceso \AR{1} dependen del valor de $\rho$:
   \[
     D^s_t =
     \begin{cases}
-      0 & \text{si $t$ corresponde al trimestre $s$}, \\
-      1 & \text{en caso contrario}.
+      1 & \text{si $t$ corresponde al trimestre $s$}, \\
+      0 & \text{en caso contrario}.
     \end{cases}
   \]
   #+end_export
 
 - En la regresión sólo incluiríamos tres de estas variables. De otra
-  forma, incurriríamos en la *trampa de la variables ficticias*.
+  forma, incurriríamos en la *trampa de las variables ficticias*.
 
 - De la misma manera, para controlar la estacionalidad en datos
   mensuales incluiríamos un conjunto de 11 variables ficticias
