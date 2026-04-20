@@ -16,8 +16,8 @@
 
 ** Introducción
 
-- El supuesto *ST.5'* requiere que el término de error no esté
-  correlacionado consigo mismo y que se cumpla:
+- El supuesto *ST.5'* requiere que no exista correlación serial en el
+  término de error:
   #+begin_export latex
   \[
     \cov(u_{t}, u_{s} | \bm{x_{t}}, \bm{x_{s}}) = 0, \quad t \neq s.
@@ -25,7 +25,7 @@
   #+end_export
 
 - ¿Qué consecuencias tiene el incumplimiento de este supuesto? ¿Cómo
-  se puede detectar? ¿Cómo se debe proceder en presencia de
+  puede detectarse y cómo debe procederse en presencia de
   autocorrelación?
 
 
@@ -57,13 +57,13 @@ de no correlación serial.
 
 ** Estimación e inferencia robusta con MCO
 
-- Se estiman por MCO los parámetros del modelo de regresión. MCO es
-  consistente si se cumplen los supuestos *ST.1'*, *ST.2'* y *ST.3'*.
+- Los parámetros del modelo de regresión se estiman por MCO. Se
+  obtienen estimaciones consistentes si se cumplen los supuestos
+  *ST.1'*, *ST.2'* y *ST.3'*.
 
-- Los contrastes de hipótesis sobre los parámetros del modelo de
-  regresión se llevan a cabo utilizando una estimación de
-  $\var(\hat{\bm\beta})$ robusta a heteroscedasticidad y
-  autocorrelación.
+- Los contrastes de hipótesis sobre los parámetros se llevan a cabo
+  utilizando una estimación de $\var(\hat{\bm\beta})$ robusta a
+  heteroscedasticidad y autocorrelación.
 
 
 ** Variable dependiente retardada (I)
@@ -109,7 +109,7 @@ de no correlación serial.
   donde $\phi_0 = \beta_0 (1 - \rho)$, $\phi_1 = \beta_1 + \rho$ y
   $\phi_2 = -\beta_1 \rho$.
 
-- Por tantos, el valor esperado de $y_t$ condicional a sus valores
+- Por tanto, el valor esperado de $y_t$ condicional a sus valores
   pasados depende de *dos* retardos:
   #+begin_export latex
   \[
@@ -203,7 +203,7 @@ especificación dinámica es incompleta.
 
 ** Contrastes de Breusch-Godfrey y heteroscedasticidad
 
-Pueden obtenerse contrastes de autocorrelación que son validos aun un
+Pueden obtenerse contrastes de autocorrelación que son válidos aun un
 presencia de heteroscedasticidad usando estimaciones de $\var(\bhat)$
 robustas a heteroscedasticidad en la regresión auxiliar.
 
@@ -235,7 +235,7 @@ robustas a heteroscedasticidad en la regresión auxiliar.
   \[
     DW = \frac{%
       \sum_{t=2}^{T}(\uhat_{t} - \uhat_{t-1})^{2}}{%
-      \sum_{t=1}^{T} \uhat_{t-1}^{2}}.
+      \sum_{t=1}^{T} \uhat_{t}^{2}}.
   \]
   #+end_export
 
@@ -410,3 +410,5 @@ robustas a heteroscedasticidad en la regresión auxiliar.
   serían preferibles las estimaciones de MCGF. Si hay grandes
   diferencias en las estimaciones de ambos métodos, MCO sería
   preferible al ser consistente en condiciones menos exigentes.
+
+#  LocalWords:  cuasi
