@@ -1,3 +1,5 @@
+(add-to-list 'load-path (concat user-emacs-directory "elisp"))
+
 (package-initialize)
 (setq package-enable-at-startup nil)
 (require 'use-package)
