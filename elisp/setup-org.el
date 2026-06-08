@@ -1,4 +1,4 @@
-(add-to-list 'load-path (concat user-emacs-directory "elisp"))
+(add-to-list 'load-path (concat user-emacs-directory "elpa"))
 
 (package-initialize)
 (setq package-enable-at-startup nil)
