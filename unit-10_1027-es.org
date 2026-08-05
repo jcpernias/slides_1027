@@ -1,4 +1,3 @@
-# -*- ispell-dictionary: "spanish" -*-
 #+SETUPFILE: ./course-es.org
 
 #+TITLE: {{{unit10}}}
@@ -588,3 +587,7 @@ Incluir una tendencia lineal es equivalente a:
 
 - Estimar por MCO los parámetros de una regresión de $\ddot{y}_t$
   sobre $\ddot{x}_{1t}, \ddot{x}_{2t}, \dots, \ddot{x}_{kt}$.
+
+# Local Variables:
+# ispell-dictionary: "spanish"
+# End:

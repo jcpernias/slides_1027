@@ -1,4 +1,3 @@
-# -*- ispell-dictionary: "spanish" -*-
 #+SETUPFILE: ./course-es.org
 
 #+TITLE: {{{unit07}}}
@@ -358,3 +357,8 @@ forman parte de la muestra no es aleatorio. Distinguimos entre:
 - Se considerarían atípicas aquellas observaciones cuyos residuos
   estudentizados sean muy grandes de acuerdo con la distribución
   $t_{n-k-2}$.
+
+
+# Local Variables:
+# ispell-dictionary: "spanish"
+# End:
